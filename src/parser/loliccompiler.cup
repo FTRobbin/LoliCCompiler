@@ -1,0 +1,6 @@
+/*
+CUP specification for loliccompiler by RobbinNi
+*/
+
+import java_cup.runtime.*;
+
