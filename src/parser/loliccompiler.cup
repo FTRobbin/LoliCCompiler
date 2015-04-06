@@ -4,3 +4,133 @@ CUP specification for loliccompiler by RobbinNi
 
 import java_cup.runtime.*;
 
+import lexer.*;
+
+/* Preliminaries to set up and use the scanner. */
+
+parser code {:
+    public void reportError(String message, Object info) {
+        StringBuffer m = new StringBuffer("\tParsing error");
+    	if (info instanceof java_cup.runtime.Symbol) {
+    		java_cup.runtime.Symbol s = (java_cup.runtime.Symbol) info;
+
+   			if (s.left >= 0) {
+   				m.append(" in line " + (s.left +1 ));
+   				if (s.right >= 0) {
+   					m.append(", column " + (s.right + 1));
+   				}
+   			}
+   		}
+   		m.append(" : " + message);
+   		System.err.println(m);
+   	}
+
+   	public Parser(InputStream input) {
+   		this(new lexer(input));
+   	}
+:};
+
+/* Terminals */
+
+/* Operators */
+terminal			LEFTRBRACKET, RIGHTRBRACKER, SEMICOLON, COMMA, ASSIGN, LEFTCBRACKET, RIGHTCBRACKET, LEFTSBRACKET, RIGHTSBRACKET,
+					MULTIPLY_ASTERISK, BITWISEOR, BITWISEXOR, ADDRESS_BITWISEAND, SMALLER, GREATER, ADD, SUBSTRACT, DIVIDE, MOD, BITWISENOT, NOT, DOT,
+
+					OR, AND, EQUAL, NOTEQUAL, SMALLEREQUAL, GREATEREQUAL, SHIFTLEFT, SHIFTRIGHT, INCREASE, DECREASE, POINTER,
+
+					MULASSIGN, DIVASSIGN, MODASSIGN, SUBASSIGN, SHLASSIGN, SHRASSIGN, ANDASSIGN, ORASSIGN, XORASSIGN;
+
+/* Identifier and Constants */
+terminal			IDENTIFIER;
+terminal Integer	INTEGER;
+terminal Char		CHAR;
+terminal String		STRING;
+
+/* Keywords */
+terminal			VOID, CHAR, INT, STRUCT, UNION, IF, ELSE, WHILE, FOR, CONTINUE, BREAK, RETURN, SIZEOF;
+
+/* Non-terminals */
+
+/* Top level */
+non terminal 		program;
+non terminal		declaration;
+non terminal		function-definition;
+non terminal		init-delarators;
+non terminal		init-delarator;
+non terminal		declarators;
+non terminal		declarator;
+non terminal		array-dimensions;
+non terminal		array-dimension;
+
+/* Precedences */
+
+
+/* The grammar */
+
+start with program
+
+program ::= 	declaration
+			|	declaration program
+			|	function-definition
+			|	function-definition program
+			;
+
+declaration ::=		type-specifier SEMICOLON
+				|	type-specifier init-delarators SEMICOLON
+				;
+
+function-definition ::=		type-specifier plain-declarator LEFTRBRACKET RIGHTRBRACKET compound-statement
+						|	type-specifier plain-declarator LEFTRBRACKET parameters RIGHTRBRACKET compoud-statement
+						;
+
+init-delarators ::=		init-declarator
+					|	init-declarator COMMA init-delarators
+					;
+
+init-declarator	::=		declarator
+					|	declarator ASSIGN initializer
+					;
+
+declarators ::=		declarator
+				|	declarator COMMA declarators
+				;
+
+declarator ::=		plain-declarator
+				|	plain-declarator LEFTRBRACKET RIGHTRBRACKET
+				|	plain-declarator LEFTRBRACKET parameters RIGHTRBRACKET
+				|	plain-declarator array-dimensions
+				;
+
+array-dimensions ::= 	array-dimension
+					|	array-dimension array-dimensions
+					;
+
+array-dimension	::=	LEFTSBRACKET constant-expression RIGHTSBRACKET
+					;
+
+parameters ::=		plain-declarators
+				;
+
+plain-declarators ::=		plain-declarator
+						|	plain-declarator plain-declarators
+						;
+
+initializers ::=	initializer
+				|	initializer	initializers
+				;
+
+initializer ::=		assignment-expression
+				|	LEFTCBRACKET initializers RIGHTCBRACKET
+				;
+
+type-specifier ::=		VOID
+					|	CHAR
+					|	INT
+					|	struct-or-union LEFTCBRACKET plaindeclarators
+
+struct-or-union ::=;
+
+plain-declarations ::=;
+
+plain-declaration ::=;
+

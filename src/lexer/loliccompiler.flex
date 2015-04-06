@@ -6,9 +6,10 @@ package lexer;
 
 import java_cup.runtime.*;
 
+import parser.*;
+
 %%
 
-%class lexer
 %unicode
 %cup
 %line
