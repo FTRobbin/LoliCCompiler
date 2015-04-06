@@ -1,4 +1,4 @@
-package lexer;
+package parser;
 
 import com.google.gson.Gson;
 import main.Main;
