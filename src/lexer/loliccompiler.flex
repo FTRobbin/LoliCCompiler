@@ -2,7 +2,7 @@
 lexer specification for loliccompiler for Jflex by RobbinNi
 */
 
-package lexer
+package lexer;
 
 %%
 
@@ -16,14 +16,17 @@ package lexer
 %cupdebug
 
 %{
-    String Buffer buffer = new StringBuffer();
+    StringBuffer buffer = new StringBuffer();
 
     private Symbol symbol(int type) {
         return new Symbol(type, yyline, yycolumn);
     }
 
-    private Symbol symbol(int type, Object value) {
+    private Symbol symbol(int type, Object value) { return new Symbol(type, yyline, yycolumn, value); }
 
+    private void reportError(String message) throws Error {
+        throw new Error("Scanning error in line " + yyline + ", column " + yycolumn + " : " message + "\n") ;
+    }
 
     private int chNum(char ch) {
         if (ch >= '0' && ch <= '9') {
@@ -35,9 +38,38 @@ package lexer
         }
     }
 
-        return new Symbol(type, yyline, yycolumn, value);
+    private char lexANC(String s) {
+        char ch;
+        if (s[1] == 'x') {
+            ch = (chNum(s[2]) << 4) | chNum(s[3]);
+        } else {
+            ch = (chNum(s[1]) << 6) | (chNum(s[2]) << 3) | chNum(s[3]);
+        }
+        return ch;
+    }
+
+    private char lexTDC(String s) {
+        switch (s) {
+            case "\\b"  : return '\b';
+            case "\\f"  : return '\f';
+            case "\\n"  : return '\n';
+            case "\\r"  : return '\r';
+            case "\\t"  : return '\t';
+            case "\\\\" : return '\\';
+            case "\\\'" : return '\'';
+            case "\\\"" : return '\"';
+            case "\\0"  : return '\0';
+        }
     }
 %}
+
+%eofval{
+    {
+        if (yystate() == COMMENT) {
+            reportError("Comment reaches the end of file.");
+        }
+    }
+%eofval}
 
 /* Characters */
 
@@ -46,9 +78,9 @@ inputCharacter = [^\r\n]
 whiteSpace = {lineTerminator} | [ \t\f]
 
 /* Comments */
-comments = {singleLineComments} | {multiLineComments}
+//comments = {singleLineComments} | {multiLineComments}
 singleLineComments = "//" {inputCharacter}* {lineTerminator}?
-multiLineComments = "/*" [^*]~ "*/" | "/*" "*"+ "/"
+//multiLineComments = "/*" [^*]~ "*/" | "/*" "*"+ "/"
 
 /* Identifier */
 letters = [a-zA-Z]
@@ -59,20 +91,23 @@ identifier = {letters}{lettersAndDigits}*
 decimalInteger = [1-9][0-9]*|0
 octalInteger = 0[0-7]+
 hexadecimalInteger = 0x[0-9A-Fa-f]+
-integer = {decimalInteger} | {octalInteger} | {hexadecimalInteger}
+//integer = {decimalInteger} | {octalInteger} | {hexadecimalInteger}
 
 commonCharacter = [ -~]&&[^\"\'\\]
 translatedCharacter = \\[bfnrt\\\'\"0]
 asciiNumberCharacter = \\x[0-9A-Fa-f][0-9A-Fa-f]|\\[0-3][0-7][0-7]
-char = {commonCharacter} | {translatedCharacter} | {asciiNumberCharacter}
+//char = {commonCharacter} | {translatedCharacter} | {asciiNumberCharacter}
 
 %state STRING
+%state COMMENT
 
 %%
 
 <YYINITIAL> {
     /* Comments */
-    {comments}      { /* ignore */ }
+    {singleLineComments}      { /* ignore */ }
+    "/*"            { yybegin(COMMENT); }
+    "*/"            { reportError("Unexpected end of a comment."); }
 
     /* Keywords */
     "void"          { return symbol(sym.VOID); }
@@ -93,8 +128,14 @@ char = {commonCharacter} | {translatedCharacter} | {asciiNumberCharacter}
     {identifier}    { return symbol(sym.IDENTIFIER, yytext()); }
 
     /* Constants */
-    {integer}       { return symbol(sym.INTEGER, yytext()); }
-    {char}          { return symbol(sym.CHAR, yytext().subString(1 , yytext().size() - 2)); }
+    {decimalInteger}        { return symbol(sym.INTEGER, Integer.parseInt(yytext())); }
+    {octalInteger}          { return symbol(sym.INTEGER, Integer.parseInt(yytext().subString(1), 8)); }
+    {hexadecimalInteger}    { return symbol(sym.INTEGER, Integer.parseInt(yytext().subString(2), 16)); }
+
+    \'{commonCharacter}\'       { return symbol(sym.CHAR, yytext()[0]); }
+    \'{translatedCharacter}\'   { return symbol(sym.CHAR, lexTDC(yytext())); }
+    \'{asciiNumberCharacter}\'  { return symbol(sym.CHAR, lexANC(yytext())); }
+
     \"              { buffer.setLength(0); yybegin(STRING); }
 
     /* Operators */
@@ -155,25 +196,15 @@ char = {commonCharacter} | {translatedCharacter} | {asciiNumberCharacter}
 
     [^\n\r\"\\]+    { buffer.append(yytext()); }
 
-    \\b             { buffer.append('\b'); }
-    \\f             { buffer.append('\f'); }
-    \\n             { buffer.append('\n'); }
-    \\r             { buffer.append('\r'); }
-    \\t             { buffer.append('\t'); }
-    \\              { buffer.append('\\'); }
-    \\'             { buffer.append('\''); }
-    \\\"            { buffer.append('\"'); }
-    \\0             { buffer.append('\0'); }
+    {translatedCharacter} {buffer.append(lexTDC(yytext()));}
 
-    {asciiNumberCharacter} { String t = yytext();
-                             char ch;
-                             if (t[0] == 'x') {
-                                ch = (chNum(t[1]) << 4) | chNum(t[2]);
-                             } else {
-                                ch = (chNum(t[0]) << 6) | (chNum(t[1]) << 3) | chNum(t[2]);
-                             }
-                             buffer.append(ch); }
+    {asciiNumberCharacter} { buffer.append(lexANC(yytext())); }
+}
+
+<COMMENT> {
+    "*/" { yybegin(YYINITIAL); }
+    [^] {}
 }
 
 /* error fallback */
-[^] { throw new Error("Illegal character <" + yytext() + ">\n" + "Found at Line : " + yyline + " Column : " + yycolumn + ".\n"); }
+[^] { reportError("Illegal character <" + yytext() + ">"); }
