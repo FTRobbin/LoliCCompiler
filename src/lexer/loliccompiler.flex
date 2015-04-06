@@ -4,6 +4,8 @@ lexer specification for loliccompiler for Jflex by RobbinNi
 
 package lexer;
 
+import java_cup.runtime.*;
+
 %%
 
 %class lexer
