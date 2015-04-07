@@ -52,15 +52,15 @@ terminal			VOID, CHAR, INT, STRUCT, UNION, IF, ELSE, WHILE, FOR, CONTINUE, BREAK
 /* Non-terminals */
 
 /* Top level */
-non terminal 		program;
-non terminal		declaration;
-non terminal		function-definition;
-non terminal		init-delarators;
-non terminal		init-delarator;
-non terminal		declarators;
-non terminal		declarator;
-non terminal		array-dimensions;
-non terminal		array-dimension;
+non terminal program external-definition declaration function-definition parameter-list plain-declaration declarator array-dimensions plain-declarator
+		     asterisks init-declarator-list init-declarator initializer initializer-list type-specifier struct-or-union	struct-or-union-definition
+		     field-list declaration-list;
+
+/* Statements */
+non terminal statement statement-list expression-statement compound-statement selection-statement iteration-statement jump-statement;
+
+/* Expressions */
+
 
 /* Precedences */
 
@@ -69,68 +69,260 @@ non terminal		array-dimension;
 
 start with program
 
-program ::= 	declaration
-			|	declaration program
-			|	function-definition
-			|	function-definition program
+program ::= 	external-definition
+			| 	program external-definition
 			;
 
-declaration ::=		type-specifier SEMICOLON
-				|	type-specifier init-delarators SEMICOLON
-				;
-
-function-definition ::=		type-specifier plain-declarator LEFTRBRACKET RIGHTRBRACKET compound-statement
-						|	type-specifier plain-declarator LEFTRBRACKET parameters RIGHTRBRACKET compoud-statement
+external-definition ::= 	declaration
+						|	function-definition
 						;
 
-init-delarators ::=		init-declarator
-					|	init-declarator COMMA init-delarators
+declaration ::=		type-specifier SEMICOLON
+				|	type-specifier init-delarator-list SEMICOLON
+				;
+
+declaration-list ::= 	declaration
+					|	declaration-list declaration
 					;
+
+function-definition ::=		type-specifier declarator compound-statement
+						;
+
+parameter-list ::=		plain-declaration
+					|	parameter-list COMMA plain-declaration
+					;
+
+plain-declaration ::=		type-specifier declarator
+						;
+
+declarator ::=		plain-declarator LEFTRBRACKET RIGHTRBRACKET
+				|	plain-declarator LEFTRBRACKET parameter-list RIGHTRBRACKET
+				|	plain-declarator array-dimensions
+				;
+
+array-dimensions ::=	LEFTSBRACKET constant-expression RIGHTSBRACKET
+					|	array-dimensions LEFTSBRACKET constant-expression RIGHTSBRACKET
+
+plain-declarator ::=		IDENTIFIER
+						|	asterisks IDENTIFIER
+						;
+
+asterisks ::= 		MULTIPLY_ASTERISK
+				|	asterisks MULTIPLY_ASTERISK
+				;
+
+init-declarator-list ::=	init-declarator
+						|	init-declarator-list COMMA init-declarator
+						;
 
 init-declarator	::=		declarator
 					|	declarator ASSIGN initializer
 					;
 
-declarators ::=		declarator
-				|	declarator COMMA declarators
+initializer	::=		assignment-expression
+				|	LEFTCBRACKET initializer-list RIGHTCBRACKET
 				;
 
-declarator ::=		plain-declarator
-				|	plain-declarator LEFTRBRACKET RIGHTRBRACKET
-				|	plain-declarator LEFTRBRACKET parameters RIGHTRBRACKET
-				|	plain-declarator array-dimensions
-				;
-
-array-dimensions ::= 	array-dimension
-					|	array-dimension array-dimensions
+initializer-list ::=	initializer
+					|	initializer-list COMMA initializer
 					;
-
-array-dimension	::=	LEFTSBRACKET constant-expression RIGHTSBRACKET
-					;
-
-parameters ::=		plain-declarators
-				;
-
-plain-declarators ::=		plain-declarator
-						|	plain-declarator plain-declarators
-						;
-
-initializers ::=	initializer
-				|	initializer	initializers
-				;
-
-initializer ::=		assignment-expression
-				|	LEFTCBRACKET initializers RIGHTCBRACKET
-				;
 
 type-specifier ::=		VOID
-					|	CHAR
 					|	INT
-					|	struct-or-union LEFTCBRACKET plaindeclarators
+					|	CHAR
+					|	STRING
+					|	struct-or-union	IDENTIFIER
+					|	struct-or-union struct-or-union-definition
+					;
 
-struct-or-union ::=;
+struct-or-union	::=		STRUCT
+					|	UNION
+					;
 
-plain-declarations ::=;
+struct-or-union-definition ::=		IDENTIFIER LEFTCBRACKET field-list RIGHTCBRACKET
+								|	LEFTCBRACKET field-list RIGHTCBRACKET
+								;
 
-plain-declaration ::=;
+field-list ::=		type-specifier declarators SEMICOLON
+				|	field-list type-specifier declarators SEMICOLON
+				;
 
+
+statement ::=		expression-statement
+				|	compound-statement
+				|	selection-statement
+				|	iteration-statement
+				|	jump-statement
+				;
+
+statement-list ::= 		statement
+					|	statement-list statement
+					;
+
+expression-statement ::=	expression SEMICOLON
+						|	SEMICOLON
+						;
+
+compound-statement ::=		LEFTCBRACKET declaration-list statement-list RIGHTCBRACKET
+						|	LEFTCBRACKET statement-list RIGHTCBRACKET
+						|	LEFTCBRACKET declaration-list RIGHTCBRACKET
+						;
+
+selection-statement ::=		IF LEFTRBRACKET expression RIGHTRBRACKET statement
+						|	IF LEFTRBRACKET expression RIGHTRBRACKET ELSE statement
+						;
+
+iteration-statement ::=		WHILE LEFTRBRACKET expression RIGHTRBRACKET statement
+						|	FOR LEFTRBRACKET expression-statement expression-statement RIGHTRBRACKET statement
+						|	FOR LEFTRBRACKET expression-statement expression-statement expression RIGHTRBRACKET statement
+						;
+
+jump-statement ::=		CONTINUE SEMICOLON
+					|	BREAK SEMICOLON
+					|	RETURN SEMICOLON
+					|	RETURN expression SEMICOLON
+					;
+
+
+expression ::=		assignment-expression
+				|	expression COMMA assignment-expression
+				;
+
+assignment-expression ::=		logical-or-expression
+							|	unary-expression assignment-operator assignment assignment-expression
+							;
+
+assignment-operator ::=		ASSIGN
+						|	MULASSIGN
+						|	DIVASSIGN
+						|	MODASSIGN
+						|	ADDASSIGN
+						|	SUBASSIGN
+						|	SHLASSIGN
+						|	SHRASSIGN
+						|	ANDASSIGN
+						|	ORASSIGN
+						|	XORASSIGN
+						;
+
+constant-expression ::=		logical-or-expression
+						;
+
+logical-or-expression ::=		logical-and-expression
+							|	logical-or-expression OR logical-and-expression
+							;
+
+logical-and-expression ::=		inclusive-or-expression
+							|	logical-and-expression ADDRESS_BITWISEAND inclusive-or-expression
+							;
+
+inclusive-or-expression ::=		exclusive-or-expression
+							|	inclusive-or-expression BITWISEOR exclusive-or-expression
+							;
+
+exclusive-or-expression ::=		and-expression
+							|	exclusive-or-expression BITWISEXOR and-expression
+							;
+
+and-expression ::=		equality-expression
+					|	and-expression BITWISEAND equality-expression
+					;
+
+equality-expression ::=		relational-expression
+						|	equality-expression equality-operator relational-expression
+						;
+
+equality-operator ::=		EQUAL
+						|	NOTEQUAL
+						;
+
+relational-expression ::=		shift-expression
+							|	relational-expression relational-operator shift-expression
+							;
+
+relational-operator ::= 	SMALLER
+						|	GREATER
+						|	SMALLEREQUAL
+						|	GREATEREQUAL
+						;
+
+shift-expression ::=	additive-expression
+					|	shift-expression shift-operator addtive-expression
+					;
+
+shift-operator ::=		SHIFTLEFT
+					|	SHIFTRIGHT
+					;
+
+additive-expression ::=		multiplicative-expression
+						|	additive-expression additive-operator multiplicative-expression
+						;
+
+additive-operator ::=		ADD
+						|	SUBSTRACT
+						;
+
+multiplicative-expression ::=		cast-expression
+								|	multiplicative-expression multiplicative-operator cast-expression
+								;
+
+multiplicative-operator ::=		MULTIPLY_ASTERISK
+							|	DIVIDE
+							|	MOD
+							;
+
+cast-expression ::=		unary-expression
+					|	LEFTRBRACKET type-name RIGHTBRACKET cast-expression
+					;
+
+type-name ::=		type-specifier
+				|	type-specifier asterisks
+				;
+
+unary-expression ::=		postfix-expression
+						|	INCREASE unary-expression
+						|	DECREASE unary-expression
+						|	unary-operator cast-expression
+						|	SIZEOF unary-expression
+						|	SIZEOF LEFTRBRACKET	type-name RIGHTRBRACKET
+						;
+
+unary-operator ::=		ADDRESS_BITWISEAND
+					|	MULTIPLY_ASTERISK
+					|	ADD
+					|	SUBTRACT
+					|	BITWISENOT
+					|	NOT
+					;
+
+postfix-expression ::=		primary-expression
+						|	primary-expression postfix-list
+						;
+
+postfix-list ::=		postfix
+					|	postfix-list postfix
+					;
+
+postfix ::=		LEFTSBRACKET expression RIGHTSBRACKET
+			|	LEFTRBRACKET RIGHTRBRACKET
+			|	LEFTRBRACKET argument RIGHTRBRACKET
+			|	DOT IDENTIFIER
+			|	POINTER IDENTIFIER
+			|	INCREASE
+			|	DECREASE
+			;
+
+argument-list ::=		assignment-expression
+					|	argument-list COMMA assignment-expression
+					;
+
+primary-expression	::=		IDENTIFIER
+						|	constant
+						|	STRING
+						|	LEFTRBRACKET expression RIGHTRBRACKET
+						;
+
+constant ::=		INTEGER
+				|	CHAR
+				|	STRING
+				;
