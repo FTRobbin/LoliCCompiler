@@ -16,8 +16,7 @@ parser code {:
 
    			if (s.left >= 0) {
    				m.append(" in line " + (s.left +1 ));
-   				if (s.right >= 0) {
-   					m.append(", column " + (s.right + 1));
+   				if (s.right >= 0) { m.append(", column " + (s.right + 1));
    				}
    			}
    		}
@@ -33,296 +32,302 @@ parser code {:
 /* Terminals */
 
 /* Operators */
-terminal			LEFTRBRACKET, RIGHTRBRACKER, SEMICOLON, COMMA, ASSIGN, LEFTCBRACKET, RIGHTCBRACKET, LEFTSBRACKET, RIGHTSBRACKET,
-					MULTIPLY_ASTERISK, BITWISEOR, BITWISEXOR, ADDRESS_BITWISEAND, SMALLER, GREATER, ADD, SUBSTRACT, DIVIDE, MOD, BITWISENOT, NOT, DOT,
-
-					OR, AND, EQUAL, NOTEQUAL, SMALLEREQUAL, GREATEREQUAL, SHIFTLEFT, SHIFTRIGHT, INCREASE, DECREASE, POINTER,
-
-					MULASSIGN, DIVASSIGN, MODASSIGN, SUBASSIGN, SHLASSIGN, SHRASSIGN, ANDASSIGN, ORASSIGN, XORASSIGN;
+terminal	PARAL, PARAR, COLON, COMMA, ASSIGN, CURLYL, CURLYR, SQUARL, SQUARR, MUL, OR, AND, XOR, ADRESS, LESS, GREATER, ADD, SUB, DIV, MOD, TILDE, NOT, DOT;
+terminal	OR_OP, AND_OP, EQ_OP, NE_OP, LE_OP, GE_OP, SHL_OP, SHR_OP, INC_OP, DEC_OP, PTR_OP;
+terminal	MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, ADD_ASSIGN, SUB_ASSIGN, SHL_ASSIGN, SHR_ASSIGN, XOR_ASSIGN, OR_ASSIGN, AND_ASSIGN;
 
 /* Identifier and Constants */
 terminal			IDENTIFIER;
 terminal Integer	INTEGER;
-terminal Char		CHAR;
+terminal Char		CHARACTER;
 terminal String		STRING;
 
 /* Keywords */
-terminal			VOID, CHAR, INT, STRUCT, UNION, IF, ELSE, WHILE, FOR, CONTINUE, BREAK, RETURN, SIZEOF;
+terminal			VOID, CHAR, INT;
+terminal			STRUCT, UNION;
+terminal			IF, ELSE, WHILE, FOR, CONTINUE, BREAK, RETURN;
+terminal			SIZEOF;
 
 /* Non-terminals */
 
 /* Top level */
-non terminal program external-definition declaration function-definition parameter-list plain-declaration declarator array-dimensions plain-declarator
-		     asterisks init-declarator-list init-declarator initializer initializer-list type-specifier struct-or-union	struct-or-union-definition
-		     field-list declaration-list;
+non terminal program, external_definition, declaration, function_definition, parameter_list, plain_declaration, declarator, declarator_list, array_dimensions,
+			 plain_declarator, asterisks, init_declarator_list, init_declarator, initializer, initializer_list, type_specifier, struct_or_union,
+			 struct_or_union_definition, field_list, declaration_list;
 
 /* Statements */
-non terminal statement statement-list expression-statement compound-statement selection-statement iteration-statement jump-statement;
+non terminal statement, statement_list, expression_statement, compound_statement, selection_statement, iteration_statement, jump_statement;
 
 /* Expressions */
-
+non terminal expression, assignment_expression, assignment_operator, constant_expression, logical_or_expression, logical_and_expression,
+			 inclusive_or_expression, exclusive_or_expression, and_expression, equality_expression, equality_operator, relational_expression,
+			 relational_operator, shift_expression,	shift_operator, additive_expression, additive_operator, multiplicative_expression,
+			 multiplicative_operator, cast_expression, type_name, unary_expression, unary_operator, postfix_expression, postfix,
+			 argument_list, primary_expression, constant;
 
 /* Precedences */
 
+precedence nonassoc ELSE;
 
 /* The grammar */
 
-start with program
+start with program;
 
-program ::= 	external-definition
-			| 	program external-definition
+program ::= 	external_definition
+			| 	program external_definition
 			;
 
-external-definition ::= 	declaration
-						|	function-definition
+external_definition ::= 	declaration
+						|	function_definition
 						;
 
-declaration ::=		type-specifier SEMICOLON
-				|	type-specifier init-delarator-list SEMICOLON
+declaration ::=		type_specifier COLON
+				|	type_specifier init_declarator_list COLON
 				;
 
-declaration-list ::= 	declaration
-					|	declaration-list declaration
+declaration_list ::= 	declaration
+					|	declaration_list declaration
 					;
 
-function-definition ::=		type-specifier declarator compound-statement
+function_definition ::=		type_specifier plain_declarator PARAL PARAR compound_statement
+						|	type_specifier plain_declarator PARAL parameter_list PARAR compound_statement
 						;
 
-parameter-list ::=		plain-declaration
-					|	parameter-list COMMA plain-declaration
+parameter_list ::=		plain_declaration
+					|	parameter_list COMMA plain_declaration
 					;
 
-plain-declaration ::=		type-specifier declarator
+plain_declaration ::=		type_specifier declarator
 						;
 
-declarator ::=		plain-declarator LEFTRBRACKET RIGHTRBRACKET
-				|	plain-declarator LEFTRBRACKET parameter-list RIGHTRBRACKET
-				|	plain-declarator array-dimensions
+declarator ::=		plain_declarator PARAL PARAR
+				|	plain_declarator PARAL parameter_list PARAR
+				|	plain_declarator array_dimensions
 				;
 
-array-dimensions ::=	LEFTSBRACKET constant-expression RIGHTSBRACKET
-					|	array-dimensions LEFTSBRACKET constant-expression RIGHTSBRACKET
+declarator_list ::=		declarator
+					|	declarator_list COMMA declarator
+					;
 
-plain-declarator ::=		IDENTIFIER
+array_dimensions ::=	SQUARL constant_expression SQUARR
+					|	array_dimensions SQUARL constant_expression SQUARR
+					;
+
+plain_declarator ::=		IDENTIFIER
 						|	asterisks IDENTIFIER
 						;
 
-asterisks ::= 		MULTIPLY_ASTERISK
-				|	asterisks MULTIPLY_ASTERISK
+asterisks ::= 		MUL
+				|	asterisks MUL
 				;
 
-init-declarator-list ::=	init-declarator
-						|	init-declarator-list COMMA init-declarator
+init_declarator_list ::=	init_declarator
+						|	init_declarator_list COMMA init_declarator
 						;
 
-init-declarator	::=		declarator
+init_declarator	::=		declarator
 					|	declarator ASSIGN initializer
 					;
 
-initializer	::=		assignment-expression
-				|	LEFTCBRACKET initializer-list RIGHTCBRACKET
+initializer	::=		assignment_expression
+				|	CURLYL initializer_list CURLYR
 				;
 
-initializer-list ::=	initializer
-					|	initializer-list COMMA initializer
+initializer_list ::=	initializer
+					|	initializer_list COMMA initializer
 					;
 
-type-specifier ::=		VOID
+type_specifier ::=		VOID
 					|	INT
 					|	CHAR
-					|	STRING
-					|	struct-or-union	IDENTIFIER
-					|	struct-or-union struct-or-union-definition
+					|	struct_or_union	IDENTIFIER
+					|	struct_or_union struct_or_union_definition
 					;
 
-struct-or-union	::=		STRUCT
+struct_or_union	::=		STRUCT
 					|	UNION
 					;
 
-struct-or-union-definition ::=		IDENTIFIER LEFTCBRACKET field-list RIGHTCBRACKET
-								|	LEFTCBRACKET field-list RIGHTCBRACKET
+struct_or_union_definition ::=		IDENTIFIER CURLYL field_list CURLYR
+								|	CURLYL field_list CURLYR
 								;
 
-field-list ::=		type-specifier declarators SEMICOLON
-				|	field-list type-specifier declarators SEMICOLON
+field_list ::=		type_specifier declarator_list COLON
+				|	field_list type_specifier declarator_list COLON
 				;
 
 
-statement ::=		expression-statement
-				|	compound-statement
-				|	selection-statement
-				|	iteration-statement
-				|	jump-statement
+statement ::=		expression_statement
+				|	compound_statement
+				|	selection_statement
+				|	iteration_statement
+				|	jump_statement
 				;
 
-statement-list ::= 		statement
-					|	statement-list statement
+statement_list ::= 		statement
+					|	statement_list statement
 					;
 
-expression-statement ::=	expression SEMICOLON
-						|	SEMICOLON
+expression_statement ::=	expression COLON
+						|	COLON
 						;
 
-compound-statement ::=		LEFTCBRACKET declaration-list statement-list RIGHTCBRACKET
-						|	LEFTCBRACKET statement-list RIGHTCBRACKET
-						|	LEFTCBRACKET declaration-list RIGHTCBRACKET
+compound_statement ::=		CURLYL declaration_list statement_list CURLYR
+						|	CURLYL statement_list CURLYR
+						|	CURLYL declaration_list CURLYR
+						|	CURLYL CURLYR
 						;
 
-selection-statement ::=		IF LEFTRBRACKET expression RIGHTRBRACKET statement
-						|	IF LEFTRBRACKET expression RIGHTRBRACKET ELSE statement
+selection_statement ::=		IF PARAL expression PARAR statement
+						|	IF PARAL expression PARAR ELSE statement
 						;
 
-iteration-statement ::=		WHILE LEFTRBRACKET expression RIGHTRBRACKET statement
-						|	FOR LEFTRBRACKET expression-statement expression-statement RIGHTRBRACKET statement
-						|	FOR LEFTRBRACKET expression-statement expression-statement expression RIGHTRBRACKET statement
+iteration_statement ::=		WHILE PARAL expression PARAR statement
+						|	FOR PARAL expression_statement expression_statement PARAR statement
+						|	FOR PARAL expression_statement expression_statement expression PARAR statement
 						;
 
-jump-statement ::=		CONTINUE SEMICOLON
-					|	BREAK SEMICOLON
-					|	RETURN SEMICOLON
-					|	RETURN expression SEMICOLON
+jump_statement ::=		CONTINUE COLON
+					|	BREAK COLON
+					|	RETURN COLON
+					|	RETURN expression COLON
 					;
 
 
-expression ::=		assignment-expression
-				|	expression COMMA assignment-expression
+expression ::=		assignment_expression
+				|	expression COMMA assignment_expression
 				;
 
-assignment-expression ::=		logical-or-expression
-							|	unary-expression assignment-operator assignment assignment-expression
+assignment_expression ::=		logical_or_expression
+							|	unary_expression assignment_operator assignment_expression
 							;
 
-assignment-operator ::=		ASSIGN
-						|	MULASSIGN
-						|	DIVASSIGN
-						|	MODASSIGN
-						|	ADDASSIGN
-						|	SUBASSIGN
-						|	SHLASSIGN
-						|	SHRASSIGN
-						|	ANDASSIGN
-						|	ORASSIGN
-						|	XORASSIGN
+assignment_operator ::=		ASSIGN
+						|	MUL_ASSIGN
+						|	DIV_ASSIGN
+						|	MOD_ASSIGN
+						|	ADD_ASSIGN
+						|	SUB_ASSIGN
+						|	SHL_ASSIGN
+						|	SHR_ASSIGN
+						|	AND_ASSIGN
+						|	OR_ASSIGN
+						|	XOR_ASSIGN
 						;
 
-constant-expression ::=		logical-or-expression
+constant_expression ::=		logical_or_expression
 						;
 
-logical-or-expression ::=		logical-and-expression
-							|	logical-or-expression OR logical-and-expression
+logical_or_expression ::=		logical_and_expression
+							|	logical_or_expression OR_OP logical_and_expression
 							;
 
-logical-and-expression ::=		inclusive-or-expression
-							|	logical-and-expression ADDRESS_BITWISEAND inclusive-or-expression
+logical_and_expression ::=		inclusive_or_expression
+							|	logical_and_expression AND_OP inclusive_or_expression
 							;
 
-inclusive-or-expression ::=		exclusive-or-expression
-							|	inclusive-or-expression BITWISEOR exclusive-or-expression
+inclusive_or_expression ::=		exclusive_or_expression
+							|	inclusive_or_expression OR exclusive_or_expression
 							;
 
-exclusive-or-expression ::=		and-expression
-							|	exclusive-or-expression BITWISEXOR and-expression
+exclusive_or_expression ::=		and_expression
+							|	exclusive_or_expression XOR and_expression
 							;
 
-and-expression ::=		equality-expression
-					|	and-expression BITWISEAND equality-expression
+and_expression ::=		equality_expression
+					|	and_expression AND equality_expression
 					;
 
-equality-expression ::=		relational-expression
-						|	equality-expression equality-operator relational-expression
+equality_expression ::=		relational_expression
+						|	equality_expression equality_operator relational_expression
 						;
 
-equality-operator ::=		EQUAL
-						|	NOTEQUAL
+equality_operator ::=		EQ_OP
+						|	NE_OP
 						;
 
-relational-expression ::=		shift-expression
-							|	relational-expression relational-operator shift-expression
+relational_expression ::=		shift_expression
+							|	relational_expression relational_operator shift_expression
 							;
 
-relational-operator ::= 	SMALLER
+relational_operator ::= 	LESS
 						|	GREATER
-						|	SMALLEREQUAL
-						|	GREATEREQUAL
+						|	LE_OP
+						|	GE_OP
 						;
 
-shift-expression ::=	additive-expression
-					|	shift-expression shift-operator addtive-expression
+shift_expression ::=	additive_expression
+					|	shift_expression shift_operator additive_expression
 					;
 
-shift-operator ::=		SHIFTLEFT
-					|	SHIFTRIGHT
+shift_operator ::=		SHL_OP
+					|	SHR_OP
 					;
 
-additive-expression ::=		multiplicative-expression
-						|	additive-expression additive-operator multiplicative-expression
+additive_expression ::=		multiplicative_expression
+						|	additive_expression additive_operator multiplicative_expression
 						;
 
-additive-operator ::=		ADD
-						|	SUBSTRACT
+additive_operator ::=		ADD
+						|	SUB
 						;
 
-multiplicative-expression ::=		cast-expression
-								|	multiplicative-expression multiplicative-operator cast-expression
+multiplicative_expression ::=		cast_expression
+								|	multiplicative_expression multiplicative_operator cast_expression
 								;
 
-multiplicative-operator ::=		MULTIPLY_ASTERISK
-							|	DIVIDE
+multiplicative_operator ::=		MUL
+							|	DIV
 							|	MOD
 							;
 
-cast-expression ::=		unary-expression
-					|	LEFTRBRACKET type-name RIGHTBRACKET cast-expression
+cast_expression ::=		unary_expression
+					|	PARAL type_name PARAR cast_expression
 					;
 
-type-name ::=		type-specifier
-				|	type-specifier asterisks
+type_name ::=		type_specifier
+				|	type_specifier asterisks
 				;
 
-unary-expression ::=		postfix-expression
-						|	INCREASE unary-expression
-						|	DECREASE unary-expression
-						|	unary-operator cast-expression
-						|	SIZEOF unary-expression
-						|	SIZEOF LEFTRBRACKET	type-name RIGHTRBRACKET
+unary_expression ::=		postfix_expression
+						|	INC_OP unary_expression
+						|	DEC_OP unary_expression
+						|	unary_operator cast_expression
+						|	SIZEOF unary_expression
+						|	SIZEOF PARAL type_name PARAR
 						;
 
-unary-operator ::=		ADDRESS_BITWISEAND
-					|	MULTIPLY_ASTERISK
+unary_operator ::=		ADRESS
+					|	MUL
 					|	ADD
-					|	SUBTRACT
-					|	BITWISENOT
+					|	SUB
+					|	TILDE
 					|	NOT
 					;
 
-postfix-expression ::=		primary-expression
-						|	primary-expression postfix-list
+postfix_expression ::=		primary_expression
+						|	postfix_expression postfix
 						;
 
-postfix-list ::=		postfix
-					|	postfix-list postfix
-					;
-
-postfix ::=		LEFTSBRACKET expression RIGHTSBRACKET
-			|	LEFTRBRACKET RIGHTRBRACKET
-			|	LEFTRBRACKET argument RIGHTRBRACKET
+postfix ::=		SQUARL expression SQUARR
+			|	PARAL PARAR
+			|	PARAL argument_list PARAR
 			|	DOT IDENTIFIER
-			|	POINTER IDENTIFIER
-			|	INCREASE
-			|	DECREASE
+			|	PTR_OP IDENTIFIER
+			|	INC_OP
+			|	DEC_OP
 			;
 
-argument-list ::=		assignment-expression
-					|	argument-list COMMA assignment-expression
+argument_list ::=		assignment_expression
+					|	argument_list COMMA assignment_expression
 					;
 
-primary-expression	::=		IDENTIFIER
+primary_expression	::=		IDENTIFIER
 						|	constant
 						|	STRING
-						|	LEFTRBRACKET expression RIGHTRBRACKET
+						|	PARAL expression PARAR
 						;
 
 constant ::=		INTEGER
-				|	CHAR
-				|	STRING
+				|	CHARACTER
 				;
