@@ -6,7 +6,7 @@ package main;
 
 public class Main {
 
-    public static String pathOf(String filename) { return Main.class.getResource(filename).getPath(); }
+//    public static String pathOf(String filename) { return Main.class.getResource(filename).getPath(); }
 
     private static void compile(String filename) {
     }

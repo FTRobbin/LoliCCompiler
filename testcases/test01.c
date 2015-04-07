@@ -30,7 +30,7 @@ int main() {
 
     0123;
     0456;
-    0789;
+    0777;
 
     0x123;
     0x456;
@@ -53,11 +53,12 @@ struct Lesson {
     int score;
 
     union {
-       int a, char b;
+       int a;
+       char b;
     } comment;
-}
+};
 
-void getMoreGPA(Lesson compiler) {
+void getMoreGPA(int compiler) {
     int i;
     if (compiler.score >= 95) {
         printf("target achieved\n");
@@ -78,7 +79,7 @@ void getMoreGPA(Lesson compiler) {
 
 void moreTests() {
     int a = (1 + 1), b = (2 + 2), c[20] = {1 * 2, 2 / 1, 3 % 2, 7 | 4, 8 & 1, ~8, !9};
-    Lesson t;
+    int t;
     t.comment.a = a;
 
     // multi-character operators
