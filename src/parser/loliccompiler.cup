@@ -2,11 +2,15 @@
 CUP specification for loliccompiler by RobbinNi
 */
 
+//TODO : type_def support
+
 package parser;
 
 import lexer.Yylex;
 
 import java.io.Reader;
+
+import ast.nodes.*;
 
 /* Preliminaries to set up and use the scanner. */
 
@@ -39,9 +43,9 @@ terminal	OR_OP, AND_OP, EQ_OP, NE_OP, LE_OP, GE_OP, SHL_OP, SHR_OP, INC_OP, DEC_
 terminal	MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, ADD_ASSIGN, SUB_ASSIGN, SHL_ASSIGN, SHR_ASSIGN, XOR_ASSIGN, OR_ASSIGN, AND_ASSIGN;
 
 /* Identifier and Constants */
-terminal			IDENTIFIER;
-terminal Integer	INTEGER;
-terminal Char		CHARACTER;
+terminal String		IDENTIFIER;
+terminal int		INTEGER;
+terminal char		CHARACTER;
 terminal String		STRING;
 
 /* Keywords */
@@ -50,22 +54,40 @@ terminal			STRUCT, UNION;
 terminal			IF, ELSE, WHILE, FOR, CONTINUE, BREAK, RETURN;
 terminal			SIZEOF;
 
-/* Non-terminals */
+/* Non terminals */
 
-/* Top level */
-non terminal program, external_definition, declaration, function_definition, parameter_list, plain_declaration, declarator, declarator_list, array_dimensions,
-			 plain_declarator, asterisks, init_declarator_list, init_declarator, initializer, initializer_list, type_specifier, struct_or_union,
-			 struct_or_union_definition, field_list, declaration_list;
+non terminal Program program, external_definition;
 
-/* Statements */
-non terminal statement, statement_list, expression_statement, compound_statement, selection_statement, iteration_statement, jump_statement;
+non terminal DeclList declaration, declaration_list, init_declarator_list, plain_declaration, parameter_list, declarator_list;
+non terminal Declaration init_declarator, declarator, plain_declarator;
+non terminal FunctionDefi function_definition;
 
-/* Expressions */
-non terminal expression, assignment_expression, assignment_operator, constant_expression, logical_or_expression, logical_and_expression,
-			 inclusive_or_expression, exclusive_or_expression, and_expression, equality_expression, equality_operator, relational_expression,
-			 relational_operator, shift_expression,	shift_operator, additive_expression, additive_operator, multiplicative_expression,
-			 multiplicative_operator, cast_expression, type_name, unary_expression, unary_operator, postfix_expression, postfix,
-			 argument_list, primary_expression, constant;
+non terminal Initializer initializer;
+non terminal InitList initializer_list;
+
+non terminal Type type_specifier, type_name, array_dimensions;
+
+non terminal DeclList field_list;
+
+non terminal Statement statement;
+non terminal StatList statement_list;
+non terminal ExpressionStat expression_statement;
+non terminal CompoundStat compound_statement;
+non terminal SelectionStat selection_statement;
+non terminal IterationStat iteration_statement;
+non terminal JumpStat jump_statement;
+
+non terminal Expression
+			 expression, assignment_expression, constant_expression, logical_or_expression, logical_and_expression,
+			 inclusive_or_expression, exclusive_or_expression, and_expression, equality_expression, relational_expression,
+			 shift_expression, additive_expression, multiplicative_expression,
+			 cast_expression, unary_expression, postfix_expression,
+			 primary_expression;
+
+non terminal ArgumentList argument_list;
+
+non terminal Integer assignment_operator, equality_operator, relational_operator, shift_operator, additive_operator, multiplicative_operator,
+					 unary_operator;
 
 /* Precedences */
 
@@ -75,262 +97,443 @@ precedence nonassoc ELSE;
 
 start with program;
 
-program ::= 	external_definition
-			| 	program external_definition
+/* Program level */
+program ::= 	external_definition:decl
+			{: RESULT = decl; :}
+
+			| 	program:prog external_definition:decl
+			{: RESULT = (new Program()).add(prog).add(decl); :}
 			;
 
-external_definition ::= 	declaration
-						|	function_definition
+external_definition ::= 	declaration:decl
+						{: RESULT = (new Program()).add(decl); :}
+
+						|	function_definition:func
+						{: RESULT = (new Program()).add(func); :}
 						;
 
-declaration ::=		type_specifier COLON
-				|	type_specifier init_declarator_list COLON
+/* Declaration level */
+
+function_definition ::=		type_specifier:type plain_declarator:dect PARAL PARAR compound_statement:stat
+						{:
+							if (dect.type == null) {
+								dect.type = type;
+							} else {
+								dect.type.encore(type);
+							}
+							RESULT = new FunctionDefi(dect.type, dect.name, new DeclList(), stat); :}
+						|	type_specifier:type plain_declarator:dect PARAL parameter_list:para PARAR compound_statement:stat
+						{:
+							if (dect.type == null) {
+								dect.type = type;
+							} else {
+								dect.type.encore(type);
+							}
+							RESULT = new FunctionDefi(dect.type, dect.name, para, stat); :}
+						;
+
+declaration_list ::= 	declaration:decl
+					{: RESULT = (new DeclList()).add(decl); :}
+					|	declaration_list:list declaration:decl
+					{: RESULT = list.add(decl); :}
+					;
+
+declaration ::=		type_specifier:type COLON
+				{: RESULT = (new DeclList()).add(new TypeDecl(type)); :}
+				|	type_specifier:type init_declarator_list:init COLON
+				{:
+					for (Declaration dect : init.list) {
+						if (dect.type == null) {
+							dect.type = type;
+						} else {
+							dect.type.encore(type);
+						}
+					}
+					RESULT = init;
+				:}
 				;
 
-declaration_list ::= 	declaration
-					|	declaration_list declaration
-					;
 
-function_definition ::=		type_specifier plain_declarator PARAL PARAR compound_statement
-						|	type_specifier plain_declarator PARAL parameter_list PARAR compound_statement
+plain_declaration ::=		type_specifier:type declarator:dect
+						{:
+							if (dect.type == null) {
+								dect.type = type;
+							} else {
+								dect.type.encore(type);
+							}
+							RESULT = (new DeclList()).add(dect);:}
 						;
 
-parameter_list ::=		plain_declaration
-					|	parameter_list COMMA plain_declaration
-					;
-
-plain_declaration ::=		type_specifier declarator
-						;
-
-declarator ::=		plain_declarator
-				|	plain_declarator PARAL PARAR
-				|	plain_declarator PARAL parameter_list PARAR
-				|	plain_declarator array_dimensions
+declarator ::=		plain_declarator:dect
+				{:  RESULT = new VariableDecl(dect.type, dect.name, new InitList()); :}
+				|	plain_declarator:dect PARAL PARAR
+				{:  RESULT = new FunctionDecl(dect.type, dect.name, new DeclList()); :}
+				|	plain_declarator:dect PARAL parameter_list:para PARAR
+				{:	RESULT = new FunctionDecl(dect.type, dect.name, para); :}
+				|	plain_declarator:dect array_dimensions:tydr
+				{:	RESULT = new VariableDecl(tydr.encore(dect.type), dect.name, new InitList()); :}
 				;
 
 declarator_list ::=		declarator
 					|	declarator_list COMMA declarator
 					;
 
-array_dimensions ::=	SQUARL constant_expression SQUARR
-					|	array_dimensions SQUARL constant_expression SQUARR
-					;
-
-plain_declarator ::=		IDENTIFIER
-						|	asterisks IDENTIFIER
+plain_declarator ::=		IDENTIFIER:name
+						{:	RESULT = new VariableDecl(null, new Symbol(name), new InitList()); :}
+						|	MUL plain_declarator:dect
+						{:	dect.type = new PointerType(dect.type);
+							RESULT = dect; :}
 						;
 
-asterisks ::= 		MUL
-				|	asterisks MUL
-				;
+array_dimensions ::=	SQUARL constant_expression:expr SQUARR
+					{:	RESULT = new ArrayType(null, expr); :}
+					|	array_dimensions:tydr SQUARL constant_expression:expr SQUARR
+					{:	RESULT = tydr.encore(new ArrayType(null, expr)); :}
+					;
 
-init_declarator_list ::=	init_declarator
-						|	init_declarator_list COMMA init_declarator
+parameter_list ::=		plain_declaration:decl
+					{:	RESULT = (new DeclList()).add(decl); :}
+					|	parameter_list:list COMMA plain_declaration:decl
+					{:	RESULT = list.add(decl);	:}
+					;
+
+/* Initializer Group */
+init_declarator_list ::=	init_declarator:dect
+						{:	RESULT = (new DeclList()).add(dect); :}
+						|	init_declarator_list:list COMMA init_declarator:dect
+						{:	RESULT = list.add(dect); :}
 						;
 
-init_declarator	::=		declarator
-					|	declarator ASSIGN initializer
+init_declarator	::=		declarator:dect
+					{:	RESULT = dect; :}
+					|	declarator:dect ASSIGN initializer:init
+					{:	dect.init = init;
+						RESULT = dect; :}
 					;
 
-initializer	::=		assignment_expression
-				|	CURLYL initializer_list CURLYR
+initializer	::=		assignment_expression:expr
+				{:	RESULT = new InitValue(expr); :}
+				|	CURLYL initializer_list:list CURLYR
+				{:	RESULT = list; :}
 				;
 
-initializer_list ::=	initializer
-					|	initializer_list COMMA initializer
+initializer_list ::=	initializer:init
+					{:	RESULT = (new InitList()).add(init); :}
+					|	initializer_list:list COMMA initializer:init
+					{:	RESULT = list.add(init); :}
 					;
 
+/* Type Group */
 type_specifier ::=		VOID
+					{:	RESULT = new VoidType(); :}
 					|	INT
+					{:	RESULT = new IntType(); :}
 					|	CHAR
-					|	struct_or_union	IDENTIFIER
-					|	struct_or_union struct_or_union_definition
+					{:	RESULT = new CharType(); :}
+					|	STRUCT IDENTIFIER:id
+					{:	RESULT = new StructType(new Symbol(id), new DeclList()); :}
+					|	STRUCT IDENTIFIER:id CURLYL field_list:list CURLYR
+					{:	RESULT = new StructType(new Symbol(id), list); :}
+					|	STRUCT CURLYL field_list:list CURLYR
+					{:	RESULT = new StructType(new Symbol(""), list); :}
+					|	UNION IDENTIFIER:id
+					{:	RESULT = new UnionType(new Symbol(id), new DeclList()); :}
+					|	UNION CURLYL field_list:list CURLYR
+					{:	RESULT = new UnionType(new Symbol(""), list); :}
 					;
 
-struct_or_union	::=		STRUCT
-					|	UNION
-					;
-
-struct_or_union_definition ::=		IDENTIFIER CURLYL field_list CURLYR
-								|	CURLYL field_list CURLYR
-								;
-
-field_list ::=		type_specifier declarator_list COLON
-				|	field_list type_specifier declarator_list COLON
+field_list ::=		type_specifier:type declarator_list:list COLON
+				{:	for (Declaration decl : list.list) {
+						if (decl.type == null) {
+							decl.type = type;
+						} else {
+							decl.type.encore(type);
+						}
+					}
+					RESULT = list;
+				:}
+				|	field_list:list type_specifier:type declarator_list:list2 COLON
+				{:	for (Declaration decl : list2.list) {
+						if (decl.type == null) {
+							decl.type = type;
+						} else {
+							decl.type.encore(type);
+						}
+					}
+					list = list.add(list2);
+					RESULT = list;
+				:}
 				;
 
-
-statement ::=		expression_statement
-				|	compound_statement
-				|	selection_statement
-				|	iteration_statement
-				|	jump_statement
+/* Statement Level */
+statement ::=		expression_statement:stat
+				{:	RESULT = stat; :}
+				|	compound_statement:stat
+				{:	RESULT = stat; :}
+				|	selection_statement:stat
+				{:	RESULT = stat; :}
+				|	iteration_statement:stat
+				{:	RESULT = stat; :}
+				|	jump_statement:stat
+				{:	RESULT = stat; :}
 				;
 
-statement_list ::= 		statement
-					|	statement_list statement
+statement_list ::= 		statement:stat
+					{:	RESULT = (new StatList()).add(stat); :}
+					|	statement_list:list statement:stat
+					{:	RESULT = list.add(stat); :}
 					;
 
-expression_statement ::=	expression COLON
+expression_statement ::=	expression:expr COLON
+						{:	RESULT = new ExpressionStat(expr); :}
 						|	COLON
+						{:	RESULT = new ExpressionStat(new EmptyExpr()); :}
 						;
 
-compound_statement ::=		CURLYL declaration_list statement_list CURLYR
-						|	CURLYL statement_list CURLYR
-						|	CURLYL declaration_list CURLYR
+compound_statement ::=		CURLYL declaration_list:dlst statement_list:slst CURLYR
+						{:	RESULT = new CompoundStat(dlst, slst); :}
+						|	CURLYL statement_list:slst CURLYR
+						{:	RESULT = new CompoundStat(new DeclList(), slst); :}
+						|	CURLYL declaration_list:dlst CURLYR
+						{:	RESULT = new CompoundStat(dlst, new StatList()); :}
 						|	CURLYL CURLYR
+						{:	RESULT = new CompoundStat(new DeclList(), new StatList()); :}
 						;
 
-selection_statement ::=		IF PARAL expression PARAR statement
-						|	IF PARAL expression PARAR statement ELSE statement
+selection_statement ::=		IF PARAL expression:expr PARAR statement:iftr
+						{:	RESULT = new SelectionStat(expr, iftr, new ExpressionStat(new EmptyExpr())); :}
+						|	IF PARAL expression:expr PARAR statement:iftr ELSE statement:iffl
+						{:	RESULT = new SelectionStat(expr, iftr, iffl); :}
 						;
 
-iteration_statement ::=		WHILE PARAL expression PARAR statement
-						|	FOR PARAL expression_statement expression_statement PARAR statement
-						|	FOR PARAL expression_statement expression_statement expression PARAR statement
+iteration_statement ::=		WHILE PARAL expression:expr PARAR statement:stat
+						{:	RESULT = new IterationStat(new ExpressionStat(new EmptyExpr()), expr, new ExpressionStat(new EmptyExpr()), stat); :}
+						|	FOR PARAL expression_statement:init expression_statement:expr PARAR statement:stat
+						{:	RESULT = new IterationStat(init, expr.expr, new ExpressionStat(new EmptyExpr()), stat); :}
+						|	FOR PARAL expression_statement:init expression_statement:expr expression:inct PARAR statement:stat
+						{:	RESULT = new IterationStat(init, expr.expr, new ExpressionStat(inct), stat); :}
 						;
 
 jump_statement ::=		CONTINUE COLON
+					{:	RESULT = new ContinueStat(); :}
 					|	BREAK COLON
+					{:	RESULT = new BreakStat(); :}
 					|	RETURN COLON
-					|	RETURN expression COLON
+					{:	RESULT = new ReturnStat(new EmptyExpr()); :}
+					|	RETURN expression:expr COLON
+					{:	RESULT = new ReturnStat(expr); :}
 					;
 
+/* Expression Level */
 
-expression ::=		assignment_expression
-				|	expression COMMA assignment_expression
+expression ::=		assignment_expression:expr
+				{:	RESULT = expr; :}
+				|	expression:expr1 COMMA assignment_expression:expr2
+				{:	RESULT = new BinaryExpr(expr1, Symbols.COMMA, expr2); :}
 				;
 
-assignment_expression ::=		logical_or_expression
-							|	unary_expression assignment_operator assignment_expression
+assignment_expression ::=		logical_or_expression:expr
+							{:	RESULT = expr; :}
+							|	unary_expression:expr1 assignment_operator:op assignment_expression:expr2
+							{:	RESULT = new BinaryExpr(expr1, op, expr2); :}
 							;
 
 assignment_operator ::=		ASSIGN
+						{:	RESULT = Symbols.ASSIGN; :}
 						|	MUL_ASSIGN
+						{:	RESULT = Symbols.MUL_ASSIGN; :}
 						|	DIV_ASSIGN
+						{:	RESULT = Symbols.DIV_ASSIGN; :}
 						|	MOD_ASSIGN
+						{:	RESULT = Symbols.MOD_ASSIGN; :}
 						|	ADD_ASSIGN
+						{:	RESULT = Symbols.ADD_ASSIGN; :}
 						|	SUB_ASSIGN
+						{:	RESULT = Symbols.SUB_ASSIGN; :}
 						|	SHL_ASSIGN
+						{:	RESULT = Symbols.SHL_ASSIGN; :}
 						|	SHR_ASSIGN
+						{:	RESULT = Symbols.SHR_ASSIGN; :}
 						|	AND_ASSIGN
+						{:	RESULT = Symbols.AND_ASSIGN; :}
 						|	OR_ASSIGN
+						{:	RESULT = Symbols.OR_ASSIGN; :}
 						|	XOR_ASSIGN
+						{:	RESULT = Symbols.XOR_ASSIGN; :}
 						;
 
-constant_expression ::=		logical_or_expression
+constant_expression ::=		logical_or_expression:expr
+						{:	RESULT = expr; :}
 						;
 
-logical_or_expression ::=		logical_and_expression
-							|	logical_or_expression OR_OP logical_and_expression
+logical_or_expression ::=		logical_and_expression:expr
+							{:	RESULT = expr; :}
+							|	logical_or_expression:expr1 OR_OP logical_and_expression:expr2
+							{:	RESULT = new BinaryExpr(expr1, Symbols.OR_OP, expr2); :}
 							;
 
-logical_and_expression ::=		inclusive_or_expression
-							|	logical_and_expression AND_OP inclusive_or_expression
+logical_and_expression ::=		inclusive_or_expression:expr
+							{:	RESULT = expr; :}
+							|	logical_and_expression:expr1 AND_OP inclusive_or_expression:expr2
+							{:	RESULT = new BinaryExpr(expr1, Symbols.AND_OP, expr2); :}
 							;
 
-inclusive_or_expression ::=		exclusive_or_expression
-							|	inclusive_or_expression OR exclusive_or_expression
+inclusive_or_expression ::=		exclusive_or_expression:expr
+							{:	RESULT = expr; :}
+							|	inclusive_or_expression:expr1 OR exclusive_or_expression:expr2
+							{:	RESULT = new BinaryExpr(expr1, Symbols.OR, expr2); :}
 							;
 
-exclusive_or_expression ::=		and_expression
-							|	exclusive_or_expression XOR and_expression
+exclusive_or_expression ::=		and_expression:expr
+							{:	RESULT = expr; :}
+							|	exclusive_or_expression:expr1 XOR and_expression:expr2
+							{:	RESULT = new BinaryExpr(expr1, Symbols.XOR, expr2); :}
 							;
 
-and_expression ::=		equality_expression
-					|	and_expression ADRESS equality_expression
+and_expression ::=		equality_expression:expr
+					{:	RESULT = expr;	:}
+					|	and_expression:expr1 ADRESS equality_expression:expr2
+					{:	RESULT = new BinaryExpr(expr1, Symbols.ADRESS, expr2); :}
 					;
 
-equality_expression ::=		relational_expression
-						|	equality_expression equality_operator relational_expression
+equality_expression ::=		relational_expression:expr
+						{:	RESULT = expr;	:}
+						|	equality_expression:expr1 equality_operator:op relational_expression:expr2
+						{:	RESULT = new BinaryExpr(expr1, op, expr2); :}
 						;
 
 equality_operator ::=		EQ_OP
+						{:	RESULT = Symbols.EQ_OP;	:}
 						|	NE_OP
+						{:	RESULT = Symbols.NE_OP;	:}
 						;
 
-relational_expression ::=		shift_expression
-							|	relational_expression relational_operator shift_expression
+relational_expression ::=		shift_expression:expr
+							{:	RESULT = expr;	:}
+							|	relational_expression:expr1 relational_operator:op shift_expression:expr2
+							{:	RESULT = new BinaryExpr(expr1, op, expr2); :}
 							;
 
 relational_operator ::= 	LESS
+						{:	RESULT = Symbols.LESS;	:}
 						|	GREATER
+						{:	RESULT = Symbols.GREATER;	:}
 						|	LE_OP
+						{:	RESULT = Symbols.LE_OP;	:}
 						|	GE_OP
+						{:	RESULT = Symbols.GE_OP;	:}
 						;
 
-shift_expression ::=	additive_expression
-					|	shift_expression shift_operator additive_expression
+shift_expression ::=	additive_expression:expr
+					{:	RESULT = expr;	:}
+					|	shift_expression:expr1 shift_operator:op additive_expression:expr2
+					{:	RESULT = new BinaryExpr(expr1, op, expr2); :}
 					;
 
 shift_operator ::=		SHL_OP
+					{:	RESULT = Symbols.SHL_OP;	:}
 					|	SHR_OP
+					{:	RESULT = Symbols.SHR_OP;	:}
 					;
 
-additive_expression ::=		multiplicative_expression
-						|	additive_expression additive_operator multiplicative_expression
+additive_expression ::=		multiplicative_expression:expr
+						{:	RESULT = expr;	:}
+						|	additive_expression:expr1 additive_operator:op multiplicative_expression:expr2
+						{:	RESULT = new BinaryExpr(expr1, op, expr2); :}
 						;
 
 additive_operator ::=		ADD
+						{:	RESULT = Symbols.ADD;	:}
 						|	SUB
+						{:	RESULT = Symbols.SUB;	:}
 						;
 
-multiplicative_expression ::=		cast_expression
-								|	multiplicative_expression multiplicative_operator cast_expression
+multiplicative_expression ::=		cast_expression:expr
+								{:	RESULT = expr;	:}
+								|	multiplicative_expression:expr1 multiplicative_operator:op cast_expression:expr2
+								{:	RESULT = new BinaryExpr(expr1, op, expr2); :}
 								;
 
 multiplicative_operator ::=		MUL
+							{:	RESULT = Symbols.MUL;	:}
 							|	DIV
+							{:	RESULT = Symbols.DIV;	:}
 							|	MOD
+							{:	RESULT = Symbols.MOD;	:}
 							;
 
-cast_expression ::=		unary_expression
-					|	PARAL type_name PARAR cast_expression
+cast_expression ::=		unary_expression:expr
+					{:	RESULT = expr;	:}
+					|	PARAL type_name:type PARAR cast_expression:expr
+					{:	RESULT = new CastExpr(type, expr);	:}
 					;
 
-type_name ::=		type_specifier
-				|	type_specifier asterisks
+type_name ::=		type_specifier:type
+				{:	RESULT = type; :}
+				|	type_name:type MUL
+				{:	RESULT = new PointerType(type); :}
 				;
 
-unary_expression ::=		postfix_expression
-						|	INC_OP unary_expression
-						|	DEC_OP unary_expression
-						|	unary_operator cast_expression
-						|	SIZEOF unary_expression
-						|	SIZEOF PARAL type_name PARAR
+unary_expression ::=		postfix_expression:expr
+						{:	RESULT = expr; :}
+						|	INC_OP unary_expression:expr
+						{:	RESULT = new UnaryExpr(Symbols.INC_OP, expr); :}
+						|	DEC_OP unary_expression:expr
+						{:	RESULT = new UnaryExpr(Symbols.DEC_OP, expr); :}
+						|	unary_operator:op cast_expression:expr
+						{:	RESULT = new UnaryExpr(op, expr); :}
+						|	SIZEOF unary_expression:expr
+						{:	RESULT = new UnaryExpr(Symbols.SIZEOF, expr); :}
+						|	SIZEOF PARAL type_name:type PARAR
+						{:	RESULT = new SizeofExpr(type); :}
 						;
 
 unary_operator ::=		ADRESS
+					{:	RESULT = Symbols.ADRESS;	:}
 					|	MUL
+					{:	RESULT = Symbols.MUL;	:}
 					|	ADD
+					{:	RESULT = Symbols.ADD;	:}
 					|	SUB
+					{:	RESULT = Symbols.SUB;	:}
 					|	TILDE
+					{:	RESULT = Symbols.TILDE;	:}
 					|	NOT
+					{:	RESULT = Symbols.NOT;	:}
 					;
 
-postfix_expression ::=		primary_expression
-						|	postfix_expression postfix
+postfix_expression ::=		primary_expression:expr
+						{:	RESULT = expr; :}
+						|	postfix_expression:expr SQUARL expression:delta SQUARR
+						{:	RESULT = new ArrayExpr(expr, delta); :}
+						|	postfix_expression:expr PARAL PARAR
+						{:	RESULT = new FunctionCall(expr, new ArgumentList()); :}
+						|	postfix_expression:expr PARAL argument_list:argu PARAR
+						{:	RESULT = new FunctionCall(expr, argu); :}
+						|	postfix_expression:expr DOT IDENTIFIER:id
+						{:	RESULT = new RecordAccess(expr, new Symbol(id)); :}
+						|	postfix_expression:expr PTR_OP IDENTIFIER:id
+						{:	RESULT = new PointerAccess(expr, new Symbol(id)); :}
+						|	postfix_expression:expr INC_OP
+						{:	RESULT = new PostExpr(expr, Symbols.INC_OP); :}
+						|	postfix_expression:expr DEC_OP
+						{:	RESULT = new PostExpr(expr, Symbols.DEC_OP); :}
 						;
 
-postfix ::=		SQUARL expression SQUARR
-			|	PARAL PARAR
-			|	PARAL argument_list PARAR
-			|	DOT IDENTIFIER
-			|	PTR_OP IDENTIFIER
-			|	INC_OP
-			|	DEC_OP
-			;
-
-argument_list ::=		assignment_expression
-					|	argument_list COMMA assignment_expression
+argument_list ::=		assignment_expression:expr
+					{:	RESULT = (new ArgumentList()).add(expr); :}
+					|	argument_list:list COMMA assignment_expression:expr
+					{:	RESULT = list.add(expr); :}
 					;
 
-primary_expression	::=		IDENTIFIER
-						|	constant
-						|	STRING
-						|	PARAL expression PARAR
+primary_expression	::=		IDENTIFIER:id
+						{:	RESULT = new Variable(new Symbol(id)); :}
+						|	INTEGER:it
+						{:	RESULT = new IntConst(it); :}
+						|	CHARACTER:ch
+						{:	RESULT = new CharConst(ch); :}
+						|	STRING:st
+						{:	RESULT = new StringConst(st); :}
+						|	PARAL expression:expr PARAR
+						{:	RESULT = expr; :}
 						;
-
-constant ::=		INTEGER
-				|	CHARACTER
-				;

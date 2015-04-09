@@ -118,25 +118,20 @@
 
   <target name="init" description="Build initialization">
     <!-- Perform any build initialization in this target -->
+      <jflex file="${basedir}/src/lexer/loliccompiler.flex"
+             destdir="${basedir}/src/"
+             verbose="true"
+              />
+
+      <cup srcfile="${basedir}/src/parser/loliccompiler.cup"
+           destdir="${basedir}/src"
+           interface="true"
+           parser="Parser"
+           symbols="Symbols"
+              />
   </target>
 
   <target name="clean" depends="clean.module.loliccompiler" description="cleanup all"/>
-
-  <target name="jflex">
-    <jflex file="${basedir}/src/lexer/loliccompiler.flex"
-           destdir="${basedir}/src/"
-           verbose="true"
-            />
-  </target>
-
-  <target name="cup">
-    <cup srcfile="${basedir}/src/parser/loliccompiler.cup"
-         destdir="${basedir}/src"
-         interface="true"
-         parser="Parser"
-         symbols="Symbols"
-            />
-  </target>
 
   <target name="build.modules" depends="init, clean, compile.module.loliccompiler" description="build all modules"/>
   
