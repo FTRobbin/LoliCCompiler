@@ -1,8 +1,5 @@
 package parser;
 
-import com.google.gson.Gson;
-import main.Main;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -26,15 +23,13 @@ final class ParserTest {
         } finally {
             input.close();
         }
-        Gson gson = new Gson();
-        System.out.println(gson.toJson(parseTree.value));
     }
 
     public static void main(String argv[]) throws IOException {
-        parse("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\test01.c");
-        parse("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\test02.c");
-        parse("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\test03.c");
-        parse("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\test04.c");
-        parse("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\test05.c");
+        parse("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\parser\\test01.c");
+        parse("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\parser\\test02.c");
+        parse("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\parser\\test03.c");
+        parse("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\parser\\test04.c");
+        parse("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\parser\\test05.c");
     }
 }

@@ -5,6 +5,8 @@ package ast.visitors;
  */
 import ast.nodes.*;
 
+import java.io.OutputStream;
+
 public interface Visitor {
     public void visit(Program p);
 
@@ -52,4 +54,7 @@ public interface Visitor {
     public void visit(CharConst cc);
     public void visit(StringConst sc);
     public void visit(Symbol s);
+
+
+    public void setOutput(OutputStream out);
 }

@@ -388,16 +388,16 @@ public class Yylex implements java_cup.runtime.Scanner, Symbols {
     }
 
     private char lexTDC(String s) {
-        switch (s) {
-            case "\\b"  : return '\b';
-            case "\\f"  : return '\f';
-            case "\\n"  : return '\n';
-            case "\\r"  : return '\r';
-            case "\\t"  : return '\t';
-            case "\\\\" : return '\\';
-            case "\\\'" : return '\'';
-            case "\\\"" : return '\"';
-            case "\\0"  : return '\0';
+        switch (s.charAt(1)) {
+            case 'b'  : return '\b';
+            case 'f'  : return '\f';
+            case 'n'  : return '\n';
+            case 'r'  : return '\r';
+            case 't'  : return '\t';
+            case '\\' : return '\\';
+            case '\'' : return '\'';
+            case '\"' : return '\"';
+            case '0'  : return '\0';
         }
         return '\0';
     }

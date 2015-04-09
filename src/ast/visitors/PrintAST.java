@@ -3,6 +3,7 @@ package ast.visitors;
 import ast.nodes.*;
 import parser.Symbols;
 
+import java.io.IOException;
 import java.io.OutputStream;
 
 /**
@@ -10,17 +11,27 @@ import java.io.OutputStream;
  */
 public class PrintAST implements Visitor {
 
+    OutputStream out;
     public int inc;
 
     public void PrintLine(String str) {
-        for (int i = 0; i < inc; ++i) {
-            System.out.print('\t');
+        try {
+            for (int i = 0; i < inc; ++i) {
+                out.write("\t".getBytes());
+            }
+            out.write(("[" + str + "]\n").getBytes());
+        } catch (IOException e) {
+            System.out.println("Unexpected IOException.");
+            e.printStackTrace();
         }
-        System.out.println("[" + str + "]");
     }
 
     public PrintAST() {
         inc = 0;
+    }
+
+    public void setOutput (OutputStream out) {
+        this.out = out;
     }
 
     public void visit(Program p) {
@@ -163,15 +174,15 @@ public class PrintAST implements Visitor {
         PrintLine("SelectionStat");
         ++inc;
         ss.expr.accept(this);
-        ss.iffl.accept(this);
         ss.iftr.accept(this);
+        ss.iffl.accept(this);
         --inc;
     }
 
     public void visit(IterationStat is) {
         PrintLine("IterationStat");
         ++inc;
-        is.inct.accept(this);
+        is.init.accept(this);
         is.expr.accept(this);
         is.inct.accept(this);
         is.stat.accept(this);
@@ -273,7 +284,7 @@ public class PrintAST implements Visitor {
         PrintLine("PostExpr");
         ++inc;
         pe.expr.accept(this);
-        PrintLine("Operator" + Symbols.terminalNames[pe.op]);
+        PrintLine("Operator " + Symbols.terminalNames[pe.op]);
         --inc;
     }
 

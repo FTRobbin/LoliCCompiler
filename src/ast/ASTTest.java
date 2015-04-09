@@ -2,20 +2,19 @@ package ast;
 
 import ast.nodes.Program;
 import ast.visitors.PrintAST;
+import ast.visitors.Visitor;
 import parser.Parser;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Created by Robbin Ni on 2015/4/9.
  */
 final class ASTTest {
 
-    private static void test(String filename) throws IOException {
-        Reader input = new BufferedReader(new FileReader(filename));
+    private static void parseAndVisit(String inputFile, String outputFile, Visitor visitor) throws IOException {
+        Reader input = new BufferedReader(new FileReader(inputFile));
         Parser parser = new Parser(input);
         Program prog;
         try {
@@ -26,17 +25,25 @@ final class ASTTest {
         } finally {
             input.close();
         }
-        PrintAST visitor = new PrintAST();
+        OutputStream output = new FileOutputStream(outputFile);
+        visitor.setOutput(output);
         prog.accept(visitor);
+        output.close();
     }
 
     public static void main(String argv[]) throws IOException {
-        test("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\test01.c");
-        /*
-        test("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\test02.c");
-        test("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\test03.c");
-        test("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\test04.c");
-        test("D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\test05.c");
-        */
+        String path = "D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\AST\\";
+        ArrayList<String> names = new ArrayList<String>();
+        names.add("helloworld");
+        names.add("fibonacci");
+        names.add("quicksort");
+        names.add("floyd");
+        names.add("matrixmul");
+        names.add("bfs");
+        names.add("toposort");
+        names.add("mixedstew");
+        for (String file : names) {
+            parseAndVisit(path + file + ".c", path + file + ".out", new PrintAST());
+        }
     }
 }
