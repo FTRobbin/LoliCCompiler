@@ -174,8 +174,10 @@ declarator ::=		plain_declarator:dect
 				{:	RESULT = new VariableDecl(tydr.encore(dect.type), dect.name, new InitList()); :}
 				;
 
-declarator_list ::=		declarator
-					|	declarator_list COMMA declarator
+declarator_list ::=		declarator:decl
+					{:	RESULT = (new DeclList()).add(decl); :}
+					|	declarator_list:list COMMA declarator:decl
+					{:	RESULT = list.add(decl); :}
 					;
 
 plain_declarator ::=		IDENTIFIER:name

@@ -354,12 +354,12 @@ public class Yylex implements java_cup.runtime.Scanner, Symbols {
     StringBuffer buffer = new StringBuffer();
 
     private Symbol symbol(int type) {
-        System.out.println("Token found : " + type);
+        //System.out.println("Token found : " + type);
         return new Symbol(type, yyline, yycolumn);
     }
 
     private Symbol symbol(int type, Object value) {
-        System.out.println("Token found : " + type + "  <" + value + ">  ");
+        //System.out.println("Token found : " + type + "  <" + value + ">  ");
         return new Symbol(type, yyline, yycolumn, value);
     }
 

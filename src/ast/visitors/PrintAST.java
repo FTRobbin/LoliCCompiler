@@ -16,7 +16,7 @@ public class PrintAST implements Visitor {
         for (int i = 0; i < inc; ++i) {
             System.out.print('\t');
         }
-        System.out.println(str);
+        System.out.println("[" + str + "]");
     }
 
     public PrintAST() {
@@ -73,8 +73,6 @@ public class PrintAST implements Visitor {
         PrintLine("TypeDecl");
         ++inc;
         td.type.accept(this);
-        td.name.accept(this);
-        td.init.accept(this);
         --inc;
     }
 
@@ -285,15 +283,15 @@ public class PrintAST implements Visitor {
     }
 
     public void visit(IntConst ic) {
-        PrintLine("IntConst " + ic.val);
+        PrintLine("IntConst] [" + ic.val);
     }
 
     public void visit(CharConst cc) {
-        PrintLine("CharConst " + cc.ch);
+        PrintLine("CharConst] [" + cc.ch);
     }
 
     public void visit(StringConst sc) {
-        PrintLine("StringConst" + sc.str);
+        PrintLine("StringConst] [" + sc.str);
     }
 
     public void visit(Symbol s) {
