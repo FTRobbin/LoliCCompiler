@@ -3,7 +3,7 @@ package ast.nodes;
 /**
  * Created by Robbin Ni on 2015/4/9.
  */
-public abstract class TypeDeco extends Type implements Visiable {
+public abstract class TypeDeco extends Type implements Visible {
     public Type baseType;
 
     @Override

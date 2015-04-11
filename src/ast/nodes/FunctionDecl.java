@@ -6,7 +6,7 @@ import ast.visitors.Visitor;
  * Created by Robbin Ni on 2015/4/8.
  */
 
-public class FunctionDecl extends Declaration implements Visiable {
+public class FunctionDecl extends Declaration implements Visible {
 
     public DeclList para;
 

@@ -6,7 +6,7 @@ package ast.nodes;
 
 import ast.visitors.Visitor;
 
-public class CompoundStat extends Statement implements Visiable {
+public class CompoundStat extends Statement implements Visible {
 
     public DeclList dlst;
     public StatList slst;

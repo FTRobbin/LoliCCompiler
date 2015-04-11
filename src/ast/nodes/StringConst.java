@@ -5,7 +5,7 @@ import ast.visitors.Visitor;
 /**
  * Created by Robbin Ni on 2015/4/9.
  */
-public class StringConst extends Expression implements Visiable {
+public class StringConst extends Expression implements Visible {
 
     public String str;
 

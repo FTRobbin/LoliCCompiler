@@ -11,6 +11,7 @@ public interface Visitor {
     public void visit(Program p);
 
     public void visit(DeclList dl);
+    public void visit(ParaList pl);
     public void visit(FunctionDefi fd);
     public void visit(VariableDecl vd);
     public void visit(FunctionDecl fd);

@@ -119,7 +119,7 @@
   <target name="init" description="Build initialization">
     <!-- Perform any build initialization in this target -->
       <jflex file="${basedir}/src/lexer/loliccompiler.flex"
-             destdir="${basedir}/src/"
+             destdir="${basedir}/src"
              verbose="true"
               />
 

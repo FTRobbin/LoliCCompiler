@@ -5,7 +5,7 @@ import ast.visitors.Visitor;
 /**
  * Created by Robbin Ni on 2015/4/9.
  */
-public class SelectionStat extends Statement implements Visiable {
+public class SelectionStat extends Statement implements Visible {
 
     public Expression expr;
     public Statement iftr, iffl;

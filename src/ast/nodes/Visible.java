@@ -5,6 +5,6 @@ import ast.visitors.Visitor;
 /**
  * Created by Robbin Ni on 2015/4/8.
  */
-public interface Visiable {
+public interface Visible {
     public void accept(Visitor v);
 }

@@ -5,10 +5,10 @@ import ast.visitors.Visitor;
 /**
  * Created by Robbin Ni on 2015/4/9.
  */
-public class CastExpr extends Expression implements Visiable {
+public class CastExpr extends Expression implements Visible {
 
     public Type type;
-    Expression expr;
+    public Expression expr;
 
     public CastExpr(Type type, Expression expr) {
         this.type = type;

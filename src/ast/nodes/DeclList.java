@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Robbin Ni on 2015/4/8.
  */
-public class DeclList implements Visiable{
+public class DeclList implements Visible {
 
     public List<Declaration> list;
 

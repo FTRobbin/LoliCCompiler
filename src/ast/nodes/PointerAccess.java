@@ -5,7 +5,7 @@ import ast.visitors.Visitor;
 /**
  * Created by Robbin Ni on 2015/4/9.
  */
-public class PointerAccess extends Expression implements Visiable {
+public class PointerAccess extends Expression implements Visible {
 
     public Expression expr;
     public Symbol id;

@@ -5,7 +5,7 @@ import ast.visitors.Visitor;
 /**
  * Created by Robbin Ni on 2015/4/8.
  */
-public class InitValue extends Initializer implements Visiable{
+public class InitValue extends Initializer implements Visible {
 
     public Expression expr;
 

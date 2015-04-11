@@ -52,6 +52,15 @@ public class PrintAST implements Visitor {
         --inc;
     }
 
+    public void visit(ParaList pl) {
+        PrintLine("ParaList");
+        ++inc;
+        for (Declaration decl : pl.list) {
+            decl.accept(this);
+        }
+        --inc;
+    }
+
     public void visit(FunctionDefi fd) {
         PrintLine("FunctionDefi");
         ++inc;
@@ -230,6 +239,7 @@ public class PrintAST implements Visitor {
         PrintLine("CastExpr");
         ++inc;
         ce.type.accept(this);
+        ce.expr.accept(this);
         --inc;
     }
 

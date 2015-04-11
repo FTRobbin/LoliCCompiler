@@ -2,12 +2,10 @@ package ast.nodes;
 
 import ast.visitors.Visitor;
 
-import java.util.List;
-
 /**
  * Created by Robbin Ni on 2015/4/9.
  */
-public class UnionType extends Type implements Visiable {
+public class UnionType extends Type implements Visible {
 
     public Symbol name;
     public DeclList list;
@@ -15,6 +13,11 @@ public class UnionType extends Type implements Visiable {
     public UnionType(Symbol name, DeclList list) {
         this.name = name;
         this.list = list;
+    }
+
+    @Override
+    public Type getShell() {
+        return null;
     }
 
     @Override

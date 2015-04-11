@@ -5,7 +5,7 @@ import ast.visitors.Visitor;
 /**
  * Created by Robbin Ni on 2015/4/9.
  */
-public class BinaryExpr extends Expression implements Visiable{
+public class BinaryExpr extends Expression implements Visible {
 
     public Expression expr1, expr2;
     public Integer op;

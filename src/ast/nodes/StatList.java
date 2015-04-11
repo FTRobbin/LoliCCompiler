@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Robbin Ni on 2015/4/9.
  */
-public class StatList implements Visiable {
+public class StatList implements Visible {
 
     public List<Statement>  list;
 

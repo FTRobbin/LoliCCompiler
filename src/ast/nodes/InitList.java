@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Robbin Ni on 2015/4/8.
  */
-public class InitList extends Initializer implements Visiable {
+public class InitList extends Initializer implements Visible {
 
     public List<Initializer> list;
 

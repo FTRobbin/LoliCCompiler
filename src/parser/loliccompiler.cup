@@ -121,7 +121,7 @@ function_definition ::=		type_specifier:type plain_declarator:dect PARAL PARAR c
 							} else {
 								dect.type.encore(type);
 							}
-							RESULT = new FunctionDefi(dect.type, dect.name, new DeclList(), stat); :}
+							RESULT = new FunctionDefi(dect.type, dect.name, new ParaList(), stat); :}
 						|	type_specifier:type plain_declarator:dect PARAL parameter_list:para PARAR compound_statement:stat
 						{:
 							if (dect.type == null) {
@@ -194,7 +194,7 @@ array_dimensions ::=	SQUARL constant_expression:expr SQUARR
 					;
 
 parameter_list ::=		plain_declaration:decl
-					{:	RESULT = (new DeclList()).add(decl); :}
+					{:	RESULT = (new ParaList()).add(decl); :}
 					|	parameter_list:list COMMA plain_declaration:decl
 					{:	RESULT = list.add(decl);	:}
 					;
@@ -309,11 +309,11 @@ selection_statement ::=		IF PARAL expression:expr PARAR statement:iftr
 						;
 
 iteration_statement ::=		WHILE PARAL expression:expr PARAR statement:stat
-						{:	RESULT = new IterationStat(new ExpressionStat(new EmptyExpr()), expr, new ExpressionStat(new EmptyExpr()), stat); :}
+						{:	RESULT = new IterationStat(new ExpressionStat(new EmptyExpr()), expr, new EmptyExpr(), stat); :}
 						|	FOR PARAL expression_statement:init expression_statement:expr PARAR statement:stat
-						{:	RESULT = new IterationStat(init, expr.expr, new ExpressionStat(new EmptyExpr()), stat); :}
+						{:	RESULT = new IterationStat(init, expr.expr, new EmptyExpr(), stat); :}
 						|	FOR PARAL expression_statement:init expression_statement:expr expression:inct PARAR statement:stat
-						{:	RESULT = new IterationStat(init, expr.expr, new ExpressionStat(inct), stat); :}
+						{:	RESULT = new IterationStat(init, expr.expr, inct, stat); :}
 						;
 
 jump_statement ::=		CONTINUE COLON

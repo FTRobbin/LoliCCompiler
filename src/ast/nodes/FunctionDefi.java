@@ -5,7 +5,7 @@ import ast.visitors.Visitor;
 /**
  * Created by Robbin Ni on 2015/4/8.
  */
-public class FunctionDefi extends Declaration implements Visiable {
+public class FunctionDefi extends Declaration implements Visible {
 
     public Type returnType;
     public Symbol name;
