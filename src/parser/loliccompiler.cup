@@ -2,8 +2,6 @@
 CUP specification for loliccompiler by RobbinNi
 */
 
-//TODO : type_def support
-
 package parser;
 
 import lexer.Yylex;

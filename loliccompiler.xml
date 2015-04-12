@@ -125,9 +125,11 @@
 
       <cup srcfile="${basedir}/src/parser/loliccompiler.cup"
            destdir="${basedir}/src"
-           interface="true"
            parser="Parser"
            symbols="Symbols"
+           interface="true"
+           force="true"
+           nopositions="true"
               />
   </target>
 
