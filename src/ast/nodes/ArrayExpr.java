@@ -14,6 +14,11 @@ public class ArrayExpr extends Expression implements Visible {
     }
 
     @Override
+    public int getPrecedence() {
+        return 13;
+    }
+
+    @Override
     public void accept(Visitor v) {
         v.visit(this);
     }

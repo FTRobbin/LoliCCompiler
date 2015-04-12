@@ -7,11 +7,10 @@ import ast.visitors.Visitor;
  */
 public class IterationStat extends Statement implements Visible {
 
-    public ExpressionStat init;
-    public Expression expr, inct;
+    public Expression init, expr, inct;
     public Statement stat;
 
-    public IterationStat(ExpressionStat init, Expression expr, Expression inct, Statement stat) {
+    public IterationStat(Expression init, Expression expr, Expression inct, Statement stat) {
         this.init = init;
         this.expr = expr;
         this.inct = inct;

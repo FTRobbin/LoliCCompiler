@@ -59,13 +59,13 @@ terminal			SIZEOF;
 non terminal Program program, external_definition;
 
 non terminal DeclList declaration, declaration_list, init_declarator_list, plain_declaration, parameter_list, declarator_list;
-non terminal Declaration init_declarator, declarator, plain_declarator;
+non terminal Declaration init_declarator, declarator, direct_declarator;
 non terminal FunctionDefi function_definition;
 
 non terminal Initializer initializer;
 non terminal InitList initializer_list;
 
-non terminal Type type_specifier, type_name, array_dimensions;
+non terminal Type type_specifier, type_name;
 
 non terminal DeclList field_list;
 
@@ -114,7 +114,7 @@ external_definition ::= 	declaration:decl
 
 /* Declaration level */
 
-function_definition ::=		type_specifier:type plain_declarator:dect PARAL PARAR compound_statement:stat
+function_definition ::=		type_specifier:type declarator:dect compound_statement:stat
 						{:
 							if (dect.type == null) {
 								dect.type = type;
@@ -122,7 +122,7 @@ function_definition ::=		type_specifier:type plain_declarator:dect PARAL PARAR c
 								dect.type.encore(type);
 							}
 							RESULT = new FunctionDefi(dect.type, dect.name, new ParaList(), stat); :}
-						|	type_specifier:type plain_declarator:dect PARAL parameter_list:para PARAR compound_statement:stat
+						|	type_specifier:type declarator:dect declaration_list:para compound_statement:stat
 						{:
 							if (dect.type == null) {
 								dect.type = type;
@@ -164,33 +164,29 @@ plain_declaration ::=		type_specifier:type declarator:dect
 							RESULT = (new DeclList()).add(dect);:}
 						;
 
-declarator ::=		plain_declarator:dect
-				{:  RESULT = new VariableDecl(dect.type, dect.name, new InitList()); :}
-				|	plain_declarator:dect PARAL PARAR
-				{:  RESULT = new FunctionDecl(dect.type, dect.name, new DeclList()); :}
-				|	plain_declarator:dect PARAL parameter_list:para PARAR
-				{:	RESULT = new FunctionDecl(dect.type, dect.name, para); :}
-				|	plain_declarator:dect array_dimensions:tydr
-				{:	RESULT = new VariableDecl(tydr.encore(dect.type), dect.name, new InitList()); :}
+declarator ::=		direct_declarator:dect
+				{:	RESULT = dect;	:}
+				|	MUL declarator:dect
+				{:	dect.type = new PointerType(dect.type);
+					RESULT = dect;	:}
 				;
+
+direct_declarator ::=	IDENTIFIER:name
+					{:	RESULT = new VariableDecl(null, new Symbol(name), new InitList()); :}
+					|	PARAL declarator:dect PARAR
+					{:  RESULT = new VariableDecl(dect.type, dect.name, new InitList()); :}
+					|	direct_declarator:dect PARAL PARAR
+					{:  RESULT = new FunctionDecl(dect.type, dect.name, new DeclList()); :}
+					|	direct_declarator:dect PARAL parameter_list:para PARAR
+					{:	RESULT = new FunctionDecl(dect.type, dect.name, para); :}
+					|	direct_declarator:dect SQUARL constant_expression:expr SQUARR
+					{:	RESULT = new VariableDecl(new ArrayType(dect.type, expr), dect.name, new InitList()); :}
+					;
 
 declarator_list ::=		declarator:decl
 					{:	RESULT = (new DeclList()).add(decl); :}
 					|	declarator_list:list COMMA declarator:decl
 					{:	RESULT = list.add(decl); :}
-					;
-
-plain_declarator ::=		IDENTIFIER:name
-						{:	RESULT = new VariableDecl(null, new Symbol(name), new InitList()); :}
-						|	MUL plain_declarator:dect
-						{:	dect.type = new PointerType(dect.type);
-							RESULT = dect; :}
-						;
-
-array_dimensions ::=	SQUARL constant_expression:expr SQUARR
-					{:	RESULT = new ArrayType(null, expr); :}
-					|	array_dimensions:tydr SQUARL constant_expression:expr SQUARR
-					{:	RESULT = tydr.encore(new ArrayType(null, expr)); :}
 					;
 
 parameter_list ::=		plain_declaration:decl
@@ -309,11 +305,11 @@ selection_statement ::=		IF PARAL expression:expr PARAR statement:iftr
 						;
 
 iteration_statement ::=		WHILE PARAL expression:expr PARAR statement:stat
-						{:	RESULT = new IterationStat(new ExpressionStat(new EmptyExpr()), expr, new EmptyExpr(), stat); :}
+						{:	RESULT = new IterationStat(new EmptyExpr(), expr, new EmptyExpr(), stat); :}
 						|	FOR PARAL expression_statement:init expression_statement:expr PARAR statement:stat
-						{:	RESULT = new IterationStat(init, expr.expr, new EmptyExpr(), stat); :}
+						{:	RESULT = new IterationStat(init.expr, expr.expr, new EmptyExpr(), stat); :}
 						|	FOR PARAL expression_statement:init expression_statement:expr expression:inct PARAR statement:stat
-						{:	RESULT = new IterationStat(init, expr.expr, inct, stat); :}
+						{:	RESULT = new IterationStat(init.expr, expr.expr, inct, stat); :}
 						;
 
 jump_statement ::=		CONTINUE COLON

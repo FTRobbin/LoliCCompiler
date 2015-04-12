@@ -7,4 +7,6 @@ public abstract class Expression implements Visible {
     public boolean isEmpty() {
         return false;
     }
+
+    public abstract int getPrecedence();
 }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 final class ASTTest {
 
-    private static void parseAndVisit(String inputFile, String outputFile, Visitor visitor) throws IOException {
+    public static void parseAndVisit(String inputFile, String outputFile, Visitor visitor) throws IOException {
         Reader input = new BufferedReader(new FileReader(inputFile));
         Parser parser = new Parser(input);
         Program prog;

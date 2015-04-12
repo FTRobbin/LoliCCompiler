@@ -13,6 +13,11 @@ public class IntConst extends Expression implements Visible {
     }
 
     @Override
+    public int getPrecedence() {
+        return 15;
+    }
+
+    @Override
     public void accept(Visitor v) {
         v.visit(this);
     }

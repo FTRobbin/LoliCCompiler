@@ -1,6 +1,7 @@
 package ast.nodes;
 
 import ast.visitors.Visitor;
+import parser.SymbolsRev;
 
 /**
  * Created by Robbin Ni on 2015/4/9.
@@ -14,6 +15,11 @@ public class BinaryExpr extends Expression implements Visible {
         this.expr1 = expr1;
         this.op = op;
         this.expr2 = expr2;
+    }
+
+    @Override
+    public int getPrecedence() {
+        return SymbolsRev.getPrecendenceBin(op);
     }
 
     @Override

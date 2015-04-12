@@ -11,14 +11,16 @@ import java.util.Random;
 /**
  * Created by Robbin Ni on 2015/4/11.
  */
-public class UglyPrinter implements Visitor {
+public class PrettyPrinter implements Visitor {
 
-    Random rand;
+    int indent;
+    Integer lastPre;
     ArrayList<String> stack;
     OutputStream out;
 
-    public UglyPrinter() {
-        rand = new Random();
+    public PrettyPrinter() {
+        indent = 0;
+        lastPre = 15;
         stack = new ArrayList<String>();
     }
 
@@ -41,7 +43,9 @@ public class UglyPrinter implements Visitor {
     }
 
     private String cover(String str, Type shell) {
+        //TODO
         if (shell == null) {
+            lastPre = 15;
             return str;
         } else {
             str = cover(str, ((TypeDeco)shell).baseType);
@@ -50,24 +54,25 @@ public class UglyPrinter implements Visitor {
                 int cur = stack.size();
                 tmp.cap.accept(this);
                 String cap = popTo(cur);
-                return "(" + str + ")" + "[" + cap + "]";
+                if (lastPre < 13) {
+                    lastPre = 13;
+                    return "(" + str + ")" + "[" + cap + "]";
+                } else {
+                    return str + "[" + cap + "]";
+                }
             } else {
-                return "*" + "(" + str + ")";
+                lastPre = 12;
+                return "*" + str;
             }
         }
     }
 
     private void pushSpace() {
         push(" ");
-        while (rand.nextInt(3) < 2) {
-           push(rand.nextInt(3) < 2 ? " " : "\t");
-        }
     }
 
     private void pushLine() {
-        while (rand.nextInt(3) < 2) {
-            push("\n");
-        }
+        push("\n");
     }
 
     public void setOutput (OutputStream out) {
@@ -75,12 +80,38 @@ public class UglyPrinter implements Visitor {
     }
 
     private void print() {
+        boolean newLine = false;
         for (String str : stack) {
+            if (str == "}") {
+                --indent;
+            } else if (newLine && indent > 0) {
+                try {
+                    out.write("\t".getBytes());
+                } catch (IOException e) {
+                    System.out.println("Unexpected IOException.");
+                    e.printStackTrace();
+                }
+            }
+            newLine = false;
             try {
                 out.write(str.getBytes());
             } catch (IOException e) {
                 System.out.println("Unexpected IOException.");
                 e.printStackTrace();
+            }
+            if (str == "{") {
+                ++indent;
+            }
+            if (str == "\n") {
+                newLine = true;
+                for (int i = 0; i < indent - 1; ++i) {
+                    try {
+                        out.write("\t".getBytes());
+                    } catch (IOException e) {
+                        System.out.println("Unexpected IOException.");
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }
@@ -88,9 +119,10 @@ public class UglyPrinter implements Visitor {
     public void visit(Program p) {
         for (Declaration decl : p.list) {
             decl.accept(this);
-            if (decl.getClass().getName() != "ast.nodes.FunctionDefi") {
+            if (decl.getClass().getName().intern() != "ast.nodes.FunctionDefi") {
                 push(";");
             }
+            pushLine();
             pushLine();
         }
         print();
@@ -103,8 +135,8 @@ public class UglyPrinter implements Visitor {
             decl.accept(this);
             if (i != pl.list.size()) {
                 push(",");
+                pushSpace();
             }
-            pushSpace();
         }
     }
 
@@ -124,9 +156,7 @@ public class UglyPrinter implements Visitor {
         fd.name.accept(this);
         push(cover(popTo(cur), shell));
         push("(");
-        pushSpace();
         fd.paras.accept(this);
-        pushSpace();
         push(")");
         pushLine();
         fd.body.accept(this);
@@ -139,7 +169,6 @@ public class UglyPrinter implements Visitor {
         int cur = stack.size();
         vd.name.accept(this);
         push(cover(popTo(cur), shell));
-        pushSpace();
         cur = stack.size();
         vd.init.accept(this);
         String init = popTo(cur);
@@ -159,9 +188,7 @@ public class UglyPrinter implements Visitor {
         fd.name.accept(this);
         push(cover(popTo(cur), shell));
         push("(");
-        pushSpace();
         fd.para.accept(this);
-        pushSpace();
         push(")");
     }
 
@@ -204,9 +231,9 @@ public class UglyPrinter implements Visitor {
         st.name.accept(this);
         pushSpace();
         push("{");
-        pushSpace();
+        pushLine();
         st.list.accept(this);
-        pushSpace();
+        pushLine();
         push("}");
     }
 
@@ -216,9 +243,9 @@ public class UglyPrinter implements Visitor {
         ut.name.accept(this);
         pushSpace();
         push("{");
-        pushSpace();
+        pushLine();
         ut.list.accept(this);
-        pushSpace();
+        pushLine();
         push("}");
     }
 
@@ -244,7 +271,6 @@ public class UglyPrinter implements Visitor {
     public void visit(ExpressionStat es) {
         es.expr.accept(this);
         push(";");
-        pushLine();
     }
 
     public void visit(CompoundStat cs) {
@@ -253,23 +279,20 @@ public class UglyPrinter implements Visitor {
         cs.dlst.accept(this);
         cs.slst.accept(this);
         push("}");
-        pushLine();
     }
 
     public void visit(SelectionStat ss) {
         push("if");
         pushSpace();
         push("(");
-        pushSpace();
         ss.expr.accept(this);
-        pushSpace();
         push(")");
-        pushSpace();
+        pushLine();
         ss.iftr.accept(this);
         if (!ss.iffl.isEmpty()) {
             pushLine();
             push("else");
-            pushSpace();
+            pushLine();
             ss.iffl.accept(this);
         }
     }
@@ -279,9 +302,7 @@ public class UglyPrinter implements Visitor {
             push("while");
             pushSpace();
             push("(");
-            pushSpace();
             is.expr.accept(this);
-            pushSpace();
             push(")");
             pushLine();
             is.stat.accept(this);
@@ -289,7 +310,6 @@ public class UglyPrinter implements Visitor {
             push("for");
             pushSpace();
             push("(");
-            pushSpace();
             is.init.accept(this);
             push(";");
             pushSpace();
@@ -297,7 +317,6 @@ public class UglyPrinter implements Visitor {
             push(";");
             pushSpace();
             is.inct.accept(this);
-            pushSpace();
             push(")");
             pushLine();
             is.stat.accept(this);
@@ -306,24 +325,20 @@ public class UglyPrinter implements Visitor {
 
     public void visit(ContinueStat cs) {
         push("continue;");
-        pushLine();
     }
 
     public void visit(BreakStat bs) {
         push("break;");
-        pushLine();
     }
 
     public void visit(ReturnStat rs) {
         if (rs.expr.isEmpty()) {
             push("return;");
-            pushLine();
         } else {
-            push("return ");
+            push("return");
             pushSpace();
             rs.expr.accept(this);
             push(";");
-            pushLine();
         }
     }
 
@@ -344,110 +359,133 @@ public class UglyPrinter implements Visitor {
     }
 
     public void visit(BinaryExpr be) {
-        push("(");
-        pushSpace();
+        int preL = be.expr1.getPrecedence(),
+            preOp = be.getPrecedence(),
+            preR = be.expr2.getPrecedence();
+        boolean paraL = false, paraR = false;
+        if (be.getPrecedence() != 1) {
+            paraL = preL < preOp;
+            paraR = preR <= preOp;
+        } else {
+            paraL = preL <= preOp;
+            paraR = preR < preOp;
+        }
+        if (paraL) {
+            push("(");
+        }
         be.expr1.accept(this);
-        pushSpace();
-        push(")");
+        if (paraL) {
+            push(")");
+        }
         pushSpace();
         push(SymbolsRev.getSymbol(be.op)) ;
         pushSpace();
-        push("(");
-        pushSpace();
+        if (paraR) {
+            push("(");
+        }
         be.expr2.accept(this);
-        pushSpace();
-        push(")");
+        if (paraR) {
+            push(")");
+        }
     }
 
     public void visit(CastExpr ce) {
+        int preOp = ce.getPrecedence(),
+            inOp = ce.expr.getPrecedence();
+        boolean para = inOp < preOp;
         push("(");
-        pushSpace();
         int cur = stack.size();
         ce.type.accept(this);
         Type shell = ce.type.getShell();
         push(cover(popTo(cur), shell));
-        pushSpace();
         push(")");
-        pushSpace();
-        push("(");
-        pushSpace();
+        if (para) {
+            push("(");
+        }
         ce.expr.accept(this);
-        pushSpace();
-        push(")");
+        if (para) {
+            push(")");
+        }
     }
 
     public void visit(UnaryExpr ue) {
         push(SymbolsRev.getSymbol(ue.op));
-        pushSpace();
-        push("(");
-        pushSpace();
+        boolean para = ue.getPrecedence() > ue.expr.getPrecedence();
+        if (para) {
+            push("(");
+        }
         ue.expr.accept(this);
-        pushSpace();
-        push(")");
+        if (para) {
+            push(")");
+        }
     }
 
     public void visit(SizeofExpr se) {
         push("sizeof");
-        pushSpace();
         push("(");
-        pushSpace();
         int cur = stack.size();
         se.type.accept(this);
         Type shell = se.type.getShell();
         push(cover(popTo(cur), shell));
-        pushSpace();
         push(")");
     }
 
     public void visit(FunctionCall fc) {
         fc.func.accept(this);
-        pushSpace();
         push("(");
-        pushSpace();
         fc.argu.accept(this);
-        pushSpace();
         push(")");
     }
 
     public void visit(ArrayExpr ar) {
-        push("(");
-        pushSpace();
+        boolean para = ar.getPrecedence() > ar.expr.getPrecedence();
+        if (para) {
+            push("(");
+        }
         ar.expr.accept(this);
-        pushSpace();
-        push(")");
+        if (para) {
+            push(")");
+        }
         push("[");
-        pushSpace();
         ar.addr.accept(this);
-        pushSpace();
         push("]");
     }
 
     public void visit(PointerAccess pa) {
-        push("(");
-        pushSpace();
+        boolean para = pa.getPrecedence() > pa.expr.getPrecedence();
+        if (para) {
+            push("(");
+        }
         pa.expr.accept(this);
-        pushSpace();
-        push(")");
+        if (para) {
+            push(")");
+        }
         push("->");
         pa.id.accept(this);
     }
 
     public void visit(RecordAccess ra) {
-        push("(");
-        pushSpace();
+        boolean para = ra.getPrecedence() > ra.expr.getPrecedence();
+        if (para) {
+            push("(");
+        }
         ra.expr.accept(this);
-        pushSpace();
-        push(")");
+        if (para) {
+            push(")");
+        }
         push(".");
         ra.id.accept(this);
     }
 
     public void visit(PostExpr pe) {
-        push("(");
-        pushSpace();
+        boolean para = pe.getPrecedence() > pe.expr.getPrecedence();
+        if (para) {
+            push("(");
+        }
         pe.expr.accept(this);
-        pushSpace();
-        push(")");
+        if (para) {
+            push(")");
+        }
         push(SymbolsRev.getSymbol(pe.op));
     }
 

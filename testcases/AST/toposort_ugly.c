@@ -1,99 +1,17 @@
-int  	  n 	 	 ;
+int      	 	     n ;
+int m   ;int top ;int (to)[10005] ;
 
+int 	(next)[10005]  ;
 
+int   	(head)[105] ;
 
 
-
-int       	m ;
-
-
-
-
-
-
-int   top ;
-
-
-
-
-
-int  		    (to)[10005]  ;
-
-
-
-int 	 	 	      	(next)[10005]  ;
-
-
-
-
-
-
-int  (head)[105]  ;
-
-
-
-void addedge( int 	     u 	 , int v  	 ){
-
-( (   	( (    to 	)[  top  ] 	     ) 	  =  (    v )   ) , ( ( ( next )[ top 	   	 ]   )  =  	 ( (  head 	)[ 	   u ]  		) ) )  	 ,   ( ( 			( head )[ u   ] 	 ) =  			 ( 	(   top )++ 		 	     )  );
-
-
-};
-int 	(dgr)[105] ;
-
-
-
-
-int 	  main(   	){int i ;
-
-int 	j  	 ;scanf    	( "%d%d", &  ( 	n 	),  	&  	 ( m  )  );for 	  ( (  i 	  ) = 	(  0 );
- (   i  	)   < (    n    		); 		++ ( i   )  ){
-
-
-
-
-
-( (   	dgr 	 )[ i 			  ]    ) =   	  ( 		  0 			 );( 	  		 		 (  head )[ 			 		 i  	  	   						  	 	 ] 		)  		 = 	( - (  1     	 )  	 	);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-for  (  ( i  	)  = ( 		  0 );
-
-
-
-
-  (  		  i )   < ( m  	 	);  	++ (  	i )  )
-
+void addedge( 	     )
 
 {
-int u  ;int v  ;
-scanf ( 	    "%d%d",  	 & 		   ( u   ),  &  (   v   	  ) 	 		 );addedge  (    u, v );
 
 
-
-++ 	( (  	dgr 	)[ v  ]  );
-
-
+( (  ( ( to   )[    	top 	   	 	 ] 	 	)     	=  ( 	v 	) 	) 		 ,   (  	( ( next   		)[ top   	] 	  )  =    (   	( head  	   )[  u   ] 	)  ) 	 )  , (  ( ( head 	)[ u   ] ) =     		( 	  	 	   (  top 	 	)++  )  	);
 
 
 
@@ -102,52 +20,94 @@ scanf ( 	    "%d%d",  	 & 		   ( u   ),  &  (   v   	  ) 	 		 );addedge  (    u,
 
 
 
-for (   		   	( i   	 ) 	   	= (  0  );
+int (dgr)[105] 	;
+
+int    	main(  )
+{
+int  	  i  		 ;
+int    	j  ;
 
 
- ( i 			  )    < ( n );  ++  ( i )  ){
-
-int f  	   	 	= - ( 1 );for (  ( j  	   ) 			=     	(       0  );
- 	(  j    	)    	   < (     	n  		  ); 	++ 	    ( 			      	j ) 	 ){
+scanf   ( 	"%d%d",  & (   		n      ), &  ( m )        	);
 
 
 
 
+for ( (  i  ) = 	(  0 );  ( 		i   	)   <  ( 	n );  ++    ( i    )  )
 
-if    (      (     ( dgr 	)[  j 		 ] ) == 	 	  		 (  0 ) ) {
 
-(   f )     =  (  j   	   	);
+
+
+{(  (  dgr  )[   	 				  i 	  ] 	) 	  	   = ( 0 );
+( (  		head )[ 				 	i  		]  ) 	=  	 	(    	-   	(   1 ) );
+
+
+
+
+}
+
+for 	( 	 	        (  i     	  	)  =        ( 0 );    ( 	i ) 		< (  m 	  	);  ++ (  i  ) 	 	)
+
+{
+
+
+
+
+
+int 	u 	 ;
+
+
+
+
+int v 	  ;scanf ( 	"%d%d",   &   ( 	    u ),  	 &  ( v )  );
+
+
+
+
+
+addedge   	( u,   v  			 );
+
+++ 	 	( ( 	dgr 	)[ v 	]   );
+
+}
+for 	  	 	( 	 ( 	i  ) =    (  	0 ); 	(  i  ) <   (   n   ); ++ (   i 	    ) 	 )
+{int f    = 		 -   ( 1  	);
+
+for   	( (   j   ) = ( 	 0  ); ( j 	) 	 <    	 	 	 (    	   	 n ); 	  	 ++  	(  j    ) ){
+
+if   	( 	( (  dgr  		)[  j   	    	  	] ) == 	 	 	( 	   0    	)   ) {( 	f  	      	) =  (   j    );
+
+
+
 break;}
 
 
-}
-if (  ( f   ) ==  		( 	  -  (  1    )  )   ) {
 
 
 
 
-
-
-printf (  "Warning!@!\n" 	   		 );break;
 
 
 
 }
-
-
-printf 		  (   "%d ", 	f  	);
-
-
-
-
-(  ( dgr  )[   f ] ) = 		 ( - ( 	 1 	  )  		    );
-
-for  (   ( j )  = 		( ( head )[ f ] 	   	 	  );
+if 	   ( 	(  f  	) ==  (   	 		    - 	  	  	 	( 1 )    		)  ) {
+printf  	 ( 	"Warning!@!\n" 	 	  	);
 
 
 
 
- ~ ( 	  j 	 			); 	     		 ( 	j  ) =   		( ( next )[  j  	]  ) )
+
+break;
+
+
+}
+printf (    "%d ",   f     			);
+
+( 		( 	dgr  )[  f 	 	 	  	  	   		] )  = (  -  		  	(  1 ) 		);
+
+
+for     	       (   	( 	 j 	 )   = 					 		   	( ( head 	)[ f ] 	);    		~    				(  	j   );   ( j ) =    ( 	 ( next 		)[  j   	] 	  ) )
+
 
 
 {
@@ -155,12 +115,8 @@ for  (   ( j )  = 		( ( head )[ f ] 	   	 	  );
 
 
 
--- ( ( dgr   )[ ( to  )[  j 		    ]    	 	 ]  );}
 
-
-
-
-
+--   	( ( 	dgr  		    )[   ( to )[ j ] ]   	 );
 
 
 
@@ -168,5 +124,16 @@ for  (   ( j )  = 		( ( head )[ f ] 	   	 	  );
 
 }
 
+
+}
+
+
+
+
+
+
+
 return   0;
-};
+
+
+}

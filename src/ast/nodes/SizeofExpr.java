@@ -14,6 +14,11 @@ public class SizeofExpr extends Expression implements Visible {
     }
 
     @Override
+    public int getPrecedence() {
+        return 12;
+    }
+
+    @Override
     public void accept(Visitor v) {
         v.visit(this);
     }

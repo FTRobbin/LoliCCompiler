@@ -8,6 +8,11 @@ import ast.visitors.Visitor;
 public class EmptyExpr extends Expression implements Visible {
 
     @Override
+    public int getPrecedence() {
+        return 16;
+    }
+
+    @Override
     public boolean isEmpty() {
         return true;
     }

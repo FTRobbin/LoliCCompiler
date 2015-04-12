@@ -38,13 +38,61 @@ public final class SymbolsRev {
             case "MOD_ASSIGN"   :   return "%=";
             case "ADD_ASSIGN"   :   return "+=";
             case "SUB_ASSIGN"   :   return "-=";
-            case "SHL_ASSIGN"   :   return "<<=";
-            case "SHR_ASSIGN"   :   return ">>=";
+            case "SHL_ASSIGN"   :   return "<<";
+            case "SHR_ASSIGN"   :   return ">>";
             case "XOR_ASSIGN"   :   return "^=";
             case "OR_ASSIGN"    :   return "|=";
             case "AND_ASSIGN"   :   return "&=";
             case "SIZEOF"       :   return "sizeof";
             default :   return "";
+        }
+    }
+
+    public static final int getPrecendenceBin(int op) {
+        switch(Symbols.terminalNames[op].intern()) {
+            case "COMMA"    :   return 0;
+
+            case "MUL_ASSIGN"   :   return 1;
+            case "DIV_ASSIGN"   :   return 1;
+            case "MOD_ASSIGN"   :   return 1;
+            case "ADD_ASSIGN"   :   return 1;
+            case "SUB_ASSIGN"   :   return 1;
+            case "SHL_ASSIGN"   :   return 1;
+            case "SHR_ASSIGN"   :   return 1;
+            case "XOR_ASSIGN"   :   return 1;
+            case "OR_ASSIGN"    :   return 1;
+            case "AND_ASSIGN"   :   return 1;
+            case "ASSIGN"   :   return 1;
+
+            case "OR_OP"    :   return 2;
+
+            case "AND_OP"   :   return 3;
+
+            case "OR"       :   return 4;
+
+            case "XOR"      :   return 5;
+
+            case "ADRESS"   :   return 6;
+
+            case "EQ_OP"    :   return 7;
+            case "NE_OP"    :   return 7;
+
+            case "LESS"     :   return 8;
+            case "GREATER"  :   return 8;
+            case "LE_OP"    :   return 8;
+            case "GE_OP"    :   return 8;
+
+            case "SHL_OP"   :   return 9;
+            case "SHR_OP"   :   return 9;
+
+            case "ADD"      :   return 10;
+            case "SUB"      :   return 10;
+
+            case "MUL"      :   return 11;
+            case "DIV"      :   return 11;
+            case "MOD"      :   return 11;
+
+            default :   return 0;
         }
     }
 
