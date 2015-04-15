@@ -1,10 +1,7 @@
 package ast;
 
-import ast.nodes.Program;
 import ast.visitors.PrettyPrinter;
 import ast.visitors.UglyPrinter;
-import ast.visitors.Visitor;
-import parser.Parser;
 
 import java.io.*;
 import java.util.ArrayList;

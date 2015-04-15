@@ -1,5 +1,7 @@
 package ast.nodes;
 
+import ast.nodes.declaration.DeclList;
+import ast.nodes.declaration.Declaration;
 import ast.visitors.Visitor;
 
 import java.util.LinkedList;

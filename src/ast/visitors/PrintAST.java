@@ -1,6 +1,14 @@
 package ast.visitors;
 
-import ast.nodes.*;
+import ast.nodes.declaration.*;
+import ast.nodes.expression.*;
+import ast.nodes.initialization.InitList;
+import ast.nodes.initialization.InitValue;
+import ast.nodes.initialization.Initializer;
+import ast.nodes.declaration.FunctionDefi;
+import ast.nodes.Program;
+import ast.nodes.statment.*;
+import ast.nodes.type.*;
 import parser.Symbols;
 
 import java.io.IOException;
@@ -153,6 +161,11 @@ public class PrintAST implements Visitor {
 
     public void visit(VoidType vt) {
         PrintLine("VoidType");
+    }
+
+    public void visit(DefinedType dt) {
+        PrintLine("DefinedType");
+        dt.name.accept(this);
     }
 
     public void visit(StatList sl) {

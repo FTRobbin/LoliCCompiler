@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="loliccompiler" default="all">
-
-
+  
+  
   <property file="loliccompiler.properties"/>
   <!-- Uncomment the following property if no tests compilation is needed -->
   <!-- 
@@ -35,13 +35,13 @@
     <exclude name="**/vssver2.scc/**"/>
   </patternset>
   <patternset id="library.patterns">
-    <include name="*.zip"/>
-    <include name="*.apk"/>
     <include name="*.war"/>
-    <include name="*.egg"/>
     <include name="*.ear"/>
-    <include name="*.ane"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
     <include name="*.swc"/>
+    <include name="*.ane"/>
+    <include name="*.egg"/>
     <include name="*.jar"/>
   </patternset>
   <patternset id="compiler.resources">
@@ -102,6 +102,103 @@
     <pathelement location="${basedir}/../tools/jcup-11b/java-cup-11b-runtime.jar"/>
   </path>
   
+  <path id="library.java-cup-11b.classpath">
+    <pathelement location="${basedir}/../tools/jcup-11b/java-cup-11b.jar"/>
+  </path>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module loliccompiler -->
+  
+  <dirname property="module.loliccompiler.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.loliccompiler" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.loliccompiler" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.loliccompiler" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.loliccompiler" value="-encoding GB18030 -source 8 ${compiler.args}"/>
+  
+  <property name="loliccompiler.output.dir" value="${module.loliccompiler.basedir}/out/production/loliccompiler"/>
+  <property name="loliccompiler.testoutput.dir" value="${module.loliccompiler.basedir}/out/test/loliccompiler"/>
+  
+  <path id="loliccompiler.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="loliccompiler.module.production.classpath">
+    <path refid="${module.jdk.classpath.loliccompiler}"/>
+    <path refid="library.java-cup-11b-runtime.classpath"/>
+    <path refid="library.gson-2.3.1.classpath"/>
+    <path refid="library.java-cup-11b.classpath"/>
+  </path>
+  
+  <path id="loliccompiler.runtime.production.module.classpath">
+    <pathelement location="${loliccompiler.output.dir}"/>
+    <path refid="library.java-cup-11b-runtime.classpath"/>
+    <path refid="library.gson-2.3.1.classpath"/>
+    <path refid="library.java-cup-11b.classpath"/>
+  </path>
+  
+  <path id="loliccompiler.module.classpath">
+    <path refid="${module.jdk.classpath.loliccompiler}"/>
+    <pathelement location="${loliccompiler.output.dir}"/>
+    <path refid="library.java-cup-11b-runtime.classpath"/>
+    <path refid="library.gson-2.3.1.classpath"/>
+    <path refid="library.java-cup-11b.classpath"/>
+  </path>
+  
+  <path id="loliccompiler.runtime.module.classpath">
+    <pathelement location="${loliccompiler.testoutput.dir}"/>
+    <pathelement location="${loliccompiler.output.dir}"/>
+    <path refid="library.java-cup-11b-runtime.classpath"/>
+    <path refid="library.gson-2.3.1.classpath"/>
+    <path refid="library.java-cup-11b.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.loliccompiler">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.loliccompiler">
+    <patternset refid="excluded.from.module.loliccompiler"/>
+  </patternset>
+  
+  <path id="loliccompiler.module.sourcepath">
+    <dirset dir="${module.loliccompiler.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.loliccompiler" depends="compile.module.loliccompiler.production,compile.module.loliccompiler.tests" description="Compile module loliccompiler"/>
+  
+  <target name="compile.module.loliccompiler.production" description="Compile module loliccompiler; production classes">
+    <mkdir dir="${loliccompiler.output.dir}"/>
+    <javac destdir="${loliccompiler.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.loliccompiler}/javac">
+      <compilerarg line="${compiler.args.loliccompiler}"/>
+      <bootclasspath refid="loliccompiler.module.bootclasspath"/>
+      <classpath refid="loliccompiler.module.production.classpath"/>
+      <src refid="loliccompiler.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.loliccompiler"/>
+    </javac>
+    
+    <copy todir="${loliccompiler.output.dir}">
+      <fileset dir="${module.loliccompiler.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.loliccompiler.tests" depends="compile.module.loliccompiler.production" description="compile module loliccompiler; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.loliccompiler" description="cleanup module">
+    <delete dir="${loliccompiler.output.dir}"/>
+    <delete dir="${loliccompiler.testoutput.dir}"/>
+  </target>
   <!-- Modules -->
 
   <taskdef name="jflex"
@@ -114,27 +211,25 @@
            classpath="${basedir}/../tools/jcup-11b/java-cup-11b.jar"
           />
 
-  <import file="${basedir}/module_loliccompiler.xml"/>
-
   <target name="init" description="Build initialization">
     <!-- Perform any build initialization in this target -->
-      <jflex file="${basedir}/src/lexer/loliccompiler.flex"
-             destdir="${basedir}/src"
-             verbose="true"
-              />
-
-      <cup srcfile="${basedir}/src/parser/loliccompiler.cup"
+    <jflex file="${basedir}/src/lexer/loliccompiler.flex"
            destdir="${basedir}/src"
-           parser="Parser"
-           symbols="Symbols"
-           interface="true"
-           force="true"
-           nopositions="true"
-              />
+           verbose="true"
+            />
+
+    <cup srcfile="${basedir}/src/parser/loliccompiler.cup"
+         destdir="${basedir}/src"
+         parser="Parser"
+         symbols="Symbols"
+         interface="true"
+         force="true"
+         nopositions="true"
+            />
   </target>
-
+  
   <target name="clean" depends="clean.module.loliccompiler" description="cleanup all"/>
-
+  
   <target name="build.modules" depends="init, clean, compile.module.loliccompiler" description="build all modules"/>
   
   <target name="all" depends="build.modules" description="build all"/>

@@ -8,6 +8,8 @@ import java_cup.runtime.*;
 
 import parser.Symbols;
 
+import table.SyntacticTable;
+
 %%
 
 %unicode
@@ -21,6 +23,11 @@ import parser.Symbols;
 
 %{
     StringBuffer buffer = new StringBuffer();
+    SyntacticTable table;
+
+    public void setTable(SyntacticTable table)  {
+        this.table = table;
+    }
 
     private Symbol symbol(int type) {
         //System.out.println("Token found : " + type);
@@ -133,9 +140,10 @@ asciiNumberCharacter = (\\x[0-9A-Fa-f][0-9A-Fa-f])|(\\[0-3][0-7][0-7])
     "break"         { return symbol(BREAK); }
     "return"        { return symbol(RETURN); }
     "sizeof"        { return symbol(SIZEOF); }
+    "typedef"       { return symbol(TYPEDEF); }
 
     /* Identifier */
-    {identifier}    { return symbol(IDENTIFIER, yytext()); }
+    {identifier}    { return symbol(table.typeOf(yytext()), yytext()); }
 
     /* Constants */
     {decimalInteger}        { return symbol(INTEGER, Integer.parseInt(yytext())); }

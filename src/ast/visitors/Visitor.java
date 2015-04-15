@@ -3,7 +3,13 @@ package ast.visitors;
 /**
  * Created by Robbin Ni on 2015/4/8.
  */
-import ast.nodes.*;
+import ast.nodes.declaration.*;
+import ast.nodes.expression.*;
+import ast.nodes.initialization.InitList;
+import ast.nodes.initialization.InitValue;
+import ast.nodes.Program;
+import ast.nodes.statment.*;
+import ast.nodes.type.*;
 
 import java.io.OutputStream;
 
@@ -27,6 +33,7 @@ public interface Visitor {
     public void visit(IntType it);
     public void visit(CharType ct);
     public void visit(VoidType vt);
+    public void visit(DefinedType dt);
 
     public void visit(StatList sl);
     public void visit(ExpressionStat es);

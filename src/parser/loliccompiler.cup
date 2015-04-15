@@ -2,17 +2,33 @@
 CUP specification for loliccompiler by RobbinNi
 */
 
+//TODO function type support + array dimension
+
 package parser;
 
 import lexer.Yylex;
 
+import java.util.*;
+
 import java.io.Reader;
 
 import ast.nodes.*;
+import ast.nodes.declaration.*;
+import ast.nodes.statment.*;
+import ast.nodes.type.*;
+import ast.nodes.initialization.*;
+import ast.nodes.expression.*;
+
+import table.SyntacticTable;
 
 /* Preliminaries to set up and use the scanner. */
 
+init with {: ((Yylex)getScanner()).setTable(this.table = new SyntacticTable()); :}
+
 parser code {:
+
+	SyntacticTable table;
+
     public void report_error(String message, Object info) {
         StringBuffer m = new StringBuffer("\tParsing error");
     	if (info instanceof java_cup.runtime.Symbol) {
@@ -42,6 +58,7 @@ terminal	MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, ADD_ASSIGN, SUB_ASSIGN, SHL_ASSIGN,
 
 /* Identifier and Constants */
 terminal String		IDENTIFIER;
+terminal String     TYPENAME;
 terminal int		INTEGER;
 terminal char		CHARACTER;
 terminal String		STRING;
@@ -51,13 +68,15 @@ terminal			VOID, CHAR, INT;
 terminal			STRUCT, UNION;
 terminal			IF, ELSE, WHILE, FOR, CONTINUE, BREAK, RETURN;
 terminal			SIZEOF;
+terminal			TYPEDEF;
 
 /* Non terminals */
 
 non terminal Program program, external_definition;
 
-non terminal DeclList declaration, declaration_list, init_declarator_list, plain_declaration, parameter_list, declarator_list;
+non terminal DeclList declaration, declaration_list, init_declarator_list, plain_declaration, parameter_list, declarator_list, struct_declarator_list;
 non terminal Declaration init_declarator, declarator, direct_declarator;
+non terminal Declaration struct_declarator, struct_direct_declarator;
 non terminal FunctionDefi function_definition;
 
 non terminal Initializer initializer;
@@ -112,7 +131,7 @@ external_definition ::= 	declaration:decl
 
 /* Declaration level */
 
-function_definition ::=		type_specifier:type declarator:dect compound_statement:stat
+function_definition ::=		type_specifier:type declarator:dect {: table.retrive(); :} compound_statement:stat
 						{:
 							if (dect.type == null) {
 								dect.type = type;
@@ -120,7 +139,7 @@ function_definition ::=		type_specifier:type declarator:dect compound_statement:
 								dect.type.encore(type);
 							}
 							RESULT = new FunctionDefi(dect.type, dect.name, new ParaList(), stat); :}
-						|	type_specifier:type declarator:dect declaration_list:para compound_statement:stat
+						|	type_specifier:type declarator:dect {: table.retrive(); :} declaration_list:para compound_statement:stat
 						{:
 							if (dect.type == null) {
 								dect.type = type;
@@ -137,7 +156,7 @@ declaration_list ::= 	declaration:decl
 					;
 
 declaration ::=		type_specifier:type COLON
-				{: RESULT = (new DeclList()).add(new TypeDecl(type)); :}
+				{: RESULT = new DeclList(); :}
 				|	type_specifier:type init_declarator_list:init COLON
 				{:
 					for (Declaration dect : init.list) {
@@ -149,6 +168,21 @@ declaration ::=		type_specifier:type COLON
 					}
 					RESULT = init;
 				:}
+				|	TYPEDEF type_specifier:type COLON
+				{: RESULT = new DeclList(); :}
+				|	TYPEDEF type_specifier:type declarator_list:init
+				{:
+					RESULT = new DeclList();
+					for (Declaration dect : init.list) {
+						if (dect.type == null) {
+							dect.type = type;
+						} else {
+							dect.type.encore(type);
+						}
+						table.addEntry(dect.name.toString(), Symbols.TYPENAME);
+						RESULT.add(new TypeDecl(dect.type, dect.name));
+					}
+				:} COLON
 				;
 
 
@@ -171,11 +205,14 @@ declarator ::=		direct_declarator:dect
 
 direct_declarator ::=	IDENTIFIER:name
 					{:	RESULT = new VariableDecl(null, new Symbol(name), new InitList()); :}
+					|	TYPENAME:name
+					{:	table.addEntry(name, Symbols.IDENTIFIER);
+						RESULT = new VariableDecl(null, new Symbol(name), new InitList()); :}
 					|	PARAL declarator:dect PARAR
 					{:  RESULT = new VariableDecl(dect.type, dect.name, new InitList()); :}
-					|	direct_declarator:dect PARAL PARAR
+					|	direct_declarator:dect PARAL {: table.addScope(); table.delScope(); :} PARAR
 					{:  RESULT = new FunctionDecl(dect.type, dect.name, new DeclList()); :}
-					|	direct_declarator:dect PARAL parameter_list:para PARAR
+					|	direct_declarator:dect PARAL {: table.addScope(); :} parameter_list:para {: table.delScope(); :} PARAR
 					{:	RESULT = new FunctionDecl(dect.type, dect.name, para); :}
 					|	direct_declarator:dect SQUARL constant_expression:expr SQUARR
 					{:	RESULT = new VariableDecl(new ArrayType(dect.type, expr), dect.name, new InitList()); :}
@@ -236,6 +273,8 @@ type_specifier ::=		VOID
 					{:	RESULT = new UnionType(new Symbol(id), new DeclList()); :}
 					|	UNION CURLYL field_list:list CURLYR
 					{:	RESULT = new UnionType(new Symbol(""), list); :}
+					|	TYPENAME:name
+					{:	RESULT = new DefinedType(new Symbol(name)); :}
 					;
 
 field_list ::=		type_specifier:type declarator_list:list COLON
@@ -248,7 +287,7 @@ field_list ::=		type_specifier:type declarator_list:list COLON
 					}
 					RESULT = list;
 				:}
-				|	field_list:list type_specifier:type declarator_list:list2 COLON
+				|	field_list:list type_specifier:type struct_declarator_list:list2 COLON
 				{:	for (Declaration decl : list2.list) {
 						if (decl.type == null) {
 							decl.type = type;
@@ -261,11 +300,38 @@ field_list ::=		type_specifier:type declarator_list:list COLON
 				:}
 				;
 
+struct_declarator ::=		struct_direct_declarator:dect
+						{:	RESULT = dect;	:}
+						|	MUL struct_declarator:dect
+						{:	dect.type = new PointerType(dect.type);
+							RESULT = dect;	:}
+						;
+
+struct_direct_declarator ::=	IDENTIFIER:name
+							{:	RESULT = new VariableDecl(null, new Symbol(name), new InitList()); :}
+							|	TYPENAME:name
+							{:	RESULT = new VariableDecl(null, new Symbol(name), new InitList()); :}
+							|	PARAL struct_declarator:dect PARAR
+							{:  RESULT = new VariableDecl(dect.type, dect.name, new InitList()); :}
+							|	struct_direct_declarator:dect PARAL PARAR
+							{:  RESULT = new FunctionDecl(dect.type, dect.name, new DeclList()); :}
+							|	struct_direct_declarator:dect PARAL parameter_list:para PARAR
+							{:	RESULT = new FunctionDecl(dect.type, dect.name, para); :}
+							|	struct_direct_declarator:dect SQUARL constant_expression:expr SQUARR
+							{:	RESULT = new VariableDecl(new ArrayType(dect.type, expr), dect.name, new InitList()); :}
+							;
+
+struct_declarator_list ::=		struct_declarator:decl
+							{:	RESULT = (new DeclList()).add(decl); :}
+							|	struct_declarator_list:list COMMA struct_declarator:decl
+							{:	RESULT = list.add(decl); :}
+							;
+
 /* Statement Level */
 statement ::=		expression_statement:stat
 				{:	RESULT = stat; :}
-				|	compound_statement:stat
-				{:	RESULT = stat; :}
+				|	{: table.addScope(); :} compound_statement:stat
+				{:  RESULT = stat; :}
 				|	selection_statement:stat
 				{:	RESULT = stat; :}
 				|	iteration_statement:stat
@@ -286,13 +352,13 @@ expression_statement ::=	expression:expr COLON
 						{:	RESULT = new ExpressionStat(new EmptyExpr()); :}
 						;
 
-compound_statement ::=		CURLYL declaration_list:dlst statement_list:slst CURLYR
+compound_statement ::=		CURLYL declaration_list:dlst statement_list:slst {: table.delScope(); :} CURLYR
 						{:	RESULT = new CompoundStat(dlst, slst); :}
-						|	CURLYL statement_list:slst CURLYR
+						|	CURLYL statement_list:slst {: table.delScope(); :} CURLYR
 						{:	RESULT = new CompoundStat(new DeclList(), slst); :}
-						|	CURLYL declaration_list:dlst CURLYR
+						|	CURLYL declaration_list:dlst {: table.delScope(); :} CURLYR
 						{:	RESULT = new CompoundStat(dlst, new StatList()); :}
-						|	CURLYL CURLYR
+						|	CURLYL {: table.delScope(); :} CURLYR
 						{:	RESULT = new CompoundStat(new DeclList(), new StatList()); :}
 						;
 
@@ -509,6 +575,10 @@ postfix_expression ::=		primary_expression:expr
 						|	postfix_expression:expr DOT IDENTIFIER:id
 						{:	RESULT = new RecordAccess(expr, new Symbol(id)); :}
 						|	postfix_expression:expr PTR_OP IDENTIFIER:id
+						{:	RESULT = new PointerAccess(expr, new Symbol(id)); :}
+						|	postfix_expression:expr DOT TYPENAME:id
+						{:	RESULT = new RecordAccess(expr, new Symbol(id)); :}
+						|	postfix_expression:expr PTR_OP TYPENAME:id
 						{:	RESULT = new PointerAccess(expr, new Symbol(id)); :}
 						|	postfix_expression:expr INC_OP
 						{:	RESULT = new PostExpr(expr, Symbols.INC_OP); :}

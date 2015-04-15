@@ -1,12 +1,19 @@
 package ast.visitors;
 
-import ast.nodes.*;
+import ast.nodes.declaration.*;
+import ast.nodes.expression.*;
+import ast.nodes.initialization.InitList;
+import ast.nodes.initialization.InitValue;
+import ast.nodes.initialization.Initializer;
+import ast.nodes.declaration.FunctionDefi;
+import ast.nodes.Program;
+import ast.nodes.statment.*;
+import ast.nodes.type.*;
 import parser.SymbolsRev;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by Robbin Ni on 2015/4/11.
@@ -49,7 +56,7 @@ public class PrettyPrinter implements Visitor {
             return str;
         } else {
             str = cover(str, ((TypeDeco)shell).baseType);
-            if (shell.getClass().getName().intern() == "ast.nodes.ArrayType") {
+            if (shell.getClass().getName().intern() == "ast.nodes.type.ArrayType") {
                 ArrayType tmp = (ArrayType)shell;
                 int cur = stack.size();
                 tmp.cap.accept(this);
@@ -193,7 +200,11 @@ public class PrettyPrinter implements Visitor {
     }
 
     public void visit(TypeDecl td) {
+        push("typedef");
+        pushSpace();
         td.type.accept(this);
+        pushSpace();
+        td.name.accept(this);
     }
 
     public void visit(InitValue iv) {
@@ -259,6 +270,10 @@ public class PrettyPrinter implements Visitor {
 
     public void visit(VoidType vt) {
         push("void");
+    }
+
+    public void visit(DefinedType dt) {
+        dt.name.accept(this);
     }
 
     public void visit(StatList sl) {
