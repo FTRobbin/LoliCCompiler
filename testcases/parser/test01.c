@@ -58,14 +58,14 @@ struct Lesson {
     } comment;
 };
 
-void getMoreGPA(int compiler) {
+void getMoreGPA(struct Lesson compiler) {
     int i;
     if (compiler.score >= 95) {
         printf("target achieved\n");
     } else {
         printf("How can I become a CS scientist if I get this score on this course!\n");
     }
-    while (true) {
+    while (1) {
         break;
     }
     for (i = 1; i < 10; ++i) {
@@ -79,7 +79,7 @@ void getMoreGPA(int compiler) {
 
 void moreTests() {
     int a = (1 + 1), b = (2 + 2), c[20] = {1 * 2, 2 / 1, 3 % 2, 7 | 4, 8 & 1, ~8, !9};
-    int t;
+    struct {struct {int a;} comment;} t;
     t.comment.a = a;
 
     // multi-character operators

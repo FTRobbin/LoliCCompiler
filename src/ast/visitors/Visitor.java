@@ -22,6 +22,7 @@ public interface Visitor {
     public void visit(VariableDecl vd);
     public void visit(FunctionDecl fd);
     public void visit(TypeDecl td);
+    public void visit(TypeDef td);
 
     public void visit(InitValue iv);
     public void visit(InitList il);

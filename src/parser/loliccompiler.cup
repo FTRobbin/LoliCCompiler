@@ -154,20 +154,36 @@ declaration_list ::= 	declaration:decl
 					;
 
 declaration ::=		type_specifier:type COLON
-				{: RESULT = new DeclList(); :}
+				{:
+					if (type.hasDefi()) {
+						RESULT = (new DeclList()).add(new TypeDecl(type));
+					} else {
+						RESULT = new DeclList();
+					}
+					:}
 				|	type_specifier:type init_declarator_list:init COLON
 				{:
+
 					for (Declaration dect : init.list) {
 						if (dect.type == null) {
 							dect.type = type;
 						} else {
 							dect.type.encore(type);
 						}
+						if (type.hasDefi()) {
+							type = type.cutDefi();
+						}
 					}
 					RESULT = init;
 				:}
 				|	TYPEDEF type_specifier:type COLON
-				{: RESULT = new DeclList(); :}
+				{:
+					if (type.hasDefi()) {
+						RESULT = (new DeclList()).add(new TypeDecl(type));
+					} else {
+						RESULT = new DeclList();
+					}
+				:}
 				|	TYPEDEF type_specifier:type declarator_list:init
 				{:
 					RESULT = new DeclList();
@@ -177,8 +193,11 @@ declaration ::=		type_specifier:type COLON
 						} else {
 							dect.type.encore(type);
 						}
+						if (type.hasDefi()) {
+							type = type.cutDefi();
+						}
 						table.addEntry(dect.name.toString(), Symbols.TYPENAME);
-						RESULT.add(new TypeDecl(dect.type, dect.name));
+						RESULT.add(new TypeDef(dect.type, dect.name));
 					}
 				:} COLON
 				;
@@ -286,6 +305,9 @@ field_list ::=		type_specifier:type declarator_list:list COLON
 						} else {
 							decl.type.encore(type);
 						}
+						if (type.hasDefi()) {
+							type = type.cutDefi();
+						}
 					}
 					RESULT = list;
 				:}
@@ -295,6 +317,9 @@ field_list ::=		type_specifier:type declarator_list:list COLON
 							decl.type = type;
 						} else {
 							decl.type.encore(type);
+						}
+						if (type.hasDefi()) {
+							type = type.cutDefi();
 						}
 					}
 					list = list.add(list2);

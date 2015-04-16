@@ -1194,7 +1194,13 @@ class CUP$Parser$actions {
             {
               DeclList RESULT =null;
 		Type type = (Type)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 RESULT = new DeclList(); 
+		
+					if (type.hasDefi()) {
+						RESULT = (new DeclList()).add(new TypeDecl(type));
+					} else {
+						RESULT = new DeclList();
+					}
+					
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("declaration",2, RESULT);
             }
           return CUP$Parser$result;
@@ -1206,11 +1212,15 @@ class CUP$Parser$actions {
 		Type type = (Type)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		DeclList init = (DeclList)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		
+
 					for (Declaration dect : init.list) {
 						if (dect.type == null) {
 							dect.type = type;
 						} else {
 							dect.type.encore(type);
+						}
+						if (type.hasDefi()) {
+							type = type.cutDefi();
 						}
 					}
 					RESULT = init;
@@ -1224,7 +1234,13 @@ class CUP$Parser$actions {
             {
               DeclList RESULT =null;
 		Type type = (Type)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 RESULT = new DeclList(); 
+		
+					if (type.hasDefi()) {
+						RESULT = (new DeclList()).add(new TypeDecl(type));
+					} else {
+						RESULT = new DeclList();
+					}
+				
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("declaration",2, RESULT);
             }
           return CUP$Parser$result;
@@ -1243,8 +1259,11 @@ class CUP$Parser$actions {
 						} else {
 							dect.type.encore(type);
 						}
+						if (type.hasDefi()) {
+							type = type.cutDefi();
+						}
 						table.addEntry(dect.name.toString(), Symbols.TYPENAME);
-						RESULT.add(new TypeDecl(dect.type, dect.name));
+						RESULT.add(new TypeDef(dect.type, dect.name));
 					}
 				
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("NT$2",54, RESULT);
@@ -1647,6 +1666,9 @@ class CUP$Parser$actions {
 						} else {
 							decl.type.encore(type);
 						}
+						if (type.hasDefi()) {
+							type = type.cutDefi();
+						}
 					}
 					RESULT = list;
 				
@@ -1666,6 +1688,9 @@ class CUP$Parser$actions {
 							decl.type = type;
 						} else {
 							decl.type.encore(type);
+						}
+						if (type.hasDefi()) {
+							type = type.cutDefi();
 						}
 					}
 					list = list.add(list2);

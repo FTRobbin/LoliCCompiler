@@ -19,6 +19,16 @@ public class UnionType extends Type implements Visible {
     }
 
     @Override
+    public boolean hasDefi() {
+        return this.list != null && name.toString().length() > 0;
+    }
+
+    @Override
+    public Type cutDefi() {
+        return new UnionType(name, null);
+    }
+
+    @Override
     public Type getShell() {
         return null;
     }

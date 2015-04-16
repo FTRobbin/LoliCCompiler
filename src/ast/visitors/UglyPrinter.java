@@ -96,7 +96,7 @@ public class UglyPrinter implements Visitor {
     public void visit(Program p) {
         for (Declaration decl : p.list) {
             decl.accept(this);
-            if (decl.getClass().getName() != "ast.nodes.FunctionDefi") {
+            if (decl.getClass().getName() != "ast.nodes.declaration.FunctionDefi") {
                 push(";");
             }
             pushLine();
@@ -174,6 +174,11 @@ public class UglyPrinter implements Visitor {
     }
 
     public void visit(TypeDecl td) {
+        td.type.accept(this);
+        pushSpace();
+    }
+
+    public void visit(TypeDef td) {
         push("typedef");
         pushSpace();
         td.type.accept(this);

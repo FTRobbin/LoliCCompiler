@@ -104,6 +104,14 @@ public class PrintAST implements Visitor {
         --inc;
     }
 
+    public void visit(TypeDef td) {
+        PrintLine("TypeDef");
+        ++inc;
+        td.type.accept(this);
+        td.name.accept(this);
+        --inc;
+    }
+
     public void visit(InitValue iv) {
         PrintLine("InitValue");
         ++inc;

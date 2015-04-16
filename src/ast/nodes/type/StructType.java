@@ -19,6 +19,16 @@ public class StructType extends Type implements Visible {
     }
 
     @Override
+    public boolean hasDefi() {
+        return this.list != null && name.toString().length() > 0;
+    }
+
+    @Override
+    public Type cutDefi() {
+        return new StructType(name, null);
+    }
+
+    @Override
     public Type getShell() {
         return null;
     }
