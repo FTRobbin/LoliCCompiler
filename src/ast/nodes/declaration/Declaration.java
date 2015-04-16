@@ -12,4 +12,5 @@ public abstract class Declaration implements Visible {
     public Type type = null;
     public Symbol name = null;
     public Initializer init = null;
+    public boolean specifier = false;
 }

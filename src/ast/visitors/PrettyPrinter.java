@@ -9,6 +9,7 @@ import ast.nodes.declaration.FunctionDefi;
 import ast.nodes.Program;
 import ast.nodes.statment.*;
 import ast.nodes.type.*;
+import parser.Symbols;
 import parser.SymbolsRev;
 
 import java.io.IOException;
@@ -92,7 +93,7 @@ public class PrettyPrinter implements Visitor {
                 --indent;
             } else if (newLine && indent > 0) {
                 try {
-                    out.write("\t".getBytes());
+                    out.write("    ".getBytes());
                 } catch (IOException e) {
                     System.out.println("Unexpected IOException.");
                     e.printStackTrace();
@@ -112,7 +113,7 @@ public class PrettyPrinter implements Visitor {
                 newLine = true;
                 for (int i = 0; i < indent - 1; ++i) {
                     try {
-                        out.write("\t".getBytes());
+                        out.write("    ".getBytes());
                     } catch (IOException e) {
                         System.out.println("Unexpected IOException.");
                         e.printStackTrace();
@@ -164,12 +165,21 @@ public class PrettyPrinter implements Visitor {
         push("(");
         fd.paras.accept(this);
         push(")");
-        pushLine();
+        pushSpace();
+        //pushLine();
         fd.body.accept(this);
     }
 
     public void visit(VariableDecl vd) {
-        vd.type.accept(this);
+        if (vd.specifier) {
+            vd.type.accept(this);
+        } else {
+            while (stack.get(stack.size() - 1).intern() != ";") {
+                pop();
+            }
+            pop();
+            push(",");
+        }
         pushSpace();
         Type shell = vd.type.getShell();
         int cur = stack.size();
@@ -187,7 +197,15 @@ public class PrettyPrinter implements Visitor {
     }
 
     public void visit(FunctionDecl fd) {
-        fd.type.accept(this);
+        if (fd.specifier) {
+            fd.type.accept(this);
+        } else {
+            while (stack.get(stack.size() - 1).intern() != ";") {
+                pop();
+            }
+            pop();
+            push(",");
+        }
         pushSpace();
         Type shell = fd.type.getShell();
         int cur = stack.size();
@@ -204,9 +222,17 @@ public class PrettyPrinter implements Visitor {
     }
 
     public void visit(TypeDef td) {
-        push("typedef");
-        pushSpace();
-        td.type.accept(this);
+        if (td.specifier) {
+            push("typedef");
+            pushSpace();
+            td.type.accept(this);
+        } else {
+            while (stack.get(stack.size() - 1).intern() != ";") {
+                pop();
+            }
+            pop();
+            push(",");
+        }
         pushSpace();
         td.name.accept(this);
     }
@@ -249,7 +275,6 @@ public class PrettyPrinter implements Visitor {
             push("{");
             pushLine();
             st.list.accept(this);
-            pushLine();
             push("}");
         }
     }
@@ -263,7 +288,6 @@ public class PrettyPrinter implements Visitor {
             push("{");
             pushLine();
             ut.list.accept(this);
-            pushLine();
             push("}");
         }
     }
@@ -310,12 +334,12 @@ public class PrettyPrinter implements Visitor {
         push("(");
         ss.expr.accept(this);
         push(")");
-        pushLine();
+        pushSpace();
         ss.iftr.accept(this);
         if (!ss.iffl.isEmpty()) {
-            pushLine();
+            pushSpace();
             push("else");
-            pushLine();
+            pushSpace();
             ss.iffl.accept(this);
         }
     }
@@ -327,7 +351,7 @@ public class PrettyPrinter implements Visitor {
             push("(");
             is.expr.accept(this);
             push(")");
-            pushLine();
+            pushSpace();
             is.stat.accept(this);
         } else {
             push("for");
@@ -341,7 +365,7 @@ public class PrettyPrinter implements Visitor {
             pushSpace();
             is.inct.accept(this);
             push(")");
-            pushLine();
+            pushSpace();
             is.stat.accept(this);
         }
     }
@@ -400,7 +424,9 @@ public class PrettyPrinter implements Visitor {
         if (paraL) {
             push(")");
         }
-        pushSpace();
+        if (be.op != Symbols.COMMA) {
+            pushSpace();
+        }
         push(SymbolsRev.getSymbol(be.op)) ;
         pushSpace();
         if (paraR) {

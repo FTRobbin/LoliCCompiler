@@ -137,14 +137,6 @@ function_definition ::=		type_specifier:type declarator:dect {: table.retrive();
 								dect.type.encore(type);
 							}
 							RESULT = new FunctionDefi(dect.type, dect.name, ((FunctionDecl)dect).para, stat); :}
-						|	type_specifier:type declarator:dect {: table.retrive(); :} declaration_list:para compound_statement:stat
-						{:
-							if (dect.type == null) {
-								dect.type = type;
-							} else {
-								dect.type.encore(type);
-							}
-							RESULT = new FunctionDefi(dect.type, dect.name, para, stat); :}
 						;
 
 declaration_list ::= 	declaration:decl
@@ -154,50 +146,38 @@ declaration_list ::= 	declaration:decl
 					;
 
 declaration ::=		type_specifier:type COLON
-				{:
-					if (type.hasDefi()) {
-						RESULT = (new DeclList()).add(new TypeDecl(type));
-					} else {
-						RESULT = new DeclList();
-					}
-					:}
+				{:  RESULT = (new DeclList()).add(new TypeDecl(type)); :}
 				|	type_specifier:type init_declarator_list:init COLON
 				{:
-
+					boolean first = true;
 					for (Declaration dect : init.list) {
+						dect.specifier = first;
 						if (dect.type == null) {
 							dect.type = type;
 						} else {
 							dect.type.encore(type);
 						}
-						if (type.hasDefi()) {
-							type = type.cutDefi();
-						}
+						first = false;
 					}
 					RESULT = init;
 				:}
 				|	TYPEDEF type_specifier:type COLON
-				{:
-					if (type.hasDefi()) {
-						RESULT = (new DeclList()).add(new TypeDecl(type));
-					} else {
-						RESULT = new DeclList();
-					}
-				:}
+				{:  RESULT = (new DeclList()).add(new TypeDecl(type)); :}
 				|	TYPEDEF type_specifier:type declarator_list:init
 				{:
 					RESULT = new DeclList();
+					boolean first = true;
 					for (Declaration dect : init.list) {
 						if (dect.type == null) {
 							dect.type = type;
 						} else {
 							dect.type.encore(type);
 						}
-						if (type.hasDefi()) {
-							type = type.cutDefi();
-						}
 						table.addEntry(dect.name.toString(), Symbols.TYPENAME);
-						RESULT.add(new TypeDef(dect.type, dect.name));
+						Declaration temp = new TypeDef(dect.type, dect.name);
+						temp.specifier = first;
+						RESULT.add(temp);
+						first = false;
 					}
 				:} COLON
 				;
@@ -210,6 +190,7 @@ plain_declaration ::=		type_specifier:type declarator:dect
 							} else {
 								dect.type.encore(type);
 							}
+							dect.specifier = true;
 							RESULT = (new DeclList()).add(dect);:}
 						;
 
@@ -298,29 +279,30 @@ type_specifier ::=		VOID
 					{:	RESULT = new DefinedType(new Symbol(name)); :}
 					;
 
-field_list ::=		type_specifier:type declarator_list:list COLON
-				{:	for (Declaration decl : list.list) {
+field_list ::=		type_specifier:type struct_declarator_list:list COLON
+				{:	boolean first = true;
+					for (Declaration decl : list.list) {
 						if (decl.type == null) {
 							decl.type = type;
 						} else {
 							decl.type.encore(type);
 						}
-						if (type.hasDefi()) {
-							type = type.cutDefi();
-						}
+						decl.specifier = first;
+						first = false;
 					}
 					RESULT = list;
 				:}
 				|	field_list:list type_specifier:type struct_declarator_list:list2 COLON
-				{:	for (Declaration decl : list2.list) {
+				{:
+					boolean first = true;
+					for (Declaration decl : list2.list) {
 						if (decl.type == null) {
 							decl.type = type;
 						} else {
 							decl.type.encore(type);
 						}
-						if (type.hasDefi()) {
-							type = type.cutDefi();
-						}
+						decl.specifier = first;
+						first = false;
 					}
 					list = list.add(list2);
 					RESULT = list;

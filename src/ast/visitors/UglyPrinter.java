@@ -141,7 +141,15 @@ public class UglyPrinter implements Visitor {
     }
 
     public void visit(VariableDecl vd) {
-        vd.type.accept(this);
+        if (vd.specifier) {
+            vd.type.accept(this);
+        } else {
+            while (stack.get(stack.size() - 1).intern() != ";") {
+                pop();
+            }
+            pop();
+            push(",");
+        }
         pushSpace();
         Type shell = vd.type.getShell();
         int cur = stack.size();
@@ -160,7 +168,15 @@ public class UglyPrinter implements Visitor {
     }
 
     public void visit(FunctionDecl fd) {
-        fd.type.accept(this);
+        if (fd.specifier) {
+            fd.type.accept(this);
+        } else {
+            while (stack.get(stack.size() - 1).intern() != ";") {
+                pop();
+            }
+            pop();
+            push(",");
+        }
         pushSpace();
         Type shell = fd.type.getShell();
         int cur = stack.size();
@@ -179,9 +195,17 @@ public class UglyPrinter implements Visitor {
     }
 
     public void visit(TypeDef td) {
-        push("typedef");
-        pushSpace();
-        td.type.accept(this);
+        if (td.specifier) {
+            push("typedef");
+            pushSpace();
+            td.type.accept(this);
+        } else {
+            while (stack.get(stack.size() - 1).intern() != ";") {
+                pop();
+            }
+            pop();
+            push(",");
+        }
         pushSpace();
         td.name.accept(this);
     }

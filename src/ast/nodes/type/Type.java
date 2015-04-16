@@ -11,13 +11,5 @@ public abstract class Type implements Visible {
         return this;
     }
 
-    public boolean hasDefi() {
-        return false;
-    }
-
-    public Type cutDefi() {
-        return this;
-    }
-
     abstract public Type getShell();
 }
