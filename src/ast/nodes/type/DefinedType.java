@@ -8,8 +8,6 @@ import ast.visitors.Visitor;
  * Created by Robbin Ni on 2015/4/15.
  */
 
-//TODO
-
 public class DefinedType extends Type implements Visible {
     public Symbol name;
 

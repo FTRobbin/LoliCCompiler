@@ -2,8 +2,6 @@
 CUP specification for loliccompiler by RobbinNi
 */
 
-//TODO function type support + array dimension
-
 package parser;
 
 import lexer.Yylex;
@@ -138,7 +136,7 @@ function_definition ::=		type_specifier:type declarator:dect {: table.retrive();
 							} else {
 								dect.type.encore(type);
 							}
-							RESULT = new FunctionDefi(dect.type, dect.name, new ParaList(), stat); :}
+							RESULT = new FunctionDefi(dect.type, dect.name, ((FunctionDecl)dect).para, stat); :}
 						|	type_specifier:type declarator:dect {: table.retrive(); :} declaration_list:para compound_statement:stat
 						{:
 							if (dect.type == null) {
@@ -216,11 +214,13 @@ direct_declarator ::=	IDENTIFIER:name
 					{:	RESULT = new FunctionDecl(dect.type, dect.name, para); :}
 					|	direct_declarator:dect SQUARL constant_expression:expr SQUARR
 					{:	RESULT = new VariableDecl(new ArrayType(dect.type, expr), dect.name, new InitList()); :}
+					|	direct_declarator:dect SQUARL SQUARR
+					{:	RESULT = new VariableDecl(new ArrayType(dect.type, new EmptyExpr()), dect.name, new InitList()); :}
 					;
 
 declarator_list ::=		declarator:decl
 					{:	RESULT = (new DeclList()).add(decl); :}
-					|	declarator_list:list COMMA declarator:decl
+					|	declarator:decl COMMA declarator_list:list
 					{:	RESULT = list.add(decl); :}
 					;
 
@@ -264,13 +264,15 @@ type_specifier ::=		VOID
 					|	CHAR
 					{:	RESULT = new CharType(); :}
 					|	STRUCT IDENTIFIER:id
-					{:	RESULT = new StructType(new Symbol(id), new DeclList()); :}
+					{:	RESULT = new StructType(new Symbol(id), null); :}
 					|	STRUCT IDENTIFIER:id CURLYL field_list:list CURLYR
 					{:	RESULT = new StructType(new Symbol(id), list); :}
 					|	STRUCT CURLYL field_list:list CURLYR
 					{:	RESULT = new StructType(new Symbol(""), list); :}
 					|	UNION IDENTIFIER:id
-					{:	RESULT = new UnionType(new Symbol(id), new DeclList()); :}
+					{:	RESULT = new UnionType(new Symbol(id), null); :}
+					|	UNION IDENTIFIER:id CURLYL field_list:list CURLYR
+					{:	RESULT = new UnionType(new Symbol(id), list); :}
 					|	UNION CURLYL field_list:list CURLYR
 					{:	RESULT = new UnionType(new Symbol(""), list); :}
 					|	TYPENAME:name
@@ -319,6 +321,8 @@ struct_direct_declarator ::=	IDENTIFIER:name
 							{:	RESULT = new FunctionDecl(dect.type, dect.name, para); :}
 							|	struct_direct_declarator:dect SQUARL constant_expression:expr SQUARR
 							{:	RESULT = new VariableDecl(new ArrayType(dect.type, expr), dect.name, new InitList()); :}
+							|	struct_direct_declarator:dect SQUARL SQUARR
+							{:	RESULT = new VariableDecl(new ArrayType(dect.type, new EmptyExpr()), dect.name, new InitList()); :}
 							;
 
 struct_declarator_list ::=		struct_declarator:decl

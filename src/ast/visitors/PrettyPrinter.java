@@ -50,7 +50,6 @@ public class PrettyPrinter implements Visitor {
     }
 
     private String cover(String str, Type shell) {
-        //TODO
         if (shell == null) {
             lastPre = 15;
             return str;
@@ -241,11 +240,13 @@ public class PrettyPrinter implements Visitor {
         pushSpace();
         st.name.accept(this);
         pushSpace();
-        push("{");
-        pushLine();
-        st.list.accept(this);
-        pushLine();
-        push("}");
+        if (st.list != null) {
+            push("{");
+            pushLine();
+            st.list.accept(this);
+            pushLine();
+            push("}");
+        }
     }
 
     public void visit(UnionType ut) {
@@ -253,11 +254,13 @@ public class PrettyPrinter implements Visitor {
         pushSpace();
         ut.name.accept(this);
         pushSpace();
-        push("{");
-        pushLine();
-        ut.list.accept(this);
-        pushLine();
-        push("}");
+        if (ut.list != null) {
+            push("{");
+            pushLine();
+            ut.list.accept(this);
+            pushLine();
+            push("}");
+        }
     }
 
     public void visit(IntType it) {

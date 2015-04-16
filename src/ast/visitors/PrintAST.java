@@ -139,7 +139,9 @@ public class PrintAST implements Visitor {
         PrintLine("StructType");
         ++inc;
         st.name.accept(this);
-        st.list.accept(this);
+        if (st.list != null) {
+            st.list.accept(this);
+        }
         --inc;
     }
 
@@ -147,7 +149,9 @@ public class PrintAST implements Visitor {
         PrintLine("UnionType");
         ++inc;
         ut.name.accept(this);
-        ut.list.accept(this);
+        if (ut.list != null) {
+            ut.list.accept(this);
+        }
         --inc;
     }
 

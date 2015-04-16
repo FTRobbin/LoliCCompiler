@@ -35,7 +35,6 @@ public class SyntacticTable {
 
     public void addScope() {
         list.push(new HashMap<String, Integer>());
-        traverse();
     }
 
     public void delScope() {

@@ -215,11 +215,13 @@ public class UglyPrinter implements Visitor {
         pushSpace();
         st.name.accept(this);
         pushSpace();
-        push("{");
-        pushSpace();
-        st.list.accept(this);
-        pushSpace();
-        push("}");
+        if (st.list != null) {
+            push("{");
+            pushSpace();
+            st.list.accept(this);
+            pushSpace();
+            push("}");
+        }
     }
 
     public void visit(UnionType ut) {
@@ -227,11 +229,13 @@ public class UglyPrinter implements Visitor {
         pushSpace();
         ut.name.accept(this);
         pushSpace();
-        push("{");
-        pushSpace();
-        ut.list.accept(this);
-        pushSpace();
-        push("}");
+        if (ut.list != null) {
+            push("{");
+            pushSpace();
+            ut.list.accept(this);
+            pushSpace();
+            push("}");
+        }
     }
 
     public void visit(IntType it) {
