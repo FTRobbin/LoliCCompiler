@@ -8,6 +8,8 @@ import ast.visitors.Visitor;
  */
 public class BreakStat extends JumpStat implements Visible {
 
+    public IterationStat target = null;
+
     @Override
     public void accept(Visitor v) {
         v.visit(this);

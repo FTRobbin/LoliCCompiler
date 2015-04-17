@@ -35,6 +35,8 @@ public interface Visitor {
     public void visit(CharType ct);
     public void visit(VoidType vt);
     public void visit(DefinedType dt);
+    public void visit(FunctionType ft);
+    public void visit(NameType nt);
 
     public void visit(StatList sl);
     public void visit(ExpressionStat es);

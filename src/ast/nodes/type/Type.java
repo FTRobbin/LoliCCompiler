@@ -7,9 +7,17 @@ import ast.nodes.Visible;
  */
 
 public abstract class Type implements Visible {
+
+    public boolean isLeft = false;
+    public boolean isConst = false;
+    public Object value = null;
+    public Integer size = 0;
+
     public Type encore(Type t) {
         return this;
     }
 
-    abstract public Type getShell();
+    public Type getShell() {
+        return null;
+    }
 }

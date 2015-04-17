@@ -8,12 +8,12 @@ import ast.visitors.Visitor;
  * Created by Robbin Ni on 2015/4/8.
  */
 
-public class ArrayType extends TypeDeco implements Visible {
+public class ArrayType extends PointerType implements Visible {
 
     public Expression cap;
 
     public ArrayType(Type baseType, Expression cap) {
-        this.baseType = baseType;
+        super(baseType);
         this.cap = cap;
     }
 

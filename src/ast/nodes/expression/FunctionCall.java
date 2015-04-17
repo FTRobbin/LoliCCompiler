@@ -2,7 +2,6 @@ package ast.nodes.expression;
 
 import ast.nodes.Visible;
 import ast.nodes.declaration.ArgumentList;
-import ast.nodes.expression.Expression;
 import ast.visitors.Visitor;
 
 /**

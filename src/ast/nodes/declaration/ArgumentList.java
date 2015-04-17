@@ -1,7 +1,8 @@
 package ast.nodes.declaration;
 
-import ast.nodes.expression.Expression;
 import ast.nodes.Visible;
+import ast.nodes.expression.Expression;
+import ast.nodes.type.Type;
 import ast.visitors.Visitor;
 
 import java.util.LinkedList;
@@ -13,9 +14,11 @@ import java.util.List;
 public class ArgumentList implements Visible {
 
     public List<Expression> list;
+    public List<Type> typeList;
 
     public ArgumentList() {
         list = new LinkedList<Expression>();
+        typeList = new LinkedList<Type>();
     }
 
     public ArgumentList add(Expression expr) {

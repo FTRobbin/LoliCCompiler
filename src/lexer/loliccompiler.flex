@@ -88,6 +88,9 @@ import table.SyntacticTable;
     }
 %eofval}
 
+/* Pre-Compile Command */
+preCompileCommand = # {inputCharacter}* {lineTerminator}?
+
 /* Characters */
 
 lineTerminator = \r|\n|\r\n
@@ -107,7 +110,7 @@ identifier = {letters}{lettersAndDigits}*
 /* Constants */
 decimalInteger = [1-9][0-9]*|0
 octalInteger = 0[0-7]+
-hexadecimalInteger = 0x[0-9A-Fa-f]+
+hexadecimalInteger = 0[xX][0-9A-Fa-f]+
 //integer = {decimalInteger} | {octalInteger} | {hexadecimalInteger}
 
 commonCharacter = [[\x20-\xff]--['\"\\]]
@@ -121,6 +124,9 @@ asciiNumberCharacter = (\\x[0-9A-Fa-f][0-9A-Fa-f])|(\\[0-3][0-7][0-7])
 %%
 
 <YYINITIAL> {
+    /* Pre-Compile Command */
+    {preCompileCommand}       { /* ignore */ }
+
     /* Comments */
     {singleLineComments}      { /* ignore */ }
     "/*"            { yybegin(YYCOMMENT); }

@@ -55,8 +55,8 @@ public class PrettyPrinter implements Visitor {
             lastPre = 15;
             return str;
         } else {
-            str = cover(str, ((TypeDeco)shell).baseType);
-            if (shell.getClass().getName().intern() == "ast.nodes.type.ArrayType") {
+            str = cover(str, ((PointerType)shell).baseType);
+            if (shell instanceof ArrayType) {
                 ArrayType tmp = (ArrayType)shell;
                 int cur = stack.size();
                 tmp.cap.accept(this);
@@ -89,6 +89,14 @@ public class PrettyPrinter implements Visitor {
     private void print() {
         boolean newLine = false;
         for (String str : stack) {
+            if (str == "\77") {
+                --indent;
+                continue;
+            }
+            if (str == "\0") {
+                ++indent;
+                continue;
+            }
             if (str == "}") {
                 --indent;
             } else if (newLine && indent > 0) {
@@ -126,7 +134,7 @@ public class PrettyPrinter implements Visitor {
     public void visit(Program p) {
         for (Declaration decl : p.list) {
             decl.accept(this);
-            if (decl.getClass().getName().intern() != "ast.nodes.declaration.FunctionDefi") {
+            if (!(decl instanceof FunctionDefi)) {
                 push(";");
             }
             pushLine();
@@ -185,14 +193,16 @@ public class PrettyPrinter implements Visitor {
         int cur = stack.size();
         vd.name.accept(this);
         push(cover(popTo(cur), shell));
-        cur = stack.size();
-        vd.init.accept(this);
-        String init = popTo(cur);
-        if (!init.intern().isEmpty()) {
-            pushSpace();
-            push("=");
-            pushSpace();
-            push(init);
+        if (vd.init != null) {
+            cur = stack.size();
+            vd.init.accept(this);
+            String init = popTo(cur);
+            if (!init.intern().isEmpty()) {
+                pushSpace();
+                push("=");
+                pushSpace();
+                push(init);
+            }
         }
     }
 
@@ -242,9 +252,6 @@ public class PrettyPrinter implements Visitor {
     }
 
     public void visit(InitList il) {
-        if (il.list.size() == 0) {
-            return;
-        }
         push("{");
         int count = 0;
         for (Initializer decl : il.list) {
@@ -308,6 +315,12 @@ public class PrettyPrinter implements Visitor {
         dt.name.accept(this);
     }
 
+    public void visit(FunctionType ft) {
+        ft.returnType.accept(this);
+    }
+
+    public void visit(NameType nt) {}
+
     public void visit(StatList sl) {
         for (Statement stat : sl.list) {
             stat.accept(this);
@@ -334,13 +347,27 @@ public class PrettyPrinter implements Visitor {
         push("(");
         ss.expr.accept(this);
         push(")");
-        pushSpace();
-        ss.iftr.accept(this);
+        if (ss.iftr instanceof CompoundStat) {
+            pushSpace();
+            ss.iftr.accept(this);
+        } else {
+            push("\0");
+            pushLine();
+            ss.iftr.accept(this);
+            push("\77");
+        }
         if (!ss.iffl.isEmpty()) {
             pushSpace();
             push("else");
-            pushSpace();
-            ss.iffl.accept(this);
+            if (ss.iffl instanceof CompoundStat) {
+                pushSpace();
+                ss.iffl.accept(this);
+            } else {
+                push("\0");
+                pushLine();
+                ss.iffl.accept(this);
+                push("\77");
+            }
         }
     }
 
@@ -351,8 +378,15 @@ public class PrettyPrinter implements Visitor {
             push("(");
             is.expr.accept(this);
             push(")");
-            pushSpace();
-            is.stat.accept(this);
+            if (is.stat instanceof CompoundStat) {
+                pushSpace();
+                is.stat.accept(this);
+            } else {
+                push("\0");
+                pushLine();
+                is.stat.accept(this);
+                push("\77");
+            }
         } else {
             push("for");
             pushSpace();
@@ -365,8 +399,15 @@ public class PrettyPrinter implements Visitor {
             pushSpace();
             is.inct.accept(this);
             push(")");
-            pushSpace();
-            is.stat.accept(this);
+            if (is.stat instanceof CompoundStat) {
+                pushSpace();
+                is.stat.accept(this);
+            } else {
+                push("\0");
+                pushLine();
+                is.stat.accept(this);
+                push("\77");
+            }
         }
     }
 

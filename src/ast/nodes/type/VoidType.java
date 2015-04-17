@@ -9,11 +9,6 @@ import ast.visitors.Visitor;
 public class VoidType extends Type implements Visible {
 
     @Override
-    public Type getShell() {
-        return null;
-    }
-
-    @Override
     public void accept(Visitor v) {
         v.visit(this);
     }

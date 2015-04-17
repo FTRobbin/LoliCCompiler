@@ -20,7 +20,7 @@ public class ReturnStat extends JumpStat implements Visible {
         }
 
         @Override
-            public void accept(Visitor v) {
+        public void accept(Visitor v) {
                 v.visit(this);
         }
 }

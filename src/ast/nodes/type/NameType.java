@@ -1,22 +1,20 @@
 package ast.nodes.type;
 
-import ast.nodes.Visible;
 import ast.nodes.expression.Symbol;
 import ast.visitors.Visitor;
 
 /**
- * Created by Robbin Ni on 2015/4/15.
+ * Created by Robbin Ni on 2015/4/17.
  */
-
-public class DefinedType extends Type implements Visible {
+public class NameType extends Type {
     public Symbol name;
 
-    public DefinedType(Symbol name) {
+    public NameType(Symbol name) {
         this.name = name;
     }
 
     @Override
     public void accept(Visitor v) {
-        v.visit(this);
+
     }
 }

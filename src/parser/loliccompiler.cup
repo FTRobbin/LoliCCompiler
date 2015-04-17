@@ -202,20 +202,20 @@ declarator ::=		direct_declarator:dect
 				;
 
 direct_declarator ::=	IDENTIFIER:name
-					{:	RESULT = new VariableDecl(null, new Symbol(name), new InitList()); :}
+					{:	RESULT = new VariableDecl(null, new Symbol(name), null); :}
 					|	TYPENAME:name
 					{:	table.addEntry(name, Symbols.IDENTIFIER);
-						RESULT = new VariableDecl(null, new Symbol(name), new InitList()); :}
+						RESULT = new VariableDecl(null, new Symbol(name), null); :}
 					|	PARAL declarator:dect PARAR
-					{:  RESULT = new VariableDecl(dect.type, dect.name, new InitList()); :}
+					{:  RESULT = new VariableDecl(dect.type, dect.name, null); :}
 					|	direct_declarator:dect PARAL {: table.addScope(); table.delScope(); :} PARAR
-					{:  RESULT = new FunctionDecl(dect.type, dect.name, new DeclList()); :}
+					{:  RESULT = new FunctionDecl(new FunctionType(dect.type, new DeclList()), dect.name, new DeclList()); :}
 					|	direct_declarator:dect PARAL {: table.addScope(); :} parameter_list:para {: table.delScope(); :} PARAR
-					{:	RESULT = new FunctionDecl(dect.type, dect.name, para); :}
+					{:	RESULT = new FunctionDecl(new FunctionType(dect.type, para), dect.name, para); :}
 					|	direct_declarator:dect SQUARL constant_expression:expr SQUARR
-					{:	RESULT = new VariableDecl(new ArrayType(dect.type, expr), dect.name, new InitList()); :}
+					{:	RESULT = new VariableDecl(new ArrayType(dect.type, expr), dect.name, null); :}
 					|	direct_declarator:dect SQUARL SQUARR
-					{:	RESULT = new VariableDecl(new ArrayType(dect.type, new EmptyExpr()), dect.name, new InitList()); :}
+					{:	RESULT = new VariableDecl(new ArrayType(dect.type, new EmptyExpr()), dect.name, null); :}
 					;
 
 declarator_list ::=		declarator:decl
@@ -317,19 +317,17 @@ struct_declarator ::=		struct_direct_declarator:dect
 						;
 
 struct_direct_declarator ::=	IDENTIFIER:name
-							{:	RESULT = new VariableDecl(null, new Symbol(name), new InitList()); :}
+							{:	RESULT = new VariableDecl(null, new Symbol(name), null); :}
 							|	TYPENAME:name
-							{:	RESULT = new VariableDecl(null, new Symbol(name), new InitList()); :}
+							{:	RESULT = new VariableDecl(null, new Symbol(name), null); :}
 							|	PARAL struct_declarator:dect PARAR
-							{:  RESULT = new VariableDecl(dect.type, dect.name, new InitList()); :}
+							{:  RESULT = new VariableDecl(dect.type, dect.name, null); :}
 							|	struct_direct_declarator:dect PARAL PARAR
-							{:  RESULT = new FunctionDecl(dect.type, dect.name, new DeclList()); :}
+							{:  RESULT = new FunctionDecl(new FunctionType(dect.type, new DeclList()), dect.name, new DeclList()); :}
 							|	struct_direct_declarator:dect PARAL parameter_list:para PARAR
-							{:	RESULT = new FunctionDecl(dect.type, dect.name, para); :}
+							{:	RESULT = new FunctionDecl(new FunctionType(dect.type, para), dect.name, para); :}
 							|	struct_direct_declarator:dect SQUARL constant_expression:expr SQUARR
-							{:	RESULT = new VariableDecl(new ArrayType(dect.type, expr), dect.name, new InitList()); :}
-							|	struct_direct_declarator:dect SQUARL SQUARR
-							{:	RESULT = new VariableDecl(new ArrayType(dect.type, new EmptyExpr()), dect.name, new InitList()); :}
+							{:	RESULT = new VariableDecl(new ArrayType(dect.type, expr), dect.name, null); :}
 							;
 
 struct_declarator_list ::=		struct_declarator:decl
