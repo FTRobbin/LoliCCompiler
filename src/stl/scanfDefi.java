@@ -15,9 +15,9 @@ import ast.nodes.type.*;
 public class scanfDefi extends FunctionDefi {
 
     public scanfDefi() {
-        super(new IntType(), new Symbol("scanf"), (new DeclList()).add(new VariableDecl(new PointerType(new CharType()), new Symbol("argu"), null)), new CompoundStat(new DeclList(), new StatList()));
+        super(new FunctionType(new IntType(), new DeclList()), new Symbol("scanf"), (new DeclList()).add(new VariableDecl(new PointerType(new CharType()), new Symbol("argu"), null)), new CompoundStat(new DeclList(), new StatList()));
         this.paras.add(new TypeDecl(new ELLIPSIS()));
-        this.type = new FunctionType(this.type, this.paras);
+        this.type = new FunctionType(this.returnType, this.paras);
         //TODO
     }
 }

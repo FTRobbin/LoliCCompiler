@@ -25,7 +25,7 @@ public class Symbol implements Visible {
 
     public Symbol(String name) {
         this.name = name;
-        anonymous = name.length() > 0;
+        anonymous = name.length() == 0;
         if (anonymous) {
             num = count++;
         } else {

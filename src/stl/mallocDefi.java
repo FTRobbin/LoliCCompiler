@@ -18,10 +18,10 @@ import ast.nodes.type.VoidType;
 public class mallocDefi extends FunctionDefi {
 
     public mallocDefi() {
-        super(new PointerType(new VoidType()), new Symbol("malloc"),
-                (new DeclList()).add(new VariableDecl(new IntType(), new Symbol("size"), new InitList())),
-                new CompoundStat(new DeclList(), new StatList()));
-        this.type = new FunctionType(this.type, this.paras);
+        super(new FunctionType(new PointerType(new VoidType()), (new DeclList()).add(new VariableDecl(new IntType(), new Symbol("size"), new InitList()))),
+              new Symbol("malloc"),
+              (new DeclList()).add(new VariableDecl(new IntType(), new Symbol("size"), new InitList())),
+              new CompoundStat(new DeclList(), new StatList()));
         //TODO
     }
 }

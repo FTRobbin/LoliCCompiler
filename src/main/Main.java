@@ -16,7 +16,6 @@ import java.io.Reader;
 public class Main {
 
      public static void parseAndVisit(Reader input, OutputStream output, Visitor visitor) throws IOException {
-         Symbol.reset();
          Parser parser = new Parser(input);
          Program prog;
          try {

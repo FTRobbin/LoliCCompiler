@@ -131,12 +131,13 @@ external_definition ::= 	declaration:decl
 
 function_definition ::=		type_specifier:type declarator:dect {: table.retrive(); :} compound_statement:stat
 						{:
-							if (dect.type == null) {
-								dect.type = type;
+							FunctionType tmp = (FunctionType)(dect.type);
+							if (tmp.returnType == null) {
+								tmp.returnType = type;
 							} else {
-								dect.type.encore(type);
+								tmp.returnType.encore(type);
 							}
-							RESULT = new FunctionDefi(dect.type, dect.name, ((FunctionDecl)dect).para, stat); :}
+							RESULT = new FunctionDefi(tmp, dect.name, ((FunctionDecl)dect).para, stat); :}
 						;
 
 declaration_list ::= 	declaration:decl
@@ -547,14 +548,8 @@ type_name ::=		type_specifier:type
 
 unary_expression ::=		postfix_expression:expr
 						{:	RESULT = expr; :}
-						|	INC_OP unary_expression:expr
-						{:	RESULT = new UnaryExpr(Symbols.INC_OP, expr); :}
-						|	DEC_OP unary_expression:expr
-						{:	RESULT = new UnaryExpr(Symbols.DEC_OP, expr); :}
 						|	unary_operator:op cast_expression:expr
 						{:	RESULT = new UnaryExpr(op, expr); :}
-						|	SIZEOF unary_expression:expr
-						{:	RESULT = new UnaryExpr(Symbols.SIZEOF, expr); :}
 						|	SIZEOF PARAL type_name:type PARAR
 						{:	RESULT = new SizeofExpr(type); :}
 						;
@@ -571,6 +566,12 @@ unary_operator ::=		ADRESS
 					{:	RESULT = Symbols.TILDE;	:}
 					|	NOT
 					{:	RESULT = Symbols.NOT;	:}
+					|	INC_OP
+					{:	RESULT = Symbols.INC_OP; :}
+					|	DEC_OP
+					{:	RESULT = Symbols.DEC_OP; :}
+					|	SIZEOF
+					{:	RESULT = Symbols.SIZEOF; :}
 					;
 
 postfix_expression ::=		primary_expression:expr

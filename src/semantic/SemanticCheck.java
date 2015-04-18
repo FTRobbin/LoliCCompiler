@@ -1,17 +1,21 @@
 package semantic;
 
 import ast.nodes.Program;
+import ast.nodes.Visible;
 import ast.nodes.declaration.*;
 import ast.nodes.expression.*;
 import ast.nodes.initialization.InitList;
 import ast.nodes.initialization.InitValue;
 import ast.nodes.statment.*;
 import ast.nodes.type.*;
+import ast.visitors.PrintAST;
 import ast.visitors.Visitor;
+import parser.Symbols;
 import stl.mallocDefi;
 import stl.printfDefi;
 import stl.scanfDefi;
 
+import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,7 +32,16 @@ public class SemanticCheck implements Visitor {
     private VariableTable table;
     private StructureTable struct;
 
+    private void debug(Visible item) {
+        Visitor v = new PrintAST();
+        OutputStream out = new ByteArrayOutputStream();
+        v.setOutput(out);
+        item.accept(v);
+        System.out.print(out.toString());
+    }
+
     public SemanticCheck() {
+        Symbol.reset();
         this.table = new VariableTable();
         this.struct = new StructureTable();
         loadSTL();
@@ -81,6 +94,7 @@ public class SemanticCheck implements Visitor {
     }
 
     private Type resolve(Type type)  {
+        //TODO could it be possible to eliminate all defined types on declarations?
         if (type instanceof DefinedType) {
             return resolve(((DefinedType) type).baseType);
         } else {
@@ -134,49 +148,347 @@ public class SemanticCheck implements Visitor {
         } else if (a instanceof VoidType) {
             return b instanceof VoidType;
         } else {
+            System.out.println("Unexpected type error.");
             return false;
         }
     }
 
     private boolean typeCheck(Type being, Type tobe) {
-        return typeEqual(being, tobe) || (typeEqual(being, new CharType()) && typeEqual(tobe, new IntType()));
+        return typeEqual(being, tobe) || (typeEqual(being, new CharType()) && typeEqual(tobe, new IntType()))
+                                      || (typeEqual(being, new IntType()) && typeEqual(tobe, new CharType()));
+    }
+
+    private boolean isNum(Type type) {
+        return typeEqual(type, new IntType()) || typeEqual(type, new CharType());
+    }
+
+    private Integer getNum(Type type) {
+        if (typeEqual(type, new IntType())) {
+            return (Integer)type.value;
+        } else {
+            return (int)((Character)type.value);
+        }
+    }
+
+    private Object calCast(Integer it, Type type) {
+        if (typeEqual(type, new IntType())) {
+            return it;
+        } else {
+            return (char)(it & 255);
+        }
     }
 
     private Type calBin(int op, Type type1, Type type2) {
-        //TODO
-        return type1;
+        //TOD
+        Type ret = null;
+        String s = Symbols.terminalNames[op].intern();
+        if (op == Symbols.COMMA) {
+            ret = type2.clone();
+            ret.isLeft = false;
+        } else if (op == Symbols.ASSIGN) {
+            if (!type1.isLeft) {
+                System.out.println("The assignment must have a left value on the left side.");
+            } else {
+                if (!typeCheck(type1, type2)) {
+                    System.out.println("The left and right value of an assignment must be of the same type.");
+                } else {
+                    ret = type1.clone();
+                }
+            }
+        } else if (op == Symbols.MUL_ASSIGN
+                || op == Symbols.DIV_ASSIGN
+                || op == Symbols.MOD_ASSIGN
+                || op == Symbols.ADD_ASSIGN
+                || op == Symbols.SUB_ASSIGN
+                || op == Symbols.SHL_ASSIGN
+                || op == Symbols.SHR_ASSIGN
+                || op == Symbols.XOR_ASSIGN
+                || op == Symbols.OR_ASSIGN
+                || op == Symbols.AND_ASSIGN) {
+            switch (s) {
+                case "MUL_ASSIGN": {
+                    ret = calBin(Symbols.ASSIGN, type1, calBin(Symbols.MUL, type1, type2));
+                    break;
+                }
+                case "DIV_ASSIGN": {
+                    ret = calBin(Symbols.ASSIGN, type1, calBin(Symbols.DIV, type1, type2));
+                    break;
+                }
+                case "MOD_ASSIGN": {
+                    ret = calBin(Symbols.ASSIGN, type1, calBin(Symbols.MOD, type1, type2));
+                    break;
+                }
+                case "ADD_ASSIGN": {
+                    ret = calBin(Symbols.ASSIGN, type1, calBin(Symbols.ADD, type1, type2));
+                    break;
+                }
+                case "SUB_ASSIGN": {
+                    ret = calBin(Symbols.ASSIGN, type1, calBin(Symbols.SUB, type1, type2));
+                    break;
+                }
+                case "SHL_ASSIGN": {
+                    ret = calBin(Symbols.ASSIGN, type1, calBin(Symbols.SHL_OP, type1, type2));
+                    break;
+                }
+                case "SHR_ASSIGN": {
+                    ret = calBin(Symbols.ASSIGN, type1, calBin(Symbols.SHR_OP, type1, type2));
+                    break;
+                }
+                case "XOR_ASSIGN": {
+                    ret = calBin(Symbols.ASSIGN, type1, calBin(Symbols.XOR, type1, type2));
+                    break;
+                }
+                case "OR_ASSIGN": {
+                    ret = calBin(Symbols.ASSIGN, type1, calBin(Symbols.OR, type1, type2));
+                    break;
+                }
+                case "AND_ASSIGN": {
+                    ret = calBin(Symbols.ASSIGN, type1, calBin(Symbols.ADRESS, type1, type2));
+                    break;
+                }
+            }
+        } else if (op == Symbols.ADD || op == Symbols.SUB) {
+            if (!isNum(type1) && !(resolve(type1) instanceof PointerType)) {
+                System.out.println("The left operand of " + s + " must be int, char or a Pointer.");
+            } else {
+                if (!isNum(type2)) {
+                    System.out.println("The right operand of " + s + " must be int, char.");
+                } else {
+                    if (resolve(type1) instanceof PointerType) {
+                        ret = type1.clone();
+                        ret.isLeft = false;
+                    } else {
+                        ret = new IntType();
+                        ret.size = 4;
+                        ret.isLeft = false;
+                        if (type1.isConst && type2.isConst) {
+                            ret.isConst = true;
+                            ret.value = op == Symbols.ADD ? getNum(type1) + getNum(type2) : getNum(type1) - getNum(type2);
+                        }
+                    }
+                }
+            }
+        } else if (op == Symbols.EQ_OP || op == Symbols.NE_OP) {
+            if (!typeCheck(type1, type2)) {
+                System.out.println("The left and right operand of " + s + " must be of the same type.");
+            } else {
+                if (!isNum(type1) && !(resolve(type1) instanceof PointerType)) {
+                    System.out.println("The left operand of " + s + " must be int, char or a Pointer.");
+                } else {
+                    if (!isNum(type2) && !(resolve(type2) instanceof PointerType)) {
+                        System.out.println("The right operand of " + s + " must be int, char or a Pointer.");
+                    } else {
+                        ret = new IntType();
+                        ret.size = 4;
+                        ret.isLeft = false;
+                        if (isNum(type1) && type1.isConst && type2.isConst) {
+                            ret.isConst = true;
+                            ret.value = op == Symbols.EQ_OP ? getNum(type1).equals(getNum(type2)) : !getNum(type1).equals(getNum(type2));
+                        }
+                    }
+                }
+            }
+        } else if (op == Symbols.MUL
+                || op == Symbols.OR
+                || op == Symbols.XOR
+                || op == Symbols.ADRESS
+                || op == Symbols.LESS
+                || op == Symbols.GREATER
+                || op == Symbols.DIV
+                || op == Symbols.MOD
+                || op == Symbols.OR_OP
+                || op == Symbols.AND_OP
+                || op == Symbols.LE_OP
+                || op == Symbols.GE_OP
+                || op == Symbols.SHL_OP
+                || op == Symbols.SHR_OP) {
+            if (!isNum(type1) || !isNum(type2)) {
+                System.out.println("The left and right operand of " + s + " must be of int or char.");
+            } else {
+                ret = new IntType();
+                ret.size = 4;
+                ret.isLeft = false;
+                if (isNum(type1) && type1.isConst && type2.isConst) {
+                    ret.isConst = true;
+                    int lv = getNum(type1), rv = getNum(type2);
+                    switch (s) {
+                        case "MUL": {
+                            ret.value = lv * rv;
+                            break;
+                        }
+                        case "OR": {
+                            ret.value = lv | rv;
+                            break;
+                        }
+                        case "XOR": {
+                            ret.value = lv ^ rv;
+                            break;
+                        }
+                        case "ADRESS": {
+                            ret.value = lv & rv;
+                            break;
+                        }
+                        case "LESS": {
+                            ret.value = lv < rv ? 1 : 0;
+                            break;
+                        }
+                        case "GREATER": {
+                            ret.value = lv > rv ? 1 : 0;
+                            break;
+                        }
+                        case "DIV": {
+                            ret.value = lv / rv;
+                            break;
+                        }
+                        case "MOD": {
+                            ret.value = lv % rv;
+                            break;
+                        }
+                        case "OR_OP": {
+                            ret.value = lv != 0 || rv != 0 ? 1 : 0;
+                            break;
+                        }
+                        case "AND_OP": {
+                            ret.value = lv != 0 && rv != 0 ? 1 : 0;
+                            break;
+                        }
+                        case "LE_OP": {
+                            ret.value = lv <= rv ? 1 : 0;
+                            break;
+                        }
+                        case "GE_OP": {
+                            ret.value = lv >= rv ? 1 : 0;
+                            break;
+                        }
+                        case "SHL_OP": {
+                            ret.value = lv << rv;
+                            break;
+                        }
+                        case "SHR_OP": {
+                            ret.value = lv >> rv;
+                            break;
+                        }
+                    }
+                }
+            }
+        } else {
+            System.out.println("Unexpected binary operation. " + s);
+        }
+        return ret;
     }
 
     private Type calUnary(int op, Type type) {
-        //TODO
-        return type;
+        Type ret = null;
+        String s = Symbols.terminalNames[op].intern();
+        if (op == Symbols.MUL) {
+            if (!(resolve(type) instanceof PointerType)) {
+                System.out.println("The " + s + " operator requires a PointerType.");
+            } else {
+                ret = ((PointerType)resolve(type)).baseType.clone();
+            }
+        } else if (op == Symbols.ADRESS) {
+            if (!type.isLeft) {
+                System.out.println("The " + s + " operator requires a leftvalue.");
+            } else {
+                ret = new PointerType(type);
+                ret.size = 4;
+                ret.isLeft = false;
+            }
+        } else if (op == Symbols.ADD || op == Symbols.SUB || op == Symbols.TILDE || op == Symbols.NOT) {
+            if (!isNum(type)) {
+                System.out.print("The " + s + " operator requires an int or char.");
+            } else {
+                ret = resolve(type).clone();
+                ret.isLeft = false;
+                if (ret.isConst) {
+                    switch (s) {
+                        case "ADD": {
+                            break;
+                        }
+                        case "SUB": {
+                            ret.value = calCast(-getNum(ret), ret);
+                            break;
+                        }
+                        case "NOT": {
+                            ret.value = calCast(getNum(ret) == 0 ? 1 : 0, ret);
+                            break;
+                        }
+                        case "TILDE": {
+                            ret.value = calCast(~getNum(ret), ret);
+                            break;
+                        }
+                    }
+                }
+            }
+        } else if (op == Symbols.INC_OP || op == Symbols.DEC_OP) {
+            if (!type.isLeft) {
+                System.out.println("The " + s + " unary expression must have a left value.");
+            } else {
+                if (typeEqual(type, new IntType()) || typeEqual(type, new CharType()) || resolve(type) instanceof PointerType) {
+                    ret = resolve(type).clone();
+                    ret.isLeft = true;
+                } else {
+                    System.out.println("The " + s + " operator only supports int, char or a Pointer.");
+                }
+            }
+        } else if (op == Symbols.SIZEOF) {
+            ret = new IntType();
+            ret.size = 4;
+            ret.isLeft = false;
+            ret.isConst = true;
+            ret.value = type.size;
+        } else {
+            System.out.println("Unexpected Unary operator." + s);
+        }
+        return ret;
     }
 
     private Type calPost(int op, Type type) {
-        //TODO
-        return type;
+        Type ret = null;
+        String s = Symbols.terminalNames[op].intern();
+        if (op == Symbols.INC_OP || op == Symbols.DEC_OP) {
+            if (!type.isLeft) {
+                System.out.println("The " + s + " post expression must have a left value.");
+            } else {
+                if (typeEqual(type, new IntType()) || typeEqual(type, new CharType()) || resolve(type) instanceof PointerType) {
+                    ret = resolve(type).clone();
+                    ret.isLeft = false;
+                } else {
+                    System.out.println("The " + s + " operator only supports int, char or a Pointer.");
+                }
+            }
+        } else {
+            System.out.println("Unexpected post expression operator. " + s);
+        }
+        return ret;
     }
 
     private boolean callCheck(FunctionType func, List<Type> para) {
         int i = 0, j = 0;
-        while (i < func.paraType.size() && j < para.size()) {
+        while (i < func.paraType.size() || j < para.size()) {
+            if (i == func.paraType.size()) {
+                System.out.println("HAHAHA1");
+                return false;
+            }
+            if (j == para.size() && !(func.paraType.get(i) instanceof ELLIPSIS)) {
+                System.out.println("HAHAHA2");
+                return false;
+            }
             if (func.paraType.get(i) instanceof ELLIPSIS) {
-                ++j;
-                if (j == para.size()) {
+                if (j < para.size()) {
+                    ++j;
+                } else {
                     ++i;
                 }
             } else if (typeEqual(func.paraType.get(i), para.get(j))) {
                 ++i;
                 ++j;
             } else {
+                System.out.println("HAHAHA3");
                 return false;
             }
         }
-        return i == func.paraType.size() && j == para.size();
-    }
-
-    private Integer toInt(Object ob) {
-        return 0;
+        return true;
     }
 
     public void setOutput (OutputStream out) {}
@@ -256,6 +568,7 @@ public class SemanticCheck implements Visitor {
 
     public void visit(ArrayType at) {
         at.baseType.accept(this);
+        at.baseType.isLeft = true;
         at.cap.accept(this);
         if (!at.cap.retType.isConst) {
             System.out.println("The size of an array must be constant.");
@@ -263,7 +576,7 @@ public class SemanticCheck implements Visitor {
             if (!typeCheck(at.cap.retType, new IntType())) {
                 System.out.println("The size of an array must be an integer.");
             } else {
-                Integer num = toInt(at.cap.retType.value);
+                Integer num = getNum(at.cap.retType);
                 if (num <= 0) {
                     System.out.println("The size of an array must be positive.");
                 } else {
@@ -275,6 +588,7 @@ public class SemanticCheck implements Visitor {
 
     public void visit(PointerType pt) {
         pt.baseType.accept(this);
+        pt.baseType.isLeft = true;
         pt.size = 4;
     }
 
@@ -289,6 +603,7 @@ public class SemanticCheck implements Visitor {
             }
         } else {
             if (struct.checkId(st.name.num)) {
+                debug(st);
                 System.out.println("Structure name redefined.");
             } else {
                 st.mem = new MemberTable();
@@ -297,6 +612,7 @@ public class SemanticCheck implements Visitor {
                 table.addScope();
                 for (Declaration decl : st.list.list) {
                     decl.type.accept(this);
+                    decl.type.isLeft = true;
                     if (st.mem.checkId(decl.name.num)) {
                         System.out.println("Duplicated structure field definition.");
                     } else {
@@ -329,6 +645,7 @@ public class SemanticCheck implements Visitor {
                 table.addScope();
                 for (Declaration decl : ut.list.list) {
                     decl.type.accept(this);
+                    decl.type.isLeft = true;
                     if (ut.mem.checkId(decl.name.num)) {
                         System.out.println("Duplicated union field definition.");
                     } else {
@@ -474,6 +791,12 @@ public class SemanticCheck implements Visitor {
         }
         ce.retType = ce.type.clone();
         ce.retType.isLeft = false;
+        if (ce.expr.retType.isConst) {
+            if (isNum(ce.expr.retType) && isNum(ce.retType)) {
+                ce.retType.isConst = true;
+                ce.retType.value = calCast(getNum(ce.expr.retType), ce.retType);
+            }
+        }
     }
 
     public void visit(UnaryExpr ue) {
@@ -494,15 +817,15 @@ public class SemanticCheck implements Visitor {
         fc.func.accept(this);
         fc.argu.accept(this);
         if (!(resolve(fc.func.retType) instanceof FunctionType)) {
-            System.out.println("Function Call Error!");
+            System.out.println("Function Call Error. Not a function!");
         } else {
             if (!callCheck((FunctionType)resolve(fc.func.retType), fc.argu.typeList)) {
-            System.out.println("Function Call Error!");
-        } else {
-            fc.retType = ((FunctionType) fc.func.retType).returnType.clone();
-            fc.retType.isConst = false;
-            fc.retType.isLeft = false;
-        }
+                System.out.println("Function Call Error. Function type doesn't match");
+            } else {
+                fc.retType = ((FunctionType) fc.func.retType).returnType.clone();
+                fc.retType.isConst = false;
+                fc.retType.isLeft = false;
+            }
         }
     }
 
@@ -544,6 +867,7 @@ public class SemanticCheck implements Visitor {
     }
 
     public void visit(RecordAccess ra) {
+        ra.expr.accept(this);
         Type type = resolve(ra.expr.retType);
         if (!(type instanceof RecordType)) {
             System.out.println("Record Type Error!");
@@ -566,6 +890,7 @@ public class SemanticCheck implements Visitor {
 
     public void visit(Variable v) {
         if (!table.checkId(v.id.num)) {
+            System.out.println(v.id.num);
             System.out.println("Identifier " + v.id.toString() + " undefined.");
         } else {
             if (table.checkType(v.id.num) == VariableTable.TYPENAME) {
@@ -596,7 +921,6 @@ public class SemanticCheck implements Visitor {
 
     public void visit(StringConst sc) {
         sc.retType = new PointerType(new CharType());
-        sc.retType = new CharType();
         sc.retType.isConst = true;
         sc.retType.isLeft = false;
         sc.retType.size = 4;

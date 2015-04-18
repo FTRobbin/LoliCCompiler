@@ -39,7 +39,7 @@ public class FunctionType extends Type {
 
     @Override
     public void accept(Visitor v) {
-        returnType.accept(v);
+        v.visit(this);
     }
 
     @Override

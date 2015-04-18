@@ -21,7 +21,8 @@ public class UnionType extends RecordType implements Visible {
 
     @Override
     public Type clone() {
-        Type ret = new UnionType(name, list);
+        Type ret = new UnionType(name, null);
+        ((RecordType)ret).mem = this.mem;
         ret.size = this.size;
         ret.isConst = this.isConst;
         ret.isLeft = this.isLeft;

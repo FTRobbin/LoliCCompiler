@@ -183,7 +183,15 @@ public class PrintAST implements Visitor {
     }
 
     public void visit(FunctionType ft) {
+        PrintLine("FunctionType");
+        ++inc;
+        PrintLine("ReturnType");
         ft.returnType.accept(this);
+        PrintLine("Paras");
+        for (Type type : ft.paraType) {
+            type.accept(this);
+        }
+        --inc;
     }
 
     public void visit(StatList sl) {

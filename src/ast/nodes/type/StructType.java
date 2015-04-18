@@ -21,7 +21,8 @@ public class StructType extends RecordType implements Visible {
 
     @Override
     public Type clone() {
-        Type ret = new StructType(name, list);
+        Type ret = new StructType(name, null);
+        ((RecordType)ret).mem = this.mem;
         ret.size = this.size;
         ret.isConst = this.isConst;
         ret.isLeft = this.isLeft;

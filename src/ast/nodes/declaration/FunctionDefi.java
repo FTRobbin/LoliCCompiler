@@ -1,6 +1,7 @@
 package ast.nodes.declaration;
 
 import ast.nodes.expression.Symbol;
+import ast.nodes.type.FunctionType;
 import ast.nodes.type.Type;
 import ast.nodes.Visible;
 import ast.nodes.declaration.DeclList;
@@ -17,8 +18,9 @@ public class FunctionDefi extends Declaration implements Visible {
     public DeclList paras;
     public CompoundStat body;
 
-    public FunctionDefi(Type returnType, Symbol name, DeclList paras, CompoundStat body) {
-        this.returnType = returnType;
+    public FunctionDefi(Type type, Symbol name, DeclList paras, CompoundStat body) {
+        this.type = type;
+        this.returnType = ((FunctionType)type).returnType;
         this.name = name;
         this.paras = paras;
         this.body = body;
