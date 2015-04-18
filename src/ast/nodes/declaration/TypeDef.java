@@ -10,7 +10,6 @@ import ast.visitors.Visitor;
  * Created by Robbin Ni on 2015/4/8.
  */
 public class TypeDef extends Declaration implements Visible {
-    public Type type;
     public Symbol name;
 
     public TypeDef(Type type, Symbol name) {

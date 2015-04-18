@@ -14,58 +14,57 @@ import ast.nodes.type.*;
 import java.io.OutputStream;
 
 public interface Visitor {
-    public void visit(Program p);
+    void visit(Program p);
 
-    public void visit(DeclList dl);
-    public void visit(ParaList pl);
-    public void visit(FunctionDefi fd);
-    public void visit(VariableDecl vd);
-    public void visit(FunctionDecl fd);
-    public void visit(TypeDecl td);
-    public void visit(TypeDef td);
+    void visit(DeclList dl);
+    void visit(ParaList pl);
+    void visit(FunctionDefi fd);
+    void visit(VariableDecl vd);
+    void visit(FunctionDecl fd);
+    void visit(TypeDecl td);
+    void visit(TypeDef td);
 
-    public void visit(InitValue iv);
-    public void visit(InitList il);
+    void visit(InitValue iv);
+    void visit(InitList il);
 
-    public void visit(ArrayType at);
-    public void visit(PointerType pt);
-    public void visit(StructType st);
-    public void visit(UnionType ut);
-    public void visit(IntType it);
-    public void visit(CharType ct);
-    public void visit(VoidType vt);
-    public void visit(DefinedType dt);
-    public void visit(FunctionType ft);
-    public void visit(NameType nt);
+    void visit(ArrayType at);
+    void visit(PointerType pt);
+    void visit(StructType st);
+    void visit(UnionType ut);
+    void visit(IntType it);
+    void visit(CharType ct);
+    void visit(VoidType vt);
+    void visit(DefinedType dt);
+    void visit(FunctionType ft);
 
-    public void visit(StatList sl);
-    public void visit(ExpressionStat es);
-    public void visit(CompoundStat cs);
-    public void visit(SelectionStat ss);
-    public void visit(IterationStat is);
-    public void visit(ContinueStat cs);
-    public void visit(BreakStat bs);
-    public void visit(ReturnStat rs);
+    void visit(StatList sl);
+    void visit(ExpressionStat es);
+    void visit(CompoundStat cs);
+    void visit(SelectionStat ss);
+    void visit(IterationStat is);
+    void visit(ContinueStat cs);
+    void visit(BreakStat bs);
+    void visit(ReturnStat rs);
 
-    public void visit(ArgumentList al);
+    void visit(ArgumentList al);
 
-    public void visit(BinaryExpr be);
-    public void visit(CastExpr ce);
-    public void visit(UnaryExpr ue);
-    public void visit(SizeofExpr se);
-    public void visit(FunctionCall fc);
-    public void visit(ArrayExpr ar);
-    public void visit(PointerAccess pa);
-    public void visit(RecordAccess ra);
-    public void visit(PostExpr pe);
-    public void visit(EmptyExpr ee);
+    void visit(BinaryExpr be);
+    void visit(CastExpr ce);
+    void visit(UnaryExpr ue);
+    void visit(SizeofExpr se);
+    void visit(FunctionCall fc);
+    void visit(ArrayExpr ar);
+    void visit(PointerAccess pa);
+    void visit(RecordAccess ra);
+    void visit(PostExpr pe);
+    void visit(EmptyExpr ee);
 
-    public void visit(Variable v);
-    public void visit(IntConst ic);
-    public void visit(CharConst cc);
-    public void visit(StringConst sc);
-    public void visit(Symbol s);
+    void visit(Variable v);
+    void visit(IntConst ic);
+    void visit(CharConst cc);
+    void visit(StringConst sc);
+    void visit(Symbol s);
 
 
-    public void setOutput(OutputStream out);
+    void setOutput(OutputStream out);
 }

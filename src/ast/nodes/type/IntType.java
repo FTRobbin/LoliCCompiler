@@ -12,4 +12,14 @@ public class IntType extends Type implements Visible {
     public void accept(Visitor v) {
         v.visit(this);
     }
+
+    @Override
+    public Type clone() {
+        Type ret = new IntType();
+        ret.size = this.size;
+        ret.isConst = this.isConst;
+        ret.isLeft = this.isLeft;
+        ret.value = this.value;
+        return ret;
+    }
 }

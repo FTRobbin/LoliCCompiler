@@ -20,4 +20,6 @@ public abstract class Type implements Visible {
     public Type getShell() {
         return null;
     }
+
+    public abstract Type clone();
 }

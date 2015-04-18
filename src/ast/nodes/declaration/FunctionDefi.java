@@ -14,7 +14,6 @@ import ast.visitors.Visitor;
 public class FunctionDefi extends Declaration implements Visible {
 
     public Type returnType;
-    public Symbol name;
     public DeclList paras;
     public CompoundStat body;
 

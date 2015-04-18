@@ -10,15 +10,15 @@ import java.util.LinkedList;
  */
 public class StructureTable {
 
-    private LinkedList<HashMap<Integer, MemberTable>> list;
+    private LinkedList<HashMap<Integer, Type>> list;
 
     public StructureTable() {
-        list = new LinkedList<HashMap<Integer, MemberTable>>();
+        list = new LinkedList<HashMap<Integer, Type>>();
         addScope();
     }
 
     public void addScope() {
-        list.push(new HashMap<Integer, MemberTable>());
+        list.push(new HashMap<Integer, Type>());
     }
 
     public void delScope() {
@@ -29,8 +29,12 @@ public class StructureTable {
         return list.peek().containsKey(id);
     }
 
+    public void addEntry(Integer id, Type type) {
+        list.peek().put(id, type);
+    }
+
     public boolean checkId(Integer id) {
-        for (HashMap<Integer, MemberTable> map : list) {
+        for (HashMap<Integer, Type> map : list) {
             if (map.containsKey(id)) {
                 return true;
             }
@@ -38,8 +42,8 @@ public class StructureTable {
         return false;
     }
 
-    public MemberTable getId(Integer id) {
-        for (HashMap<Integer, MemberTable> map : list) {
+    public Type getId(Integer id) {
+        for (HashMap<Integer, Type> map : list) {
             if (map.containsKey(id)) {
                 return map.get(id);
             }

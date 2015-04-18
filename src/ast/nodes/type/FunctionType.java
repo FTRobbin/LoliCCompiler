@@ -22,6 +22,11 @@ public class FunctionType extends Type {
         }
     }
 
+    public FunctionType(Type returnType, LinkedList<Type> para) {
+        this.returnType = returnType;
+        this.paraType = para;
+    }
+
     @Override
     public Type encore(Type type) {
         if (returnType == null) {
@@ -35,5 +40,15 @@ public class FunctionType extends Type {
     @Override
     public void accept(Visitor v) {
         returnType.accept(v);
+    }
+
+    @Override
+    public Type clone() {
+        Type ret = new FunctionType(this.returnType, this.paraType);
+        ret.size = this.size;
+        ret.isConst = this.isConst;
+        ret.isLeft = this.isLeft;
+        ret.value = this.value;
+        return ret;
     }
 }

@@ -10,4 +10,14 @@ public class ELLIPSIS extends Type {
     public void accept(Visitor v) {
 
     }
+
+    @Override
+    public Type clone() {
+        Type ret = new ELLIPSIS();
+        ret.size = this.size;
+        ret.isConst = this.isConst;
+        ret.isLeft = this.isLeft;
+        ret.value = this.value;
+        return ret;
+    }
 }

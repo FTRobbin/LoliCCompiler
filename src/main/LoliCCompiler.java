@@ -22,6 +22,7 @@ public class LoliCCompiler {
     private JPanel panel;
     private JTextArea textArea1;
     private JButton originalButton;
+    private JButton semanticButton;
     private JFrame frame;
 
     private FileDialog openDia, saveDia;
@@ -84,7 +85,7 @@ public class LoliCCompiler {
                     InputStream input = new BufferedInputStream(new FileInputStream(file));
                     byte[] buffer = new byte[4096];
                     OutputStream out = new ByteArrayOutputStream();
-                    int len = 0;
+                    int len;
                     while ((len = input.read(buffer)) > 0) {
                         out.write(buffer, 0, len);
                     }
@@ -108,6 +109,12 @@ public class LoliCCompiler {
 
                     }
                 }
+            }
+        });
+        semanticButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                visit(new semantic.SemanticCheck());
             }
         });
     }

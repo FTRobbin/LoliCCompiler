@@ -53,7 +53,7 @@ public class UglyPrinter implements Visitor {
             return str;
         } else {
             str = cover(str, ((PointerType)shell).baseType);
-            if (shell.getClass().getName().intern() == "ast.nodes.type.ArrayType") {
+            if (shell instanceof ArrayType) {
                 ArrayType tmp = (ArrayType)shell;
                 int cur = stack.size();
                 tmp.cap.accept(this);
@@ -96,7 +96,7 @@ public class UglyPrinter implements Visitor {
     public void visit(Program p) {
         for (Declaration decl : p.list) {
             decl.accept(this);
-            if (decl.getClass().getName() != "ast.nodes.declaration.FunctionDefi") {
+            if (!(decl instanceof FunctionDefi)) {
                 push(";");
             }
             pushLine();
@@ -144,7 +144,7 @@ public class UglyPrinter implements Visitor {
         if (vd.specifier) {
             vd.type.accept(this);
         } else {
-            while (stack.get(stack.size() - 1).intern() != ";") {
+            while (!stack.get(stack.size() - 1).equals(";")) {
                 pop();
             }
             pop();
@@ -173,7 +173,7 @@ public class UglyPrinter implements Visitor {
         if (fd.specifier) {
             fd.type.accept(this);
         } else {
-            while (stack.get(stack.size() - 1).intern() != ";") {
+            while (!stack.get(stack.size() - 1).equals(";")) {
                 pop();
             }
             pop();
@@ -285,8 +285,6 @@ public class UglyPrinter implements Visitor {
     public void visit(DefinedType dt) {
         dt.name.accept(this);
     }
-
-    public void visit(NameType nt) {}
 
     public void visit(StatList sl) {
         for (Statement stat : sl.list) {

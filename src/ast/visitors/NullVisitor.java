@@ -119,8 +119,6 @@ public class NullVisitor implements Visitor {
         ft.returnType.accept(this);
     }
 
-    public void visit(NameType nt) {}
-
     public void visit(StatList sl) {
         for (Statement stat : sl.list) {
             stat.accept(this);

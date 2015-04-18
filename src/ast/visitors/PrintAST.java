@@ -182,8 +182,6 @@ public class PrintAST implements Visitor {
         dt.name.accept(this);
     }
 
-    public void visit(NameType nt) {}
-
     public void visit(FunctionType ft) {
         ft.returnType.accept(this);
     }

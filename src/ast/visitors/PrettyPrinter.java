@@ -86,18 +86,21 @@ public class PrettyPrinter implements Visitor {
         this.out = out;
     }
 
+    static String addIndent = "\0\0\0\0";
+    static String delIndent = "\0\0\0\0\0";
+
     private void print() {
         boolean newLine = false;
         for (String str : stack) {
-            if (str == "\77") {
+            if (str.equals(delIndent)) {
                 --indent;
                 continue;
             }
-            if (str == "\0") {
+            if (str.equals(addIndent)) {
                 ++indent;
                 continue;
             }
-            if (str == "}") {
+            if (str.equals("}")) {
                 --indent;
             } else if (newLine && indent > 0) {
                 try {
@@ -114,10 +117,10 @@ public class PrettyPrinter implements Visitor {
                 System.out.println("Unexpected IOException.");
                 e.printStackTrace();
             }
-            if (str == "{") {
+            if (str.equals("{")) {
                 ++indent;
             }
-            if (str == "\n") {
+            if (str.equals("\n")) {
                 newLine = true;
                 for (int i = 0; i < indent - 1; ++i) {
                     try {
@@ -182,7 +185,7 @@ public class PrettyPrinter implements Visitor {
         if (vd.specifier) {
             vd.type.accept(this);
         } else {
-            while (stack.get(stack.size() - 1).intern() != ";") {
+            while (!stack.get(stack.size() - 1).equals(";")) {
                 pop();
             }
             pop();
@@ -210,7 +213,7 @@ public class PrettyPrinter implements Visitor {
         if (fd.specifier) {
             fd.type.accept(this);
         } else {
-            while (stack.get(stack.size() - 1).intern() != ";") {
+            while (!stack.get(stack.size() - 1).equals(";")) {
                 pop();
             }
             pop();
@@ -237,7 +240,7 @@ public class PrettyPrinter implements Visitor {
             pushSpace();
             td.type.accept(this);
         } else {
-            while (stack.get(stack.size() - 1).intern() != ";") {
+            while (!stack.get(stack.size() - 1).equals(";")) {
                 pop();
             }
             pop();
@@ -319,8 +322,6 @@ public class PrettyPrinter implements Visitor {
         ft.returnType.accept(this);
     }
 
-    public void visit(NameType nt) {}
-
     public void visit(StatList sl) {
         for (Statement stat : sl.list) {
             stat.accept(this);
@@ -351,10 +352,10 @@ public class PrettyPrinter implements Visitor {
             pushSpace();
             ss.iftr.accept(this);
         } else {
-            push("\0");
+            push(addIndent);
             pushLine();
             ss.iftr.accept(this);
-            push("\77");
+            push(delIndent);
         }
         if (!ss.iffl.isEmpty()) {
             pushSpace();
@@ -363,10 +364,10 @@ public class PrettyPrinter implements Visitor {
                 pushSpace();
                 ss.iffl.accept(this);
             } else {
-                push("\0");
+                push(addIndent);
                 pushLine();
                 ss.iffl.accept(this);
-                push("\77");
+                push(delIndent);
             }
         }
     }
@@ -382,10 +383,10 @@ public class PrettyPrinter implements Visitor {
                 pushSpace();
                 is.stat.accept(this);
             } else {
-                push("\0");
+                push(addIndent);
                 pushLine();
                 is.stat.accept(this);
-                push("\77");
+                push(delIndent);
             }
         } else {
             push("for");
@@ -403,10 +404,10 @@ public class PrettyPrinter implements Visitor {
                 pushSpace();
                 is.stat.accept(this);
             } else {
-                push("\0");
+                push(addIndent);
                 pushLine();
                 is.stat.accept(this);
-                push("\77");
+                push(delIndent);
             }
         }
     }
@@ -450,7 +451,7 @@ public class PrettyPrinter implements Visitor {
         int preL = be.expr1.getPrecedence(),
             preOp = be.getPrecedence(),
             preR = be.expr2.getPrecedence();
-        boolean paraL = false, paraR = false;
+        boolean paraL, paraR;
         if (be.getPrecedence() != 1) {
             paraL = preL < preOp;
             paraR = preR <= preOp;
