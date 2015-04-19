@@ -105,6 +105,19 @@
   <path id="library.java-cup-11b.classpath">
     <pathelement location="${basedir}/../tools/jcup-11b/java-cup-11b.jar"/>
   </path>
+
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
   
   <!-- Modules -->
   
@@ -175,15 +188,15 @@
   
   <target name="compile.module.loliccompiler" depends="compile.module.loliccompiler.production,compile.module.loliccompiler.tests" description="Compile module loliccompiler"/>
   
-  <target name="compile.module.loliccompiler.production" description="Compile module loliccompiler; production classes">
+  <target name="compile.module.loliccompiler.production" depends="register.custom.compilers" description="Compile module loliccompiler; production classes">
     <mkdir dir="${loliccompiler.output.dir}"/>
-    <javac destdir="${loliccompiler.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.loliccompiler}/javac">
+    <javac2 destdir="${loliccompiler.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.loliccompiler}/javac">
       <compilerarg line="${compiler.args.loliccompiler}"/>
       <bootclasspath refid="loliccompiler.module.bootclasspath"/>
       <classpath refid="loliccompiler.module.production.classpath"/>
       <src refid="loliccompiler.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.loliccompiler"/>
-    </javac>
+    </javac2>
     
     <copy todir="${loliccompiler.output.dir}">
       <fileset dir="${module.loliccompiler.basedir}/src">
@@ -193,13 +206,12 @@
     </copy>
   </target>
   
-  <target name="compile.module.loliccompiler.tests" depends="compile.module.loliccompiler.production" description="compile module loliccompiler; test classes" unless="skip.tests"/>
+  <target name="compile.module.loliccompiler.tests" depends="register.custom.compilers,compile.module.loliccompiler.production" description="compile module loliccompiler; test classes" unless="skip.tests"/>
   
   <target name="clean.module.loliccompiler" description="cleanup module">
     <delete dir="${loliccompiler.output.dir}"/>
     <delete dir="${loliccompiler.testoutput.dir}"/>
   </target>
-  <!-- Modules -->
 
   <taskdef name="jflex"
            classname="jflex.anttask.JFlexTask"
@@ -227,7 +239,7 @@
          nopositions="true"
             />
   </target>
-  
+
   <target name="clean" depends="clean.module.loliccompiler" description="cleanup all"/>
   
   <target name="build.modules" depends="init, clean, compile.module.loliccompiler" description="build all modules"/>

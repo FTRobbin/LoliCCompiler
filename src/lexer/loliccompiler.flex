@@ -10,6 +10,8 @@ import parser.Symbols;
 
 import table.SyntacticTable;
 
+import exception.SyntacticError;
+
 %%
 
 %unicode
@@ -39,8 +41,8 @@ import table.SyntacticTable;
         return new Symbol(type, yyline, yycolumn, value);
     }
 
-    private void reportError(String message) throws Error {
-        throw new Error("Scanning error in line " + yyline + ", column " + yycolumn + " : " + message + "\n") ;
+    private void reportError(String message) {
+        throw new SyntacticError("Lexing error in line " + yyline + ", column " + yycolumn + " : " + message + "\n") ;
     }
 
     private int chNum(char ch) {

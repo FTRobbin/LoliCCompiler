@@ -16,6 +16,7 @@ import ast.nodes.statment.*;
 import ast.nodes.type.*;
 import ast.nodes.initialization.*;
 import ast.nodes.expression.*;
+import exception.SyntacticError;
 
 import table.SyntacticTable;
 
@@ -28,7 +29,7 @@ parser code {:
 	SyntacticTable table;
 
     public void report_error(String message, Object info) {
-        StringBuffer m = new StringBuffer("\tParsing error");
+        StringBuffer m = new StringBuffer("Parsing error");
     	if (info instanceof java_cup.runtime.Symbol) {
     		java_cup.runtime.Symbol s = (java_cup.runtime.Symbol) info;
 
@@ -39,7 +40,8 @@ parser code {:
    			}
    		}
    		m.append(" : " + message);
-   		System.err.println(m);
+        System.out.println(m);
+   		throw new SyntacticError(m.toString());
    	}
 
    	public Parser(Reader input) {
@@ -158,6 +160,9 @@ declaration ::=		type_specifier:type COLON
 						} else {
 							dect.type.encore(type);
 						}
+						if (first) {
+							type = type.clone();
+						}
 						first = false;
 					}
 					RESULT = init;
@@ -178,6 +183,9 @@ declaration ::=		type_specifier:type COLON
 						Declaration temp = new TypeDef(dect.type, dect.name);
 						temp.specifier = first;
 						RESULT.add(temp);
+						if (first) {
+							type = type.clone();
+						}
 						first = false;
 					}
 				:} COLON
@@ -198,7 +206,12 @@ plain_declaration ::=		type_specifier:type declarator:dect
 declarator ::=		direct_declarator:dect
 				{:	RESULT = dect;	:}
 				|	MUL declarator:dect
-				{:	dect.type = new PointerType(dect.type);
+				{:
+					if (dect.type == null) {
+						dect.type = new PointerType(null);
+					} else {
+						dect.type = dect.type.encore(new PointerType(null));
+					}
 					RESULT = dect;	:}
 				;
 
@@ -208,15 +221,41 @@ direct_declarator ::=	IDENTIFIER:name
 					{:	table.addEntry(name, Symbols.IDENTIFIER);
 						RESULT = new VariableDecl(null, new Symbol(name), null); :}
 					|	PARAL declarator:dect PARAR
-					{:  RESULT = new VariableDecl(dect.type, dect.name, null); :}
+					{:  RESULT = dect; :}
 					|	direct_declarator:dect PARAL {: table.addScope(); table.delScope(); :} PARAR
-					{:  RESULT = new FunctionDecl(new FunctionType(dect.type, new DeclList()), dect.name, new DeclList()); :}
+					{:
+						if (dect.type == null) {
+							RESULT = new FunctionDecl(new FunctionType(null, new DeclList()), dect.name, new DeclList());
+						} else {
+							dect.type = dect.type.encore(new FunctionType(null, new DeclList()));
+							RESULT = dect;
+						}
+						:}
 					|	direct_declarator:dect PARAL {: table.addScope(); :} parameter_list:para {: table.delScope(); :} PARAR
-					{:	RESULT = new FunctionDecl(new FunctionType(dect.type, para), dect.name, para); :}
+					{:
+						if (dect.type == null) {
+							RESULT = new FunctionDecl(new FunctionType(null, para), dect.name, new DeclList());
+						} else {
+							dect.type = dect.type.encore(new FunctionType(null, para));
+							RESULT = dect;
+						}
+						:}
 					|	direct_declarator:dect SQUARL constant_expression:expr SQUARR
-					{:	RESULT = new VariableDecl(new ArrayType(dect.type, expr), dect.name, null); :}
+					{:
+						if (dect.type == null) {
+							dect.type = new ArrayType(null, expr);
+						} else {
+							dect.type = dect.type.encore(new ArrayType(null, expr));
+						}
+						RESULT = dect; :}
 					|	direct_declarator:dect SQUARL SQUARR
-					{:	RESULT = new VariableDecl(new ArrayType(dect.type, new EmptyExpr()), dect.name, null); :}
+					{:
+						if (dect.type == null) {
+							dect.type = new ArrayType(null, new EmptyExpr());
+						} else {
+							dect.type = dect.type.encore(new ArrayType(null, new EmptyExpr()));
+						}
+						RESULT = dect; :}
 					;
 
 declarator_list ::=		declarator:decl
@@ -289,6 +328,9 @@ field_list ::=		type_specifier:type struct_declarator_list:list COLON
 							decl.type.encore(type);
 						}
 						decl.specifier = first;
+						if (first) {
+							type = type.clone();
+						}
 						first = false;
 					}
 					RESULT = list;
@@ -303,6 +345,9 @@ field_list ::=		type_specifier:type struct_declarator_list:list COLON
 							decl.type.encore(type);
 						}
 						decl.specifier = first;
+						if (first) {
+							type = type.clone();
+						}
 						first = false;
 					}
 					list = list.add(list2);
@@ -313,7 +358,12 @@ field_list ::=		type_specifier:type struct_declarator_list:list COLON
 struct_declarator ::=		struct_direct_declarator:dect
 						{:	RESULT = dect;	:}
 						|	MUL struct_declarator:dect
-						{:	dect.type = new PointerType(dect.type);
+						{:
+							if (dect.type == null) {
+								dect.type = new PointerType(null);
+							} else {
+								dect.type = dect.type.encore(new PointerType(null));
+							}
 							RESULT = dect;	:}
 						;
 
@@ -322,13 +372,41 @@ struct_direct_declarator ::=	IDENTIFIER:name
 							|	TYPENAME:name
 							{:	RESULT = new VariableDecl(null, new Symbol(name), null); :}
 							|	PARAL struct_declarator:dect PARAR
-							{:  RESULT = new VariableDecl(dect.type, dect.name, null); :}
-							|	struct_direct_declarator:dect PARAL PARAR
-							{:  RESULT = new FunctionDecl(new FunctionType(dect.type, new DeclList()), dect.name, new DeclList()); :}
-							|	struct_direct_declarator:dect PARAL parameter_list:para PARAR
-							{:	RESULT = new FunctionDecl(new FunctionType(dect.type, para), dect.name, para); :}
+							{:  RESULT = dect; :}
+							|	struct_direct_declarator:dect PARAL {: table.addScope(); table.delScope(); :} PARAR
+							{:
+								if (dect.type == null) {
+									throw new SyntacticError("Function Declaration is not allowed in structure or union.");
+								} else {
+									dect.type = dect.type.encore(new FunctionType(null, new DeclList()));
+									RESULT = dect;
+								}
+								:}
+							|	struct_direct_declarator:dect PARAL {: table.addScope(); :} parameter_list:para {: table.delScope(); :} PARAR
+							{:
+								if (dect.type == null) {
+									throw new SyntacticError("Function Declaration is not allowed in structure or union.");
+								} else {
+									dect.type = dect.type.encore(new FunctionType(null, para));
+									RESULT = dect;
+								}
+								:}
 							|	struct_direct_declarator:dect SQUARL constant_expression:expr SQUARR
-							{:	RESULT = new VariableDecl(new ArrayType(dect.type, expr), dect.name, null); :}
+							{:
+								if (dect.type == null) {
+									dect.type = new ArrayType(null, expr);
+								} else {
+									dect.type = dect.type.encore(new ArrayType(null, expr));
+								}
+								RESULT = dect; :}
+							|	struct_direct_declarator:dect SQUARL SQUARR
+							{:
+								if (dect.type == null) {
+									dect.type = new ArrayType(null, new EmptyExpr());
+								} else {
+									dect.type = dect.type.encore(new ArrayType(null, new EmptyExpr()));
+								}
+								RESULT = dect; :}
 							;
 
 struct_declarator_list ::=		struct_declarator:decl
@@ -550,6 +628,8 @@ unary_expression ::=		postfix_expression:expr
 						{:	RESULT = expr; :}
 						|	unary_operator:op cast_expression:expr
 						{:	RESULT = new UnaryExpr(op, expr); :}
+						|	SIZEOF unary_expression:expr
+						{:	RESULT = new UnaryExpr(Symbols.SIZEOF, expr); :}
 						|	SIZEOF PARAL type_name:type PARAR
 						{:	RESULT = new SizeofExpr(type); :}
 						;
@@ -570,8 +650,6 @@ unary_operator ::=		ADRESS
 					{:	RESULT = Symbols.INC_OP; :}
 					|	DEC_OP
 					{:	RESULT = Symbols.DEC_OP; :}
-					|	SIZEOF
-					{:	RESULT = Symbols.SIZEOF; :}
 					;
 
 postfix_expression ::=		primary_expression:expr

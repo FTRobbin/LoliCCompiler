@@ -10,6 +10,7 @@ import ast.nodes.statment.*;
 import ast.nodes.type.*;
 import ast.visitors.PrintAST;
 import ast.visitors.Visitor;
+import exception.SemanticError;
 import parser.Symbols;
 import stl.mallocDefi;
 import stl.printfDefi;
@@ -26,6 +27,10 @@ import java.util.List;
 
 //TODO : undimensioned array
 //TODO : wrong initialization
+//TODO : void variables
+//TODO : void pointers
+//TODO : could it be possible to eliminate all defined types on declarations?
+//TODO : better error message
 
 public class SemanticCheck implements Visitor {
 
@@ -94,7 +99,6 @@ public class SemanticCheck implements Visitor {
     }
 
     private Type resolve(Type type)  {
-        //TODO could it be possible to eliminate all defined types on declarations?
         if (type instanceof DefinedType) {
             return resolve(((DefinedType) type).baseType);
         } else {
@@ -109,7 +113,6 @@ public class SemanticCheck implements Visitor {
             if (!(b instanceof ArrayType)) {
                 return false;
             } else {
-                //TODO array dimension
                 return a.size.equals(b.size) && typeEqual(((ArrayType) a).baseType, ((ArrayType) b).baseType);
             }
         } else if (a instanceof CharType) {
@@ -148,8 +151,7 @@ public class SemanticCheck implements Visitor {
         } else if (a instanceof VoidType) {
             return b instanceof VoidType;
         } else {
-            System.out.println("Unexpected type error.");
-            return false;
+            throw new SemanticError("Unexpected type error.\n");
         }
     }
 
@@ -187,10 +189,15 @@ public class SemanticCheck implements Visitor {
             ret.isLeft = false;
         } else if (op == Symbols.ASSIGN) {
             if (!type1.isLeft) {
-                System.out.println("The assignment must have a left value on the left side.");
+                throw new SemanticError("The assignment must have a left value on the left side.\n");
             } else {
                 if (!typeCheck(type1, type2)) {
-                    System.out.println("The left and right value of an assignment must be of the same type.");
+                    if (resolve(type1) instanceof PointerType && resolve(type2) instanceof PointerType
+                            && ((PointerType)resolve(type2)).baseType instanceof VoidType) {
+                        ret = type1.clone();
+                    } else {
+                        throw new SemanticError("The left and right value of an assignment must be of the same type.\n");
+                    }
                 } else {
                     ret = type1.clone();
                 }
@@ -249,10 +256,10 @@ public class SemanticCheck implements Visitor {
             }
         } else if (op == Symbols.ADD || op == Symbols.SUB) {
             if (!isNum(type1) && !(resolve(type1) instanceof PointerType)) {
-                System.out.println("The left operand of " + s + " must be int, char or a Pointer.");
+                throw new SemanticError("The left operand of " + s + "must be int, char or a Pointer.\n");
             } else {
                 if (!isNum(type2)) {
-                    System.out.println("The right operand of " + s + " must be int, char.");
+                    throw new SemanticError("The right operand of " + s + " must be int or char.\n");
                 } else {
                     if (resolve(type1) instanceof PointerType) {
                         ret = type1.clone();
@@ -269,22 +276,18 @@ public class SemanticCheck implements Visitor {
                 }
             }
         } else if (op == Symbols.EQ_OP || op == Symbols.NE_OP) {
-            if (!typeCheck(type1, type2)) {
-                System.out.println("The left and right operand of " + s + " must be of the same type.");
+            if (!isNum(type1) && !(resolve(type1) instanceof PointerType)) {
+                throw new SemanticError("The left operand of " + s + " must be int, char or a Pointer.\n");
             } else {
-                if (!isNum(type1) && !(resolve(type1) instanceof PointerType)) {
-                    System.out.println("The left operand of " + s + " must be int, char or a Pointer.");
+                if (!isNum(type2) && !(resolve(type2) instanceof PointerType)) {
+                    throw new SemanticError("The right operand of " + s + " must be int, char or a Pointer.\n");
                 } else {
-                    if (!isNum(type2) && !(resolve(type2) instanceof PointerType)) {
-                        System.out.println("The right operand of " + s + " must be int, char or a Pointer.");
-                    } else {
-                        ret = new IntType();
-                        ret.size = 4;
-                        ret.isLeft = false;
-                        if (isNum(type1) && type1.isConst && type2.isConst) {
-                            ret.isConst = true;
-                            ret.value = op == Symbols.EQ_OP ? getNum(type1).equals(getNum(type2)) : !getNum(type1).equals(getNum(type2));
-                        }
+                    ret = new IntType();
+                    ret.size = 4;
+                    ret.isLeft = false;
+                    if (isNum(type1) && isNum(type2) && type1.isConst && type2.isConst) {
+                        ret.isConst = true;
+                        ret.value = op == Symbols.EQ_OP ? getNum(type1).equals(getNum(type2)) : !getNum(type1).equals(getNum(type2));
                     }
                 }
             }
@@ -303,7 +306,7 @@ public class SemanticCheck implements Visitor {
                 || op == Symbols.SHL_OP
                 || op == Symbols.SHR_OP) {
             if (!isNum(type1) || !isNum(type2)) {
-                System.out.println("The left and right operand of " + s + " must be of int or char.");
+                throw new SemanticError("The left and right operand of " + s + " must be of int or char.\n");
             } else {
                 ret = new IntType();
                 ret.size = 4;
@@ -337,11 +340,15 @@ public class SemanticCheck implements Visitor {
                             break;
                         }
                         case "DIV": {
-                            ret.value = lv / rv;
+                            if (rv != 0) {
+                                ret.value = lv / rv;
+                            }
                             break;
                         }
                         case "MOD": {
-                            ret.value = lv % rv;
+                            if (rv != 0) {
+                                ret.value = lv % rv;
+                            }
                             break;
                         }
                         case "OR_OP": {
@@ -372,7 +379,7 @@ public class SemanticCheck implements Visitor {
                 }
             }
         } else {
-            System.out.println("Unexpected binary operation. " + s);
+            throw new SemanticError("Unexpected binary operation : " + s + " .\n");
         }
         return ret;
     }
@@ -382,13 +389,13 @@ public class SemanticCheck implements Visitor {
         String s = Symbols.terminalNames[op].intern();
         if (op == Symbols.MUL) {
             if (!(resolve(type) instanceof PointerType)) {
-                System.out.println("The " + s + " operator requires a PointerType.");
+                throw new SemanticError("The " + s + " operator requires a PointerType.\n");
             } else {
                 ret = ((PointerType)resolve(type)).baseType.clone();
             }
         } else if (op == Symbols.ADRESS) {
             if (!type.isLeft) {
-                System.out.println("The " + s + " operator requires a leftvalue.");
+                throw new SemanticError("The " + s + " operator requires a left value.\n");
             } else {
                 ret = new PointerType(type);
                 ret.size = 4;
@@ -396,7 +403,7 @@ public class SemanticCheck implements Visitor {
             }
         } else if (op == Symbols.ADD || op == Symbols.SUB || op == Symbols.TILDE || op == Symbols.NOT) {
             if (!isNum(type)) {
-                System.out.print("The " + s + " operator requires an int or char.");
+                throw new SemanticError("The " + s + " operator requires an int or char.\n");
             } else {
                 ret = resolve(type).clone();
                 ret.isLeft = false;
@@ -422,13 +429,13 @@ public class SemanticCheck implements Visitor {
             }
         } else if (op == Symbols.INC_OP || op == Symbols.DEC_OP) {
             if (!type.isLeft) {
-                System.out.println("The " + s + " unary expression must have a left value.");
+                throw new SemanticError("The " + s + " unary expression must have a left value.\n");
             } else {
                 if (typeEqual(type, new IntType()) || typeEqual(type, new CharType()) || resolve(type) instanceof PointerType) {
                     ret = resolve(type).clone();
                     ret.isLeft = true;
                 } else {
-                    System.out.println("The " + s + " operator only supports int, char or a Pointer.");
+                    throw new SemanticError("The " + s + " operator only supports int, char or a Pointer.\n");
                 }
             }
         } else if (op == Symbols.SIZEOF) {
@@ -438,7 +445,7 @@ public class SemanticCheck implements Visitor {
             ret.isConst = true;
             ret.value = type.size;
         } else {
-            System.out.println("Unexpected Unary operator." + s);
+            throw new SemanticError("Unexpected Unary operator : " + s + " .\n");
         }
         return ret;
     }
@@ -448,17 +455,17 @@ public class SemanticCheck implements Visitor {
         String s = Symbols.terminalNames[op].intern();
         if (op == Symbols.INC_OP || op == Symbols.DEC_OP) {
             if (!type.isLeft) {
-                System.out.println("The " + s + " post expression must have a left value.");
+                throw new SemanticError("The " + s + " post expression must have a left value.\n");
             } else {
                 if (typeEqual(type, new IntType()) || typeEqual(type, new CharType()) || resolve(type) instanceof PointerType) {
                     ret = resolve(type).clone();
                     ret.isLeft = false;
                 } else {
-                    System.out.println("The " + s + " operator only supports int, char or a Pointer.");
+                    throw new SemanticError("The " + s + " operator only supports int, char or a Pointer.\n");
                 }
             }
         } else {
-            System.out.println("Unexpected post expression operator. " + s);
+            throw new SemanticError("Unexpected post expression operator : " + s + " .\n");
         }
         return ret;
     }
@@ -467,11 +474,9 @@ public class SemanticCheck implements Visitor {
         int i = 0, j = 0;
         while (i < func.paraType.size() || j < para.size()) {
             if (i == func.paraType.size()) {
-                System.out.println("HAHAHA1");
                 return false;
             }
             if (j == para.size() && !(func.paraType.get(i) instanceof ELLIPSIS)) {
-                System.out.println("HAHAHA2");
                 return false;
             }
             if (func.paraType.get(i) instanceof ELLIPSIS) {
@@ -484,7 +489,6 @@ public class SemanticCheck implements Visitor {
                 ++i;
                 ++j;
             } else {
-                System.out.println("HAHAHA3");
                 return false;
             }
         }
@@ -514,7 +518,7 @@ public class SemanticCheck implements Visitor {
     public void visit(FunctionDefi fd) {
         fd.type.accept(this);
         if (table.checkCurId(fd.name.num)) {
-            System.out.println("Identifier " + fd.name.toString() + " redeclared as a different kind of symbol.");
+            throw new SemanticError("Identifier " + fd.name.toString() + " redeclared as a different kind of symbol.\n");
         } else {
             table.addVari(fd.name.num, fd.type);
         }
@@ -532,7 +536,7 @@ public class SemanticCheck implements Visitor {
         vd.type.accept(this);
         vd.type = resolve(vd.type);
         if (table.checkCurId(vd.name.num)) {
-            System.out.println("Identifier " + vd.name.toString() + " redeclared as a different kind of symbol.");
+            throw new SemanticError("Identifier " + vd.name.toString() + " redeclared as a different kind of symbol.\n");
         } else {
             table.addVari(vd.name.num, vd.type);
         }
@@ -541,7 +545,7 @@ public class SemanticCheck implements Visitor {
     public void visit(FunctionDecl fd) {
         fd.type.accept(this);
         if (table.checkCurId(fd.name.num)) {
-            System.out.println("Identifier " + fd.name.toString() + " redeclared as a different kind of symbol.");
+            throw new SemanticError("Identifier " + fd.name.toString() + " redeclared as a different kind of symbol.\n");
         } else {
             table.addVari(fd.name.num, fd.type);
         }
@@ -554,7 +558,7 @@ public class SemanticCheck implements Visitor {
     public void visit(TypeDef td) {
         td.type.accept(this);
         if (table.checkCurId(td.name.num)) {
-            System.out.println("Identifier " + td.name.toString() + " redeclared as a different kind of symbol.");
+            throw new SemanticError("Identifier " + td.name.toString() + " redeclared as a different kind of symbol.\n");
         } else {
             table.addType(td.name.num, td.type);
         }
@@ -571,14 +575,14 @@ public class SemanticCheck implements Visitor {
         at.baseType.isLeft = true;
         at.cap.accept(this);
         if (!at.cap.retType.isConst) {
-            System.out.println("The size of an array must be constant.");
+            throw new SemanticError("The size of an array must be constant.\n");
         } else {
             if (!typeCheck(at.cap.retType, new IntType())) {
-                System.out.println("The size of an array must be an integer.");
+                throw new SemanticError("The size of an array must be an integer.\n");
             } else {
                 Integer num = getNum(at.cap.retType);
                 if (num <= 0) {
-                    System.out.println("The size of an array must be positive.");
+                    throw new SemanticError("The size of an array must be positive.\n");
                 } else {
                     at.size = at.baseType.size * num;
                 }
@@ -596,15 +600,14 @@ public class SemanticCheck implements Visitor {
         st.size = 0;
         if (st.list == null) {
             if (!struct.checkId(st.name.num)) {
-                System.out.println("Structure name undefined.");
+                throw new SemanticError("Structure name " + st.name.toString() + " undeclared.\n");
             } else {
                 st.mem = ((StructType)struct.getId(st.name.num)).mem;
                 st.size = ((StructType)struct.getId(st.name.num)).size;
             }
         } else {
             if (struct.checkId(st.name.num)) {
-                debug(st);
-                System.out.println("Structure name redefined.");
+                throw new SemanticError("Structure name " + st.name.toString() + " redeclared.\n");
             } else {
                 st.mem = new MemberTable();
                 struct.addEntry(st.name.num, st);
@@ -614,7 +617,7 @@ public class SemanticCheck implements Visitor {
                     decl.type.accept(this);
                     decl.type.isLeft = true;
                     if (st.mem.checkId(decl.name.num)) {
-                        System.out.println("Duplicated structure field definition.");
+                        throw new SemanticError("Structure field " + decl.name.toString() + " redeclared.\n");
                     } else {
                         st.mem.addEntry(decl.name.num, decl.type);
                     }
@@ -630,14 +633,14 @@ public class SemanticCheck implements Visitor {
         ut.size = 0;
         if (ut.list == null) {
             if (!struct.checkId(ut.name.num)) {
-                System.out.println("Union name undefined.");
+                throw new SemanticError("Union name " + ut.name.toString() + " undeclared.\n");
             } else {
                 ut.mem = ((UnionType)struct.getId(ut.name.num)).mem;
                 ut.size = ((UnionType)struct.getId(ut.name.num)).size;
             }
         } else {
             if (struct.checkId(ut.name.num)) {
-                System.out.println("Union name redefined.");
+                throw new SemanticError("Union name " + ut.name.toString() + " redefined.\n");
             } else {
                 ut.mem = new MemberTable();
                 struct.addEntry(ut.name.num, ut);
@@ -647,7 +650,7 @@ public class SemanticCheck implements Visitor {
                     decl.type.accept(this);
                     decl.type.isLeft = true;
                     if (ut.mem.checkId(decl.name.num)) {
-                        System.out.println("Duplicated union field definition.");
+                        throw new SemanticError("Union field " + decl.name.toString() + " redeclared.\n");
                     } else {
                         ut.mem.addEntry(decl.name.num, decl.type);
                     }
@@ -673,10 +676,10 @@ public class SemanticCheck implements Visitor {
 
     public void visit(DefinedType dt) {
         if (!table.checkId(dt.name.num)) {
-            System.out.println("Defined type not found.");
+            throw new SemanticError("Defined type " + dt.name.toString() + " undeclared.\n");
         } else {
             if (table.checkType(dt.name.num) != VariableTable.TYPENAME) {
-                System.out.println("Defined type is not a type.");
+                throw new SemanticError("Defined type " + dt.name.toString() + " is not a type.\n");
             } else {
                 dt.baseType = table.getId(dt.name.num);
                 dt.size = dt.baseType.size;
@@ -694,7 +697,15 @@ public class SemanticCheck implements Visitor {
 
     public void visit(StatList sl) {
         for (Statement stat : sl.list) {
+            if (stat instanceof CompoundStat) {
+                table.addScope();
+                struct.addScope();
+            }
             stat.accept(this);
+            if (stat instanceof CompoundStat) {
+                table.delScope();
+                struct.delScope();
+            }
         }
     }
 
@@ -710,7 +721,7 @@ public class SemanticCheck implements Visitor {
     public void visit(SelectionStat ss) {
         ss.expr.accept(this);
         if (!typeCheck(ss.expr.retType, new IntType())) {
-            System.out.println("Selection expression type exception.");
+            throw new SemanticError("Selection expression return type must be int or char.\n");
         }
         table.addScope();
         struct.addScope();
@@ -728,7 +739,7 @@ public class SemanticCheck implements Visitor {
         is.init.accept(this);
         is.expr.accept(this);
         if (!typeCheck(is.expr.retType, new IntType())) {
-            System.out.println("Iteration expression type exception.");
+            throw new SemanticError("Iteration expression return type must be int or char.\n");
         }
         is.inct.accept(this);
         table.addScope();
@@ -742,7 +753,7 @@ public class SemanticCheck implements Visitor {
 
     public void visit(ContinueStat cs) {
         if (!hasLoop()) {
-            System.out.println("Continue not in a loop.");
+            throw new SemanticError("Continue must be in a loop.\n");
         } else {
             cs.target = topLoop();
         }
@@ -750,7 +761,7 @@ public class SemanticCheck implements Visitor {
 
     public void visit(BreakStat bs) {
         if (!hasLoop()) {
-            System.out.println("Break not in a loop.");
+            throw new SemanticError("Break must be in a loop.\n");
         } else {
             bs.target = topLoop();
         }
@@ -759,7 +770,7 @@ public class SemanticCheck implements Visitor {
     public void visit(ReturnStat rs) {
         rs.expr.accept(this);
         if (!typeCheck(rs.expr.retType, topFunc().returnType)) {
-            System.out.println("Return type exception.");
+            throw new SemanticError("Return type doesn't match function return type.\n");
         }
     }
 
@@ -787,7 +798,7 @@ public class SemanticCheck implements Visitor {
     public void visit(CastExpr ce) {
         ce.expr.accept(this);
         if (!typeCheck(ce.expr.retType, ce.type)) {
-            System.out.println("Typecast Error.");
+            throw new SemanticError("Typecast error.\n");
         }
         ce.retType = ce.type.clone();
         ce.retType.isLeft = false;
@@ -817,10 +828,10 @@ public class SemanticCheck implements Visitor {
         fc.func.accept(this);
         fc.argu.accept(this);
         if (!(resolve(fc.func.retType) instanceof FunctionType)) {
-            System.out.println("Function Call Error. Not a function!");
+            throw new SemanticError("Function call error. Expression return type is not a function.\n");
         } else {
             if (!callCheck((FunctionType)resolve(fc.func.retType), fc.argu.typeList)) {
-                System.out.println("Function Call Error. Function type doesn't match");
+                throw new SemanticError("Function call error. Function parameters doesn't match. \n");
             } else {
                 fc.retType = ((FunctionType) fc.func.retType).returnType.clone();
                 fc.retType.isConst = false;
@@ -833,10 +844,10 @@ public class SemanticCheck implements Visitor {
         ar.expr.accept(this);
         ar.addr.accept(this);
         if (!typeCheck(ar.addr.retType, new IntType())) {
-            System.out.println("Array Address Error!");
+            throw new SemanticError("Array subscript error. Must be int or char.\n");
         } else {
             if (!(resolve(ar.expr.retType) instanceof PointerType)) {
-                System.out.println("Array Type Error!");
+                throw new SemanticError("Array or pointer expected.\n");
             } else {
                 ar.retType = ((PointerType)resolve(ar.expr.retType)).baseType.clone();
                 ar.retType.isConst = false;
@@ -848,15 +859,15 @@ public class SemanticCheck implements Visitor {
     public void visit(PointerAccess pa) {
         pa.expr.accept(this);
         if (!(resolve(pa.expr.retType) instanceof PointerType)) {
-            System.out.println("Pointer Type Error!");
+            throw new SemanticError("Pointer type excepted.\n");
         } else {
             Type type = resolve(((PointerType)resolve(pa.expr.retType)).baseType);
             if (!(type instanceof RecordType)) {
-                System.out.println("Record Type Error!");
+                throw new SemanticError("Record type expected.\n");
             } else{
                 RecordType reco = (RecordType)type;
                 if (!reco.mem.checkId(pa.id.num)) {
-                    System.out.println("Field Name Error!");
+                    throw new SemanticError("Field name " + pa.id.toString() + " not found.\n");
                 } else {
                     pa.retType = reco.mem.getId(pa.id.num).clone();
                     pa.retType.isConst = false;
@@ -870,11 +881,11 @@ public class SemanticCheck implements Visitor {
         ra.expr.accept(this);
         Type type = resolve(ra.expr.retType);
         if (!(type instanceof RecordType)) {
-            System.out.println("Record Type Error!");
+            throw new SemanticError("Record type expected.\n");
         } else{
             RecordType reco = (RecordType)type;
             if (!reco.mem.checkId(ra.id.num)) {
-                System.out.println("Field Name Error!");
+                throw new SemanticError("Field name " + ra.id.toString() + " not found.\n");
             } else {
                 ra.retType = reco.mem.getId(ra.id.num).clone();
                 ra.retType.isConst = false;
@@ -890,11 +901,10 @@ public class SemanticCheck implements Visitor {
 
     public void visit(Variable v) {
         if (!table.checkId(v.id.num)) {
-            System.out.println(v.id.num);
-            System.out.println("Identifier " + v.id.toString() + " undefined.");
+            throw new SemanticError("Identifier " + v.id.toString() + " undeclared.\n");
         } else {
             if (table.checkType(v.id.num) == VariableTable.TYPENAME) {
-                System.out.println("Typename " + v.id.toString() + " used as variable.");
+                throw new SemanticError("Typename " + v.id.toString() + " used as variable.\n");
             } else {
                 v.retType = table.getId(v.id.num).clone();
                 v.retType.isConst = false;

@@ -10,5 +10,6 @@
     <orderEntry type="library" name="java-cup-11b-runtime" level="project" />
     <orderEntry type="library" name="gson-2.3.1" level="project" />
     <orderEntry type="library" name="java-cup-11b" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>

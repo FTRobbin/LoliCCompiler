@@ -1,6 +1,9 @@
 package main;
 
 import ast.visitors.Visitor;
+import exception.CompileError;
+import exception.SemanticError;
+import exception.SyntacticError;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +26,7 @@ public class LoliCCompiler {
     private JTextArea textArea1;
     private JButton originalButton;
     private JButton semanticButton;
+    private JTextArea compilerMessage;
     private JFrame frame;
 
     private FileDialog openDia, saveDia;
@@ -32,9 +36,18 @@ public class LoliCCompiler {
         OutputStream out = new ByteArrayOutputStream();
         try {
             Main.parseAndVisit(new BufferedReader(new FileReader(file)), out, v);
-        } catch (IOException err) {
+        } catch (IOException ie) {
+            ie.printStackTrace();
         }
         textArea1.setText(out.toString());
+    }
+
+    private void showError(CompileError ce) {
+        showMessage(ce.desc);
+    }
+
+    private void showMessage(String s) {
+        compilerMessage.append(s);
     }
 
     public LoliCCompiler() {
@@ -114,7 +127,12 @@ public class LoliCCompiler {
         semanticButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                visit(new semantic.SemanticCheck());
+                try {
+                    visit(new semantic.SemanticCheck());
+                    showMessage("SemanticCheck completed without error.\n");
+                } catch (SemanticError ce) {
+                    showError(ce);
+                }
             }
         });
     }

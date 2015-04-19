@@ -9,6 +9,8 @@ import ast.nodes.declaration.FunctionDefi;
 import ast.nodes.Program;
 import ast.nodes.statment.*;
 import ast.nodes.type.*;
+import com.sun.jna.Function;
+import com.sun.jna.Pointer;
 import parser.Symbols;
 import parser.SymbolsRev;
 
@@ -28,7 +30,6 @@ public class PrettyPrinter implements Visitor {
 
     public PrettyPrinter() {
         indent = 0;
-        lastPre = 15;
         stack = new ArrayList<String>();
     }
 
@@ -52,24 +53,29 @@ public class PrettyPrinter implements Visitor {
 
     private String cover(String str, Type shell) {
         if (shell == null) {
-            lastPre = 15;
             return str;
         } else {
-            str = cover(str, ((PointerType)shell).baseType);
             if (shell instanceof ArrayType) {
                 ArrayType tmp = (ArrayType)shell;
                 int cur = stack.size();
                 tmp.cap.accept(this);
                 String cap = popTo(cur);
-                if (lastPre < 13) {
-                    lastPre = 13;
-                    return "(" + str + ")" + "[" + cap + "]";
-                } else {
-                    return str + "[" + cap + "]";
+                str = str + "[" + cap + "]";
+                return cover(str, tmp.baseType);
+            } else if (shell instanceof PointerType){
+                PointerType tmp = (PointerType) shell;
+                str = "*" + str;
+                if (tmp.baseType instanceof ArrayType || tmp.baseType instanceof FunctionType) {
+                    str = "(" + str + ")";
                 }
+                return cover(str, tmp.baseType);
             } else {
-                lastPre = 12;
-                return "*" + str;
+                FunctionType tmp = (FunctionType)shell;
+                int cur = stack.size();
+                tmp.list.accept(this);
+                String para = popTo(cur);
+                str = str + "(" + para + ")";
+                return cover(str, tmp.returnType);
             }
         }
     }

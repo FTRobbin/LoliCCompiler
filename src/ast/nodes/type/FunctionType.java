@@ -13,9 +13,11 @@ public class FunctionType extends Type {
 
     public Type returnType;
     public LinkedList<Type> paraType;
+    public DeclList list;
 
     public FunctionType(Type returnType, DeclList para) {
         this.returnType = returnType;
+        this.list = para;
         this.paraType = new LinkedList<Type>();
         for (Declaration decl : para.list) {
             paraType.add(decl.type);
@@ -25,6 +27,7 @@ public class FunctionType extends Type {
     public FunctionType(Type returnType, LinkedList<Type> para) {
         this.returnType = returnType;
         this.paraType = para;
+        this.list = null;
     }
 
     @Override
@@ -35,6 +38,11 @@ public class FunctionType extends Type {
             returnType = returnType.encore(type);
         }
         return this;
+    }
+
+    @Override
+    public Type getShell() {
+        return new FunctionType(returnType.getShell(), list);
     }
 
     @Override
