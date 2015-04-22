@@ -163,12 +163,16 @@ public class LoliCCompiler {
         semanticButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                visit(new semantic.SemanticCheck());
+                showMessage("SemanticCheck completed without error.\n");
+                /*
                 try {
                     visit(new semantic.SemanticCheck());
                     showMessage("SemanticCheck completed without error.\n");
                 } catch (SemanticError ce) {
                     showError(ce);
                 }
+                */
             }
         });
         warningButton.addActionListener(new ActionListener() {

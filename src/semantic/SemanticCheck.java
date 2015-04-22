@@ -203,7 +203,10 @@ public class SemanticCheck implements Visitor {
                         base.cap = new IntConst(len + 1);
                         base.cap.accept(this);
                         base.size = (Integer)base.cap.retType.value * base.baseType.size;
+                    } else if ((Integer)base.cap.retType.value < len) {
+                        throw new SemanticError("Initializer is too long.\n");
                     }
+                    return;
                 }
             }
         }
@@ -224,11 +227,15 @@ public class SemanticCheck implements Visitor {
                     initCheck(base.baseType, it);
                 }
             } else {
+                debug(vari);
+                debug(init);
                 throw new SemanticError("An array is improperly initialized.\n");
             }
         } else {
             InitValue val = (InitValue)init;
-            calBin(Symbols.ASSIGN, vari, val.expr.retType);
+            if (!typeCheck(vari, val.expr.retType) && !(vari instanceof PointerType && isNum(val.expr.retType))) {
+                throw new SemanticError("Improper initialization.\n");
+            }
         }
     }
 
@@ -500,6 +507,7 @@ public class SemanticCheck implements Visitor {
                     throw new SemanticError("Cannot redeference a pointer to void type.\n");
                 } else {
                     ret = ((PointerType) type).baseType.clone();
+                    ret.isLeft = true;
                 }
             }
         } else if (op == Symbols.ADRESS) {
@@ -649,12 +657,24 @@ public class SemanticCheck implements Visitor {
     }
 
     public void visit(VariableDecl vd) {
-        if (vd.init != null) {
-            vd.init.accept(this);
-        }
         vd.type.accept(this);
         vd.type = resolve(vd.type);
-        initCheck(vd.type, vd.init);
+        if (table.checkCurId(vd.name.num)) {
+            if (!isGlobal() || !typeEqual(vd.type, table.getId(vd.name.num)) || isVoidPointer(vd.type) != isVoidPointer(table.getId(vd.name.num))) {
+                throw new SemanticError("Identifier " + vd.name.toString() + " redeclared as a different kind of symbol.\n");
+            } else if (vd.init != null && table.checkDefi(vd.name.num)) {
+                throw new SemanticError("Identifier " + vd.name.toString() + " redefined.\n");
+            }
+        } else {
+            table.addVari(vd.name.num, vd.type);
+            if (vd.init != null) {
+                table.defiVari(vd.name.num);
+            }
+        }
+        if (vd.init != null) {
+            vd.init.accept(this);
+            initCheck(vd.type, vd.init);
+        }
         if (undimCheck(vd.type)) {
             if (funcStack.size() == 0) {
                 ArrayType base = ((ArrayType)vd.type);
@@ -674,18 +694,6 @@ public class SemanticCheck implements Visitor {
         }
         if (isVoid(vd.type)) {
             throw new SemanticError("Identifier " + vd.name.toString() + " declared as void.\n");
-        }
-        if (table.checkCurId(vd.name.num)) {
-            if (!isGlobal() || !typeEqual(vd.type, table.getId(vd.name.num)) || isVoidPointer(vd.type) != isVoidPointer(table.getId(vd.name.num))) {
-                throw new SemanticError("Identifier " + vd.name.toString() + " redeclared as a different kind of symbol.\n");
-            } else if (vd.init != null && table.checkDefi(vd.name.num)) {
-                throw new SemanticError("Identifier " + vd.name.toString() + " redefined.\n");
-            }
-        } else {
-            table.addVari(vd.name.num, vd.type);
-            if (vd.init != null) {
-                table.defiVari(vd.name.num);
-            }
         }
     }
 
@@ -947,9 +955,15 @@ public class SemanticCheck implements Visitor {
     }
 
     public void visit(ReturnStat rs) {
-        rs.expr.accept(this);
-        if (!typeCheck(rs.expr.retType, topFunc().returnType)) {
-            throw new SemanticError("Return type doesn't match function return type.\n");
+        if (rs.expr.isEmpty())  {
+            if (!typeCheck(topFunc().returnType, new VoidType())) {
+                throw new SemanticError("Return type doesn't match function return type.\n");
+            }
+        } else {
+            rs.expr.accept(this);
+            if (!typeCheck(rs.expr.retType, topFunc().returnType)) {
+                throw new SemanticError("Return type doesn't match function return type.\n");
+            }
         }
     }
 
@@ -981,9 +995,12 @@ public class SemanticCheck implements Visitor {
             throw new SemanticError("Can't cast any value to void.\n");
         }
         ce.expr.accept(this);
+        /*
         if (!typeCheck(ce.expr.retType, ce.type)) {
+            debug(ce.expr.retType);
+            debug(ce.type);
             throw new SemanticError("Typecast error.\n");
-        }
+        }*/
         ce.retType = ce.type.clone();
         ce.retType.isLeft = false;
         if (ce.expr.retType.isConst) {
