@@ -3,6 +3,7 @@ package semantic;
 import ast.nodes.type.Type;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 /**
@@ -16,10 +17,12 @@ public class VariableTable {
 
     private LinkedList<HashMap<Integer, Type>> list;
     private LinkedList<HashMap<Integer, Integer>> type;
+    private HashSet<Integer> defi;
 
     public VariableTable() {
         list = new LinkedList<HashMap<Integer, Type>>();
         type = new LinkedList<HashMap<Integer, Integer>>();
+        defi = new HashSet<Integer>();
         addScope();
     }
 
@@ -58,6 +61,14 @@ public class VariableTable {
     public void addVari(Integer id, Type type) {
         list.peek().put(id, type);
         this.type.peek().put(id, VARIABLE);
+    }
+
+    public void defiVari(Integer id) {
+        defi.add(id);
+    }
+
+    public Boolean checkDefi(Integer id) {
+        return defi.contains(id);
     }
 
     public void addType(Integer id, Type type) {

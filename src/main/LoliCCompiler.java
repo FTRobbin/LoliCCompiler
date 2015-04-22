@@ -3,12 +3,15 @@ package main;
 import ast.visitors.Visitor;
 import exception.CompileError;
 import exception.SemanticError;
-import exception.SyntacticError;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.*;
 
 /**
@@ -27,7 +30,11 @@ public class LoliCCompiler {
     private JButton originalButton;
     private JButton semanticButton;
     private JTextArea compilerMessage;
+    private JButton warningButton;
+    private JLabel warning;
     private JFrame frame;
+
+    private static int cnt = 0;
 
     private FileDialog openDia, saveDia;
 
@@ -50,17 +57,46 @@ public class LoliCCompiler {
         compilerMessage.append(s);
     }
 
+    private void loadWarning() {
+        String ret = "";
+        String file = "D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\baojingcount.log";
+        try {
+            InputStream input = new BufferedInputStream(new FileInputStream(file));
+            byte[] buffer = new byte[4096];
+            OutputStream out = new ByteArrayOutputStream();
+            int len;
+            while ((len = input.read(buffer)) > 0) {
+                out.write(buffer, 0, len);
+            }
+            ret = out.toString();
+        } catch (IOException err) {
+        }
+        cnt = Integer.parseInt(ret);
+        warning.setText("\u62a5\u8b66\u6b21\u6570\uff1a" + cnt);
+    }
+
+    private static void writeWarning() {
+        String file = "D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\baojingcount.log";
+        try {
+            OutputStream out = new FileOutputStream(file);
+            out.write(((Integer) cnt).toString().getBytes());
+        } catch (Exception err) {
+
+        }
+    }
+
     public LoliCCompiler() {
         openDia = new FileDialog(frame, "Open File", FileDialog.LOAD);
         saveDia = new FileDialog(frame, "Save File", FileDialog.SAVE);
+        loadWarning();
         openButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 openDia.setVisible(true);
                 String path = openDia.getDirectory(),
-                       name = openDia.getFile();
+                        name = openDia.getFile();
                 if (name != null) {
-                   textField1.setText(path + name);
+                    textField1.setText(path + name);
                 }
             }
         });
@@ -135,13 +171,29 @@ public class LoliCCompiler {
                 }
             }
         });
+        warningButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ++cnt;
+                warning.setText("\u62a5\u8b66\u6b21\u6570\uff1a" + cnt);
+                showMessage("\u62a5\u8b66\u4e86\uff01\u62a5\u8b66\u4e86\uff01\u53c8\u51fabug\u4e86\uff01\n");
+            }
+        });
     }
+
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("LoliCCompiler");
         frame.setContentPane(new LoliCCompiler().panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                writeWarning();
+            }
+        });
         frame.setVisible(true);
     }
 }

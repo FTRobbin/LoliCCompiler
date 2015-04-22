@@ -230,9 +230,11 @@ public class PrettyPrinter implements Visitor {
         int cur = stack.size();
         fd.name.accept(this);
         push(cover(popTo(cur), shell));
+        /*
         push("(");
         fd.para.accept(this);
         push(")");
+        */
     }
 
     public void visit(TypeDecl td) {

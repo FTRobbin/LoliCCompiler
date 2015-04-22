@@ -192,11 +192,13 @@ public class UglyPrinter implements Visitor {
         int cur = stack.size();
         fd.name.accept(this);
         push(cover(popTo(cur), shell));
+        /*
         push("(");
         pushSpace();
         fd.para.accept(this);
         pushSpace();
         push(")");
+        */
     }
 
     public void visit(TypeDecl td) {

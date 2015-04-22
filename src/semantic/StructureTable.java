@@ -10,36 +10,39 @@ import java.util.LinkedList;
  */
 public class StructureTable {
 
+    public static int STRUCT = 1, UNION = 2;
+
     private LinkedList<HashMap<Integer, Type>> list;
+    private LinkedList<HashMap<Integer, Integer>> type;
 
     public StructureTable() {
         list = new LinkedList<HashMap<Integer, Type>>();
+        type = new LinkedList<HashMap<Integer, Integer>>();
         addScope();
     }
 
     public void addScope() {
         list.push(new HashMap<Integer, Type>());
+        type.push(new HashMap<Integer, Integer>());
     }
 
     public void delScope() {
         list.pop();
+        type.pop();
     }
 
-    public boolean checkCurId(Integer id) {
-        return list.peek().containsKey(id);
-    }
-
-    public void addEntry(Integer id, Type type) {
+    public void addEntry(Integer id, Type type, int soru) {
         list.peek().put(id, type);
+        this.type.peek().put(id, soru);
     }
 
-    public boolean checkId(Integer id) {
-        for (HashMap<Integer, Type> map : list) {
+    public int checkId(Integer id) {
+        for (HashMap<Integer, Integer> map : type) {
             if (map.containsKey(id)) {
-                return true;
+                return map.get(id);
             }
         }
-        return false;
+        return 0;
     }
 
     public Type getId(Integer id) {
