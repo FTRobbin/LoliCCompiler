@@ -13,6 +13,7 @@ public class PointerType extends Type implements Visible {
 
     public PointerType(Type baseType) {
         this.baseType = baseType;
+        this.size = 4;
     }
 
     @Override

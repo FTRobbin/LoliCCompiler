@@ -8,6 +8,11 @@ import ast.visitors.Visitor;
  */
 public class CharType extends Type implements Visible {
 
+    public CharType() {
+        super();
+        this.size = 1;
+    }
+
     @Override
     public void accept(Visitor v) {
         v.visit(this);

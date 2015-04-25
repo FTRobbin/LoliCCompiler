@@ -8,6 +8,7 @@ import ast.nodes.expression.Symbol;
 import ast.nodes.statment.CompoundStat;
 import ast.nodes.statment.StatList;
 import ast.nodes.type.*;
+import ast.visitors.Visitor;
 
 /**
  * Created by Robbin Ni on 2015/4/16.
@@ -19,5 +20,10 @@ public class scanfDefi extends FunctionDefi {
         this.paras.add(new TypeDecl(new ELLIPSIS()));
         this.type = new FunctionType(this.returnType, this.paras);
         //TODO
+    }
+
+    @Override
+    public void accept(Visitor v) {
+        v.visit(this);
     }
 }

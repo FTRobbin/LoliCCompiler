@@ -3,6 +3,7 @@ package main;
 import ast.visitors.Visitor;
 import exception.CompileError;
 import exception.SemanticError;
+import exception.SyntacticError;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,6 +33,7 @@ public class LoliCCompiler {
     private JTextArea compilerMessage;
     private JButton warningButton;
     private JLabel warning;
+    private JButton interpreterButton;
     private JFrame frame;
 
     private static int cnt = 0;
@@ -43,8 +45,10 @@ public class LoliCCompiler {
         OutputStream out = new ByteArrayOutputStream();
         try {
             Main.parseAndVisit(new BufferedReader(new FileReader(file)), out, v);
-        } catch (IOException ie) {
-            ie.printStackTrace();
+        } catch (SyntacticError se) {
+            showError(se);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         textArea1.setText(out.toString());
     }
@@ -163,16 +167,12 @@ public class LoliCCompiler {
         semanticButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                visit(new semantic.SemanticCheck());
-                showMessage("SemanticCheck completed without error.\n");
-                /*
                 try {
                     visit(new semantic.SemanticCheck());
                     showMessage("SemanticCheck completed without error.\n");
                 } catch (SemanticError ce) {
                     showError(ce);
                 }
-                */
             }
         });
         warningButton.addActionListener(new ActionListener() {
@@ -181,6 +181,12 @@ public class LoliCCompiler {
                 ++cnt;
                 warning.setText("\u62a5\u8b66\u6b21\u6570\uff1a" + cnt);
                 showMessage("\u62a5\u8b66\u4e86\uff01\u62a5\u8b66\u4e86\uff01\u53c8\u51fabug\u4e86\uff01\n");
+            }
+        });
+        interpreterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                (new InterpreterWin()).run(textField1);
             }
         });
     }

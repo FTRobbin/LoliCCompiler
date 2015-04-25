@@ -8,9 +8,6 @@ import ast.nodes.Visible;
 import ast.nodes.expression.Expression;
 import ast.visitors.Visitor;
 
-/**
- * Created by Robbin Ni on 2015/4/9.
- */
 public class ReturnStat extends JumpStat implements Visible {
 
         public Expression expr;

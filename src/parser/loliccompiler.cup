@@ -106,6 +106,8 @@ non terminal ArgumentList argument_list;
 non terminal Integer assignment_operator, equality_operator, relational_operator, shift_operator, additive_operator, multiplicative_operator,
 					 unary_operator;
 
+non terminal String strings;
+
 /* Precedences */
 
 precedence nonassoc ELSE;
@@ -678,8 +680,14 @@ primary_expression	::=		IDENTIFIER:id
 						{:	RESULT = new IntConst(it); :}
 						|	CHARACTER:ch
 						{:	RESULT = new CharConst(ch); :}
-						|	STRING:st
+						|	strings:st
 						{:	RESULT = new StringConst(st); :}
 						|	PARAL expression:expr PARAR
 						{:	RESULT = expr; :}
 						;
+
+strings ::= 	STRING:st
+			{:	RESULT = st; :}
+			|	strings:st1 STRING:st2
+			{:	RESULT = st1 + st2; :}
+			;

@@ -18,6 +18,17 @@ public class Symbol implements Visible {
         dict.clear();
     }
 
+    static public int getnum(String name) {
+        int ret = 0;
+        if (dict.containsKey(name.intern())) {
+            ret = dict.get(name.intern());
+        } else {
+            ret = count++;
+            dict.put(name.intern(), ret);
+        }
+        return ret;
+    }
+
     private String name;
     private boolean anonymous;
 

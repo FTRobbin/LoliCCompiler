@@ -11,6 +11,7 @@ import ast.nodes.type.FunctionType;
 import ast.nodes.type.IntType;
 import ast.nodes.type.PointerType;
 import ast.nodes.type.VoidType;
+import ast.visitors.Visitor;
 
 /**
  * Created by Robbin Ni on 2015/4/16.
@@ -23,5 +24,10 @@ public class mallocDefi extends FunctionDefi {
               (new DeclList()).add(new VariableDecl(new IntType(), new Symbol("size"), new InitList())),
               new CompoundStat(new DeclList(), new StatList()));
         //TODO
+    }
+
+    @Override
+    public void accept(Visitor v) {
+        v.visit(this);
     }
 }

@@ -274,7 +274,7 @@ public class SemanticCheck implements Visitor {
                 throw new SemanticError("The assignment must have a left value on the left side.\n");
             } else {
                 if (!typeCheck(type1, type2)) {
-                    if (type1 instanceof PointerType && isNum(type2)) {
+                    if (type1 instanceof PointerType && (isNum(type2) || type2 instanceof PointerType)) {
                         ret = type1.clone();
                     } else {
                         throw new SemanticError("The left and right value of an assignment must be of the same type.\n");
@@ -675,21 +675,19 @@ public class SemanticCheck implements Visitor {
             vd.init.accept(this);
             initCheck(vd.type, vd.init);
         }
-        if (undimCheck(vd.type)) {
+        if (isInPara > 0) {
+            vd.type = new PointerType(((ArrayType) vd.type).baseType);
+            vd.type.size = 4;
+            vd.type.isConst = false;
+            vd.type.isLeft = false;
+        } else if (undimCheck(vd.type)) {
             if (funcStack.size() == 0) {
                 ArrayType base = ((ArrayType)vd.type);
                 base.cap = new IntConst(1);
                 base.cap.accept(this);
                 base.size = base.baseType.size * (Integer)base.cap.retType.value;
             } else {
-                if (isInPara > 0) {
-                    vd.type = new PointerType(((ArrayType)vd.type).baseType);
-                    vd.type.size = 4;
-                    vd.type.isConst = false;
-                    vd.type.isLeft = false;
-                } else {
-                    throw new SemanticError("Array size undefined.\n");
-                }
+                throw new SemanticError("Array size undefined.\n");
             }
         }
         if (isVoid(vd.type)) {
@@ -800,7 +798,7 @@ public class SemanticCheck implements Visitor {
                     if (st.mem.checkId(decl.name.num)) {
                         throw new SemanticError("Structure field " + decl.name.toString() + " redeclared.\n");
                     } else {
-                        st.mem.addEntry(decl.name.num, decl.type);
+                        st.mem.addEntry(decl.name.num, decl.type, st.size);
                     }
                     st.size += decl.type.size;
                 }
@@ -834,7 +832,7 @@ public class SemanticCheck implements Visitor {
                     if (ut.mem.checkId(decl.name.num)) {
                         throw new SemanticError("Union field " + decl.name.toString() + " redeclared.\n");
                     } else {
-                        ut.mem.addEntry(decl.name.num, decl.type);
+                        ut.mem.addEntry(decl.name.num, decl.type, 0);
                     }
                     ut.size = Integer.max(ut.size, decl.type.size);
                 }
@@ -876,7 +874,7 @@ public class SemanticCheck implements Visitor {
         LinkedList<Type> tmp = new LinkedList<Type>();
         for (Type type : ft.paraType) {
             type.accept(this);
-            tmp.add(type);
+            tmp.add(resolve(type));
         }
         ft.paraType = tmp;
         ft.size = 4;

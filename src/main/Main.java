@@ -15,17 +15,11 @@ import java.io.Reader;
 
 public class Main {
 
-     public static void parseAndVisit(Reader input, OutputStream output, Visitor visitor) throws IOException {
+     public static void parseAndVisit(Reader input, OutputStream output, Visitor visitor) throws Exception {
          Parser parser = new Parser(input);
          Program prog;
-         try {
-             prog = (Program)parser.parse().value;
-         } catch (Throwable e) {
-             e.printStackTrace();
-             throw new Error(e.toString());
-         } finally {
-             input.close();
-         }
+         prog = (Program)parser.parse().value;
+         input.close();
          visitor.setOutput(output);
          prog.accept(visitor);
          output.close();

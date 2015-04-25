@@ -9,13 +9,16 @@ import java.util.HashMap;
  */
 public class MemberTable {
     private HashMap<Integer, Type> map;
+    private HashMap<Integer, Integer> devi;
 
     MemberTable() {
         map = new HashMap<Integer, Type>();
+        devi = new HashMap<Integer, Integer>();
     }
 
-    public void addEntry(Integer id, Type type)  {
+    public void addEntry(Integer id, Type type, Integer delta)  {
         map.put(id, type);
+        devi.put(id, delta);
     }
 
     public boolean checkId(Integer id) {
@@ -24,5 +27,9 @@ public class MemberTable {
 
     public Type getId(Integer id) {
         return map.get(id);
+    }
+
+    public int getDel(Integer id) {
+        return devi.get(id);
     }
 }
