@@ -1,5 +1,6 @@
 package irt.factory;
 
+import ast.nodes.type.ArrayType;
 import ast.nodes.type.RecordType;
 import interpreter.Interpreter;
 import irt.Expr;
@@ -21,6 +22,10 @@ public class RecordOp extends Op{
     @Override
     public int interpret(Interpreter v) {
         int addr = expr.exprs.get(0).accept(v);
-        return v.writeInt(v.newInt(), addr + delta);
+        if (expr.retType instanceof ArrayType) {
+            return v.writeInt(v.newInt(), addr + delta);
+        } else {
+            return addr + delta;
+        }
     }
 }

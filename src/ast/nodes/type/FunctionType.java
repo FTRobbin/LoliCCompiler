@@ -22,6 +22,7 @@ public class FunctionType extends Type {
         for (Declaration decl : para.list) {
             paraType.add(decl.type);
         }
+        this.size = 4;
     }
 
     public FunctionType(Type returnType, LinkedList<Type> para) {

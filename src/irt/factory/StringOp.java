@@ -27,6 +27,6 @@ public class StringOp extends Op{
             }
             v.writeByte(addr + s.length(), (byte)0);
         }
-        return addr;
+        return v.writeInt(v.newInt(), addr);
     }
 }

@@ -16,6 +16,7 @@ import irt.*;
 import irt.factory.Factories;
 import irt.factory.OpFactory;
 import parser.Symbols;
+import stl.getcharDefi;
 import stl.mallocDefi;
 import stl.printfDefi;
 import stl.scanfDefi;
@@ -46,7 +47,6 @@ public class IRTBuilder implements Visitor {
     }
 
     public IRTBuilder() {
-        Symbol.reset();
         this.table = new VariableTable();
         this.struct = new StructureTable();
         loadSTL();
@@ -61,6 +61,7 @@ public class IRTBuilder implements Visitor {
         mySTL.add(new mallocDefi());
         mySTL.add(new scanfDefi());
         mySTL.add(new printfDefi());
+        mySTL.add(new getcharDefi());
         for (FunctionDefi func : mySTL) {
             table.addVari(func.name.num, func.type);
         }
@@ -437,11 +438,6 @@ public class IRTBuilder implements Visitor {
         vd.type.accept(this);
         vd.type = resolve(vd.type);
         Type type = vd.type;
-        if (type instanceof ArrayType && isPara()) {
-            vd.type = new PointerType(((ArrayType) type).baseType);
-            vd.type.size = 4;
-            type = vd.type;
-        }
         if (isVoid(type)) {
             throw new SemanticError("Identifier " + vd.name.toString() + " declared as void.\n");
         }
@@ -453,17 +449,29 @@ public class IRTBuilder implements Visitor {
                     type1.cap = new IntConst(1);
                     type1.cap.accept(this);
                     type1.size = type1.baseType.size;
-                } else {
+                } else if (!isPara()) {
                     throw new SemanticError("Array size undefined.\n");
                 }
             }
+            if (type instanceof ArrayType && isPara()) {
+                vd.type = new PointerType(((ArrayType) type).baseType);
+                vd.type.size = 4;
+                type = vd.type;
+            }
             declare(vd.name.num, type);
         } else {
-            init = calInit(vd.type, vd.init, 0);
+            if (type instanceof ArrayType && isPara()) {
+                vd.type = new PointerType(((ArrayType) type).baseType);
+                vd.type.size = 4;
+                type = vd.type;
+            }
             define(vd.name.num, type);
+            init = calInit(vd.type, vd.init, 0);
         }
 
-        stack.push(new Decl(vd.name.num, vd.type.size, true, init));
+        if (!isPara()) {
+            stack.push(new Decl(vd.name.num, vd.type.size, true, init));
+        }
     }
 
     public void visit(FunctionDecl fd) {
@@ -503,7 +511,7 @@ public class IRTBuilder implements Visitor {
         at.baseType.isLeft = true;
         if (at.cap != null) {
             at.cap.accept(this);
-            Expr cap = (Expr)stack.peek();
+            Expr cap = (Expr)stack.pop();
             if (!cap.isConst) {
                 throw new SemanticError("The size of an array must be constant.\n");
             } else {
@@ -561,6 +569,9 @@ public class IRTBuilder implements Visitor {
                         st.mem.addEntry(decl.name.num, decl.type, st.size);
                     }
                     st.size += decl.type.size;
+                }
+                if (st.size % 4 != 0) {
+                    st.size += 4 - st.size % 4;
                 }
             }
         }
@@ -733,7 +744,9 @@ public class IRTBuilder implements Visitor {
             if (!isVoid(table.getId(Symbol.getnum("#Return")))) {
                 throw new SemanticError("Return type doesn't match function return type.\n");
             }
+            stack.push(new JpSt(JpSt.RETURN));
         } else {
+            LinkedList<IRTNode> tmp = new LinkedList<IRTNode>();
             rs.expr.accept(this);
             Expr expr = (Expr)(stack.pop());
             int retVari = Symbol.getnum("#Return");
@@ -743,8 +756,9 @@ public class IRTBuilder implements Visitor {
             }
             Expr expr1 = new Expr(null, getList(retVari, retType), Factories.VARI.getFact());
             expr = new Expr(getExprList(expr1, expr), null, Factories.ASSIGN.getFact());
-            stack.push(new ExSt(expr));
-            stack.push(new JpSt(JpSt.RETURN));
+            tmp.add(new ExSt(expr));
+            tmp.add(new JpSt(JpSt.RETURN));
+            stack.push(new CpSt(tmp));
         }
     }
 

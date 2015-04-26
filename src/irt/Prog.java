@@ -2,6 +2,7 @@ package irt;
 
 import ast.nodes.expression.Symbol;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -9,27 +10,23 @@ import java.util.LinkedList;
  */
 public class Prog implements IRTNode {
 
-    public LinkedList<Func> funcs;
+    public HashMap<Integer, Func> funcs;
     public LinkedList<Decl> decls;
-    public Func main;
 
     public void add(IRTNode node) {
         if (node instanceof Func) {
-            funcs.add((Func)node);
-            if (((Func)node).id == Symbol.getnum("main")) {
-                main = (Func)node;
-            }
+            funcs.put(((Func)node).id, (Func)node);
         } else if (node instanceof Decl) {
             decls.add((Decl)node);
         } else {
+            System.out.print(node.toString());
             throw new InternalError("Unexpected IRTNode in Prog.add().\n");
         }
     }
 
     public Prog(LinkedList<IRTNode> list) {
-        funcs = new LinkedList<Func>();
+        funcs = new HashMap<Integer, Func>();
         decls = new LinkedList<Decl>();
-        main = null;
         while (list.size() > 0) {
             add(list.pop());
         }

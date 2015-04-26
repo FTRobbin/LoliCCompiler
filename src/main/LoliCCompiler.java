@@ -34,6 +34,7 @@ public class LoliCCompiler {
     private JButton warningButton;
     private JLabel warning;
     private JButton interpreterButton;
+    private JButton oldBuggyCheckButton;
     private JFrame frame;
 
     private static int cnt = 0;
@@ -168,7 +169,7 @@ public class LoliCCompiler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    visit(new semantic.SemanticCheck());
+                    visit(new semantic.IRTBuilder());
                     showMessage("SemanticCheck completed without error.\n");
                 } catch (SemanticError ce) {
                     showError(ce);
@@ -186,7 +187,18 @@ public class LoliCCompiler {
         interpreterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                (new InterpreterWin()).run(textField1);
+                InterpreterWin.run(textField1);
+            }
+        });
+        oldBuggyCheckButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    visit(new semantic.SemanticCheck());
+                    showMessage("Old-buggy-SemanticCheck completed without error.\n");
+                } catch (SemanticError ce) {
+                    showError(ce);
+                }
             }
         });
     }

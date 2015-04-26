@@ -16,6 +16,6 @@ public class CharOp extends Op {
 
     @Override
     public int interpret(Interpreter v) {
-        return v.writeByte(v.newByte(), (byte)(expr.consts.get(0)));
+        return v.writeByte(v.newByte(), (byte)((Character)expr.consts.get(0)).charValue());
     }
 }

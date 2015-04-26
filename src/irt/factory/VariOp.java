@@ -18,6 +18,10 @@ public class VariOp extends Op{
 
     @Override
     public int interpret(Interpreter v) {
-        return v.getId((Integer)(expr.consts.get(0)));
+        if (expr.retType instanceof ArrayType) {
+            return v.writeInt(v.newInt(), v.getId((Integer)expr.consts.get(0)));
+        } else {
+            return v.getId((Integer) (expr.consts.get(0)));
+        }
     }
 }

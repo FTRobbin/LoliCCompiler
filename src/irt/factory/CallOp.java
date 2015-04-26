@@ -19,25 +19,18 @@ public class CallOp extends Op {
     @Override
     public int interpret(Interpreter v) {
         int func = v.fetchInt(expr.exprs.get(0).accept(v));
-        LinkedList<Integer> addrs = new LinkedList<Integer>();
-        LinkedList<Integer> size = new LinkedList<Integer>();
-        addrs.add(0);
-        size.add(expr.retSize);
-        for (int i = 1; i < (int)expr.exprs.size(); ++i) {
-            addrs.add(expr.exprs.get(i).accept(v));
-            size.add(expr.exprs.get(i).retSize);
-        }
         int head = v.getTop();
-        for (int i = 0; i < addrs.size(); ++i) {
-            int tmp = v.getTop();
-            for (int j = 0; j < size.get(i); ++j) {
-                v.newByte();
-            }
-            if (i > 0) {
-                for (int j = 0; j < size.get(i); ++j) {
-                    v.writeByte(tmp + j, v.fetchByte(addrs.get(i) + j));
-                }
-            }
+        v.newStack(expr.retSize);
+        for (int i = 1; i < expr.exprs.size(); ++i) {
+            v.newStack(expr.exprs.get(i).retSize);
+        }
+        int tmp = head + expr.retSize;
+        for (int i = 1; i < expr.exprs.size(); ++i) {
+            int size = expr.exprs.get(i).retSize;
+            int addr = (expr.exprs.get(i).accept(v));
+            v.copyMem(addr, size, tmp);
+            //System.out.println("CallOp! " + func + " : " + addr + "  " + size + "  " + tmp + "  " + v.fetchInt(tmp) + "\n");
+            tmp += size;
         }
         return v.callFunc(func, head);
     }

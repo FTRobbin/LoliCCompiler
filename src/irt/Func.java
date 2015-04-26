@@ -19,6 +19,8 @@ public class Func implements IRTNode {
         this.id = id;
         this.retSize = retSize;
         int pos = 0;
+        paraPos = new LinkedList<Integer>();
+        paraName = new LinkedList<Integer>();
         for (Declaration decl : paras.list)  {
             paraPos.add(pos);
             paraName.add(decl.name.num);

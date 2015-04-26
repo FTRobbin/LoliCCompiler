@@ -2,6 +2,7 @@ package irt.factory;
 
 import ast.nodes.type.CharType;
 import ast.nodes.type.IntType;
+import ast.nodes.type.PointerType;
 import exception.SemanticError;
 import irt.Expr;
 import semantic.IRTBuilder;
@@ -41,10 +42,10 @@ public class BinIntFact extends OpFactory {
     @Override
     public Op createOp(Expr expr) {
         Expr expr1 = expr.exprs.get(0), expr2 = expr.exprs.get(1);
-        if (expr1.retType instanceof CharType) {
+        if (expr1.retType instanceof CharType || (op.equals(Ops.EQ_OP) || op.equals(Ops.NE_OP)) && expr1.retType instanceof PointerType) {
             expr1 = new Expr(IRTBuilder.getExprList(expr1), IRTBuilder.getList(new IntType()), Factories.CAST.getFact());
         }
-        if (expr2.retType instanceof CharType) {
+        if (expr2.retType instanceof CharType || (op.equals(Ops.EQ_OP) || op.equals(Ops.NE_OP)) && expr2.retType instanceof PointerType) {
             expr2 = new Expr(IRTBuilder.getExprList(expr2), IRTBuilder.getList(new IntType()), Factories.CAST.getFact());
         }
         expr.exprs.clear();
@@ -53,7 +54,7 @@ public class BinIntFact extends OpFactory {
         if (IRTBuilder.isInt(expr1.retType) && IRTBuilder.isInt(expr2.retType)) {
             return new BinIntOp(expr, op);
         } else {
-            throw new SemanticError("Unexpected relation operator operands type.\n");
+            throw new SemanticError("Unexpected operator operands type.\n");
         }
     }
 }

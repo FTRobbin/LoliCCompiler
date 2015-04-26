@@ -2,6 +2,7 @@ package irt.factory;
 
 import ast.nodes.type.ELLIPSIS;
 import ast.nodes.type.FunctionType;
+import ast.nodes.type.IntType;
 import ast.nodes.type.Type;
 import exception.SemanticError;
 import irt.Expr;
@@ -34,7 +35,11 @@ public class CallFact extends OpFactory {
             }
             if (list.get(i) instanceof ELLIPSIS) {
                 if (j < expr.exprs.size()) {
-                    ret.add(expr.exprs.get(j));
+                    if (expr.exprs.get(j).retSize == 4) {
+                        ret.add(expr.exprs.get(j));
+                    } else {
+                        ret.add(new Expr(IRTBuilder.getExprList(expr.exprs.get(j)), IRTBuilder.getList(new IntType()), Factories.CAST.getFact()));
+                    }
                     ++j;
                 } else {
                     ++i;

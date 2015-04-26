@@ -1,8 +1,9 @@
 package main;
 
-import interpreter.FailedInterpreterShell;
+import interpreter.InterpreterShell;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -20,15 +21,20 @@ public class InterpreterWin {
     private JButton runFileButton;
     private JPanel panel;
     private JTextField fileName;
+    private JFrame frame;
+
+    private FileDialog openDia;
 
     private GUIInput input;
     private SystemInput sinput;
     private GUIOutput output;
 
-    public InterpreterWin() {
+    public InterpreterWin(JTextField fileName) {
+        this.fileName = fileName;
         sinput = new SystemInput();
         input = new GUIInput();
         output = new GUIOutput(textArea1);
+        openDia = new FileDialog(frame, "Open File", FileDialog.LOAD);
         textField1.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -46,20 +52,40 @@ public class InterpreterWin {
             public void actionPerformed(ActionEvent e) {
                 try {
                     output.print("interpret \"" + fileName.getText() + "\"\n");
-                    Thread t = new Thread(new FailedInterpreterShell(input, output, new BufferedReader(new FileReader(fileName.getText()))));
+                    Thread t = new Thread(new InterpreterShell(input, output, new BufferedReader(new FileReader(fileName.getText()))));
                     t.start();
                 } catch (FileNotFoundException fe) {
                     fe.printStackTrace();
                 }
             }
         });
+        runFileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openDia.setVisible(true);
+                String path = openDia.getDirectory(),
+                        name = openDia.getFile();
+                if (path != null) {
+                    try {
+                        output.print("read from input file \"" + path + name + "\"\n");
+                        FileInput fileInput = new FileInput(path + name);
+                        output.print(fileInput.getInput());
+                        output.print("interpret \"" + fileName.getText() + "\"\n");
+                        Thread t = new Thread(new InterpreterShell(fileInput, output, new BufferedReader(new FileReader(fileName.getText()))));
+                        t.start();
+                    } catch (IOException ie) {
+                        output.print("read input file failed.\n");
+                    }
+                }
+            }
+        });
     }
 
 
-    public void run(JTextField fileName) {
-        this.fileName = fileName;
+
+    public static void run(JTextField fileName) {
         JFrame frame = new JFrame("InterpreterWin");
-        frame.setContentPane(new InterpreterWin().panel);
+        frame.setContentPane(new InterpreterWin(fileName).panel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

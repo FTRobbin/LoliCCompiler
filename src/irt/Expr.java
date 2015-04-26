@@ -1,5 +1,6 @@
 package irt;
 
+import ast.nodes.type.ArrayType;
 import ast.nodes.type.Type;
 import irt.factory.OpFactory;
 import irt.factory.Op;
@@ -29,7 +30,7 @@ public class Expr implements IRTNode {
 
     public void setValue(Type retType, boolean isConst, boolean isLeft, Object value) {
         this.retType = retType;
-        this.retSize = retType.size;
+        this.retSize = retType instanceof ArrayType ? 4 : retType.size;
         this.isConst = isConst;
         this.isLeft = isLeft;
         this.value = value;

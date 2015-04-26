@@ -40,12 +40,7 @@ public class Symbol implements Visible {
         if (anonymous) {
             num = count++;
         } else {
-            if (dict.containsKey(name.intern())) {
-                num = dict.get(name.intern());
-            } else {
-                num = count++;
-                dict.put(name.intern(), num);
-            }
+            num = getnum(name);
         }
     }
 

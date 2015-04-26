@@ -199,6 +199,16 @@
           <text value="Interpreter..."/>
         </properties>
       </component>
+      <component id="6985d" class="javax.swing.JButton" binding="oldBuggyCheckButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="80" height="36"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="OldBuggyCheck"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

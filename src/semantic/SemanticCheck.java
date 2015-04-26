@@ -13,6 +13,7 @@ import ast.visitors.PrintAST;
 import ast.visitors.Visitor;
 import exception.SemanticError;
 import parser.Symbols;
+import stl.getcharDefi;
 import stl.mallocDefi;
 import stl.printfDefi;
 import stl.scanfDefi;
@@ -44,7 +45,6 @@ public class SemanticCheck implements Visitor {
     }
 
     public SemanticCheck() {
-        Symbol.reset();
         this.table = new VariableTable();
         this.struct = new StructureTable();
         loadSTL();
@@ -59,6 +59,7 @@ public class SemanticCheck implements Visitor {
         mySTL.add(new mallocDefi());
         mySTL.add(new scanfDefi());
         mySTL.add(new printfDefi());
+        mySTL.add(new getcharDefi());
         for (FunctionDefi func : mySTL) {
             table.addVari(func.name.num, func.type);
         }

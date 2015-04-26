@@ -1,5 +1,6 @@
 package irt.factory;
 
+import ast.nodes.type.ArrayType;
 import ast.nodes.type.Type;
 import interpreter.Interpreter;
 import irt.Expr;
@@ -20,6 +21,10 @@ public class PointOp extends Op{
     @Override
     public int interpret(Interpreter v) {
         int addr = v.fetchInt(expr.exprs.get(0).accept(v));
-        return v.writeInt(v.newInt(), addr + delta);
+        if (expr.retType instanceof ArrayType) {
+            return v.writeInt(v.newInt(), addr + delta);
+        } else {
+            return addr + delta;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package irt.factory;
 
+import ast.nodes.type.ArrayType;
 import ast.nodes.type.IntType;
 import ast.nodes.type.PointerType;
 import exception.SemanticError;
