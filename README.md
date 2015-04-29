@@ -1,0 +1,1 @@
+A student project targeted at creating a fully-functioning and well-optimized compiler for a restricted subset of the C language. Named Loliccompiler by the author Robbin Ni.
