@@ -55,18 +55,24 @@ public class UglyPrinter implements Visitor {
             if (shell instanceof ArrayType) {
                 ArrayType tmp = (ArrayType)shell;
                 int cur = stack.size();
-                tmp.cap.accept(this);
+                if (tmp.cap != null) {
+                    tmp.cap.accept(this);
+                }
+                pushSpace();
                 String cap = popTo(cur);
-                str = "(" + str + ")" + "[" + cap + "]";
+                str = "(" + str + "   )  " + "[   " + cap + "  ]";
                 return cover(str, tmp.baseType);
             } else if (shell instanceof PointerType){
+                pushSpace();
                 str = "*" + "(" + str + ")";
                 return cover(str, ((PointerType) shell).baseType);
             } else {
                 FunctionType tmp = (FunctionType)shell;
                 int cur = stack.size();
                 tmp.list.accept(this);
+                pushSpace();
                 String para = popTo(cur);
+                pushSpace();
                 str = "(" + str + ")" + "(" + para + ")";
                 return cover(str, tmp.returnType);
             }

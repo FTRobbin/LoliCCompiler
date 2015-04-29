@@ -40,7 +40,6 @@ parser code {:
    			}
    		}
    		m.append(" : " + message);
-        System.out.println(m);
    		throw new SyntacticError(m.toString());
    	}
 
@@ -253,9 +252,9 @@ direct_declarator ::=	IDENTIFIER:name
 					|	direct_declarator:dect SQUARL SQUARR
 					{:
 						if (dect.type == null) {
-							dect.type = new ArrayType(null, new EmptyExpr());
+							dect.type = new ArrayType(null, null);
 						} else {
-							dect.type = dect.type.encore(new ArrayType(null, new EmptyExpr()));
+							dect.type = dect.type.encore(new ArrayType(null, null));
 						}
 						RESULT = dect; :}
 					;
@@ -399,6 +398,14 @@ struct_direct_declarator ::=	IDENTIFIER:name
 									dect.type = new ArrayType(null, expr);
 								} else {
 									dect.type = dect.type.encore(new ArrayType(null, expr));
+								}
+								RESULT = dect; :}
+							|	struct_direct_declarator:dect SQUARL SQUARR
+							{:
+								if (dect.type == null) {
+									dect.type = new ArrayType(null, null);
+								} else {
+									dect.type = dect.type.encore(new ArrayType(null, null));
 								}
 								RESULT = dect; :}
 							;

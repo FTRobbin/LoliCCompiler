@@ -2,6 +2,7 @@ package irt.factory;
 
 import ast.nodes.type.ArrayType;
 import ast.nodes.type.PointerType;
+import ast.nodes.type.Type;
 import interpreter.Interpreter;
 import irt.Expr;
 
@@ -12,8 +13,14 @@ public class ArrayOp extends Op {
 
     public ArrayOp(Expr expr) {
         this.expr = expr;
-        expr.setValue(((PointerType)expr.exprs.get(0).retType).baseType,
-                false, true, null);
+        Type type = ((PointerType)expr.exprs.get(0).retType).baseType;
+        if (type instanceof ArrayType) {
+            expr.setValue(((PointerType)expr.exprs.get(0).retType).baseType,
+                    true, true, false, null);
+        } else {
+            expr.setValue(((PointerType)expr.exprs.get(0).retType).baseType,
+                    false, true, true, null);
+        }
     }
 
     @Override

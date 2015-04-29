@@ -2,6 +2,7 @@ package irt.factory;
 
 import ast.nodes.type.ArrayType;
 import ast.nodes.type.RecordType;
+import ast.nodes.type.Type;
 import interpreter.Interpreter;
 import irt.Expr;
 
@@ -15,8 +16,14 @@ public class RecordOp extends Op{
     public RecordOp(Expr expr, int delta) {
         this.expr = expr;
         this.delta = delta;
-        expr.setValue(((RecordType)(expr.exprs.get(0).retType)).mem.getId((Integer)(expr.consts.get(0))),
-                false, true, null);
+        Type type = ((RecordType)(expr.exprs.get(0).retType)).mem.getId((Integer)(expr.consts.get(0)));
+        if (type instanceof ArrayType) {
+            expr.setValue(((RecordType)(expr.exprs.get(0).retType)).mem.getId((Integer)(expr.consts.get(0))),
+                    true, false, false, null);
+        } else {
+            expr.setValue(((RecordType)(expr.exprs.get(0).retType)).mem.getId((Integer)(expr.consts.get(0))),
+                    false, true, true, null);
+        }
     }
 
     @Override

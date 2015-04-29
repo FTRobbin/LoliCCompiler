@@ -79,7 +79,7 @@
       </component>
       <scrollpane id="8864d">
         <constraints>
-          <grid row="0" column="5" row-span="6" col-span="1" vsize-policy="7" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="0" column="5" row-span="6" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <minimum-size width="600" height="800"/>
           </grid>
         </constraints>
@@ -90,6 +90,8 @@
             <constraints/>
             <properties>
               <editable value="false"/>
+              <font/>
+              <tabSize value="4"/>
             </properties>
           </component>
         </children>
@@ -127,7 +129,7 @@
           </component>
           <vspacer id="37383">
             <constraints>
-              <grid row="0" column="2" row-span="3" col-span="1" vsize-policy="2" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="2" row-span="3" col-span="1" vsize-policy="3" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
           <scrollpane id="2dd0f">

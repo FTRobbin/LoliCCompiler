@@ -134,7 +134,9 @@ public class PrintAST implements Visitor {
         PrintLine("ArrayType");
         ++inc;
         at.baseType.accept(this);
-        at.cap.accept(this);
+        if (at.cap != null) {
+            at.cap.accept(this);
+        }
         --inc;
     }
 

@@ -16,9 +16,9 @@ public class UniIntOp extends Op {
         this.op = op;
         if (expr.exprs.get(0).isConst) {
             int val = this.op.cal((Integer)expr.exprs.get(0).value);
-            expr.setValue(new IntType(), true, false, val);
+            expr.setValue(new IntType(), true, false, false, val);
         } else {
-            expr.setValue(new IntType(), false, false, null);
+            expr.setValue(new IntType(), false, false, false, null);
         }
     }
 

@@ -12,7 +12,7 @@ public class SizeOfFact extends OpFactory {
     @Override
     public Op createOp(Expr expr) {
         expr.consts = new LinkedList<Object>();
-        expr.consts.add(expr.exprs.get(0).retSize);
+        expr.consts.add(expr.exprs.get(0).retType.size);
         return new IntOp(expr);
     }
 }

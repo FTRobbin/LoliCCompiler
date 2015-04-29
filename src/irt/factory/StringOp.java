@@ -14,7 +14,7 @@ public class StringOp extends Op{
 
     public StringOp(Expr expr) {
         this.expr = expr;
-        expr.setValue(new PointerType(new CharType()), false, false, null);
+        expr.setValue(new PointerType(new CharType()), false, false, true, null);
     }
 
     @Override

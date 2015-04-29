@@ -69,7 +69,7 @@ public class InterpreterWin {
                     try {
                         output.print("read from input file \"" + path + name + "\"\n");
                         FileInput fileInput = new FileInput(path + name);
-                        output.print(fileInput.getInput());
+                        output.print(fileInput.getLine());
                         output.print("interpret \"" + fileName.getText() + "\"\n");
                         Thread t = new Thread(new InterpreterShell(fileInput, output, new BufferedReader(new FileReader(fileName.getText()))));
                         t.start();

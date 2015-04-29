@@ -299,7 +299,7 @@ public class Interpreter implements IRTVisitor {
         for (int i = 0; i < retSize; ++i) {
             ret = ret << 8 | getBit(fetchByte(pt + i));
         }
-        output.print("=========================================\n");
+        output.print("\n=========================================\n");
         output.print("Process exited with return value " + ret + "\n");
         return ret;
     }

@@ -14,7 +14,7 @@ public class PostByteOp extends Op {
     public PostByteOp(Expr expr, int op, int delta) {
         this.expr = expr;
         this.delta = delta * (op == Symbols.INC_OP ? 1 : -1);
-        expr.setValue(expr.exprs.get(0).retType, false, false, null);
+        expr.setValue(expr.exprs.get(0).retType, false, false, false, null);
     }
 
     @Override

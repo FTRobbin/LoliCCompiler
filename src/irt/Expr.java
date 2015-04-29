@@ -18,7 +18,7 @@ public class Expr implements IRTNode {
 
     public Type retType;
     public int retSize;
-    public boolean isConst, isLeft, isStatic;
+    public boolean isConst, isLeft, isLoad, isStatic;
     public Object value;
 
     public Expr(LinkedList<Expr> exprs, LinkedList<Object> consts, OpFactory fact) {
@@ -28,7 +28,7 @@ public class Expr implements IRTNode {
         this.op = fact.createOp(this);
     }
 
-    public void setValue(Type retType, boolean isConst, boolean isLeft, Object value) {
+    public void setValue(Type retType, boolean isConst, boolean isLeft, boolean isLoad, Object value) {
         this.retType = retType;
         this.retSize = retType instanceof ArrayType ? 4 : retType.size;
         this.isConst = isConst;

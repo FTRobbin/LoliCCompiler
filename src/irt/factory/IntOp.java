@@ -11,7 +11,7 @@ public class IntOp extends Op {
 
     public IntOp(Expr expr) {
         this.expr = expr;
-        expr.setValue(new IntType(), true, false, expr.consts.get(0));
+        expr.setValue(new IntType(), true, false, false, expr.consts.get(0));
     }
 
     @Override

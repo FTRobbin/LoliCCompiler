@@ -102,7 +102,7 @@ public class IRTBuilder implements Visitor {
         } else if (a instanceof IntType) {
             return b instanceof IntType;
         } else if (a instanceof PointerType) {
-            if (!(b instanceof PointerType)) {
+            if (!(b instanceof PointerType && !(b instanceof ArrayType))) {
                 return false;
             } else {
                 return typeEqual(((PointerType) a).baseType, ((PointerType) b).baseType);
@@ -227,7 +227,7 @@ public class IRTBuilder implements Visitor {
 
     void define(int id, Type type, int isVari) {
         if (table.checkCurId(id)) {
-            if (!isGlobal() || !typeEqual(type, table.getId(id))) {
+            if (!isGlobal() || !typeEqual(type, table.getId(id)) || table.checkType(id) != isVari) {
                 throw new SemanticError("Identifier " + id + " redeclared as a different kind of symbol.\n");
             } else if (table.checkDefi(id)) {
                 throw new SemanticError("Identifier " + id + " redefined.\n");
@@ -248,14 +248,31 @@ public class IRTBuilder implements Visitor {
 
     void declare(int id, Type type, int isVari) {
         if (table.checkCurId(id)) {
-            if (!isGlobal() || !typeEqual(type, table.getId(id))) {
-                throw new SemanticError("Identifier " + id + " redeclared as a different kind of symbol.\n");
+            if (!isGlobal() || !typeEqual(type, table.getId(id)) || table.checkType(id) != isVari) {
+                throw new SemanticError("Identifier #" + id + " redeclared as a different kind of symbol.\n");
             }
         } else {
             if (isVari == VariableTable.VARIABLE) {
                 table.addVari(id, type);
             } else {
                 table.addType(id, type);
+            }
+        }
+    }
+
+    private String getString2(Initializer init) {
+        if (init instanceof InitList) {
+            List<Initializer> list = ((InitList) init).list;
+            if (list.size() != 1) {
+                return null;
+            }
+            return getString2(list.get(0));
+        } else {
+            Expression expr = ((InitValue)init).expr;
+            if (expr instanceof StringConst) {
+                return ((StringConst)expr).str;
+            } else {
+                return null;
             }
         }
     }
@@ -273,30 +290,65 @@ public class IRTBuilder implements Visitor {
         }
     }
 
+    void checkInit(Initializer init)  {
+        if (init instanceof InitList) {
+            List<Initializer> list = ((InitList) init).list;
+            for (Initializer init1 : list) {
+                checkInit(init1);
+            }
+        } else {
+            ((InitValue)init).expr.accept(this);
+            stack.pop();
+        }
+    }
+
     LinkedList<Pair> calInit(Type vari, Initializer init, int delta) {
         LinkedList<Pair> ret = new LinkedList<>();
 
         String s = getString(init);
+        if (s == null) {
+            if (vari instanceof ArrayType) {
+                ArrayType base = (ArrayType) vari;
+                if (base.baseType instanceof CharType) {
+                    s = getString2(init);
+                }
+            }
+        }
         if (s != null) {
             if (vari instanceof ArrayType) {
                 ArrayType base = (ArrayType)vari;
                 if (base.baseType instanceof CharType) {
                     if (base.cap == null) {
-                        base.cap = new IntConst(s.length() + 1);
-                        base.cap.accept(this);
-                        base.size = (Integer)base.cap.retType.value * base.baseType.size;
-                    }
-                    if ((Integer)base.cap.retType.value < s.length()) {
-                        throw new SemanticError("Initializer is too long.\n");
-                    } else {
-                        for (int i = 0; i < s.length(); ++i) {
-                            ret.add(new Pair(delta + i, new Expr(null, getList(s.charAt(i)), Factories.CHAR.getFact())));
+                        new IntConst(s.length() + 1).accept(this);
+                        Expr cap = (Expr)stack.pop();
+                        if (!cap.isConst) {
+                            throw new SemanticError("The size of an array must be constant.\n");
+                        } else {
+                            if (!isInt(cap.retType)) {
+                                cap = new Expr(getExprList((Expr) (stack.pop())), getList(new IntType()), Factories.CAST.getFact());
+                            }
+                            Integer num = (Integer)(cap.value);
+                            if (num <= 0) {
+                                throw new SemanticError("The size of an array must be positive.\n");
+                            } else {
+                                vari.size = num * base.baseType.size;
+                            }
                         }
-                        if ((Integer)base.cap.retType.value > s.length()) {
-                            ret.add(new Pair(delta + s.length(), new Expr(null, getList('\0'), Factories.CHAR.getFact())));
-                        }
-                        return ret;
                     }
+                    int size = Math.min(s.length(), base.size / base.baseType.size);
+                    for (int i = 0; i < size; ++i) {
+                        ret.add(new Pair(delta + i, new Expr(null, getList(s.charAt(i)), Factories.CHAR.getFact())));
+                    }
+                    if ((base.size / base.baseType.size) > s.length()) {
+                        ret.add(new Pair(delta + s.length(), new Expr(null, getList('\0'), Factories.CHAR.getFact())));
+                    }
+                    return ret;
+                }
+            } else if (vari instanceof PointerType) {
+                Type base = ((PointerType)vari).baseType;
+                if (base instanceof CharType) {
+                    ret.add(new Pair(delta, new Expr(null, getList(s), Factories.STRING.getFact())));
+                    return ret;
                 }
             }
         }
@@ -306,29 +358,61 @@ public class IRTBuilder implements Visitor {
             if (init instanceof InitList) {
                 List<Initializer> list = ((InitList) init).list;
                 if (base.cap == null) {
-                    base.cap = new IntConst(list.size());
-                    base.cap.accept(this);
-                    base.size = (Integer)base.cap.retType.value * base.baseType.size;
-                }
-                if ((Integer)(base.cap.retType.value) < list.size()) {
-                    throw new SemanticError("Initializer is too long.\n");
+                    new IntConst(list.size()).accept(this);
+                    Expr cap = (Expr)stack.pop();
+                    if (!cap.isConst) {
+                        throw new SemanticError("The size of an array must be constant.\n");
+                    } else {
+                        if (!isInt(cap.retType)) {
+                            cap = new Expr(getExprList((Expr) (stack.pop())), getList(new IntType()), Factories.CAST.getFact());
+                        }
+                        Integer num = (Integer)(cap.value);
+                        if (num <= 0) {
+                            throw new SemanticError("The size of an array must be positive.\n");
+                        } else {
+                            base.size = num * base.baseType.size;
+                        }
+                    }
                 }
                 int delta1 = base.baseType.size;
-                for (Initializer it : list) {
-                    LinkedList<Pair> tmp = calInit(base.baseType, it, delta1);
-                    ret.addAll(tmp);
+                for (int i = 0; i < list.size(); ++i) {
+                    if (i >= base.size / base.baseType.size) {
+                        checkInit(list.get(i));
+                    } else {
+                        if (base.baseType instanceof ArrayType && list.get(i) instanceof InitValue && getString(list.get(i)) == null) {
+                            //TODO this is not very correct
+                            ret.addAll(calInit(((ArrayType)(base.baseType)).baseType, init, delta + delta1 * i));
+                        } else {
+                            ret.addAll(calInit(base.baseType, list.get(i), delta + delta1 * i));
+                        }
+                    }
                 }
             } else {
                 throw new SemanticError("An array is improperly initialized.\n");
             }
         } else {
-            InitValue val = (InitValue)init;
-            val.expr.accept(this);
-            Expr expr = (Expr)(stack.pop());
-            if (!typeEqual(vari, expr.retType)) {
-                expr = new Expr(getExprList(expr), getList(vari), Factories.CAST.getFact());
+            if (init instanceof InitValue) {
+                InitValue val = (InitValue) init;
+                val.expr.accept(this);
+                Expr expr = (Expr) (stack.pop());
+                if (!typeEqual(vari, expr.retType)) {
+                    expr = new Expr(getExprList(expr), getList(vari), Factories.CAST.getFact());
+                }
+                if (isGlobal() && !expr.isConst) {
+                    throw new SemanticError("Global initialization must be constant.");
+                }
+                ret.add(new Pair(delta, expr));
+            } else {
+                InitList list = (InitList) init;
+                if (list.list.size() > 0) {
+                    for (int i = 1; i < list.list.size(); ++i) {
+                        checkInit(list.list.get(i));
+                    }
+                    ret = calInit(vari, list.list.get(0), delta);
+                } else {
+                    throw new SemanticError("Empty initialization list for a certain value.");
+                }
             }
-            ret.add(new Pair(delta, expr));
         }
         return ret;
     }
@@ -419,7 +503,6 @@ public class IRTBuilder implements Visitor {
     public void visit(FunctionDefi fd) {
         fd.type.accept(this);
         FunctionType type = ((FunctionType)fd.type);
-
         define(fd.name.num, fd.type);
         addScope();
         ++isInFunc;
@@ -468,7 +551,6 @@ public class IRTBuilder implements Visitor {
             define(vd.name.num, type);
             init = calInit(vd.type, vd.init, 0);
         }
-
         if (!isPara()) {
             stack.push(new Decl(vd.name.num, vd.type.size, true, init));
         }
@@ -560,7 +642,12 @@ public class IRTBuilder implements Visitor {
                     decl.type.accept(this);
                     decl.type = resolve(decl.type);
                     if (isUndim(decl.type)) {
-                        throw new SemanticError("Incomplete array type in a structure.\n");
+                        if (st.list.list.lastIndexOf(decl) == st.list.list.size() - 1) {
+                            ArrayType type = (ArrayType)decl.type;
+                            type.size = 0;
+                        } else {
+                            throw new SemanticError("Incomplete array type in a structure.\n");
+                        }
                     }
                     decl.type.isLeft = true;
                     if (st.mem.checkId(decl.name.num)) {
@@ -626,16 +713,23 @@ public class IRTBuilder implements Visitor {
         vt.size = 0;
     }
 
+    DefinedType lastType = null;
+
     public void visit(DefinedType dt) {
         if (!table.checkId(dt.name.num)) {
             throw new SemanticError("Defined type " + dt.name.toString() + " undeclared.\n");
         } else {
             if (table.checkType(dt.name.num) != VariableTable.TYPENAME) {
-                throw new SemanticError("Defined type " + dt.name.toString() + " is not a type.\n");
+                if (dt.equals(lastType)) {
+                    return;
+                } else {
+                    throw new SemanticError("Defined type " + dt.name.toString() + " is not a type.\n");
+                }
             } else {
                 dt.baseType = table.getId(dt.name.num);
                 dt.size = dt.baseType.size;
             }
+            lastType = dt;
         }
     }
 

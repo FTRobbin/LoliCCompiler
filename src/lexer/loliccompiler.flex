@@ -105,7 +105,7 @@ singleLineComments = "//" {inputCharacter}* {lineTerminator}?
 //multiLineComments = "/*" [^*]~ "*/" | "/*" "*"+ "/"
 
 /* Identifier */
-letters = [a-zA-Z]
+letters = [a-zA-Z_$]
 lettersAndDigits = [a-zA-Z0-9_$]
 identifier = {letters}{lettersAndDigits}*
 
@@ -132,7 +132,6 @@ asciiNumberCharacter = (\\x[0-9A-Fa-f][0-9A-Fa-f])|(\\[0-3][0-7][0-7])
     /* Comments */
     {singleLineComments}      { /* ignore */ }
     "/*"            { yybegin(YYCOMMENT); }
-    "*/"            { reportError("Unexpected end of a comment."); }
 
     /* Keywords */
     "void"          { return symbol(VOID); }

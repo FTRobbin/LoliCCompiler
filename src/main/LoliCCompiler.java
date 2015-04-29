@@ -48,6 +48,8 @@ public class LoliCCompiler {
             Main.parseAndVisit(new BufferedReader(new FileReader(file)), out, v);
         } catch (SyntacticError se) {
             showError(se);
+        } catch (CompileError ce) {
+            throw ce;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -171,7 +173,7 @@ public class LoliCCompiler {
                 try {
                     visit(new semantic.IRTBuilder());
                     showMessage("SemanticCheck completed without error.\n");
-                } catch (SemanticError ce) {
+                } catch (CompileError ce) {
                     showError(ce);
                 }
             }
@@ -196,7 +198,7 @@ public class LoliCCompiler {
                 try {
                     visit(new semantic.SemanticCheck());
                     showMessage("Old-buggy-SemanticCheck completed without error.\n");
-                } catch (SemanticError ce) {
+                } catch (CompileError ce) {
                     showError(ce);
                 }
             }
@@ -205,7 +207,7 @@ public class LoliCCompiler {
 
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("LoliCCompiler");
+        JFrame frame = new JFrame("LoliCCompiler\u3000\uff5e\u96ea\u82b1\u7e5a\u4e71 Ver\uff5e");
         frame.setContentPane(new LoliCCompiler().panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

@@ -13,7 +13,7 @@ public class CallOp extends Op {
 
     public CallOp(Expr expr) {
         this.expr = expr;
-        expr.setValue(((FunctionType)(expr.exprs.get(0).retType)).returnType, false, false, null);
+        expr.setValue(((FunctionType)(expr.exprs.get(0).retType)).returnType, false, false, false, null);
     }
 
     @Override

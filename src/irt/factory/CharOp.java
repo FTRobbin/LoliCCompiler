@@ -11,7 +11,7 @@ public class CharOp extends Op {
 
     public CharOp(Expr expr) {
         this.expr = expr;
-        expr.setValue(new CharType(), true, false, expr.consts.get(0));
+        expr.setValue(new CharType(), true, false, false, expr.consts.get(0));
     }
 
     @Override

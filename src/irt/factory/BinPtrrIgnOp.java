@@ -14,7 +14,7 @@ public class BinPtrrIgnOp extends Op {
     public BinPtrrIgnOp(Expr expr, BinIntFact.Ops op) {
         this.expr = expr;
         this.op = op;
-        expr.setValue(expr.exprs.get(0).retType, false, true, null);
+        expr.setValue(expr.exprs.get(0).retType, false, true, false, null);
     }
 
     @Override

@@ -16,10 +16,13 @@ public class BinIntOp extends Op {
         this.op = op;
         Expr expr1 = expr.exprs.get(0), expr2 = expr.exprs.get(1);
         if (expr1.isConst && expr2.isConst) {
-            int val = this.op.cal((Integer)expr1.value, (Integer)expr2.value);
-            expr.setValue(new IntType(), true, false, val);
+            Integer val = null;
+            if (expr1.value != null && expr2.value != null) {
+                val = this.op.cal((Integer) expr1.value, (Integer) expr2.value);
+            }
+            expr.setValue(new IntType(), true, false, false, val);
         } else {
-            expr.setValue(new IntType(), false, false, null);
+            expr.setValue(new IntType(), false, false, false, null);
         }
     }
 

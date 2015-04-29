@@ -11,7 +11,7 @@ public class AdrOp extends Op {
 
     public AdrOp(Expr expr) {
         this.expr = expr;
-        expr.setValue(new PointerType(expr.exprs.get(0).retType), false, false, null);
+        expr.setValue(new PointerType(expr.exprs.get(0).retType), expr.exprs.get(0).isLoad, false, false, null);
     }
 
     @Override

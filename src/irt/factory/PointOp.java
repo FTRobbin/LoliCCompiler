@@ -15,7 +15,7 @@ public class PointOp extends Op{
     public PointOp(Expr expr, Type ret, int delta) {
         this.expr = expr;
         this.delta = delta;
-        expr.setValue(ret, false, true, null);
+        expr.setValue(ret, false, true, false, null);
     }
 
     @Override

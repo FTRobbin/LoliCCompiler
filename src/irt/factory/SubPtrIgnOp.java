@@ -13,7 +13,7 @@ public class SubPtrIgnOp extends Op {
     public SubPtrIgnOp(Expr expr, int size) {
         this.expr = expr;
         this.size = size;
-        expr.setValue(new IntType(), false, true, null);
+        expr.setValue(new IntType(), false, true, false, null);
     }
 
     @Override

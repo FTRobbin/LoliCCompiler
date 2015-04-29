@@ -58,7 +58,9 @@ public class PrettyPrinter implements Visitor {
             if (shell instanceof ArrayType) {
                 ArrayType tmp = (ArrayType)shell;
                 int cur = stack.size();
-                tmp.cap.accept(this);
+                if (tmp.cap != null) {
+                    tmp.cap.accept(this);
+                }
                 String cap = popTo(cur);
                 str = str + "[" + cap + "]";
                 return cover(str, tmp.baseType);
@@ -510,11 +512,11 @@ public class PrettyPrinter implements Visitor {
     public void visit(UnaryExpr ue) {
         push(SymbolsRev.getSymbol(ue.op));
         boolean para = ue.getPrecedence() > ue.expr.getPrecedence();
-        if (para) {
+        if (para || ue.op == Symbols.SIZEOF) {
             push("(");
         }
         ue.expr.accept(this);
-        if (para) {
+        if (para || ue.op == Symbols.SIZEOF) {
             push(")");
         }
     }

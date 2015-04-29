@@ -13,7 +13,7 @@ public class AssignOp extends Op {
     public AssignOp(Expr expr, int size) {
         this.expr = expr;
         this.size = size;
-        expr.setValue(expr.exprs.get(0).retType, false, true, null);
+        expr.setValue(expr.exprs.get(0).retType, false, true, false, null);
     }
 
     @Override

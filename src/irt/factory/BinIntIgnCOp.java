@@ -14,13 +14,13 @@ public class BinIntIgnCOp extends Op {
     public BinIntIgnCOp(Expr expr, BinIntFact.Ops op) {
         this.expr = expr;
         this.op = op;
-        expr.setValue(expr.exprs.get(0).retType, false, true, null);
+        expr.setValue(expr.exprs.get(0).retType, false, true, false, null);
     }
 
     @Override
     public int interpret(Interpreter v) {
         int addr = expr.exprs.get(0).accept(v);
-        int val = op.cal((int)(v.fetchByte(addr)), v.fetchInt(expr.exprs.get(1).accept(v)));
+        int val = op.cal(v.getBit(v.fetchByte(addr)), v.fetchInt(expr.exprs.get(1).accept(v)));
         return v.writeByte(addr, (byte)val);
     }
 }

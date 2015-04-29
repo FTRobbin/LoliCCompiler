@@ -11,7 +11,7 @@ public class RefOp extends Op {
 
     public RefOp(Expr expr, Type type) {
         this.expr = expr;
-        expr.setValue(type, false, true, null);
+        expr.setValue(type, false, true, false, null);
     }
 
     @Override

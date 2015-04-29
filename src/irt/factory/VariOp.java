@@ -12,8 +12,13 @@ public class VariOp extends Op{
 
     public VariOp(Expr expr) {
         this.expr = expr;
-        expr.setValue((Type)expr.consts.get(1),
-                false, !(((Type)expr.consts.get(1)) instanceof ArrayType), null);
+        if (expr.consts.get(1) instanceof ArrayType) {
+            expr.setValue((Type)expr.consts.get(1),
+                    true, !(((Type)expr.consts.get(1)) instanceof ArrayType), false, null);
+        } else {
+            expr.setValue((Type)expr.consts.get(1),
+                    false, !(((Type)expr.consts.get(1)) instanceof ArrayType), true, null);
+        }
     }
 
     @Override

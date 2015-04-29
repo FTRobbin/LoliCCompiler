@@ -18,8 +18,8 @@ int main() {
     myintKai myintKaiNi;
     myintKai myintKai;
     myintKaiNi = myint;
-    myint = mymain();
-    myintKaiNi = mymainKai();
+    myint = 0;
+    myintKaiNi = 1;
     return 0;
 }
 

@@ -13,9 +13,9 @@ public class CastBtoIOp extends Op{
         this.expr = expr;
         if (expr.exprs.get(0).isConst) {
             int val = (int)(((Character)(expr.exprs.get(0).value)).charValue());
-            expr.setValue((Type)(expr.consts.get(0)), true, false, val);
+            expr.setValue((Type)(expr.consts.get(0)), true, false, false, val);
         } else {
-            expr.setValue((Type) (expr.consts.get(0)), false, false, null);
+            expr.setValue((Type) (expr.consts.get(0)), false, false, false, null);
         }
     }
 

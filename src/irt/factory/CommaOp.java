@@ -11,9 +11,9 @@ public class CommaOp extends Op {
     public CommaOp(Expr expr) {
         this.expr = expr;
         if (expr.exprs.get(1).isConst) {
-            expr.setValue(expr.exprs.get(1).retType, true, false, expr.exprs.get(1).value);
+            expr.setValue(expr.exprs.get(1).retType, true, false, false, expr.exprs.get(1).value);
         } else {
-            expr.setValue(expr.exprs.get(1).retType, false, false, null);
+            expr.setValue(expr.exprs.get(1).retType, false, false, false, null);
         }
     }
 

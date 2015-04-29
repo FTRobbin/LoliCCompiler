@@ -14,7 +14,11 @@ public class BinPtrrOp extends Op {
     public BinPtrrOp(Expr expr, BinIntFact.Ops op) {
         this.expr = expr;
         this.op = op;
-        expr.setValue(expr.exprs.get(1).retType, false, false, null);
+        if (expr.exprs.get(0).isConst && expr.exprs.get(1).isConst) {
+            expr.setValue(expr.exprs.get(1).retType, true, false, false, null);
+        } else {
+            expr.setValue(expr.exprs.get(1).retType, false, false, false, null);
+        }
     }
 
     @Override

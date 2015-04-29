@@ -13,7 +13,11 @@ public class SubPtrOp extends Op {
     public SubPtrOp(Expr expr, int size) {
         this.expr = expr;
         this.size = size;
-        expr.setValue(new IntType(), false, false, null);
+        if (expr.exprs.get(0).isConst && expr.exprs.get(1).isConst) {
+            expr.setValue(new IntType(), true, false, false, null);
+        } else {
+            expr.setValue(new IntType(), false, false, false, null);
+        }
     }
 
     @Override

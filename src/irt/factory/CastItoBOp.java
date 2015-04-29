@@ -13,9 +13,9 @@ public class CastItoBOp extends Op{
         this.expr = expr;
         if (expr.exprs.get(0).isConst) {
             byte val = (byte)((Integer)(expr.exprs.get(0).value)).intValue();
-            expr.setValue((Type)(expr.consts.get(0)), true, false, val);
+            expr.setValue((Type)(expr.consts.get(0)), true, false, false, val);
         } else {
-            expr.setValue((Type) (expr.consts.get(0)), false, false, null);
+            expr.setValue((Type) (expr.consts.get(0)), false, false, false, null);
         }
     }
 

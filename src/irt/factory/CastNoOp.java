@@ -12,7 +12,7 @@ public class CastNoOp extends Op{
     public CastNoOp(Expr expr) {
         this.expr = expr;
         Expr expr1 = expr.exprs.get(0);
-        expr.setValue((Type)(expr.consts.get(0)), expr1.isConst, false, expr1.value);
+        expr.setValue((Type)(expr.consts.get(0)), expr1.isConst, false, false, expr1.value);
     }
 
     @Override
