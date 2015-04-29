@@ -2,7 +2,6 @@ package main;
 
 import ast.visitors.Visitor;
 import exception.CompileError;
-import exception.SemanticError;
 import exception.SyntacticError;
 
 import javax.swing.*;
@@ -11,8 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.*;
 
 /**
@@ -45,7 +42,7 @@ public class LoliCCompiler {
         String file = textField1.getText();
         OutputStream out = new ByteArrayOutputStream();
         try {
-            Main.parseAndVisit(new BufferedReader(new FileReader(file)), out, v);
+            Phase1Test.parseAndVisit(new BufferedReader(new FileReader(file)), out, v);
         } catch (SyntacticError se) {
             showError(se);
         } catch (CompileError ce) {

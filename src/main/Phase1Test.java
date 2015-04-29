@@ -13,7 +13,7 @@ import java.io.Reader;
  * Created by Robbin Ni on 2015/4/6.
  */
 
-public class Main {
+public class Phase1Test {
 
      public static void parseAndVisit(Reader input, OutputStream output, Visitor visitor) throws Exception {
          Parser parser = new Parser(input);
