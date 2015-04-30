@@ -1,4 +1,4 @@
 all:
-    ant run
+	ant all
 clear:
-    ant clear
+	ant clear

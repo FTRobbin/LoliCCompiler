@@ -9,8 +9,6 @@ import ast.nodes.declaration.FunctionDefi;
 import ast.nodes.Program;
 import ast.nodes.statment.*;
 import ast.nodes.type.*;
-import com.sun.jna.Function;
-import com.sun.jna.Pointer;
 import parser.Symbols;
 import parser.SymbolsRev;
 
