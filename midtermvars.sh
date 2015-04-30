@@ -1,1 +1,1 @@
-CCHK="javac bin/main/Midterm "
+CCHK="java -classpath ../lib/java-cup-11b-runtime.jar: main.Midterm "
