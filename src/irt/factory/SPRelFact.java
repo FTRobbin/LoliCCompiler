@@ -9,13 +9,13 @@ import semantic.IRTBuilder;
 /**
  * Created by Robbin Ni on 2015/4/23.
  */
-public class SpRelFact extends OpFactory {
+public class SPRelFact extends OpFactory {
 
     public static int OR = 1, AND = 0;
 
     int op;
 
-    public SpRelFact(int op) {
+    public SPRelFact(int op) {
         this.op = op;
     }
 
