@@ -1,0 +1,1 @@
+CCHK="javac bin/main/Midterm "
