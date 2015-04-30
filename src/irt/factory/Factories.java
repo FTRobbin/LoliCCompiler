@@ -39,8 +39,8 @@ public enum Factories {
     BIGEQ(new BinIntFact(BinIntFact.Ops.GE_OP)),
     EQUAL(new BinIntFact(BinIntFact.Ops.EQ_OP)),
     NEQUAL(new BinIntFact(BinIntFact.Ops.NE_OP)),
-    LOGAND(new SPRelFact(SPRelFact.AND)),
-    LOGOR(new SPRelFact(SPRelFact.OR)),
+    LOGAND(new SpRelFact(SpRelFact.AND)),
+    LOGOR(new SpRelFact(SpRelFact.OR)),
 
     UNREF(new RefFact()),
     UNADR(new AdrFact()),

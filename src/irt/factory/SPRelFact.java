@@ -9,13 +9,13 @@ import semantic.IRTBuilder;
 /**
  * Created by Robbin Ni on 2015/4/23.
  */
-public class SPRelFact extends OpFactory {
+public class SpRelFact extends OpFactory {
 
     public static int OR = 1, AND = 0;
 
     int op;
 
-    public SPRelFact(int op) {
+    public SpRelFact(int op) {
         this.op = op;
     }
 
@@ -32,7 +32,7 @@ public class SPRelFact extends OpFactory {
         expr.exprs.add(expr1);
         expr.exprs.add(expr2);
         if (IRTBuilder.getRank(expr1.retType) == 4 && IRTBuilder.getRank(expr2.retType) == 4) {
-            return new SPRelOp(expr, op);
+            return new SpRelOp(expr, op);
         } else {
             throw new SemanticError("Unexpected ||/&& operands type.\n");
         }
