@@ -1,4 +1,4 @@
 all:
 	ant all
-clear:
-	ant clear
+clean:
+	ant clean
