@@ -12,8 +12,8 @@ import java.util.ArrayList;
 final class UglyPrinterTest {
 
     public static void main(String argv[]) throws IOException {
-        String path = "D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\AST\\";
         ArrayList<String> names = new ArrayList<String>();
+        String path = "D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\AST\\";
         names.add("bfs");
         names.add("helloworld");
         names.add("fibonacci");
