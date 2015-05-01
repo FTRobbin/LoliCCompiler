@@ -655,6 +655,7 @@ public class IRTBuilder implements Visitor {
                     } else {
                         st.mem.addEntry(decl.name.num, decl.type, st.size);
                     }
+                    //TODO : space patch bug!
                     st.size += decl.type.size;
                 }
                 if (st.size % 4 != 0) {
