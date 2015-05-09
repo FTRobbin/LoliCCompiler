@@ -1,5 +1,7 @@
 package main;
 
+import analysis.ControlFlowGraph;
+import analysis.StaticSingleAssignment;
 import ast.nodes.Program;
 import exception.CompileError;
 import exception.SemanticError;
@@ -53,7 +55,10 @@ public final class Phase3Test {
                 Prog root = (Prog)builder.getRoot();
                 MIRGen gen = new MIRGen();
                 try {
-                    gen.gen(root);
+                    mir.Program IRroot = gen.gen(root);
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    StaticSingleAssignment.turntoSSA(IRroot);
                 } catch (CompileError ce) {
                     System.out.println(ce.desc);
                     throw new InternalError("Test failed.\n");

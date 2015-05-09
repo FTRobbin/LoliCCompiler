@@ -1,5 +1,7 @@
 package mir;
 
+import analysis.cfg.Block;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,9 +13,7 @@ public abstract class MIRInst {
     public String comment;
 
     public MIRInst setLabel(Label label) {
-        if (!label.isDummy()) {
-            this.label = label;
-        }
+        this.label = label;
         return this;
     }
 
@@ -36,4 +36,7 @@ public abstract class MIRInst {
         ret.add(s);
         return ret;
     }
+
+    public boolean isLeader = false;
+    public Block block;
 }

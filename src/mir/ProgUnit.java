@@ -1,5 +1,8 @@
 package mir;
 
+import analysis.ControlFlowGraph;
+import analysis.cfg.Graph;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,5 +41,54 @@ public class ProgUnit {
         }
         ret.add("end");
         return ret;
+    }
+
+    public Graph graph;
+
+    public void dummyCut() {
+        LinkedList<MIRInst> list1 = new LinkedList<>();
+        for (MIRInst inst : list)  {
+            if (inst.label != null && inst.label.isDummy()) {
+                inst.label = null;
+            }
+        }
+
+        int cnt = 0;
+        for (MIRInst inst : list)  {
+            if (inst instanceof EmptyInst) {
+                if (inst.label != null) {
+                    if (cnt == list.size() - 1 || list.get(cnt + 1).label != null) {
+                        list1.add(inst);
+                    } else {
+                        list.get(cnt + 1).label = inst.label;
+                    }
+                }
+            } else {
+                list1.add(inst);
+            }
+            ++cnt;
+        }
+        for (MIRInst inst : list1) {
+            if (inst.label != null) {
+                inst.label.inst = inst;
+            }
+        }
+        list = list1;
+    }
+
+    public ProgUnit getCFG() {
+        graph = new Graph();
+        ControlFlowGraph.markLeader(list);
+        ControlFlowGraph.cutBlocks(list, graph);
+        ControlFlowGraph.addEdges(list, graph);
+        return this;
+    }
+
+    public String printCFG() {
+        return this.label.name + ":\n" + graph.print();
+    }
+
+    public String printSSA() {
+        return this.label.name + ":\n" + graph.printSSA();
     }
 }

@@ -2,6 +2,7 @@ package mir;
 
 import ast.nodes.expression.Symbol;
 import irt.*;
+import irt.factory.IntOp;
 
 import java.util.*;
 
@@ -92,7 +93,7 @@ public class MIRGen {
 
     void addLabelEntry(int id, Label label) {
         int cur = curScope();
-        while (id == Symbol.getnum("main") && toFill.containsKey(id) && toFill.get(id).size() > 0 || checkLabelEntry(id)) {
+        while (checkLabelEntry(id)) {
             BranchInst inst = toFill.get(id).pop();
             filld.get(id).pop();
             inst.setTarget(label);
@@ -133,10 +134,12 @@ public class MIRGen {
         for (Map.Entry<Integer, Func> entry : set) {
             funcs.peek().put(entry.getKey(), new VarName(curScope(), "@" + Symbol.getstr(entry.getKey())));
         }
-        __global.addInst(getBranch(new GotoInst(null), Symbol.getnum("main")));
         for (Map.Entry<Integer, Func> entry : set) {
             root.addUnit(gen(entry.getValue()));
         }
+        VarName ret = new VarName();
+        __global.addInst(new CallInst(ret, new IntConst(0), getEntry(Symbol.getnum("main"))));
+        __global.dummyCut();
         delScope();
 
         return root;
@@ -158,11 +161,11 @@ public class MIRGen {
         }
         Label dummy = new Label(Label.DUMMY);
         ret.addInst(gen(new Label(Label.DUMMY), func.st, dummy));
-        if (dummy.used()) {
-            dummy.reInit();
+        if (!dummy.isDummy()) {
             ret.addInst((new ReturnInst()).setLabel(dummy));
         }
         delScope();
+        ret.dummyCut();
         return ret;
     }
 
@@ -242,7 +245,7 @@ public class MIRGen {
 
     public List<MIRInst> gen(Label cur, ItSt st, Label next) {
         List<MIRInst> list = new LinkedList<>();
-        Label expr = new Label(Label.DUMMY), body = new Label(Label.FALL | Label.DUMMY), inct = new Label(Label.DUMMY), jump = new Label(Label.DUMMY);
+        Label expr = new Label(), body = new Label(Label.FALL | Label.DUMMY), inct = new Label(Label.DUMMY), jump = new Label(Label.DUMMY);
         //TODO the fall optimization
         list.addAll(genStat(cur, st.init, expr));
         list.addAll(genRel(expr, st.expr, body, next));
@@ -275,11 +278,17 @@ public class MIRGen {
     public List<MIRInst> gen(Label cur, SeSt st, Label next) {
         List<MIRInst> list = new LinkedList<>();
         //TODO the fall optimization
-        Label trjp = new Label(Label.DUMMY), iftr = new Label(Label.FALL | Label.DUMMY), iffl = new Label(Label.DUMMY);
-        list.addAll(genRel(cur, st.expr, iftr, iffl));
-        list.addAll(genStat(iftr, st.tr, trjp));
-        list.add((new GotoInst(next)).setLabel(trjp));
-        list.addAll(genStat(iffl, st.fl, new Label(Label.FALL)));
+        if (st.fl instanceof ExSt && ((ExSt)st.fl).expr.op instanceof IntOp) {
+            Label iftr = new Label(Label.FALL | Label.DUMMY);
+            list.addAll(genRel(cur, st.expr, iftr, next));
+            list.addAll(genStat(iftr, st.tr, next));
+        } else {
+            Label trjp = new Label(Label.DUMMY), iftr = new Label(Label.FALL | Label.DUMMY), iffl = new Label(Label.DUMMY);
+            list.addAll(genRel(cur, st.expr, iftr, iffl));
+            list.addAll(genStat(iftr, st.tr, trjp));
+            list.add((new GotoInst(next)).setLabel(trjp));
+            list.addAll(genStat(iffl, st.fl, next));
+        }
         return list;
     }
 
@@ -288,12 +297,18 @@ public class MIRGen {
     }
 
     public List<MIRInst> genRel(Label cur, Expr expr, Label trLa, Label faLa) {
-        //TODO this can be optimized!!!
+        //TODO this can be optimized using not / oprands
         List<MIRInst> list = new LinkedList<>();
         Label branch = new Label(Label.DUMMY);
         Value ret = gen(cur, expr, list, branch);
-        list.add((new IfInst(RelOp.beq, ret, new IntConst(0), faLa)).setLabel(branch));
-        list.add((new GotoInst(trLa)));
+        if (trLa.isFall()) {
+            list.add((new IfInst(RelOp.beq, ret, new IntConst(0), faLa)).setLabel(branch));
+        } else if (faLa.isFall()) {
+            list.add((new IfInst(RelOp.bne, ret, new IntConst(0), trLa)).setLabel(branch));
+        } else {
+            list.add((new IfInst(RelOp.bne, ret, new IntConst(0), faLa)).setLabel(branch));
+            list.add((new GotoInst(trLa)));
+        }
         return list;
     }
 }

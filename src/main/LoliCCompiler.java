@@ -1,5 +1,7 @@
 package main;
 
+import analysis.ControlFlowGraph;
+import analysis.StaticSingleAssignment;
 import ast.visitors.Visitor;
 import exception.*;
 import irt.Prog;
@@ -36,6 +38,8 @@ public class LoliCCompiler {
     private JButton interpreterButton;
     private JButton oldBuggyCheckButton;
     private JButton IRButton;
+    private JButton CFGButton;
+    private JButton SSAButton;
     private JFrame frame;
 
     private static int cnt = 0;
@@ -91,6 +95,46 @@ public class LoliCCompiler {
         } catch (Exception err) {
 
         }
+    }
+
+    private mir.Program getIR() {
+        String file = textField1.getText();
+        Reader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(file));
+        } catch (FileNotFoundException fe){
+            showMessage("File not found.\n");
+            return null;
+        }
+        Parser parser = new Parser(reader);
+        ast.nodes.Program prog = null;
+        try {
+            prog = (ast.nodes.Program)parser.parse().value;
+        } catch (SyntacticError se) {
+            showMessage(se.desc);
+            return null;
+        } catch (Exception ex) {
+            showMessage("unknown parser error and is not tested.\n");
+            return null;
+        }
+        Prog IRTroot = null;
+        IRTBuilder builder = new IRTBuilder();
+        try {
+            prog.accept(builder);
+            IRTroot = (Prog)builder.getRoot();
+        } catch (SemanticError se) {
+            showMessage(se.desc);
+            return null;
+        }
+        MIRGen gen = new MIRGen();
+        mir.Program IRroot = null;
+        try {
+            IRroot = gen.gen(IRTroot);
+        } catch (exception.InternalError ie) {
+            showMessage(ie.desc);
+            return null;
+        }
+        return IRroot;
     }
 
     public LoliCCompiler() {
@@ -207,47 +251,31 @@ public class LoliCCompiler {
         IRButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String file = textField1.getText();
-                Reader reader = null;
-                try {
-                    reader = new BufferedReader(new FileReader(file));
-                } catch (FileNotFoundException fe){
-                    showMessage("File not found.\n");
-                    return;
-                }
-                Parser parser = new Parser(reader);
-                ast.nodes.Program prog = null;
-                try {
-                    prog = (ast.nodes.Program)parser.parse().value;
-                } catch (SyntacticError se) {
-                    showMessage(se.desc);
-                    return;
-                } catch (Exception ex) {
-                    showMessage("unknown parser error and is not tested.\n");
-                    return;
-                }
-                Prog IRTroot = null;
-                IRTBuilder builder = new IRTBuilder();
-                try {
-                    prog.accept(builder);
-                    IRTroot = (Prog)builder.getRoot();
-                } catch (SemanticError se) {
-                    showMessage(se.desc);
-                    return;
-                }
-                MIRGen gen = new MIRGen();
-                mir.Program IRroot = null;
-                try {
-                    IRroot = gen.gen(IRTroot);
-                } catch (exception.InternalError ie) {
-                    showMessage(ie.desc);
-                    return;
-                }
+                mir.Program IRroot = getIR();
                 java.util.List<String> IR = IRroot.print();
                 textArea1.setText("");
                 for (String s : IR) {
                     textArea1.append(s + "\n");
                 }
+            }
+        });
+        CFGButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mir.Program IRroot = getIR();
+                ControlFlowGraph.getCFG(IRroot);
+                ControlFlowGraph.calDominator(IRroot);
+                textArea1.setText(IRroot.printCFG());
+            }
+        });
+        SSAButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mir.Program IRroot = getIR();
+                ControlFlowGraph.getCFG(IRroot);
+                ControlFlowGraph.calDominator(IRroot);
+                StaticSingleAssignment.turntoSSA(IRroot);
+                textArea1.setText(IRroot.printSSA());
             }
         });
     }

@@ -26,4 +26,27 @@ public class Program {
         }
         return ret;
     }
+
+    public Program getCFG() {
+        for (ProgUnit unit : list) {
+            unit.getCFG();
+        }
+        return this;
+    }
+
+    public String printCFG() {
+        String ret = "";
+        for (ProgUnit unit : list) {
+            ret += unit.printCFG();
+        }
+        return ret;
+    }
+
+    public String printSSA() {
+        String ret = "";
+        for (ProgUnit unit : list) {
+            ret += unit.printSSA();
+        }
+        return ret;
+    }
 }

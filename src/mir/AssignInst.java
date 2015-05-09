@@ -13,6 +13,13 @@ public class AssignInst extends MIRInst {
     public VarName dest;
     public Value src1, src2;
 
+    public AssignInst(ExprOp op, VarName dest) {
+        this.op = op;
+        this.dest = dest;
+        src1 = null;
+        src2 = null;
+    }
+
     public AssignInst(ExprOp op, VarName dest, Value src1) {
         this.op = op;
         this.dest = dest;

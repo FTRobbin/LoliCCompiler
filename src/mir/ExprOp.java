@@ -149,6 +149,12 @@ public enum ExprOp {
         public String print(AssignInst inst) {
             return inst.dest.name + " = *" + inst.src1.name;
         }
+    },
+
+    dcl {
+        public String print(AssignInst inst) {
+            return inst.dest.name;
+        }
     };
 
     public abstract String print(AssignInst inst);

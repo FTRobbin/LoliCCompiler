@@ -19,6 +19,8 @@ public class Label {
     public String name;
     public int id, st = 0;
 
+    public MIRInst inst = null;
+
     public Label() {
         id = cnt++;
         name = "L#" + id;
@@ -30,6 +32,7 @@ public class Label {
     }
 
     public Label(int num) {
+        name = "";
         st = num;
     }
 

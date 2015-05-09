@@ -40,9 +40,7 @@ public class VariOp extends Op{
         if (gen.isNested(id)) {
             list.add((new TrampInst(var)).setLabel(cur));
         } else {
-            if (!cur.isDummy()) {
-                list.add((new EmptyInst()).setLabel(cur));
-            }
+            list.add((new EmptyInst()).setLabel(cur));
         }
         return var;
     }
