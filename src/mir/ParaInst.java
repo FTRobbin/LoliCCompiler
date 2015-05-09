@@ -1,5 +1,7 @@
 package mir;
 
+import java.util.List;
+
 /**
  * Created by Robbin Ni on 2015/5/7.
  */
@@ -11,7 +13,7 @@ public class ParaInst extends MIRInst {
         this.val = val;
     }
 
-    public String print() {
+    public List<String> print() {
         return super.print("para " + val.name);
     }
 }

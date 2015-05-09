@@ -17,7 +17,11 @@ public class VarName extends Value {
     public VarName(Integer uid, String name) {
         this.isTemp = false;
         this.uid = uid;
-        this.name = name + "#" + uid;
+        if (uid > 0) {
+            this.name = name + "#" + uid;
+        } else {
+            this.name = name;
+        }
     }
 
     public VarName() {

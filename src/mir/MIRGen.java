@@ -18,7 +18,9 @@ public class MIRGen {
     HashMap<Integer, LinkedList<BranchInst>> toFill;
     HashMap<Integer, LinkedList<Integer>> filld;
 
-    HashMap<Integer, VarName> funcs;
+    LinkedList<HashMap<Integer, VarName>> funcs;
+
+    Program root;
 
     void init() {
         scopeNum = 0;
@@ -28,11 +30,7 @@ public class MIRGen {
         toFill = new HashMap<>();
         filld = new HashMap<>();
 
-        funcs = new HashMap<>();
-        funcs.put(Symbol.getnum("printf"), new VarName(0, "@printf"));
-        funcs.put(Symbol.getnum("scanf"), new VarName(0, "@scanf"));
-        funcs.put(Symbol.getnum("malloc"), new VarName(0, "@malloc"));
-        funcs.put(Symbol.getnum("getchar"), new VarName(0, "@getchar"));
+        funcs = new LinkedList<>();
 
         Label.reset();
         VarName.reset();
@@ -45,15 +43,28 @@ public class MIRGen {
     void addScope() {
         scopes.push(scopeNum++);
         varTable.push(new HashMap<>());
+        funcs.push(new HashMap<>());
     }
 
     void delScope() {
         scopes.pop();
         varTable.pop();
+        funcs.pop();
     }
 
     void addEntry(int id, VarName var) {
         varTable.peek().put(id, var);
+    }
+
+    public boolean isNested(int id) {
+        int i = 0;
+        for (HashMap<Integer, VarName> map : funcs) {
+            if (i != funcs.size() - 1 && map.containsKey(id)) {
+                return true;
+            }
+            ++i;
+        }
+        return false;
     }
 
     public VarName getEntry(int id) {
@@ -62,8 +73,13 @@ public class MIRGen {
                 return map.get(id);
             }
         }
-        if (funcs.containsKey(id)) {
-            return funcs.get(id);
+        if (funcs.peekLast().containsKey(id)) {
+            return funcs.peekLast().get(id);
+        }
+        for (HashMap<Integer, VarName> map : funcs) {
+            if (map.containsKey(id)) {
+                return map.get(id);
+            }
         }
         System.out.println(Symbol.getstr(id));
         throw new exception.InternalError("Variable not found in MIRGen.\n");
@@ -96,11 +112,18 @@ public class MIRGen {
     public Program gen(Prog pr) {
         init();
 
-        Program root = new Program();
+        root = new Program();
 
         ProgUnit __global = new ProgUnit(new Label("__global"));
         root.addUnit(__global);
         addScope();
+
+        //STL
+        funcs.peek().put(Symbol.getnum("printf"), new VarName(0, "@printf"));
+        funcs.peek().put(Symbol.getnum("scanf"), new VarName(0, "@scanf"));
+        funcs.peek().put(Symbol.getnum("malloc"), new VarName(0, "@malloc"));
+        funcs.peek().put(Symbol.getnum("getchar"), new VarName(0, "@getchar"));
+
         List<Decl> list = pr.decls;
         for (Decl decl : list) {
             //Global initialization
@@ -108,7 +131,7 @@ public class MIRGen {
         }
         Set<Map.Entry<Integer, Func>> set = pr.funcs.entrySet();
         for (Map.Entry<Integer, Func> entry : set) {
-            funcs.put(entry.getKey(), new VarName(curScope(), "@" + Symbol.getstr(entry.getKey())));
+            funcs.peek().put(entry.getKey(), new VarName(curScope(), "@" + Symbol.getstr(entry.getKey())));
         }
         __global.addInst(getBranch(new GotoInst(null), Symbol.getnum("main")));
         for (Map.Entry<Integer, Func> entry : set) {
@@ -120,7 +143,10 @@ public class MIRGen {
     }
 
     public ProgUnit gen(Func func) {
-        ProgUnit ret = new ProgUnit(new Label(Symbol.getstr(func.id)));
+        ProgUnit ret = new ProgUnit(new Label("@" + Symbol.getstr(func.id) + (curScope() > 0 ? "#" + curScope() : "") ));
+        if (curScope() > 0) {
+            funcs.peek().put(func.id, new VarName(curScope(), "@" + Symbol.getstr(func.id)));
+        }
         addLabelEntry(func.id, ret.label);
         addScope();
         VarName retVar = new VarName(curScope(), "#Return");
@@ -168,7 +194,6 @@ public class MIRGen {
         List<Pair> list1 = decl.init;
         if (list1.size() > 0) {
             if (decl.isArray) {
-                int cnt = 0;
                 for (Pair pair : list1) {
                     Label ccur = new Label(Label.DUMMY),
                           cnxt = new Label(Label.DUMMY);
@@ -195,9 +220,16 @@ public class MIRGen {
         Label last = cur;
         for (IRTNode node : st.list) {
             Label ccur = last,
-                  cnxt = cnt == st.list.size() - 1 ? next : (last = new Label(Label.DUMMY));
-            ++cnt;
-            list.addAll(genStat(ccur, node, cnxt));
+                    cnxt = cnt == st.list.size() - 1 ? next : (last = new Label(Label.DUMMY));
+            if (node instanceof Func) {
+                if (!ccur.isDummy()) {
+                    list.add((new EmptyInst()).setLabel(ccur));
+                }
+                root.addUnit(gen((Func)node));
+            } else {
+                ++cnt;
+                list.addAll(genStat(ccur, node, cnxt));
+            }
         }
         return list;
     }

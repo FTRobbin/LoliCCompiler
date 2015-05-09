@@ -1,5 +1,7 @@
 package mir;
 
+import java.util.List;
+
 /**
  * Created by Robbin Ni on 2015/5/7.
  */
@@ -15,7 +17,7 @@ public class CallInst extends MIRInst {
         this.func = func;
     }
 
-    public String print() {
+    public List<String> print() {
         return super.print(dest.name + " = " + "call " + func.name + " " + num.name);
     }
 }

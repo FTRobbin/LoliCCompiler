@@ -23,6 +23,7 @@ import stl.scanfDefi;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -769,6 +770,8 @@ public class IRTBuilder implements Visitor {
 
     public void visit(CompoundStat cs) {
         int pt = stack.size();
+
+        HashMap<Integer, Func> funcs = new HashMap<>();
 
         cs.dlst.accept(this);
         cs.slst.accept(this);

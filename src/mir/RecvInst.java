@@ -1,5 +1,7 @@
 package mir;
 
+import java.util.List;
+
 /**
  * Created by Robbin Ni on 2015/5/8.
  */
@@ -13,7 +15,8 @@ public class RecvInst extends MIRInst {
         this.size = size;
     }
 
-    public String print() {
+    @Override
+    public List<String> print() {
         return super.print("recv " + var.name + " " + size);
     }
 }

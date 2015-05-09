@@ -1,5 +1,7 @@
 package mir;
 
+import java.util.List;
+
 /**
  * Created by Robbin Ni on 2015/5/7.
  */
@@ -26,7 +28,7 @@ public class AssignInst extends MIRInst {
     }
 
     @Override
-    public String print() {
+    public List<String> print() {
         return super.print(this.op.print(this));
     }
 }

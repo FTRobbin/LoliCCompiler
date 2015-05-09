@@ -1,5 +1,7 @@
 package mir;
 
+import java.util.List;
+
 /**
  * Created by Robbin Ni on 2015/5/7.
  */
@@ -19,7 +21,8 @@ public class IfInst extends BranchInst {
         }
     }
 
-    public String print() {
+    @Override
+    public List<String> print() {
         return super.print(this.op.print(this));
     }
 }

@@ -34,7 +34,7 @@ public class ProgUnit {
         ret.add(label.name + ":");
         ret.add("begin");
         for (MIRInst inst : list)  {
-            ret.add(inst.print());
+            ret.addAll(inst.print());
         }
         ret.add("end");
         return ret;

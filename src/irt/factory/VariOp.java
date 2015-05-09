@@ -35,9 +35,15 @@ public class VariOp extends Op{
 
     @Override
     public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
-        if (!cur.isDummy()) {
-            list.add((new EmptyInst()).setLabel(cur));
+        int id = (Integer)this.expr.consts.get(0);
+        VarName var = gen.getEntry(id);
+        if (gen.isNested(id)) {
+            list.add((new TrampInst(var)).setLabel(cur));
+        } else {
+            if (!cur.isDummy()) {
+                list.add((new EmptyInst()).setLabel(cur));
+            }
         }
-        return gen.getEntry((Integer)this.expr.consts.get(0));
+        return var;
     }
 }

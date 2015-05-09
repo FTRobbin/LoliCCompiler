@@ -17,7 +17,7 @@ public class Prog implements IRTNode {
         if (node instanceof Func) {
             funcs.put(((Func)node).id, (Func)node);
         } else if (node instanceof Decl) {
-            decls.add((Decl)node);
+            decls.push((Decl)node);
         } else {
             System.out.print(node.toString());
             throw new InternalError("Unexpected IRTNode in Prog.add().\n");
