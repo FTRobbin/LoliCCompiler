@@ -1,5 +1,6 @@
 package irt.factory;
 
+import ast.nodes.type.FunctionType;
 import exception.SemanticError;
 import irt.Expr;
 

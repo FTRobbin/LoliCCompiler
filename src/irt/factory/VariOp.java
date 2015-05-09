@@ -4,6 +4,9 @@ import ast.nodes.type.ArrayType;
 import ast.nodes.type.Type;
 import interpreter.Interpreter;
 import irt.Expr;
+import mir.*;
+
+import java.util.List;
 
 /**
  * Created by Robbin Ni on 2015/4/24.
@@ -28,5 +31,13 @@ public class VariOp extends Op{
         } else {
             return v.getId((Integer) (expr.consts.get(0)));
         }
+    }
+
+    @Override
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+        if (!cur.isDummy()) {
+            list.add((new EmptyInst()).setLabel(cur));
+        }
+        return gen.getEntry((Integer)this.expr.consts.get(0));
     }
 }

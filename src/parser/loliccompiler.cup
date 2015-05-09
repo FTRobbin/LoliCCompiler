@@ -74,7 +74,7 @@ terminal			TYPEDEF;
 non terminal Program program, external_definition;
 
 non terminal DeclList declaration, declaration_list, init_declarator_list, plain_declaration, parameter_list, declarator_list, struct_declarator_list;
-non terminal Declaration init_declarator, declarator, direct_declarator;
+non terminal Declaration init_declarator, declarator, direct_declarator, anonymous_declarator, anonymous_direct_declarator;
 non terminal Declaration struct_declarator, struct_direct_declarator;
 non terminal FunctionDefi function_definition;
 
@@ -140,6 +140,9 @@ function_definition ::=		type_specifier:type declarator:dect {: table.retrive();
 							} else {
 								tmp.returnType.encore(type);
 							}
+							if (((FunctionDecl)dect).para.isAnonymous()) {
+   								throw new SyntacticError("Parameter name omitted.\n");
+							}
 							RESULT = new FunctionDefi(tmp, dect.name, ((FunctionDecl)dect).para, stat); :}
 						;
 
@@ -147,6 +150,11 @@ declaration_list ::= 	declaration:decl
 					{: RESULT = (new DeclList()).add(decl); :}
 					|	declaration_list:list declaration:decl
 					{: RESULT = list.add(decl); :}
+					/*NESTED FUNCTION*/
+					|	function_definition:func
+					{:	RESULT = (new DeclList()).add(func); :}
+					|	declaration_list:list function_definition:func
+					{:	RESULT = list.add(func); :}
 					;
 
 declaration ::=		type_specifier:type COLON
@@ -194,6 +202,15 @@ declaration ::=		type_specifier:type COLON
 
 
 plain_declaration ::=		type_specifier:type declarator:dect
+						{:
+							if (dect.type == null) {
+								dect.type = type;
+							} else {
+								dect.type.encore(type);
+							}
+							dect.specifier = true;
+							RESULT = (new DeclList()).add(dect);:}
+						|	type_specifier:type anonymous_declarator:dect
 						{:
 							if (dect.type == null) {
 								dect.type = type;
@@ -258,6 +275,40 @@ direct_declarator ::=	IDENTIFIER:name
 						}
 						RESULT = dect; :}
 					;
+
+anonymous_direct_declarator ::=
+					{:	RESULT = new VariableDecl(null, null, null); :}
+					|	anonymous_direct_declarator:dect SQUARL constant_expression:expr SQUARR
+					{:
+						if (dect.type == null) {
+							dect.type = new ArrayType(null, expr);
+						} else {
+							dect.type = dect.type.encore(new ArrayType(null, expr));
+						}
+						RESULT = dect; :}
+					|	anonymous_direct_declarator:dect SQUARL SQUARR
+					{:
+						if (dect.type == null) {
+							dect.type = new ArrayType(null, null);
+						} else {
+							dect.type = dect.type.encore(new ArrayType(null, null));
+						}
+						RESULT = dect; :}
+					;
+
+anonymous_declarator ::=
+					anonymous_direct_declarator:dect
+				{:	RESULT = dect;	:}
+				|	MUL anonymous_declarator:dect
+				{:
+					if (dect.type == null) {
+						dect.type = new PointerType(null);
+					} else {
+						dect.type = dect.type.encore(new PointerType(null));
+					}
+					RESULT = dect;	:}
+				;
+
 
 declarator_list ::=		declarator:decl
 					{:	RESULT = (new DeclList()).add(decl); :}

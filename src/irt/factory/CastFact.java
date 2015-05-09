@@ -1,9 +1,8 @@
 package irt.factory;
 
-import ast.nodes.type.CharType;
-import ast.nodes.type.IntType;
-import ast.nodes.type.Type;
+import ast.nodes.type.*;
 import exception.SemanticError;
+import io.netty.util.internal.chmv8.ConcurrentHashMapV8;
 import irt.Expr;
 import semantic.IRTBuilder;
 
@@ -16,6 +15,11 @@ public class CastFact extends OpFactory {
     public Op createOp(Expr expr) {
         Expr expr1 = expr.exprs.get(0);
         Type type = (Type)(expr.consts.get(0));
+        if (expr1.retType instanceof FunctionType && type instanceof PointerType && ((PointerType) type).baseType instanceof FunctionType) {
+            expr1 = new Expr(IRTBuilder.getExprList(expr1), null, Factories.UNADR.getFact());
+            expr.exprs.pop();
+            expr.exprs.push(expr1);
+        }
         if (IRTBuilder.typeEqual(expr1.retType, type)) {
             return new CastNoOp(expr);
         }

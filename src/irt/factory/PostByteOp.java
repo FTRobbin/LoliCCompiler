@@ -2,7 +2,10 @@ package irt.factory;
 
 import interpreter.Interpreter;
 import irt.Expr;
+import mir.*;
 import parser.Symbols;
+
+import java.util.List;
 
 /**
  * Created by Robbin Ni on 2015/4/24.
@@ -23,5 +26,15 @@ public class PostByteOp extends Op {
         byte val = v.fetchByte(addr);
         v.writeByte(addr, (byte)(val + delta));
         return v.writeByte(v.newByte(), val);
+    }
+
+    @Override
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+        Label tcur = new Label(Label.DUMMY);
+        VarName src1 = (VarName)gen.gen(cur, expr.exprs.get(0), list, tcur);
+        VarName dest = new VarName();
+        list.add((new AssignInst(ExprOp.asg, dest, src1)).setLabel(tcur));
+        list.add(new AssignInst(delta < 0 ? ExprOp.sub : ExprOp.add, src1, src1, new IntConst(Math.abs(delta))));
+        return dest;
     }
 }

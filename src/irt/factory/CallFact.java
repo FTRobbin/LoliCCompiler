@@ -1,9 +1,6 @@
 package irt.factory;
 
-import ast.nodes.type.ELLIPSIS;
-import ast.nodes.type.FunctionType;
-import ast.nodes.type.IntType;
-import ast.nodes.type.Type;
+import ast.nodes.type.*;
 import exception.SemanticError;
 import irt.Expr;
 import semantic.IRTBuilder;
@@ -19,6 +16,12 @@ public class CallFact extends OpFactory {
     @Override
     public Op createOp(Expr expr) {
         Type type = expr.exprs.get(0).retType;
+        if (type instanceof PointerType && ((PointerType)type).baseType instanceof FunctionType) {
+            Expr expr1 = new Expr(IRTBuilder.getExprList(expr.exprs.get(0)), null, Factories.UNREF.getFact());
+            expr.exprs.pop();
+            expr.exprs.push(expr1);
+            type = expr.exprs.get(0).retType;
+        }
         if (!(type instanceof FunctionType)) {
             throw new SemanticError("Requires a function expression to call.\n");
         }

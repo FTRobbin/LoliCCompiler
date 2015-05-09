@@ -5,6 +5,9 @@ import ast.nodes.type.PointerType;
 import ast.nodes.type.Type;
 import interpreter.Interpreter;
 import irt.Expr;
+import mir.*;
+
+import java.util.List;
 
 /**
  * Created by Robbin Ni on 2015/4/24.
@@ -34,5 +37,17 @@ public class ArrayOp extends Op {
         } else {
             return ret;
         }
+    }
+
+    @Override
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+        Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
+        Value src1 = gen.gen(cur, expr.exprs.get(0), list, mid);
+        Value src2 = gen.gen(mid, expr.exprs.get(1), list, tcur);
+        VarName tmp = new VarName();
+        list.add(new AssignInst(ExprOp.mul, tmp, src2, new IntConst(this.expr.retType.size)).setLabel(tcur));
+        VarName dest = new VarName();
+        list.add(new AssignInst(ExprOp.add, dest, src1, tmp));
+        return dest;
     }
 }

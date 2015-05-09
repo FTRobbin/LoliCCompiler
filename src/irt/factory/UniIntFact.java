@@ -6,6 +6,7 @@ import ast.nodes.type.PointerType;
 import ast.nodes.type.Type;
 import exception.SemanticError;
 import irt.Expr;
+import mir.ExprOp;
 import semantic.IRTBuilder;
 
 /**
@@ -14,12 +15,41 @@ import semantic.IRTBuilder;
 public class UniIntFact extends OpFactory {
 
     enum Ops {
-        ADD {public int cal(int a) {return a;}},
-        SUB {public int cal(int a) {return -a;}},
-        NOT {public int cal(int a) {return a == 0 ? 1 : 0;}},
-        TILDE {public int cal(int a) {return ~a;}};
+        ADD {
+            public ExprOp IROp() {
+                return ExprOp.asg;
+            }
+            public int cal(int a) {
+                return a;
+            }
+        },
+        SUB {
+            public ExprOp IROp() {
+                return ExprOp.neg;
+            }
+            public int cal(int a) {
+                return -a;
+            }
+        },
+        NOT {
+            public ExprOp IROp() {
+                throw new InternalError("NOT ExprOp does not exist.\n");
+            }
+            public int cal(int a) {
+                return a == 0 ? 1 : 0;
+            }
+        },
+        TILDE {
+            public ExprOp IROp() {
+                return ExprOp.not;
+            }
+            public int cal(int a) {
+                return ~a;
+            }
+        };
 
         abstract public int cal(int a);
+        abstract public ExprOp IROp();
     }
 
     Ops op;

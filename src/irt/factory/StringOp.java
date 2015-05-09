@@ -4,6 +4,9 @@ import ast.nodes.type.CharType;
 import ast.nodes.type.PointerType;
 import interpreter.Interpreter;
 import irt.Expr;
+import mir.*;
+
+import java.util.List;
 
 /**
  * Created by Robbin Ni on 2015/4/24.
@@ -28,5 +31,13 @@ public class StringOp extends Op{
             v.writeByte(addr + s.length(), (byte)0);
         }
         return v.writeInt(v.newInt(), addr);
+    }
+
+    @Override
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+        if (!cur.isDummy()) {
+            list.add((new EmptyInst()).setLabel(cur));
+        }
+        return new StringConst((String) this.expr.consts.get(0));
     }
 }

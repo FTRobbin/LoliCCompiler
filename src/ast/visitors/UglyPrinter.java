@@ -167,7 +167,9 @@ public class UglyPrinter implements Visitor {
         pushSpace();
         Type shell = vd.type.getShell();
         int cur = stack.size();
-        vd.name.accept(this);
+        if (vd.name != null) {
+            vd.name.accept(this);
+        }
         push(cover(popTo(cur), shell));
         pushSpace();
         if (vd.init != null) {
@@ -225,7 +227,10 @@ public class UglyPrinter implements Visitor {
             push(",");
         }
         pushSpace();
+        Type shell = td.type.getShell();
+        int cur = stack.size();
         td.name.accept(this);
+        push(cover(popTo(cur), shell));
     }
 
     public void visit(FunctionType ft) {

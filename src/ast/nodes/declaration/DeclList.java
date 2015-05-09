@@ -27,6 +27,15 @@ public class DeclList implements Visible {
         return this;
     }
 
+    public boolean isAnonymous() {
+        for (Declaration decl : list) {
+            if (decl.name == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void accept(Visitor v) {
         v.visit(this);

@@ -3,6 +3,9 @@ package irt.factory;
 import ast.nodes.type.IntType;
 import interpreter.Interpreter;
 import irt.Expr;
+import mir.*;
+
+import java.util.List;
 
 /**
  * Created by Robbin Ni on 2015/4/24.
@@ -17,5 +20,13 @@ public class IntOp extends Op {
     @Override
     public int interpret(Interpreter v) {
         return v.writeInt(v.newInt(), (int)(expr.consts.get(0)));
+    }
+
+    @Override
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+        if (!cur.isDummy()) {
+            list.add((new EmptyInst()).setLabel(cur));
+        }
+        return new IntConst((int) this.expr.consts.get(0));
     }
 }

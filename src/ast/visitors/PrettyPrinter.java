@@ -200,7 +200,9 @@ public class PrettyPrinter implements Visitor {
         pushSpace();
         Type shell = vd.type.getShell();
         int cur = stack.size();
-        vd.name.accept(this);
+        if (vd.name != null) {
+            vd.name.accept(this);
+        }
         push(cover(popTo(cur), shell));
         if (vd.init != null) {
             cur = stack.size();
@@ -255,7 +257,10 @@ public class PrettyPrinter implements Visitor {
             push(",");
         }
         pushSpace();
+        Type shell = td.type.getShell();
+        int cur = stack.size();
         td.name.accept(this);
+        push(cover(popTo(cur), shell));
     }
 
     public void visit(InitValue iv) {

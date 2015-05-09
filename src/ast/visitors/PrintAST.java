@@ -83,7 +83,9 @@ public class PrintAST implements Visitor {
         PrintLine("VariableDecl");
         ++inc;
         vd.type.accept(this);
-        vd.name.accept(this);
+        if (vd.name != null) {
+            vd.name.accept(this);
+        }
         if (vd.init != null) {
             vd.init.accept(this);
         }

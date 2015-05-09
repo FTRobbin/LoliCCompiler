@@ -12,7 +12,7 @@ public class Func implements IRTNode {
 
     public int id;
     public int retSize;
-    public LinkedList<Integer> paraPos, paraName;
+    public LinkedList<Integer> paraPos, paraName, paraSize;
     public CpSt st;
 
     public Func(int id, int retSize, DeclList paras, CpSt st) {
@@ -21,9 +21,11 @@ public class Func implements IRTNode {
         int pos = 0;
         paraPos = new LinkedList<Integer>();
         paraName = new LinkedList<Integer>();
+        paraSize = new LinkedList<Integer>();
         for (Declaration decl : paras.list)  {
             paraPos.add(pos);
             paraName.add(decl.name.num);
+            paraSize.add(decl.type.size);
             pos += decl.type.size;
         }
         this.st = st;

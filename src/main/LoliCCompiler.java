@@ -1,8 +1,11 @@
 package main;
 
 import ast.visitors.Visitor;
-import exception.CompileError;
-import exception.SyntacticError;
+import exception.*;
+import irt.Prog;
+import mir.MIRGen;
+import parser.Parser;
+import semantic.IRTBuilder;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,6 +35,7 @@ public class LoliCCompiler {
     private JLabel warning;
     private JButton interpreterButton;
     private JButton oldBuggyCheckButton;
+    private JButton IRButton;
     private JFrame frame;
 
     private static int cnt = 0;
@@ -200,11 +204,57 @@ public class LoliCCompiler {
                 }
             }
         });
+        IRButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String file = textField1.getText();
+                Reader reader = null;
+                try {
+                    reader = new BufferedReader(new FileReader(file));
+                } catch (FileNotFoundException fe){
+                    showMessage("File not found.\n");
+                    return;
+                }
+                Parser parser = new Parser(reader);
+                ast.nodes.Program prog = null;
+                try {
+                    prog = (ast.nodes.Program)parser.parse().value;
+                } catch (SyntacticError se) {
+                    showMessage(se.desc);
+                    return;
+                } catch (Exception ex) {
+                    showMessage("unknown parser error and is not tested.\n");
+                    return;
+                }
+                Prog IRTroot = null;
+                IRTBuilder builder = new IRTBuilder();
+                try {
+                    prog.accept(builder);
+                    IRTroot = (Prog)builder.getRoot();
+                } catch (SemanticError se) {
+                    showMessage(se.desc);
+                    return;
+                }
+                MIRGen gen = new MIRGen();
+                mir.Program IRroot = null;
+                try {
+                    IRroot = gen.gen(IRTroot);
+                } catch (exception.InternalError ie) {
+                    showMessage(ie.desc);
+                    return;
+                }
+                java.util.List<String> IR = IRroot.print();
+                textArea1.setText("");
+                for (String s : IR) {
+                    textArea1.append(s + "\n");
+                }
+            }
+        });
     }
 
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("LoliCCompiler\u3000\uff5e\u96ea\u82b1\u7e5a\u4e71 Ver\uff5e");
+        JFrame frame = new JFrame("LoliCCompiler\u3000\uff5e\u7d05\u84ee\u6563\u83ef Ver\uff5e");
         frame.setContentPane(new LoliCCompiler().panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

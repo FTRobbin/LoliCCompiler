@@ -3,8 +3,9 @@ package irt.factory;
 import ast.nodes.type.FunctionType;
 import interpreter.Interpreter;
 import irt.Expr;
+import mir.*;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Robbin Ni on 2015/4/25.
@@ -33,5 +34,20 @@ public class CallOp extends Op {
             tmp += size;
         }
         return v.callFunc(func, head);
+    }
+
+    @Override
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+        Label tcur = new Label(Label.DUMMY);
+        Value func = gen.gen(cur, expr.exprs.get(0), list, tcur);
+        for (int i = 1; i < expr.exprs.size(); ++i) {
+            Label next1 = new Label(Label.DUMMY);
+            Value para = gen.gen(tcur, expr.exprs.get(i), list, next1);
+            list.add((new ParaInst(para)).setLabel(next1));
+            tcur = new Label(Label.DUMMY);
+        }
+        VarName dest = new VarName();
+        list.add((new CallInst(dest, new IntConst(expr.exprs.size() - 1), func).setLabel(tcur)));
+        return dest;
     }
 }

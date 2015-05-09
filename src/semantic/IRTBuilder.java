@@ -542,6 +542,7 @@ public class IRTBuilder implements Visitor {
                 type = vd.type;
             }
             declare(vd.name.num, type);
+            init = new LinkedList<>();
         } else {
             if (type instanceof ArrayType && isPara()) {
                 vd.type = new PointerType(((ArrayType) type).baseType);
@@ -552,7 +553,7 @@ public class IRTBuilder implements Visitor {
             init = calInit(vd.type, vd.init, 0);
         }
         if (!isPara()) {
-            stack.push(new Decl(vd.name.num, vd.type.size, true, init));
+            stack.push(new Decl(vd.name.num, vd.type.size, vd.type instanceof ArrayType, init));
         }
     }
 

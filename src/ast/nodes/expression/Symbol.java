@@ -12,10 +12,12 @@ public class Symbol implements Visible {
     static int count = 0;
 
     static HashMap<String, Integer> dict = new HashMap<String, Integer>();
+    static HashMap<Integer, String> rdict = new HashMap<>();
 
     static public void reset() {
         count = 0;
         dict.clear();
+        rdict.clear();
     }
 
     static public int getnum(String name) {
@@ -25,6 +27,15 @@ public class Symbol implements Visible {
         } else {
             ret = count++;
             dict.put(name.intern(), ret);
+            rdict.put(ret, name.intern());
+        }
+        return ret;
+    }
+
+    static public String getstr(int id) {
+        String ret = "";
+        if (rdict.containsKey(id)) {
+            ret = rdict.get(id);
         }
         return ret;
     }

@@ -18,7 +18,6 @@ public class Midterm {
         Parser parser = new Parser(reader);
         Program prog = null;
         try {
-            parser = new Parser(reader);
             prog = (Program)parser.parse().value;
         } catch (Throwable t) {
             System.exit(1);

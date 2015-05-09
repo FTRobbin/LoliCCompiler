@@ -6,6 +6,7 @@ import ast.nodes.type.PointerType;
 import exception.InterpretError;
 import exception.SemanticError;
 import irt.Expr;
+import mir.ExprOp;
 import semantic.IRTBuilder;
 
 /**
@@ -14,24 +15,152 @@ import semantic.IRTBuilder;
 public class BinIntFact extends OpFactory {
 
     enum Ops {
-        LESS {public int cal(int a, int b){return a < b ? 1 : 0;}},
-        GREATER {public int cal(int a, int b){return a > b ? 1 : 0;}},
-        LE_OP {public int cal(int a, int b){return a <= b ? 1 : 0;}},
-        GE_OP {public int cal(int a, int b){return a >= b ? 1 : 0;}},
-        EQ_OP {public int cal(int a, int b){return a == b ? 1 : 0;}},
-        NE_OP {public int cal(int a, int b){return a != b ? 1 : 0;}},
-        ADD{public int cal(int a, int b){return a + b;}},
-        SUB{public int cal(int a, int b){return a - b;}},
-        MUL{public int cal(int a, int b){return a * b;}},
-        DIV{public int cal(int a, int b){if (b == 0) throw new InterpretError("Divided by zero.\n"); return a / b;}},
-        MOD{public int cal(int a, int b){if (b == 0) throw new InterpretError("Divided by zero.\n"); return a % b;}},
-        XOR{public int cal(int a, int b){return a ^ b;}},
-        OR{public int cal(int a, int b){return a | b;}},
-        AND{public int cal(int a, int b){return a & b;}},
-        SHL{public int cal(int a, int b){return a << b;}},
-        SHR{public int cal(int a, int b){return a >> b;}};
+        LESS {
+            public ExprOp IROp() {
+                return ExprOp.slt;
+            }
+
+            public int cal(int a, int b){
+                return a < b ? 1 : 0;
+            }
+        },
+
+        GREATER {
+            public ExprOp IROp() {
+                return ExprOp.sgt;
+            }
+
+            public int cal(int a, int b) {
+                return a > b ? 1 : 0;
+            }
+        },
+
+
+        LE_OP {
+            public ExprOp IROp() {
+                return ExprOp.sle;
+            }
+
+            public int cal(int a, int b) {
+                return a <= b ? 1 : 0;
+            }
+        },
+
+        GE_OP {
+            public ExprOp IROp() {
+                return ExprOp.sge;
+            }
+
+            public int cal (int a, int b) {
+                return a >= b ? 1 : 0;
+            }
+        },
+
+        EQ_OP {
+            public ExprOp IROp() {
+                return ExprOp.seq;
+            }
+            public int cal(int a, int b) {
+                return a == b ? 1 : 0;
+            }
+        },
+        NE_OP {
+            public ExprOp IROp() {
+                return ExprOp.sne;
+            }
+            public int cal(int a, int b) {
+                return a != b ? 1 : 0;
+            }
+        },
+        ADD {
+            public ExprOp IROp() {
+                return ExprOp.add;
+            }
+            public int cal(int a, int b) {
+                return a + b;
+            }
+        },
+        SUB {
+            public ExprOp IROp() {
+                return ExprOp.sub;
+            }
+            public int cal(int a, int b) {
+                return a - b;
+            }
+        },
+        MUL {
+            public ExprOp IROp() {
+                return ExprOp.mul;
+            }
+            public int cal(int a, int b) {
+                return a * b;
+            }
+        },
+        DIV {
+            public ExprOp IROp() {
+                return ExprOp.div;
+            }
+            public int cal(int a, int b) {
+                if (b == 0) throw new InterpretError("Divided by zero.\n");
+                return a / b;
+            }
+        },
+        MOD {
+            public ExprOp IROp() {
+                return ExprOp.rem;
+            }
+            public int cal(int a, int b) {
+                if (b == 0) throw new InterpretError("Divided by zero.\n");
+                return a % b;
+            }
+        },
+        XOR {
+            public ExprOp IROp() {
+                return ExprOp.xor;
+            }
+            public int cal(int a, int b) {
+                return a ^ b;
+            }
+        },
+
+        OR {
+            public ExprOp IROp() {
+                return ExprOp.or;
+            }
+            public int cal(int a, int b) {
+                return a | b;
+            }
+        },
+
+        AND {
+            public ExprOp IROp() {
+                return ExprOp.and;
+            }
+            public int cal(int a, int b) {
+                return a & b;
+            }
+        },
+
+        SHL {
+            public ExprOp IROp() {
+                return ExprOp.sll;
+            }
+            public int cal(int a, int b) {
+                return a << b;
+            }
+        },
+
+        SHR {
+            public ExprOp IROp() {
+                return ExprOp.srl;
+            }
+            public int cal(int a, int b) {
+                return a >> b;
+            }
+        };
 
         abstract public int cal(int a, int b);
+        abstract public ExprOp IROp();
     }
 
     Ops op;
