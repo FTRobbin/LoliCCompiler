@@ -1,3 +1,4 @@
+#include <stdio.h>
 
 void call(void (*f)(), int n) {
 	while(n--) {

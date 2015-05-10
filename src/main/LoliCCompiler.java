@@ -1,6 +1,7 @@
 package main;
 
 import analysis.ControlFlowGraph;
+import analysis.LivenessAnalysis;
 import analysis.StaticSingleAssignment;
 import ast.visitors.Visitor;
 import exception.*;
@@ -40,6 +41,7 @@ public class LoliCCompiler {
     private JButton IRButton;
     private JButton CFGButton;
     private JButton SSAButton;
+    private JButton livenessButton;
     private JFrame frame;
 
     private static int cnt = 0;
@@ -155,7 +157,7 @@ public class LoliCCompiler {
         comboBox1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String path = "D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\loliccompiler\\testcases\\AST\\" + comboBox1.getSelectedItem().toString() + ".c";
+                String path = "D:\\4415 \u7f16\u8bd1\u539f\u7406 MS109\\Demos2\\" + comboBox1.getSelectedItem().toString() + ".c";
                 textField1.setText(path);
             }
         });
@@ -276,6 +278,16 @@ public class LoliCCompiler {
                 ControlFlowGraph.calDominator(IRroot);
                 StaticSingleAssignment.turntoSSA(IRroot);
                 textArea1.setText(IRroot.printSSA());
+            }
+        });
+        livenessButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mir.Program IRroot = getIR();
+                ControlFlowGraph.getCFG(IRroot);
+                ControlFlowGraph.calDominator(IRroot);
+                LivenessAnalysis.cal(IRroot);
+                textArea1.setText(LivenessAnalysis.printLive(IRroot));
             }
         });
     }
