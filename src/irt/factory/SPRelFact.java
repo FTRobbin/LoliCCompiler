@@ -32,7 +32,7 @@ public class SPRelFact extends OpFactory {
         expr.exprs.add(expr1);
         expr.exprs.add(expr2);
         if (IRTBuilder.getRank(expr1.retType) == 4 && IRTBuilder.getRank(expr2.retType) == 4) {
-            return new SpRelOp(expr, op);
+            return new SPRelOp(expr, op);
         } else {
             throw new SemanticError("Unexpected ||/&& operands type.\n");
         }

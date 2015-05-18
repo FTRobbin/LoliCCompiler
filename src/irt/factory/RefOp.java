@@ -26,8 +26,12 @@ public class RefOp extends Op {
     public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
         Label tcur = new Label(Label.DUMMY);
         Value src1 = gen.gen(cur, expr.exprs.get(0), list, tcur);
-        VarName dest = new VarName();
-        list.add((new AssignInst(ExprOp.ref, dest, src1)).setLabel(tcur));
-        return dest;
+        if (src1 instanceof DeRefVar) {
+            VarName dest = new VarName();
+            list.add((new AssignInst(ExprOp.asg, dest, src1)).setLabel(tcur));
+            return new DeRefVar(dest);
+        } else {
+            return new DeRefVar(src1);
+        }
     }
 }

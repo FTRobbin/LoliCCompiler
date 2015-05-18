@@ -48,6 +48,10 @@ public class ArrayOp extends Op {
         list.add(new AssignInst(ExprOp.mul, tmp, src2, new IntConst(this.expr.retType.size)).setLabel(tcur));
         VarName dest = new VarName();
         list.add(new AssignInst(ExprOp.add, dest, src1, tmp));
-        return dest;
+        if (expr.retType instanceof ArrayType) {
+            return dest;
+        } else {
+            return new DeRefVar(dest);
+        }
     }
 }

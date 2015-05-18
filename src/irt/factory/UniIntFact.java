@@ -14,7 +14,7 @@ import semantic.IRTBuilder;
  */
 public class UniIntFact extends OpFactory {
 
-    enum Ops {
+    public enum Ops {
         ADD {
             public ExprOp IROp() {
                 return ExprOp.asg;

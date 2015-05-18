@@ -29,8 +29,8 @@ public class Interpreter implements IRTVisitor {
         this.output = output;
     }
 
-    int stackTop = 0, heapTop = 1024 << 9;
-    byte[] memory = new byte[1024 << 9];
+    int stackTop = 0, heapTop = 1024 << 12;
+    byte[] memory = new byte[1024 << 12];
 
     public int getBit(byte b) {
         return b >= 0 ? b : (b & 127) + 128;

@@ -37,7 +37,9 @@ public class Label {
     }
 
     public void reInit() {
-        st = 0;
+        if (isDummy()) {
+            st ^= DUMMY;
+        }
         id = cnt++;
         name = "L#" + id;
     }

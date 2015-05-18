@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class UniIntOp extends Op {
 
-    UniIntFact.Ops op;
+    public UniIntFact.Ops op;
 
     public UniIntOp(Expr expr, UniIntFact.Ops op) {
         this.expr = expr;
@@ -39,9 +39,9 @@ public class UniIntOp extends Op {
         if (op.equals(UniIntFact.Ops.NOT)) {
             Label istr = new Label(Label.DUMMY);
             list.add((new IfInst(RelOp.beq, src1, new IntConst(0), istr)).setLabel(tcur));
-            list.add((new AssignInst(ExprOp.asg, dest, new IntConst(1))));
+            list.add((new AssignInst(ExprOp.asg, dest, new IntConst(0))));
             list.add((new GotoInst(next)));
-            list.add((new AssignInst(ExprOp.asg, dest, new IntConst(0))).setLabel(istr));
+            list.add((new AssignInst(ExprOp.asg, dest, new IntConst(1))).setLabel(istr));
         } else {
             list.add((new AssignInst(op.IROp(), dest, src1)).setLabel(tcur));
         }

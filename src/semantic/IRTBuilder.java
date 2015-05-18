@@ -162,6 +162,18 @@ public class IRTBuilder implements Visitor {
         }
     }
 
+    public static int getAlignSize(Type type) {
+        if (type instanceof ArrayType) {
+            return getAlignSize(((ArrayType) type).baseType);
+        } else if (type instanceof PointerType || type instanceof IntType) {
+            return 4;
+        } else if (type instanceof CharType) {
+            return 1;
+        } else if (type instanceof RecordType) {
+            return ((RecordType) type).mem.maxAlign;
+        }
+        return 0;
+    }
 
     private OpFactory calBin(int op) {
         switch (op) {
@@ -655,13 +667,16 @@ public class IRTBuilder implements Visitor {
                     if (st.mem.checkId(decl.name.num)) {
                         throw new SemanticError("Structure field " + decl.name.toString() + " redeclared.\n");
                     } else {
+                        if (st.size % getAlignSize(decl.type) != 0) {
+                            int align = getAlignSize(decl.type);
+                            st.size += align - st.size % align;
+                        }
                         st.mem.addEntry(decl.name.num, decl.type, st.size);
                     }
-                    //TODO : space patch bug!
                     st.size += decl.type.size;
                 }
-                if (st.size % 4 != 0) {
-                    st.size += 4 - st.size % 4;
+                if (st.size % st.mem.maxAlign != 0) {
+                    st.size += st.mem.maxAlign - st.size % st.mem.maxAlign;
                 }
             }
         }

@@ -7,6 +7,7 @@ import exception.InterpretError;
 import exception.SemanticError;
 import irt.Expr;
 import mir.ExprOp;
+import mir.RelOp;
 import semantic.IRTBuilder;
 
 /**
@@ -14,10 +15,14 @@ import semantic.IRTBuilder;
  */
 public class BinIntFact extends OpFactory {
 
-    enum Ops {
+    public enum Ops {
         LESS {
             public ExprOp IROp() {
                 return ExprOp.slt;
+            }
+
+            public RelOp IRRelOp() {
+                return RelOp.blt;
             }
 
             public int cal(int a, int b){
@@ -30,6 +35,9 @@ public class BinIntFact extends OpFactory {
                 return ExprOp.sgt;
             }
 
+            public RelOp IRRelOp() {
+                return RelOp.bgt;
+            }
             public int cal(int a, int b) {
                 return a > b ? 1 : 0;
             }
@@ -41,6 +49,9 @@ public class BinIntFact extends OpFactory {
                 return ExprOp.sle;
             }
 
+            public RelOp IRRelOp() {
+                return RelOp.ble;
+            }
             public int cal(int a, int b) {
                 return a <= b ? 1 : 0;
             }
@@ -51,6 +62,9 @@ public class BinIntFact extends OpFactory {
                 return ExprOp.sge;
             }
 
+            public RelOp IRRelOp() {
+                return RelOp.bge;
+            }
             public int cal (int a, int b) {
                 return a >= b ? 1 : 0;
             }
@@ -60,6 +74,9 @@ public class BinIntFact extends OpFactory {
             public ExprOp IROp() {
                 return ExprOp.seq;
             }
+            public RelOp IRRelOp() {
+                return RelOp.beq;
+            }
             public int cal(int a, int b) {
                 return a == b ? 1 : 0;
             }
@@ -67,6 +84,9 @@ public class BinIntFact extends OpFactory {
         NE_OP {
             public ExprOp IROp() {
                 return ExprOp.sne;
+            }
+            public RelOp IRRelOp() {
+                return RelOp.bne;
             }
             public int cal(int a, int b) {
                 return a != b ? 1 : 0;
@@ -161,6 +181,7 @@ public class BinIntFact extends OpFactory {
 
         abstract public int cal(int a, int b);
         abstract public ExprOp IROp();
+        public RelOp IRRelOp() {return null;}
     }
 
     Ops op;

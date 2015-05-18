@@ -47,10 +47,12 @@ public class Block {
             }
         }
         for (Block block : succ) {
-           ret += " -> Vertex " + block.id + "\n";
+            ret += " -> Vertex " + block.id + "\n";
         }
         return ret;
     }
+
+    public HashSet<VarName> def, use, liveIn, liveOut;
 
     public Block idom = null;
 

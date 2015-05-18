@@ -2,7 +2,7 @@ package mir;
 
 import ast.nodes.expression.Symbol;
 import irt.*;
-import irt.factory.IntOp;
+import irt.factory.*;
 
 import java.util.*;
 
@@ -246,12 +246,16 @@ public class MIRGen {
     public List<MIRInst> gen(Label cur, ItSt st, Label next) {
         List<MIRInst> list = new LinkedList<>();
         Label expr = new Label(), body = new Label(Label.FALL | Label.DUMMY), inct = new Label(Label.DUMMY), jump = new Label(Label.DUMMY);
-        //TODO the fall optimization
         list.addAll(genStat(cur, st.init, expr));
         list.addAll(genRel(expr, st.expr, body, next));
         addScope();
-        list.addAll(genStat(body, st.stat, inct));
-        list.addAll(genStat(inct, st.inct, jump));
+        if (st.inct instanceof ExSt && ((ExSt)st.inct).expr.op instanceof IntOp) {
+            list.addAll(genStat(body, st.stat, jump));
+            inct = jump;
+        } else {
+            list.addAll(genStat(body, st.stat, inct));
+            list.addAll(genStat(inct, st.inct, jump));
+        }
         list.add((new GotoInst(expr)).setLabel(jump));
         if (checkLabelEntry(Symbol.getnum("#CONTINUE"))) {
             addLabelEntry(Symbol.getnum("#CONTINUE"), inct);
@@ -277,7 +281,6 @@ public class MIRGen {
 
     public List<MIRInst> gen(Label cur, SeSt st, Label next) {
         List<MIRInst> list = new LinkedList<>();
-        //TODO the fall optimization
         if (st.fl instanceof ExSt && ((ExSt)st.fl).expr.op instanceof IntOp) {
             Label iftr = new Label(Label.FALL | Label.DUMMY);
             list.addAll(genRel(cur, st.expr, iftr, next));
@@ -297,17 +300,87 @@ public class MIRGen {
     }
 
     public List<MIRInst> genRel(Label cur, Expr expr, Label trLa, Label faLa) {
-        //TODO this can be optimized using not / oprands
+        return genRel(cur, expr, trLa, faLa, false);
+    }
+
+    public List<MIRInst> genRel(Label cur, Expr expr, Label trLa, Label faLa, boolean rev) {
         List<MIRInst> list = new LinkedList<>();
         Label branch = new Label(Label.DUMMY);
-        Value ret = gen(cur, expr, list, branch);
-        if (trLa.isFall()) {
-            list.add((new IfInst(RelOp.beq, ret, new IntConst(0), faLa)).setLabel(branch));
-        } else if (faLa.isFall()) {
-            list.add((new IfInst(RelOp.bne, ret, new IntConst(0), trLa)).setLabel(branch));
+        //if relation op optimization
+        Op lastOp = expr.op;
+        while (lastOp instanceof UniIntOp && ((UniIntOp)lastOp).op.equals(UniIntFact.Ops.NOT)) {
+            rev = !rev;
+            expr = expr.exprs.get(0);
+            lastOp = expr.op;
+        }
+        if (lastOp instanceof BinIntOp && ((BinIntOp)lastOp).op.ordinal() < BinIntFact.Ops.ADD.ordinal()) {
+            BinIntOp lastOpb = (BinIntOp)lastOp;
+            BinIntFact.Ops op = lastOpb.op;
+            Label fatr = null, fafa = null;
+            if (trLa.isFall()) {
+                rev = !rev;
+                fatr = faLa;
+                fafa = trLa;
+            } else {
+                fatr = trLa;
+                fafa = faLa;
+            }
+            if (rev) {
+                switch (op.ordinal()) {
+                    case 0 : {
+                        //LESS
+                        lastOpb.op = op = BinIntFact.Ops.GE_OP;
+                        break;
+                    }
+                    case 1 : {
+                        //GREATER
+                        lastOpb.op = op = BinIntFact.Ops.LE_OP;
+                        break;
+                    }
+                    case 2 : {
+                        //LE_OP
+                        lastOpb.op = op = BinIntFact.Ops.GREATER;
+                        break;
+                    }
+                    case 3 : {
+                        //GE_OP
+                        lastOpb.op = op = BinIntFact.Ops.LESS;
+                        break;
+                    }
+                    case 4 : {
+                        //EQ_OP
+                        lastOpb.op = op = BinIntFact.Ops.NE_OP;
+                        break;
+                    }
+                    case 5 : {
+                        //NE_OP
+                        lastOpb.op = op = BinIntFact.Ops.EQ_OP;
+                        break;
+                    }
+                    default: {
+                        throw new InternalError("Unknown relation op.\n");
+                    }
+                }
+            }
+            Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
+            Value src1 = gen(cur, expr.exprs.get(0), list, mid);
+            Value src2 = gen(mid, expr.exprs.get(1), list, tcur);
+            list.add((new IfInst(op.IRRelOp(), src1, src2, fatr)).setLabel(tcur));
+            if (!fafa.isFall()) {
+                list.add((new GotoInst(fafa)));
+            }
+        } else if (lastOp instanceof SPRelOp) {
+            ((SPRelOp)expr.op).genIfIR(cur, list, trLa, faLa, this, rev);
         } else {
-            list.add((new IfInst(RelOp.bne, ret, new IntConst(0), faLa)).setLabel(branch));
-            list.add((new GotoInst(trLa)));
+            Value ret = gen(cur, expr, list, branch);
+            if (trLa.isFall()) {
+                list.add((new IfInst(rev ? RelOp.bne : RelOp.beq, ret, new IntConst(0), faLa)).setLabel(branch));
+            } else if (faLa.isFall()) {
+                list.add((new IfInst(rev ? RelOp.beq : RelOp.bne, ret, new IntConst(0), trLa)).setLabel(branch));
+            } else {
+                list.add((new IfInst(rev ? RelOp.bne :RelOp.beq, ret, new IntConst(0), faLa)).setLabel(branch));
+                list.add((new GotoInst(trLa)));
+            }
         }
         return list;
     }

@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class BinIntOp extends Op {
 
-    BinIntFact.Ops op;
+    public BinIntFact.Ops op;
 
     public BinIntOp(Expr expr, BinIntFact.Ops op) {
         this.expr = expr;
