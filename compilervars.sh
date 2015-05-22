@@ -1,0 +1,1 @@
+CCHK="java -classpath ../lib/java-cup-11b-runtime.jar: main.Compiler "
