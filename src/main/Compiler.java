@@ -1,5 +1,6 @@
 package main;
 
+import analysis.trivial.GotoGoto;
 import ast.nodes.Program;
 import gen.ASMCode;
 import gen.basic.BasicGen;
@@ -28,6 +29,7 @@ public class Compiler {
             Prog IRTroot = (Prog)builder.getRoot();
             MIRGen gen = new MIRGen();
             mir.Program IRroot = gen.gen(IRTroot);
+            IRroot = GotoGoto.GotoGotoOpti(IRroot);
             BasicGen cgen = new BasicGen();
             ASMCode code = cgen.gen(IRroot);
             System.out.println(code.print());
