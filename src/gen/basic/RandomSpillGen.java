@@ -141,6 +141,8 @@ public class RandomSpillGen implements CodeGen {
     }
 
     void addGlobal(ProgUnit global) {
+        curState = new HashMap<>();
+        toWrite = new HashSet<>();
         code.addText("main:");
         for (MIRInst inst : global.list) {
             if (inst instanceof ReturnInst) {
@@ -368,6 +370,9 @@ public class RandomSpillGen implements CodeGen {
         if (val instanceof IntConst && ((IntConst) val).val == 0 || val instanceof CharConst && ((CharConst) val).ch == 0) {
             return BasicReg.zero;
         }
+        if (curState == null) {
+            System.out.println("WHAT");
+        }
         if (curState.containsValue(val)) {
             for (BasicReg reg : BasicReg.values()) {
                 if (val.equals(curState.get(reg))) {
@@ -436,7 +441,7 @@ public class RandomSpillGen implements CodeGen {
     }
 
     void pesudoWrite(BasicReg reg, VarName var) {
-        if (var.isRet) {
+        if (var.isRet && var instanceof DeRefVar) {
             writeToMem(reg, var);
             return;
         }
