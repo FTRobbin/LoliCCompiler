@@ -441,8 +441,11 @@ public class RandomSpillGen implements CodeGen {
     }
 
     void pesudoWrite(BasicReg reg, VarName var) {
-        if (var.isRet && var instanceof DeRefVar) {
-            writeToMem(reg, var);
+        writeToMem(reg, var);
+        curState.put(reg, var);
+        return;
+        /*
+        if (var.isRet || var instanceof DeRefVar) {
             return;
         }
         if (curState.containsKey(reg) && var.equals(curState.get(reg))) {
@@ -466,6 +469,7 @@ public class RandomSpillGen implements CodeGen {
         getAddr(var);
         curState.put(reg, var);
         toWrite.add(reg);
+        */
     }
 
     void genInst(AssignInst inst) {
