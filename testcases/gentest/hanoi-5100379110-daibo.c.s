@@ -1,161 +1,136 @@
 	.data
-_str0:		.asciiz	"%d\n"
+_str0:		.asciiz	"move %c --> %c\n"
 _str1:		.asciiz	"move %c --> %c\n"
-_str2:		.asciiz	"move %c --> %c\n"
+_str2:		.asciiz	"%d\n"
 	.text
 	.globl main
 main:
-		move	$fp	$sp
 		j	__main
-__main:
-		li	$t0	65
-		sb	$t0	-1($fp)
-		li	$t0	66
-		sb	$t0	-2($fp)
-		li	$t0	67
-		sb	$t0	-3($fp)
-		li	$t0	10
-		sw	$t0	-8($fp)
-		sw	$ra	-16($fp)
-		lw	$t0	-8($fp)
-		sw	$t0	-20($fp)
-		lb	$t0	-1($fp)
-		sb	$t0	-21($fp)
-		lb	$t0	-2($fp)
-		sb	$t0	-22($fp)
-		lb	$t0	-3($fp)
-		sb	$t0	-23($fp)
-		li	$t0	0
-		sw	$t0	-28($fp)
-		sub	$fp	16
-		la	$t0	__cd
-		jal	$t0
-		add	$fp	16
-		sw	$v0	-32($fp)
-		lw	$ra	-16($fp)
-		lw	$t0	-32($fp)
-		sw	$t0	-12($fp)
-		sw	$ra	-36($fp)
-		la	$t0	_str0
-		sw	$t0	-40($fp)
-		lw	$t0	-12($fp)
-		sw	$t0	-44($fp)
-		sub	$fp	36
-		la	$t0	___printf
-		jal	$t0
-		add	$fp	36
-		sw	$v0	-48($fp)
-		lw	$ra	-36($fp)
-		li	$t0	0
-		move	$v0	$t0
-		jr	$ra
-		jr	$ra
 __cd:
-		lw	$t0	-4($fp)
-		li	$t1	1
-		bne	$t0	$t1	_L3
-		lb	$t0	-5($fp)
-		sw	$t0	-16($fp)
-		lb	$t0	-7($fp)
-		sw	$t0	-20($fp)
-		sw	$ra	-24($fp)
-		la	$t0	_str1
-		sw	$t0	-28($fp)
-		lw	$t0	-16($fp)
-		sw	$t0	-32($fp)
-		lw	$t0	-20($fp)
-		sw	$t0	-36($fp)
-		sub	$fp	24
-		la	$t0	___printf
-		jal	$t0
-		add	$fp	24
-		sw	$v0	-40($fp)
-		lw	$ra	-24($fp)
-		lw	$t0	-12($fp)
-		sw	$t0	-44($fp)
-		lw	$t0	-12($fp)
-		li	$t1	1
-		add	$t2	$t0	$t1
-		sw	$t2	-12($fp)
-		j	_L4
+		lw	$t2	-4($sp)
+		li	$t3	1
+		bne	$t2	$t3	_L2
+		lb	$t2	-5($sp)
+		lb	$t3	-7($sp)
+		sw	$ra	-24($sp)
+		la	$t4	_str0
+		sw	$t4	-28($sp)
+		sw	$t2	-32($sp)
+		sw	$t3	-36($sp)
+		sub	$sp	24
+		jal	___printf
+		add	$sp	24
+		lw	$ra	-24($sp)
+		lw	$t5	-12($sp)
+		lw	$t6	-12($sp)
+		li	$t7	1
+		add	$t8	$t6	$t7
+		sw	$t2	-16($sp)
+		sw	$t3	-20($sp)
+		sw	$t5	-44($sp)
+		sw	$t8	-12($sp)
+		sw	$v0	-40($sp)
+		j	_L3
+_L2:
+		lw	$t2	-4($sp)
+		li	$t3	1
+		sub	$t4	$t2	$t3
+		sw	$ra	-52($sp)
+		sw	$t4	-56($sp)
+		lb	$t5	-5($sp)
+		sb	$t5	-57($sp)
+		lb	$t6	-7($sp)
+		sb	$t6	-58($sp)
+		lb	$t7	-6($sp)
+		sb	$t7	-59($sp)
+		lw	$t8	-12($sp)
+		sw	$t8	-64($sp)
+		sw	$t4	-48($sp)
+		sub	$sp	52
+		jal	__cd
+		add	$sp	52
+		lw	$ra	-52($sp)
+		sw	$v0	-68($sp)
+		lb	$t2	-5($sp)
+		lb	$t3	-7($sp)
+		sw	$ra	-80($sp)
+		la	$t4	_str1
+		sw	$t4	-84($sp)
+		sw	$t2	-88($sp)
+		sw	$t3	-92($sp)
+		sw	$v0	-12($sp)
+		sub	$sp	80
+		jal	___printf
+		add	$sp	80
+		lw	$ra	-80($sp)
+		lw	$t5	-4($sp)
+		li	$t6	1
+		sub	$t7	$t5	$t6
+		sw	$ra	-104($sp)
+		sw	$t7	-108($sp)
+		lb	$t8	-6($sp)
+		sb	$t8	-109($sp)
+		lb	$t9	-5($sp)
+		sb	$t9	-110($sp)
+		lb	$a3	-7($sp)
+		sb	$a3	-111($sp)
+		lw	$s0	-12($sp)
+		sw	$s0	-116($sp)
+		sw	$t2	-72($sp)
+		sw	$t3	-76($sp)
+		sw	$t7	-100($sp)
+		sw	$v0	-96($sp)
+		sub	$sp	104
+		jal	__cd
+		add	$sp	104
+		lw	$ra	-104($sp)
+		sw	$v0	-120($sp)
+		sw	$v0	-12($sp)
+		lw	$t2	-12($sp)
+		li	$t3	1
+		add	$t4	$t2	$t3
+		sw	$t4	-12($sp)
+		sw	$v0	-124($sp)
 _L3:
-		lw	$t0	-4($fp)
-		li	$t1	1
-		sub	$t2	$t0	$t1
-		sw	$t2	-48($fp)
-		sw	$ra	-52($fp)
-		lw	$t0	-48($fp)
-		sw	$t0	-56($fp)
-		lb	$t0	-5($fp)
-		sb	$t0	-57($fp)
-		lb	$t0	-7($fp)
-		sb	$t0	-58($fp)
-		lb	$t0	-6($fp)
-		sb	$t0	-59($fp)
-		lw	$t0	-12($fp)
-		sw	$t0	-64($fp)
-		sub	$fp	52
-		la	$t0	__cd
-		jal	$t0
-		add	$fp	52
-		sw	$v0	-68($fp)
-		lw	$ra	-52($fp)
-		lw	$t0	-68($fp)
-		sw	$t0	-12($fp)
-		lb	$t0	-5($fp)
-		sw	$t0	-72($fp)
-		lb	$t0	-7($fp)
-		sw	$t0	-76($fp)
-		sw	$ra	-80($fp)
-		la	$t0	_str2
-		sw	$t0	-84($fp)
-		lw	$t0	-72($fp)
-		sw	$t0	-88($fp)
-		lw	$t0	-76($fp)
-		sw	$t0	-92($fp)
-		sub	$fp	80
-		la	$t0	___printf
-		jal	$t0
-		add	$fp	80
-		sw	$v0	-96($fp)
-		lw	$ra	-80($fp)
-		lw	$t0	-4($fp)
-		li	$t1	1
-		sub	$t2	$t0	$t1
-		sw	$t2	-100($fp)
-		sw	$ra	-104($fp)
-		lw	$t0	-100($fp)
-		sw	$t0	-108($fp)
-		lb	$t0	-6($fp)
-		sb	$t0	-109($fp)
-		lb	$t0	-5($fp)
-		sb	$t0	-110($fp)
-		lb	$t0	-7($fp)
-		sb	$t0	-111($fp)
-		lw	$t0	-12($fp)
-		sw	$t0	-116($fp)
-		sub	$fp	104
-		la	$t0	__cd
-		jal	$t0
-		add	$fp	104
-		sw	$v0	-120($fp)
-		lw	$ra	-104($fp)
-		lw	$t0	-120($fp)
-		sw	$t0	-12($fp)
-		lw	$t0	-12($fp)
-		sw	$t0	-124($fp)
-		lw	$t0	-12($fp)
-		li	$t1	1
-		add	$t2	$t0	$t1
-		sw	$t2	-12($fp)
-_L4:
-		lw	$t0	-12($fp)
-		move	$v0	$t0
+		lw	$t2	-12($sp)
+		move	$v0	$t2
+		jr	$ra
+		jr	$ra
+__main:
+		li	$t2	65
+		li	$t3	66
+		li	$t4	67
+		li	$t5	10
+		sw	$ra	-16($sp)
+		sw	$t5	-20($sp)
+		sb	$t2	-21($sp)
+		sb	$t3	-22($sp)
+		sb	$t4	-23($sp)
+		sw	$0	-28($sp)
+		sb	$t2	-1($sp)
+		sb	$t3	-2($sp)
+		sb	$t4	-3($sp)
+		sw	$t5	-8($sp)
+		sub	$sp	16
+		jal	__cd
+		add	$sp	16
+		lw	$ra	-16($sp)
+		sw	$v0	-32($sp)
+		sw	$ra	-36($sp)
+		la	$t2	_str2
+		sw	$t2	-40($sp)
+		sw	$v0	-44($sp)
+		sw	$v0	-12($sp)
+		sub	$sp	36
+		jal	___printf
+		add	$sp	36
+		lw	$ra	-36($sp)
+		move	$v0	$0
 		jr	$ra
 		jr	$ra
 ___printf:
-        lw  $t0 -4($fp)
-        move    $t1 $fp
+        lw  $t0 -4($sp)
+        move    $t1 $sp
         sub $t1 4
 ___printf_loop:
         lb  $a0 0($t0)
@@ -233,8 +208,8 @@ ___getchar:
         syscall
         jr  $ra
 ___scanf:
-        lw  $t0 -4($fp)
-        move    $t1 $fp
+        lw  $t0 -4($sp)
+        move    $t1 $sp
         sub $t1 4
 ___scanf_loop:
         lb  $a0 0($t0)
@@ -272,7 +247,7 @@ ___scanf_char:
         sb  $v0 0($a0)
         j   ___scanf_loop 
 ___malloc:
-        lw  $a0 -4($fp)
+        lw  $a0 -4($sp)
         li  $v0 9
         syscall
         jr  $ra

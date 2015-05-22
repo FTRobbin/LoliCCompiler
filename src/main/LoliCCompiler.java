@@ -6,6 +6,7 @@ import analysis.StaticSingleAssignment;
 import ast.visitors.Visitor;
 import exception.*;
 import gen.basic.BasicGen;
+import gen.basic.RandomSpillGen;
 import irt.Prog;
 import mir.MIRGen;
 import parser.Parser;
@@ -44,6 +45,7 @@ public class LoliCCompiler {
     private JButton SSAButton;
     private JButton livenessButton;
     private JButton basicGenButton;
+    private JButton randomSpillButton;
     private JFrame frame;
 
     private static int cnt = 0;
@@ -297,6 +299,14 @@ public class LoliCCompiler {
             public void actionPerformed(ActionEvent e) {
                 mir.Program IRroot = getIR();
                 textArea1.setText((new BasicGen()).gen(IRroot).print());
+            }
+        });
+        randomSpillButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mir.Program IRroot = getIR();
+                ControlFlowGraph.getCFG(IRroot);
+                textArea1.setText((new RandomSpillGen()).gen(IRroot).print());
             }
         });
     }
