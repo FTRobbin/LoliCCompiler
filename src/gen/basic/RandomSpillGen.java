@@ -271,7 +271,7 @@ public class RandomSpillGen implements CodeGen {
             if (val == null || !(val instanceof VarName)) {
                 curState.remove(reg);
                 toWrite.remove(reg);
-                System.out.println("Spilled : " + reg.toString());
+                //System.out.println("Spilled : " + reg.toString());
                 return;
             }
         }
@@ -288,7 +288,7 @@ public class RandomSpillGen implements CodeGen {
             throw new InternalError("Every register is protected. Call the police!\n");
         }
         Value val = curState.get(last);
-        System.out.println("Spilled : " + last.toString());
+        //System.out.println("Spilled : " + last.toString());
         if (toWrite.contains(last) && val instanceof VarName) {
             writeToMem(last, (VarName)val);
         }
@@ -369,9 +369,6 @@ public class RandomSpillGen implements CodeGen {
     public BasicReg loadToReg(Value val) {
         if (val instanceof IntConst && ((IntConst) val).val == 0 || val instanceof CharConst && ((CharConst) val).ch == 0) {
             return BasicReg.zero;
-        }
-        if (curState == null) {
-            System.out.println("WHAT");
         }
         if (curState.containsValue(val)) {
             for (BasicReg reg : BasicReg.values()) {

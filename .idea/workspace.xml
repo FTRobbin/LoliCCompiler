@@ -9,13 +9,10 @@
     <bookmark url="file://$PROJECT_DIR$/src/semantic/IRTBuilder.java" line="897" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd301699-7dc0-43f0-8c70-45cea3c704d9" name="Default" comment="Another trivial optimization added.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gen/basic/RandomSpillGen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gen/basic/BasicReg.java" afterPath="$PROJECT_DIR$/src/gen/basic/BasicReg.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/LoliCCompiler.form" afterPath="$PROJECT_DIR$/src/main/LoliCCompiler.form" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/LoliCCompiler.java" afterPath="$PROJECT_DIR$/src/main/LoliCCompiler.java" />
+    <list default="true" id="bd301699-7dc0-43f0-8c70-45cea3c704d9" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gen/basic/RandomSpillGen.java" afterPath="$PROJECT_DIR$/src/gen/basic/RandomSpillGen.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/baojingcount.log" afterPath="$PROJECT_DIR$/testcases/baojingcount.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/gentest/hanoi-5100379110-daibo.c.s" afterPath="$PROJECT_DIR$/testcases/gentest/hanoi-5100379110-daibo.c.s" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/gentest/board-5100379110-daibo.c.s" afterPath="$PROJECT_DIR$/testcases/gentest/board-5100379110-daibo.c.s" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="loliccompiler.iws" />
@@ -41,11 +38,11 @@
       <file leaf-file-name="RandomSpillGen.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gen/basic/RandomSpillGen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5073892">
-              <caret line="182" column="8" selection-start-line="182" selection-start-column="8" selection-end-line="182" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.75533664">
+              <caret line="273" column="22" selection-start-line="273" selection-start-column="22" selection-end-line="273" selection-end-column="22" />
               <folding>
-                <element signature="e#22512#22513#0" expanded="true" />
-                <element signature="e#22549#22550#0" expanded="true" />
+                <element signature="e#22680#22681#0" expanded="true" />
+                <element signature="e#22717#22718#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -176,7 +173,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/Compiler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+              <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -268,12 +265,12 @@
         <option value="$PROJECT_DIR$/build.properties" />
         <option value="$PROJECT_DIR$/src/irt/factory/CastFact.java" />
         <option value="$PROJECT_DIR$/src/analysis/trivial/GotoGoto.java" />
-        <option value="$PROJECT_DIR$/src/main/Compiler.java" />
         <option value="$PROJECT_DIR$/src/gen/basic/BasicGen.java" />
         <option value="$PROJECT_DIR$/src/main/LoliCCompiler.form" />
         <option value="$PROJECT_DIR$/src/gen/basic/BasicReg.java" />
         <option value="$PROJECT_DIR$/src/mir/VarName.java" />
         <option value="$PROJECT_DIR$/src/main/LoliCCompiler.java" />
+        <option value="$PROJECT_DIR$/src/main/Compiler.java" />
         <option value="$PROJECT_DIR$/src/gen/basic/RandomSpillGen.java" />
       </list>
     </option>
@@ -837,30 +834,6 @@
       <option name="number" value="Default" />
       <updated>1428288077013</updated>
     </task>
-    <task id="LOCAL-00009" summary="Lexer name changed">
-      <created>1428334548333</created>
-      <option name="number" value="00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1428334548333</updated>
-    </task>
-    <task id="LOCAL-00010" summary="The first version of CUP specification is done.">
-      <created>1428373458875</created>
-      <option name="number" value="00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1428373458875</updated>
-    </task>
-    <task id="LOCAL-00011" summary="The CUP specification has been successfully compiled for the first time.">
-      <created>1428378856878</created>
-      <option name="number" value="00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1428378856878</updated>
-    </task>
-    <task id="LOCAL-00012" summary="The parser and the lexer passed some easy tests made by myself.">
-      <created>1428387784632</created>
-      <option name="number" value="00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1428387784632</updated>
-    </task>
     <task id="LOCAL-00013" summary="The parser compile process automated using Apache Ant.">
       <created>1428391783852</created>
       <option name="number" value="00013" />
@@ -1131,7 +1104,31 @@
       <option name="project" value="LOCAL" />
       <updated>1432294683836</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="The crazyness and madness random-spill register allocator!">
+      <created>1432305970358</created>
+      <option name="number" value="00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1432305970358</updated>
+    </task>
+    <task id="LOCAL-00059" summary="The crazyness and madness random-spill register allocator!">
+      <created>1432306018377</created>
+      <option name="number" value="00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1432306018377</updated>
+    </task>
+    <task id="LOCAL-00060" summary="The crazyness and madness random-spill register allocator!">
+      <created>1432306495694</created>
+      <option name="number" value="00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1432306495694</updated>
+    </task>
+    <task id="LOCAL-00061" summary="The crazyness and madness random-spill register allocator!">
+      <created>1432306655471</created>
+      <option name="number" value="00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1432306655472</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1185,7 +1182,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="INCLUDE_TEXT_INTO_SHELF" value="true" />
-    <MESSAGE value="typedef is now fully supported" />
     <MESSAGE value="Repaired the empty struct/union bug." />
     <MESSAGE value="Resolved the reduplication of struct/union definition." />
     <MESSAGE value="Pretty Printer is now prettier." />
@@ -1210,7 +1206,8 @@
     <MESSAGE value="Commited for correctness test." />
     <MESSAGE value="A trivial optimization added. Test the test script." />
     <MESSAGE value="Another trivial optimization added." />
-    <option name="LAST_COMMIT_MESSAGE" value="Another trivial optimization added." />
+    <MESSAGE value="The crazyness and madness random-spill register allocator!" />
+    <option name="LAST_COMMIT_MESSAGE" value="The crazyness and madness random-spill register allocator!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1604,16 +1601,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Compiler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gen/basic/BasicReg.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1696,13 +1683,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Compiler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/gen/basic/RandomSpillGen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5073892">
-          <caret line="182" column="8" selection-start-line="182" selection-start-column="8" selection-end-line="182" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.75533664">
+          <caret line="273" column="22" selection-start-line="273" selection-start-column="22" selection-end-line="273" selection-end-column="22" />
           <folding>
-            <element signature="e#22512#22513#0" expanded="true" />
-            <element signature="e#22549#22550#0" expanded="true" />
+            <element signature="e#22680#22681#0" expanded="true" />
+            <element signature="e#22717#22718#0" expanded="true" />
           </folding>
         </state>
       </provider>
