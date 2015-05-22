@@ -386,7 +386,11 @@ public class BasicGen implements CodeGen {
             releaseReg();
         }
         code.addText("\t\tsub\t$fp\t" + bak);
-        code.addText("\t\tjal\t" + loadToReg(inst.func));
+        if (inst.func instanceof VarName && !(inst.func instanceof DeRefVar)) {
+            code.addText("\t\tjal\t" + inst.func.name);
+        } else {
+            code.addText("\t\tjal\t" + loadToReg(inst.func));
+        }
         code.addText("\t\tadd\t$fp\t" + bak);
         releaseReg();
         writeToMem(BasicReg.v0, inst.dest);
