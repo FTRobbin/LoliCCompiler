@@ -10,5 +10,7 @@ public class IntConst extends Const {
     public IntConst(Integer val) {
         this.val = val;
         this.name = "" + val;
+        this.size = 4;
+        this.align = 4;
     }
 }

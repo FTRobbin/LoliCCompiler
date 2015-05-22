@@ -1,8 +1,12 @@
 package irt.factory;
 
+import ast.nodes.expression.Symbol;
+import ast.nodes.type.ArrayType;
+import ast.nodes.type.RecordType;
 import interpreter.Interpreter;
 import irt.Expr;
 import mir.*;
+import semantic.IRTBuilder;
 
 import java.util.List;
 
@@ -34,7 +38,19 @@ public class AssignOp extends Op {
         Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
         VarName dest = (VarName)gen.gen(cur, expr.exprs.get(0), list, mid);
         Value src1 = gen.gen(mid, expr.exprs.get(1), list, tcur);
-        list.add((new AssignInst(ExprOp.asg, dest, src1)).setLabel(tcur));
+        if (dest.isRet && dest.isStruct) {
+            VarName adrStr = gen.getEntry(Symbol.getnum("#ReturnStruct"));
+            DeRefVar tmpStr = new DeRefVar(adrStr, dest.size, dest.align, dest.isArray, dest.isStruct);
+            list.add((new AssignInst(ExprOp.asgr, tmpStr, src1)).setLabel(tcur));
+            list.add((new AssignInst(ExprOp.asg, dest, adrStr)));
+        } else {
+            if (expr.retType instanceof RecordType) {
+                dest = new DeRefVar(dest, expr.retType.size, IRTBuilder.getAlignSize(expr.retType), expr.retType instanceof ArrayType, expr.retType instanceof RecordType);
+                list.add((new AssignInst(ExprOp.asgr, dest, src1)).setLabel(tcur));
+            } else {
+                list.add((new AssignInst(ExprOp.asg, dest, src1)).setLabel(tcur));
+            }
+        }
         return dest;
     }
 }

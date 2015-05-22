@@ -39,7 +39,7 @@ public class IRTBuilder implements Visitor {
     private StructureTable struct;
     int isInPara = 0, isInLoop = 0, isInFunc = 0;
 
-    private void debug(Visible item) {
+    private static void debug(Visible item) {
         Visitor v = new PrintAST();
         OutputStream out = new ByteArrayOutputStream();
         v.setOutput(out);
@@ -165,14 +165,17 @@ public class IRTBuilder implements Visitor {
     public static int getAlignSize(Type type) {
         if (type instanceof ArrayType) {
             return getAlignSize(((ArrayType) type).baseType);
-        } else if (type instanceof PointerType || type instanceof IntType) {
+        } else if (type instanceof PointerType || type instanceof IntType || type instanceof FunctionType) {
             return 4;
         } else if (type instanceof CharType) {
             return 1;
         } else if (type instanceof RecordType) {
             return ((RecordType) type).mem.maxAlign;
+        } else if (type instanceof VoidType) {
+            return 0;
         }
-        return 0;
+        debug(type);
+        throw new InternalError("Unknown align size.\n");
     }
 
     private OpFactory calBin(int op) {
@@ -525,7 +528,7 @@ public class IRTBuilder implements Visitor {
         --isInFunc;
         delScope();
 
-        stack.push(new Func(fd.name.num, type.returnType.size, fd.paras, (CpSt) stack.pop()));
+        stack.push(new Func(fd.name.num, type.returnType.size, getAlignSize(type.returnType), type.returnType instanceof RecordType, fd.paras, (CpSt) stack.pop()));
     }
 
     public void visit(VariableDecl vd) {
@@ -566,7 +569,7 @@ public class IRTBuilder implements Visitor {
             init = calInit(vd.type, vd.init, 0);
         }
         if (!isPara()) {
-            stack.push(new Decl(vd.name.num, vd.type.size, vd.type instanceof ArrayType, init));
+            stack.push(new Decl(vd.name.num, vd.type.size, getAlignSize(vd.type), vd.type instanceof ArrayType, vd.type instanceof RecordType, init));
         }
     }
 

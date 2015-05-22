@@ -32,7 +32,7 @@ public class PostByteOp extends Op {
     public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
         Label tcur = new Label(Label.DUMMY);
         VarName src1 = (VarName)gen.gen(cur, expr.exprs.get(0), list, tcur);
-        VarName dest = new VarName();
+        VarName dest = VarName.getTmp();
         list.add((new AssignInst(ExprOp.asg, dest, src1)).setLabel(tcur));
         list.add(new AssignInst(delta < 0 ? ExprOp.sub : ExprOp.add, src1, src1, new IntConst(Math.abs(delta))));
         return dest;

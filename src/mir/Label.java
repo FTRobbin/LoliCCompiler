@@ -23,7 +23,7 @@ public class Label {
 
     public Label() {
         id = cnt++;
-        name = "L#" + id;
+        name = "_L" + id;
     }
 
     public Label(String s) {
@@ -41,7 +41,7 @@ public class Label {
             st ^= DUMMY;
         }
         id = cnt++;
-        name = "L#" + id;
+        name = "_L" + id;
     }
 
     public boolean isFall() {

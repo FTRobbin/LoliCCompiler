@@ -36,9 +36,9 @@ public class BinPtrrOp extends Op {
         Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
         Value src1 = gen.gen(cur, expr.exprs.get(0), list, mid);
         Value src2 = gen.gen(mid, expr.exprs.get(1), list, tcur);
-        VarName tmp = new VarName();
+        VarName tmp = VarName.getTmp();
         list.add((new AssignInst(ExprOp.mul, tmp, src1, new IntConst(((PointerType)(expr.exprs.get(1).retType)).baseType.size))).setLabel(tcur));
-        VarName dest = new VarName();
+        VarName dest = VarName.getTmp();
         list.add(new AssignInst(this.op.IROp(), dest, tmp, src2));
         return dest;
     }

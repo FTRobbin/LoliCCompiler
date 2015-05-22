@@ -9,6 +9,7 @@ public class SSAVarName extends VarName {
     public int id;
 
     public SSAVarName(VarName var, int id) {
+        super(null);
         this.isTemp = var.isTemp;
         this.ori = var;
         this.id = id;

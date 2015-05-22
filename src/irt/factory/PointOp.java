@@ -1,10 +1,13 @@
 package irt.factory;
 
 import ast.nodes.type.ArrayType;
+import ast.nodes.type.FunctionType;
+import ast.nodes.type.RecordType;
 import ast.nodes.type.Type;
 import interpreter.Interpreter;
 import irt.Expr;
 import mir.*;
+import semantic.IRTBuilder;
 
 import java.util.List;
 
@@ -35,11 +38,12 @@ public class PointOp extends Op{
     public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
         Label tcur = new Label(Label.DUMMY);
         Value src1 = gen.gen(cur, expr.exprs.get(0), list, tcur);
-        VarName dest = new VarName();
+        VarName dest = VarName.getTmp();
         list.add((new AssignInst(ExprOp.add, dest, src1, new IntConst(delta)).setLabel(tcur)));
-        if (expr.retType instanceof ArrayType) {
-            list.add(new AssignInst(ExprOp.adr, dest, dest));
+        if (expr.retType instanceof ArrayType || expr.retType instanceof FunctionType || expr.retType instanceof RecordType) {
+            return dest;
+        } else {
+            return new DeRefVar(dest, expr.retSize, IRTBuilder.getAlignSize(expr.retType), expr.retType instanceof ArrayType, expr.retType instanceof RecordType);
         }
-        return dest;
     }
 }

@@ -5,6 +5,7 @@ import analysis.LivenessAnalysis;
 import analysis.StaticSingleAssignment;
 import ast.visitors.Visitor;
 import exception.*;
+import gen.basic.BasicGen;
 import irt.Prog;
 import mir.MIRGen;
 import parser.Parser;
@@ -42,6 +43,7 @@ public class LoliCCompiler {
     private JButton CFGButton;
     private JButton SSAButton;
     private JButton livenessButton;
+    private JButton basicGenButton;
     private JFrame frame;
 
     private static int cnt = 0;
@@ -68,7 +70,7 @@ public class LoliCCompiler {
     }
 
     private void showMessage(String s) {
-        compilerMessage.append(s);
+        compilerMessage.setText(compilerMessage.getText() + s);
     }
 
     private void loadWarning() {
@@ -288,6 +290,13 @@ public class LoliCCompiler {
                 ControlFlowGraph.calDominator(IRroot);
                 LivenessAnalysis.cal(IRroot);
                 textArea1.setText(LivenessAnalysis.printLive(IRroot));
+            }
+        });
+        basicGenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mir.Program IRroot = getIR();
+                textArea1.setText((new BasicGen()).gen(IRroot).print());
             }
         });
     }

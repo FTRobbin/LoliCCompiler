@@ -1,8 +1,11 @@
 package mir;
 
 import ast.nodes.expression.Symbol;
+import ast.nodes.type.ArrayType;
+import ast.nodes.type.RecordType;
 import irt.*;
 import irt.factory.*;
+import semantic.IRTBuilder;
 
 import java.util.*;
 
@@ -37,7 +40,7 @@ public class MIRGen {
         VarName.reset();
     }
 
-    int curScope() {
+    public int curScope() {
         return scopes.peek();
     }
 
@@ -120,10 +123,10 @@ public class MIRGen {
         addScope();
 
         //STL
-        funcs.peek().put(Symbol.getnum("printf"), new VarName(0, "@printf"));
-        funcs.peek().put(Symbol.getnum("scanf"), new VarName(0, "@scanf"));
-        funcs.peek().put(Symbol.getnum("malloc"), new VarName(0, "@malloc"));
-        funcs.peek().put(Symbol.getnum("getchar"), new VarName(0, "@getchar"));
+        funcs.peek().put(Symbol.getnum("printf"), new VarName(0, "___printf", 4, 4));
+        funcs.peek().put(Symbol.getnum("scanf"), new VarName(0, "___scanf", 4, 4));
+        funcs.peek().put(Symbol.getnum("malloc"), new VarName(0, "___malloc", 4, 4));
+        funcs.peek().put(Symbol.getnum("getchar"), new VarName(0, "___getchar", 4, 4));
 
         List<Decl> list = pr.decls;
         for (Decl decl : list) {
@@ -132,13 +135,16 @@ public class MIRGen {
         }
         Set<Map.Entry<Integer, Func>> set = pr.funcs.entrySet();
         for (Map.Entry<Integer, Func> entry : set) {
-            funcs.peek().put(entry.getKey(), new VarName(curScope(), "@" + Symbol.getstr(entry.getKey())));
+            funcs.peek().put(entry.getKey(), new VarName(curScope(), "__" + Symbol.getstr(entry.getKey()), 4, 4));
         }
         for (Map.Entry<Integer, Func> entry : set) {
             root.addUnit(gen(entry.getValue()));
         }
+        __global.addInst(new ReturnInst());
+        /*
         VarName ret = new VarName();
         __global.addInst(new CallInst(ret, new IntConst(0), getEntry(Symbol.getnum("main"))));
+        */
         __global.dummyCut();
         delScope();
 
@@ -146,22 +152,33 @@ public class MIRGen {
     }
 
     public ProgUnit gen(Func func) {
-        ProgUnit ret = new ProgUnit(new Label("@" + Symbol.getstr(func.id) + (curScope() > 0 ? "#" + curScope() : "") ));
+        ProgUnit ret = new ProgUnit(new Label("__" + Symbol.getstr(func.id) + (curScope() > 0 ? "_" + curScope() : "") ));
         if (curScope() > 0) {
-            funcs.peek().put(func.id, new VarName(curScope(), "@" + Symbol.getstr(func.id)));
+            funcs.peek().put(func.id, new VarName(curScope(), "__" + Symbol.getstr(func.id), 4, 4));
         }
         addLabelEntry(func.id, ret.label);
         addScope();
-        VarName retVar = new VarName(curScope(), "#Return");
+        VarName retVar = new VarName(curScope(), "_Return", func.retSize, func.retAlign);
+        //TODO!!!
+        if (func.retRe) {
+            retVar.isStruct = true;
+            VarName var = new VarName(curScope(), "_ReturnStruct", 4, 4);
+            var.isRet = false;
+            addEntry(Symbol.getnum("#ReturnStruct"), var);
+            ret.addInst(new RecvInst(var, 4));
+        }
         addEntry(Symbol.getnum("#Return"), retVar);
         for (int i = 0; i < func.paraSize.size(); ++i) {
-            VarName var = new VarName(curScope(), Symbol.getstr(func.paraName.get(i)));
+            VarName var = new VarName(curScope(), Symbol.getstr(func.paraName.get(i)), func.paraSize.get(i), func.paraAlign.get(i));
+            if (func.paraRe.get(i)) {
+                var.isStruct = true;
+            }
             addEntry(func.paraName.get(i), var);
             ret.addInst(new RecvInst(var, func.paraSize.get(i)));
         }
         Label dummy = new Label(Label.DUMMY);
         ret.addInst(gen(new Label(Label.DUMMY), func.st, dummy));
-        if (!dummy.isDummy()) {
+        if (!dummy.isDummy() || func.retSize == 0) {
             ret.addInst((new ReturnInst()).setLabel(dummy));
         }
         delScope();
@@ -191,7 +208,13 @@ public class MIRGen {
 
     public List<MIRInst> gen(Label cur, Decl decl, Label next) {
         List<MIRInst> list = new LinkedList<>();
-        VarName var = new VarName(curScope(), Symbol.getstr(decl.id));
+        VarName var = new VarName(curScope(), Symbol.getstr(decl.id), decl.size, decl.align);
+        if (decl.isArray) {
+            var.isArray = true;
+        }
+        if (decl.isStruct) {
+            var.isStruct = true;
+        }
         addEntry(decl.id, var);
         list.add((new MemInst(var, decl.size)).setLabel(cur));
         List<Pair> list1 = decl.init;
@@ -201,9 +224,9 @@ public class MIRGen {
                     Label ccur = new Label(Label.DUMMY),
                           cnxt = new Label(Label.DUMMY);
                     Value tmp = gen(ccur, pair.expr, list, cnxt);
-                    VarName tmp2 = new VarName();
+                    VarName tmp2 = VarName.getTmp();
                     list.add((new AssignInst(ExprOp.add, tmp2, var, new IntConst(pair.id))).setLabel(cnxt));
-                    list.add(new AssignInst(ExprOp.asg, tmp2, tmp));
+                    list.add(new AssignInst(ExprOp.asg, new DeRefVar(tmp2, pair.expr.retSize, IRTBuilder.getAlignSize(pair.expr.retType), pair.expr.retType instanceof ArrayType, pair.expr.retType instanceof RecordType), tmp));
                 }
             } else {
                 if (list1.size() > 1 || list1.get(0).id != 0) {

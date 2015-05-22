@@ -31,7 +31,7 @@ public class SubPtrIgnOp extends Op {
         Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
         VarName src1 = (VarName)gen.gen(cur, expr.exprs.get(0), list, mid);
         Value src2 = gen.gen(mid, expr.exprs.get(1), list, tcur);
-        VarName tmp = new VarName();
+        VarName tmp = VarName.getTmp();
         list.add((new AssignInst(ExprOp.sub, tmp, src1, src2)).setLabel(tcur));
         list.add((new AssignInst(ExprOp.div, src1, tmp, new IntConst(size))).setLabel(tcur));
         return src1;

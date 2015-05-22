@@ -4,88 +4,88 @@ package mir;
  * Created by Robbin Ni on 2015/5/8.
  */
 public enum ExprOp {
-    add {
+    add (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " + " + inst.src2.name;
         }
     },
 
-    and {
+    and (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " & " + inst.src2.name;
         }
     },
 
-    div {
+    div (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " / " + inst.src2.name;
         }
     },
 
-    mul {
+    mul (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " * " + inst.src2.name;
         }
 
     },
 
-    neg {
+    neg (1) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = -" + inst.src1.name;
         }
 
     },
 
-    nor {
+    nor (0) {
         public String print(AssignInst inst) {
             return "NOR";
         }
 
     },
 
-    not {
+    not (1) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = ~" + inst.src1.name;
         }
 
     },
 
-    or  {
+    or  (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " | " + inst.src2.name;
         }
 
     },
 
-    rem {
+    rem (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " % " + inst.src2.name;
         }
 
     },
 
-    sll {
+    sll (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " << " + inst.src2.name;
         }
 
     },
 
-    srl {
+    srl (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " >> " + inst.src2.name;
         }
 
     },
 
-    sub {
+    sub (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " - " + inst.src2.name;
         }
 
     },
 
-    xor {
+    xor (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " ^ " + inst.src2.name;
         }
@@ -93,69 +93,68 @@ public enum ExprOp {
     },
 
 
-    seq {
+    seq (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " == " + inst.src2.name;
         }
 
     },
 
-    sge {
+    sge (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " >= " + inst.src2.name;
         }
 
     },
 
-    sgt {
+    sgt (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " > " + inst.src2.name;
         }
 
     },
 
-    sle {
+    sle (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " <= " + inst.src2.name;
         }
 
     },
 
-    slt {
+    slt (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " < " + inst.src2.name;
         }
     },
 
-    sne {
+    sne (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " != " + inst.src2.name;
         }
     },
 
-    asg {
+    asg (1) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name;
         }
     },
 
-    adr {
+    asgr (1) {
+        public String print(AssignInst inst) {
+            return inst.dest.name + " CP= " + inst.src1.name;
+        }
+    },
+
+    adr (1) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = &" + inst.src1.name;
         }
-    },
-
-    ref {
-        public String print(AssignInst inst) {
-            return inst.dest.name + " = *" + inst.src1.name;
-        }
-    },
-
-    dcl {
-        public String print(AssignInst inst) {
-            return inst.dest.name;
-        }
     };
 
+    public int cnt;
+
+    ExprOp(int cnt) {
+        this.cnt = cnt;
+    }
     public abstract String print(AssignInst inst);
 }

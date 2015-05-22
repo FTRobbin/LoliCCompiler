@@ -61,14 +61,14 @@ public class SPRelOp extends Op {
         if (tag == 1) {
             list.addAll(gen.genRel(cur, expr.exprs.get(0), istr, br2));
             list.addAll(gen.genRel(br2, expr.exprs.get(1), istr, isfl));
-            dest = new VarName();
+            dest = VarName.getTmp();
             list.add((new AssignInst(ExprOp.asg, dest, new IntConst(0))).setLabel(isfl));
             list.add((new GotoInst(next)));
             list.add((new AssignInst(ExprOp.asg, dest, new IntConst(1))).setLabel(istr));
         } else {
             list.addAll(gen.genRel(cur, expr.exprs.get(0), br2, istr));
             list.addAll(gen.genRel(br2, expr.exprs.get(1), isfl, istr));
-            dest = new VarName();
+            dest = VarName.getTmp();
             list.add((new AssignInst(ExprOp.asg, dest, new IntConst(1))).setLabel(isfl));
             list.add((new GotoInst(next)));
             list.add((new AssignInst(ExprOp.asg, dest, new IntConst(0))).setLabel(istr));

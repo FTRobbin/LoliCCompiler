@@ -32,7 +32,7 @@ public class BinPtrlIgnOp extends Op {
         Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
         VarName src1 = (VarName)gen.gen(cur, expr.exprs.get(0), list, mid);
         Value src2 = gen.gen(mid, expr.exprs.get(1), list, tcur);
-        VarName tmp = new VarName();
+        VarName tmp = VarName.getTmp();
         list.add((new AssignInst(ExprOp.mul, tmp, src2, new IntConst(((PointerType)(expr.exprs.get(0).retType)).baseType.size))).setLabel(tcur));
         list.add(new AssignInst(this.op.IROp(), src1, src1, tmp));
         return src1;

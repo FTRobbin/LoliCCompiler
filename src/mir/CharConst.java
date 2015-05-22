@@ -9,5 +9,7 @@ public class CharConst extends Const {
     public CharConst(Character ch) {
         this.ch = ch;
         this.name = "\'" + ch + "\'";
+        this.size = 1;
+        this.align = 1;
     }
 }

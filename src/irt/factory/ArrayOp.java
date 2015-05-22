@@ -1,11 +1,10 @@
 package irt.factory;
 
-import ast.nodes.type.ArrayType;
-import ast.nodes.type.PointerType;
-import ast.nodes.type.Type;
+import ast.nodes.type.*;
 import interpreter.Interpreter;
 import irt.Expr;
 import mir.*;
+import semantic.IRTBuilder;
 
 import java.util.List;
 
@@ -44,14 +43,14 @@ public class ArrayOp extends Op {
         Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
         Value src1 = gen.gen(cur, expr.exprs.get(0), list, mid);
         Value src2 = gen.gen(mid, expr.exprs.get(1), list, tcur);
-        VarName tmp = new VarName();
+        VarName tmp = VarName.getTmp();
         list.add(new AssignInst(ExprOp.mul, tmp, src2, new IntConst(this.expr.retType.size)).setLabel(tcur));
-        VarName dest = new VarName();
+        VarName dest = VarName.getTmp();
         list.add(new AssignInst(ExprOp.add, dest, src1, tmp));
-        if (expr.retType instanceof ArrayType) {
+        if (expr.retType instanceof ArrayType || expr.retType instanceof FunctionType || expr.retType instanceof RecordType) {
             return dest;
         } else {
-            return new DeRefVar(dest);
+            return new DeRefVar(dest, expr.retSize, IRTBuilder.getAlignSize(expr.retType), expr.retType instanceof ArrayType, expr.retType instanceof RecordType);
         }
     }
 }

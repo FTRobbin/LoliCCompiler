@@ -5,4 +5,6 @@ package mir;
  */
 public abstract class Value {
     public String name;
+    public int size;
+    public int align;
 }

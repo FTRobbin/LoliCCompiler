@@ -9,5 +9,7 @@ public class StringConst extends Const {
     public StringConst(String s) {
         this.s = s;
         this.name = "\"" + s + "\"";
+        this.size = 4;
+        this.align = 4;
     }
 }

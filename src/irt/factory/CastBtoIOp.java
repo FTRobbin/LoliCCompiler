@@ -31,7 +31,7 @@ public class CastBtoIOp extends Op{
     public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
         Label tcur = new Label(Label.DUMMY);
         Value src1 = gen.gen(cur, expr.exprs.get(0), list, tcur);
-        VarName dest = new VarName();
+        VarName dest = VarName.getTmp();
         list.add((new AssignInst(ExprOp.asg, dest, src1)).setLabel(tcur));
         return dest;
     }

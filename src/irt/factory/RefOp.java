@@ -1,9 +1,12 @@
 package irt.factory;
 
+import ast.nodes.type.ArrayType;
+import ast.nodes.type.RecordType;
 import ast.nodes.type.Type;
 import interpreter.Interpreter;
 import irt.Expr;
 import mir.*;
+import semantic.IRTBuilder;
 
 import java.util.List;
 
@@ -27,11 +30,11 @@ public class RefOp extends Op {
         Label tcur = new Label(Label.DUMMY);
         Value src1 = gen.gen(cur, expr.exprs.get(0), list, tcur);
         if (src1 instanceof DeRefVar) {
-            VarName dest = new VarName();
+            VarName dest = VarName.getTmp();
             list.add((new AssignInst(ExprOp.asg, dest, src1)).setLabel(tcur));
-            return new DeRefVar(dest);
+            return new DeRefVar(dest, expr.retSize, IRTBuilder.getAlignSize(expr.retType), expr.retType instanceof ArrayType, expr.retType instanceof RecordType);
         } else {
-            return new DeRefVar(src1);
+            return new DeRefVar(src1, expr.retSize, IRTBuilder.getAlignSize(expr.retType), expr.retType instanceof ArrayType, expr.retType instanceof RecordType);
         }
     }
 }

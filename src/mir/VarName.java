@@ -5,27 +5,57 @@ package mir;
  */
 public class VarName extends Value {
 
-    static int tmpCnt = 0;
+    public static int tmpCnt = 0;
 
     public static void reset() {
         tmpCnt = 0;
     }
 
-    public boolean isTemp;
+    public boolean isTemp, isFunc, isSTL, isRet, isArray, isStruct;
     public int uid;
 
-    public VarName(Integer uid, String name) {
+    public VarName(Integer uid, String name, int size, int align) {
         this.isTemp = false;
         this.uid = uid;
-        if (uid > 0) {
-            this.name = name + "#" + uid;
+        this.size = size;
+        this.align = align;
+        if (name.length() >= 3) {
+            this.isFunc = name.charAt(0) == '_' && name.charAt(1) == '_';
+            this.isSTL = this.isFunc && name.length() > 3 && name.charAt(2) == '_';
+            this.isRet = name.charAt(0) == '_' && name.charAt(1) == 'R';
+        } else {
+            this.isFunc = false;
+            this.isSTL = false;
+            this.isRet = false;
+        }
+        if (!isSTL && !(isFunc && uid == 0)) {
+            this.name = name + "_" + uid;
         } else {
             this.name = name;
         }
     }
 
-    public VarName() {
+    private VarName(int size, int align, boolean isFunc, boolean isArray, boolean isStruct) {
         this.isTemp = true;
-        this.name = "#t" + (tmpCnt++);
+        this.name = "_t" + (tmpCnt++);
+        this.size = size;
+        this.align = align;
+        this.isFunc = isFunc;
+        this.isArray = isArray;
+        this.isStruct = isStruct;
+    }
+
+    protected VarName(Object ob) {
+        if (ob != null) {
+            throw new InternalError("Null VarName!\n");
+        }
+    }
+
+    static public VarName getTmp() {
+        return new VarName(4, 4, false, false, false);
+    }
+
+    static public VarName getStrTmp(int size, int align) {
+        return new VarName(size, align, false, false, true);
     }
 }

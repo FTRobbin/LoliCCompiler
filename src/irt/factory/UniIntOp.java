@@ -35,7 +35,7 @@ public class UniIntOp extends Op {
     public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
         Label tcur = new Label(Label.DUMMY);
         Value src1 = gen.gen(cur, expr.exprs.get(0), list, tcur);
-        VarName dest = new VarName();
+        VarName dest = VarName.getTmp();
         if (op.equals(UniIntFact.Ops.NOT)) {
             Label istr = new Label(Label.DUMMY);
             list.add((new IfInst(RelOp.beq, src1, new IntConst(0), istr)).setLabel(tcur));
