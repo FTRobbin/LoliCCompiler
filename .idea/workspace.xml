@@ -31,105 +31,6 @@
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\toolong.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\typchk.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\voidpnt2.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\Bulgarian_solitaire-5110379024-wuhang.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\Bulgarian_solitaire-5110379024-wuhang.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\Bulgarian_solitaire-5110379024-wuhang.exe" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\basicopt1-hetianxing.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\basicopt1-hetianxing.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\basicopt1-hetianxing.exe" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\board-5100379110-daibo.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\board-5100379110-daibo.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\board-5100379110-daibo.exe" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\expr-5110309085-jintianxing.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\expr-5110309085-jintianxing.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\expr-5110309085-jintianxing.exe" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\factor-5090379042-jiaxiao.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\factor-5090379042-jiaxiao.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\factor-5090379042-jiaxiao.exe" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\gcd-5090379042-jiaxiao.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\gcd-5090379042-jiaxiao.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\gcd-5090379042-jiaxiao.exe" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\hanoi-5100379110-daibo.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\hanoi-5100379110-daibo.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\hanoi-5100379110-daibo.exe" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\hanoi2-5100309153-yanghuan.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\hanoi2-5100309153-yanghuan.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\hanoi2-5100309153-yanghuan.exe" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\hashmap-5100309127-hetianxing.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\hashmap-5100309127-hetianxing.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\heapsort-5100379110-daibo.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\heapsort-5100379110-daibo.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\hello-5090379042-jiaxiao.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\hello-5090379042-jiaxiao.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\horse-5100309153-yanghuan.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\horse-5100309153-yanghuan.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\horse2-5100309153-yanghuan.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\horse2-5100309153-yanghuan.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\horse2-5100309153-yanghuan.exe" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\horse3-5100309153-yanghuan.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\horse3-5100309153-yanghuan.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\horse3-5100309153-yanghuan.exe" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\hpplus-5100309153-yanghuan.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\hpplus-5100309153-yanghuan.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\inlinecheck-5100309153-yanghuan.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\inlinecheck-5100309153-yanghuan.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\magic-5100309153-yanghuan.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\magic-5100309153-yanghuan.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\manyarguments-5100379110-daibo.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\manyarguments-5100379110-daibo.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\manymanyarguments-5100379110-daibo.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\manymanyarguments-5100379110-daibo.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\maxflow-5100379110-daibo.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\maxflow-5100379110-daibo.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\multiarray-5100309153-yanghuan.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\multiarray-5100309153-yanghuan.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\nqueencon-5100379110-daibo.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\nqueencon-5100379110-daibo.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\num1-5110379024-wuhang.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\num1-5110379024-wuhang.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\pi-5090379042-jiaxiao.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\pi-5090379042-jiaxiao.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\plus-5100309153-yanghuan.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\plus-5100309153-yanghuan.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\prime-5100309153-yanghuan.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\prime-5100309153-yanghuan.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\prime2-5100309153-yanghuan.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\prime2-5100309153-yanghuan.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\qsort-5100379110-daibo.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\qsort-5100379110-daibo.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\queenbitwise-5110379024-wuhang.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\queenbitwise-5110379024-wuhang.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\queens-5100379110-daibo.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\queens-5100379110-daibo.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\self-5090379042-jiaxiao.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\self-5090379042-jiaxiao.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\selfref-5090379042-jiaxiao.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\selfref-5090379042-jiaxiao.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\spill-5100379110-daibo.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\spill-5100379110-daibo.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\spill2-5100379110-daibo.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\spill2-5100379110-daibo.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\struct4-5110379024-wuhang.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\struct4-5110379024-wuhang.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\struct5-5110379024-wuhang.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\struct5-5110379024-wuhang.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\struct5-5110379024-wuhang_.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\struct5-5110379024-wuhang_.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\struct6-5100309127-hetianxing.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\struct6-5100309127-hetianxing.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\superloop-5090379042-jiaxiao.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\superloop-5090379042-jiaxiao.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\tak-5090379042-jiaxiao.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\tak-5090379042-jiaxiao.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\treap-5110309085-jintianxing.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\treap-5110309085-jintianxing.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\twinprime-5090379042-jiaxiao.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\twinprime-5090379042-jiaxiao.c.s" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\varptr-5100309127-hetianxing.c" afterPath="" />
-      <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\gentest\varptr-5100309127-hetianxing.c.s" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gen/basic/BasicGen.java" afterPath="$PROJECT_DIR$/src/gen/basic/BasicGen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" afterPath="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/baojingcount.log" afterPath="$PROJECT_DIR$/testcases/baojingcount.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse-5100309153-yanghuan.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse3-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse3-5100309153-yanghuan.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/hpplus-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/hpplus-5100309153-yanghuan.c" />
@@ -179,8 +80,8 @@
       <file leaf-file-name="BasicGen.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gen/basic/BasicGen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.098522164">
-              <caret line="143" column="8" selection-start-line="143" selection-start-column="8" selection-end-line="143" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.45217392">
+              <caret line="153" column="81" selection-start-line="153" selection-start-column="81" selection-end-line="153" selection-end-column="82" />
               <folding />
             </state>
           </provider>
@@ -1026,13 +927,13 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34449244" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34449244" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.50208336" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30777538" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30777538" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17447917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1062,7 +963,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="INCLUDE_TEXT_INTO_SHELF" value="true" />
-    <MESSAGE value="Minor fixes." />
     <MESSAGE value="Phase 2 : Now Passed some trivial tests." />
     <MESSAGE value="Major bug fix in the type system." />
     <MESSAGE value="Most known bugs of Phase 2 are fixed.&#10;New feature : 增加了可以统计报警次数的报警按钮！" />
@@ -1087,7 +987,8 @@
     <MESSAGE value="Bug fixes." />
     <MESSAGE value="IR small improvement." />
     <MESSAGE value="IR small improvement. Bug fixes." />
-    <option name="LAST_COMMIT_MESSAGE" value="IR small improvement. Bug fixes." />
+    <MESSAGE value="Initialization bug fixes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Initialization bug fixes." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1492,8 +1393,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gen/basic/BasicGen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.098522164">
-          <caret line="143" column="8" selection-start-line="143" selection-start-column="8" selection-end-line="143" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.45217392">
+          <caret line="153" column="81" selection-start-line="153" selection-start-column="81" selection-end-line="153" selection-end-column="82" />
           <folding />
         </state>
       </provider>
