@@ -68,6 +68,7 @@ public class CodeSelect {
                 code.addText(new SPIMInst(SPIMOp.j, new SPIMAddress(new SPIMLabel("__main"))));
             } else if (inst instanceof MemInst) {
                 MemInst mem = (MemInst)inst;
+                code.addData("\t\t.align\t" + mem.var.align);
                 code.addData("\t\t.extern\t" + mem.var.name + "\t" + mem.size);
                 code.addData(mem.var.name + ":\t\t" + ".space" + "\t" + mem.size);
                 vars.put(mem.var, (new AddressDescription(new SPIMAddress(new SPIMLabel(mem.var.name)))));
