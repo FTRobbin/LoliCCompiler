@@ -14,6 +14,8 @@ public class VarName extends Value {
     public boolean isTemp, isFunc, isSTL, isRet, isArray, isStruct;
     public int uid;
 
+    public int isPara = -1;
+
     public VarName(Integer uid, String name, int size, int align) {
         this.isTemp = false;
         this.uid = uid;

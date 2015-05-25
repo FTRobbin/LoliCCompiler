@@ -8,6 +8,7 @@ import irt.Expr;
 import mir.*;
 import semantic.IRTBuilder;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -44,14 +45,21 @@ public class CallOp extends Op {
         if (!(expr.retType instanceof RecordType)) {
             Label tcur = new Label(Label.DUMMY);
             Value func = gen.gen(cur, expr.exprs.get(0), list, tcur);
+            LinkedList<Value> paras = new LinkedList<>();
             for (int i = 1; i < expr.exprs.size(); ++i) {
                 Label next1 = new Label(Label.DUMMY);
                 Value para = gen.gen(tcur, expr.exprs.get(i), list, next1);
                 if (expr.exprs.get(i).retType instanceof RecordType) {
                     para = new DeRefVar(para, expr.exprs.get(i).retSize, IRTBuilder.getAlignSize(expr.exprs.get(i).retType), expr.exprs.get(i).retType instanceof ArrayType, expr.exprs.get(i).retType instanceof RecordType);
                 }
-                list.add((new ParaInst(para)).setLabel(next1));
-                tcur = new Label(Label.DUMMY);
+                paras.add(para);
+                //list.add((new ParaInst(para)).setLabel(next1));
+                tcur = next1;
+            }
+            for (Value val : paras) {
+                Label next1 = new Label(Label.DUMMY);
+                list.add((new ParaInst(val)).setLabel(tcur));
+                tcur = next1;
             }
             VarName dest = VarName.getTmp();
             list.add((new CallInst(dest, new IntConst(expr.exprs.size() - 1), func).setLabel(tcur)));
@@ -59,6 +67,7 @@ public class CallOp extends Op {
         } else {
             Label tcur = new Label(Label.DUMMY);
             Value func = gen.gen(cur, expr.exprs.get(0), list, tcur);
+            LinkedList<Value> paras = new LinkedList<>();
             for (int i = 0; i < expr.exprs.size(); ++i) {
                 Label next1 = new Label(Label.DUMMY);
                 if (i == 0) {
@@ -70,15 +79,22 @@ public class CallOp extends Op {
                     list.add((new AssignInst(ExprOp.asg, para, tmpStr)).setLabel(next1));
                     tcur = next1;
                     next1 = new Label(Label.DUMMY);
-                    list.add((new ParaInst(para)).setLabel(next1));
+                    //list.add((new ParaInst(para)).setLabel(next1));
+                    paras.add(para);
                 } else {
                     Value para = gen.gen(tcur, expr.exprs.get(i), list, next1);
                     if (expr.exprs.get(i).retType instanceof RecordType) {
                         para = new DeRefVar(para, expr.exprs.get(i).retSize, IRTBuilder.getAlignSize(expr.exprs.get(i).retType), expr.exprs.get(i).retType instanceof ArrayType, expr.exprs.get(i).retType instanceof RecordType);
                     }
-                    list.add((new ParaInst(para)).setLabel(next1));
+                    //list.add((new ParaInst(para)).setLabel(next1));
+                    paras.add(para);
                 }
-                tcur = new Label(Label.DUMMY);
+                tcur = next1;
+            }
+            for (Value val : paras) {
+                Label next1 = new Label(Label.DUMMY);
+                list.add((new ParaInst(val)).setLabel(tcur));
+                tcur = next1;
             }
             VarName dest = VarName.getTmp();
             list.add((new CallInst(dest, new IntConst(expr.exprs.size()), func).setLabel(tcur)));

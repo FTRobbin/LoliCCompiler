@@ -71,6 +71,29 @@ public class MIRGen {
         return false;
     }
 
+    public boolean hasMerit(Value val) {
+        if (val instanceof IntConst) {
+            return true;
+        } else if (val instanceof CharConst) {
+            return true;
+        } else if (val instanceof StringConst) {
+            return true;
+        } else if (val instanceof VarName && (((VarName) val).isStruct || ((VarName) val).isArray || ((VarName) val).isFunc)) {
+            if (val instanceof DeRefVar) {
+                val = ((DeRefVar) val).val;
+                if (val instanceof VarName && (((VarName) val).isStruct || ((VarName) val).isArray || ((VarName) val).isFunc)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
     public VarName getEntry(int id) {
         for (HashMap<Integer, VarName> map : varTable)  {
             if (map.containsKey(id)) {
@@ -160,11 +183,13 @@ public class MIRGen {
         addScope();
         VarName retVar = new VarName(curScope(), "_Return", func.retSize, func.retAlign);
         //TODO!!!
+        int cnt = 0;
         if (func.retRe) {
             retVar.isStruct = true;
             VarName var = new VarName(curScope(), "_ReturnStruct", 4, 4);
             var.isRet = false;
             addEntry(Symbol.getnum("#ReturnStruct"), var);
+            var.isPara = cnt++;
             ret.addInst(new RecvInst(var, 4));
         }
         addEntry(Symbol.getnum("#Return"), retVar);
@@ -175,12 +200,13 @@ public class MIRGen {
             }
             addEntry(func.paraName.get(i), var);
             ret.addInst(new RecvInst(var, func.paraSize.get(i)));
+            if (cnt < 4) {
+                var.isPara = cnt++;
+            }
         }
         Label dummy = new Label(Label.DUMMY);
         ret.addInst(gen(new Label(Label.DUMMY), func.st, dummy));
-        if (!dummy.isDummy() || func.retSize == 0) {
-            ret.addInst((new ReturnInst()).setLabel(dummy));
-        }
+        ret.addInst((new ReturnInst()).setLabel(dummy));
         delScope();
         ret.dummyCut();
         return ret;
@@ -349,46 +375,16 @@ public class MIRGen {
                 fafa = faLa;
             }
             if (rev) {
-                switch (op.ordinal()) {
-                    case 0 : {
-                        //LESS
-                        lastOpb.op = op = BinIntFact.Ops.GE_OP;
-                        break;
-                    }
-                    case 1 : {
-                        //GREATER
-                        lastOpb.op = op = BinIntFact.Ops.LE_OP;
-                        break;
-                    }
-                    case 2 : {
-                        //LE_OP
-                        lastOpb.op = op = BinIntFact.Ops.GREATER;
-                        break;
-                    }
-                    case 3 : {
-                        //GE_OP
-                        lastOpb.op = op = BinIntFact.Ops.LESS;
-                        break;
-                    }
-                    case 4 : {
-                        //EQ_OP
-                        lastOpb.op = op = BinIntFact.Ops.NE_OP;
-                        break;
-                    }
-                    case 5 : {
-                        //NE_OP
-                        lastOpb.op = op = BinIntFact.Ops.EQ_OP;
-                        break;
-                    }
-                    default: {
-                        throw new InternalError("Unknown relation op.\n");
-                    }
-                }
+                op = op.changedOp();
             }
             Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
             Value src1 = gen(cur, expr.exprs.get(0), list, mid);
             Value src2 = gen(mid, expr.exprs.get(1), list, tcur);
-            list.add((new IfInst(op.IRRelOp(), src1, src2, fatr)).setLabel(tcur));
+            if (op.changeAble() && hasMerit(src1) && !hasMerit(src2)) {
+                list.add((new IfInst(op.changedOp().IRRelOp(), src2, src1, fatr)).setLabel(tcur));
+            } else {
+                list.add((new IfInst(op.IRRelOp(), src1, src2, fatr)).setLabel(tcur));
+            }
             if (!fafa.isFall()) {
                 list.add((new GotoInst(fafa)));
             }

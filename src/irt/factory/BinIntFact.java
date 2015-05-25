@@ -28,6 +28,9 @@ public class BinIntFact extends OpFactory {
             public int cal(int a, int b){
                 return a < b ? 1 : 0;
             }
+
+            public boolean changeAble() {return true;}
+            public Ops changedOp() {return GE_OP;}
         },
 
         GREATER {
@@ -41,6 +44,9 @@ public class BinIntFact extends OpFactory {
             public int cal(int a, int b) {
                 return a > b ? 1 : 0;
             }
+
+            public boolean changeAble() {return true;}
+            public Ops changedOp() {return LE_OP;}
         },
 
 
@@ -55,6 +61,8 @@ public class BinIntFact extends OpFactory {
             public int cal(int a, int b) {
                 return a <= b ? 1 : 0;
             }
+            public boolean changeAble() {return true;}
+            public Ops changedOp() {return GREATER;}
         },
 
         GE_OP {
@@ -68,6 +76,8 @@ public class BinIntFact extends OpFactory {
             public int cal (int a, int b) {
                 return a >= b ? 1 : 0;
             }
+            public boolean changeAble() {return true;}
+            public Ops changedOp() {return LESS;}
         },
 
         EQ_OP {
@@ -80,6 +90,8 @@ public class BinIntFact extends OpFactory {
             public int cal(int a, int b) {
                 return a == b ? 1 : 0;
             }
+            public boolean changeAble() {return true;}
+            public Ops changedOp() {return EQ_OP;}
         },
         NE_OP {
             public ExprOp IROp() {
@@ -91,6 +103,8 @@ public class BinIntFact extends OpFactory {
             public int cal(int a, int b) {
                 return a != b ? 1 : 0;
             }
+            public boolean changeAble() {return true;}
+            public Ops changedOp() {return NE_OP;}
         },
         ADD {
             public ExprOp IROp() {
@@ -99,6 +113,8 @@ public class BinIntFact extends OpFactory {
             public int cal(int a, int b) {
                 return a + b;
             }
+            public boolean changeAble() {return true;}
+            public Ops changedOp() {return ADD;}
         },
         SUB {
             public ExprOp IROp() {
@@ -115,6 +131,8 @@ public class BinIntFact extends OpFactory {
             public int cal(int a, int b) {
                 return a * b;
             }
+            public boolean changeAble() {return true;}
+            public Ops changedOp() {return MUL;}
         },
         DIV {
             public ExprOp IROp() {
@@ -141,6 +159,8 @@ public class BinIntFact extends OpFactory {
             public int cal(int a, int b) {
                 return a ^ b;
             }
+            public boolean changeAble() {return true;}
+            public Ops changedOp() {return XOR;}
         },
 
         OR {
@@ -150,6 +170,8 @@ public class BinIntFact extends OpFactory {
             public int cal(int a, int b) {
                 return a | b;
             }
+            public boolean changeAble() {return true;}
+            public Ops changedOp() {return OR;}
         },
 
         AND {
@@ -159,6 +181,8 @@ public class BinIntFact extends OpFactory {
             public int cal(int a, int b) {
                 return a & b;
             }
+            public boolean changeAble() {return true;}
+            public Ops changedOp() {return AND;}
         },
 
         SHL {
@@ -182,6 +206,8 @@ public class BinIntFact extends OpFactory {
         abstract public int cal(int a, int b);
         abstract public ExprOp IROp();
         public RelOp IRRelOp() {return null;}
+        public boolean changeAble() {return false;}
+        public Ops changedOp() {return null;}
     }
 
     Ops op;

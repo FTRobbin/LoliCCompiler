@@ -19,7 +19,7 @@ public class LivenessAnalysis {
     }
 
     public static void addDef(VarName var, Block b) {
-        if (b.def.contains(var) || b.use.contains(var)) {
+        if (b.def.contains(var)) {
             return;
         }
         b.def.add(var);

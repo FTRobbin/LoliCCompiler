@@ -2,7 +2,6 @@ package gen.basic;
 
 import gen.ASMCode;
 import gen.CodeGen;
-import gen.SPIMCode;
 import mir.*;
 
 import java.util.*;
@@ -12,7 +11,7 @@ import java.util.*;
  */
 public class RandomSpillGen implements CodeGen {
 
-    public SPIMCode code;
+    public BasicSPIMCode code;
 
     void addSTL() {
         code.addText("___printf:\n" +
@@ -297,7 +296,7 @@ public class RandomSpillGen implements CodeGen {
     }
 
     public BasicReg getReg(Value val) {
-        if (val != null) {
+        if (val != null && !(val instanceof DeRefVar)) {
             for (BasicReg reg : BasicReg.values()) {
                 if (val.equals(curState.get(reg))) {
                     return reg;
@@ -438,6 +437,11 @@ public class RandomSpillGen implements CodeGen {
     }
 
     void pesudoWrite(BasicReg reg, VarName var) {
+        for (BasicReg reg1 : BasicReg.values()) {
+            if (var.equals(curState.get(reg1))) {
+                curState.remove(reg1);
+            }
+        }
         writeToMem(reg, var);
         curState.put(reg, var);
         return;
@@ -611,7 +615,7 @@ public class RandomSpillGen implements CodeGen {
     @Override
     public ASMCode gen(Program prog) {
         strCnt = 0;
-        code = new SPIMCode();
+        code = new BasicSPIMCode();
         addGlobal(prog.list.get(0));
         for (ProgUnit unit : prog.list) {
             if (unit.label.name.equals("__global")) {

@@ -34,7 +34,7 @@ public class Compiler {
             mir.Program IRroot = gen.gen(IRTroot);
             IRroot = GotoGoto.GotoGotoOpti(IRroot);
             ControlFlowGraph.getCFG(IRroot);
-            CodeGen cgen = new RandomSpillGen();
+            CodeGen cgen = new BasicGen();
             ASMCode code = cgen.gen(IRroot);
             System.out.println(code.print());
         } catch (Throwable t) {

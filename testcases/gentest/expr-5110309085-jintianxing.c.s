@@ -11,3087 +11,1592 @@ _str0:		.asciiz	"%d %d %d\n"
 	.text
 	.globl main
 main:
-		li	$t0	1
-		sw	$t0	A_0
-		li	$t0	1
-		sw	$t0	B_0
-		li	$t0	1
-		sw	$t0	C_0
-		move	$fp	$sp
+		li	$t2	1
+		sw	$t2	A_0
+		li	$t3	1
+		sw	$t3	B_0
+		li	$t4	1
+		sw	$t4	C_0
 		j	__main
 __main:
 _L2:
-		li	$t0	1
-		li	$t1	29
-		sll	$t2	$t0	$t1
-		sw	$t2	-4($fp)
-		lw	$t0	C_0
-		lw	$t1	-4($fp)
-		bge	$t0	$t1	_L3
-		li	$t0	1
-		li	$t1	29
-		sll	$t2	$t0	$t1
-		sw	$t2	-8($fp)
-		lw	$t0	-8($fp)
-		neg	$t1	$t0
-		sw	$t1	-12($fp)
-		lw	$t0	C_0
-		lw	$t1	-12($fp)
-		ble	$t0	$t1	_L3
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-16($fp)
-		lw	$t0	-16($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-20($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-24($fp)
-		lw	$t0	-20($fp)
-		lw	$t1	-24($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-28($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-32($fp)
-		lw	$t0	-32($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-36($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-40($fp)
-		lw	$t0	-36($fp)
-		lw	$t1	-40($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-44($fp)
-		lw	$t0	-28($fp)
-		lw	$t1	-44($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-48($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-52($fp)
-		lw	$t0	-52($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-56($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-60($fp)
-		lw	$t0	-56($fp)
-		lw	$t1	-60($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-64($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-68($fp)
-		lw	$t0	-68($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-72($fp)
-		lw	$t0	-64($fp)
-		lw	$t1	-72($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-76($fp)
-		lw	$t0	-48($fp)
-		lw	$t1	-76($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-80($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-84($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-88($fp)
-		lw	$t0	-88($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-92($fp)
-		lw	$t0	-84($fp)
-		lw	$t1	-92($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-96($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-100($fp)
-		lw	$t0	-96($fp)
-		lw	$t1	-100($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-104($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-108($fp)
-		lw	$t0	-108($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-112($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-116($fp)
-		lw	$t0	-112($fp)
-		lw	$t1	-116($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-120($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-124($fp)
-		lw	$t0	-124($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-128($fp)
-		lw	$t0	-120($fp)
-		lw	$t1	-128($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-132($fp)
-		lw	$t0	-104($fp)
-		lw	$t1	-132($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-136($fp)
-		lw	$t0	-80($fp)
-		lw	$t1	-136($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-140($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-144($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-148($fp)
-		lw	$t0	-148($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-152($fp)
-		lw	$t0	-144($fp)
-		lw	$t1	-152($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-156($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-160($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-164($fp)
-		lw	$t0	-164($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-168($fp)
-		lw	$t0	-160($fp)
-		lw	$t1	-168($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-172($fp)
-		lw	$t0	-156($fp)
-		lw	$t1	-172($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-176($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-180($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-184($fp)
-		lw	$t0	-184($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-188($fp)
-		lw	$t0	-180($fp)
-		lw	$t1	-188($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-192($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-196($fp)
-		lw	$t0	-192($fp)
-		lw	$t1	-196($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-200($fp)
-		lw	$t0	-176($fp)
-		lw	$t1	-200($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-204($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-208($fp)
-		lw	$t0	-208($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-212($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-216($fp)
-		lw	$t0	-212($fp)
-		lw	$t1	-216($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-220($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-224($fp)
-		lw	$t0	-224($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-228($fp)
-		lw	$t0	-220($fp)
-		lw	$t1	-228($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-232($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-236($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-240($fp)
-		lw	$t0	-240($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-244($fp)
-		lw	$t0	-236($fp)
-		lw	$t1	-244($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-248($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-252($fp)
-		lw	$t0	-248($fp)
-		lw	$t1	-252($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-256($fp)
-		lw	$t0	-232($fp)
-		lw	$t1	-256($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-260($fp)
-		lw	$t0	-204($fp)
-		lw	$t1	-260($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-264($fp)
-		lw	$t0	-140($fp)
-		lw	$t1	-264($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-268($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-272($fp)
-		lw	$t0	-272($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-276($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-280($fp)
-		lw	$t0	-276($fp)
-		lw	$t1	-280($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-284($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-288($fp)
-		lw	$t0	-288($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-292($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-296($fp)
-		lw	$t0	-292($fp)
-		lw	$t1	-296($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-300($fp)
-		lw	$t0	-284($fp)
-		lw	$t1	-300($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-304($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-308($fp)
-		lw	$t0	-308($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-312($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-316($fp)
-		lw	$t0	-312($fp)
-		lw	$t1	-316($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-320($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-324($fp)
-		lw	$t0	-324($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-328($fp)
-		lw	$t0	-320($fp)
-		lw	$t1	-328($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-332($fp)
-		lw	$t0	-304($fp)
-		lw	$t1	-332($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-336($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-340($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-344($fp)
-		lw	$t0	-344($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-348($fp)
-		lw	$t0	-340($fp)
-		lw	$t1	-348($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-352($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-356($fp)
-		lw	$t0	-352($fp)
-		lw	$t1	-356($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-360($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-364($fp)
-		lw	$t0	-364($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-368($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-372($fp)
-		lw	$t0	-368($fp)
-		lw	$t1	-372($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-376($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-380($fp)
-		lw	$t0	-380($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-384($fp)
-		lw	$t0	-376($fp)
-		lw	$t1	-384($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-388($fp)
-		lw	$t0	-360($fp)
-		lw	$t1	-388($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-392($fp)
-		lw	$t0	-336($fp)
-		lw	$t1	-392($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-396($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-400($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-404($fp)
-		lw	$t0	-404($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-408($fp)
-		lw	$t0	-400($fp)
-		lw	$t1	-408($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-412($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-416($fp)
-		lw	$t0	-412($fp)
-		lw	$t1	-416($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-420($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-424($fp)
-		lw	$t0	-424($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-428($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-432($fp)
-		lw	$t0	-428($fp)
-		lw	$t1	-432($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-436($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-440($fp)
-		lw	$t0	-440($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-444($fp)
-		lw	$t0	-436($fp)
-		lw	$t1	-444($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-448($fp)
-		lw	$t0	-420($fp)
-		lw	$t1	-448($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-452($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-456($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-460($fp)
-		lw	$t0	-460($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-464($fp)
-		lw	$t0	-456($fp)
-		lw	$t1	-464($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-468($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-472($fp)
-		lw	$t0	-468($fp)
-		lw	$t1	-472($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-476($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-480($fp)
-		lw	$t0	-480($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-484($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-488($fp)
-		lw	$t0	-484($fp)
-		lw	$t1	-488($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-492($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-496($fp)
-		lw	$t0	-496($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-500($fp)
-		lw	$t0	-492($fp)
-		lw	$t1	-500($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-504($fp)
-		lw	$t0	-476($fp)
-		lw	$t1	-504($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-508($fp)
-		lw	$t0	-452($fp)
-		lw	$t1	-508($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-512($fp)
-		lw	$t0	-396($fp)
-		lw	$t1	-512($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-516($fp)
-		lw	$t0	-268($fp)
-		lw	$t1	-516($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-520($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-524($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-528($fp)
-		lw	$t0	-528($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-532($fp)
-		lw	$t0	-524($fp)
-		lw	$t1	-532($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-536($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-540($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-544($fp)
-		lw	$t0	-544($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-548($fp)
-		lw	$t0	-540($fp)
-		lw	$t1	-548($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-552($fp)
-		lw	$t0	-536($fp)
-		lw	$t1	-552($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-556($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-560($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-564($fp)
-		lw	$t0	-564($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-568($fp)
-		lw	$t0	-560($fp)
-		lw	$t1	-568($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-572($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-576($fp)
-		lw	$t0	-572($fp)
-		lw	$t1	-576($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-580($fp)
-		lw	$t0	-556($fp)
-		lw	$t1	-580($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-584($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-588($fp)
-		lw	$t0	-588($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-592($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-596($fp)
-		lw	$t0	-592($fp)
-		lw	$t1	-596($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-600($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-604($fp)
-		lw	$t0	-604($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-608($fp)
-		lw	$t0	-600($fp)
-		lw	$t1	-608($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-612($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-616($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-620($fp)
-		lw	$t0	-620($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-624($fp)
-		lw	$t0	-616($fp)
-		lw	$t1	-624($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-628($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-632($fp)
-		lw	$t0	-628($fp)
-		lw	$t1	-632($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-636($fp)
-		lw	$t0	-612($fp)
-		lw	$t1	-636($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-640($fp)
-		lw	$t0	-584($fp)
-		lw	$t1	-640($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-644($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-648($fp)
-		lw	$t0	-648($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-652($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-656($fp)
-		lw	$t0	-652($fp)
-		lw	$t1	-656($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-660($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-664($fp)
-		lw	$t0	-664($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-668($fp)
-		lw	$t0	-660($fp)
-		lw	$t1	-668($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-672($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-676($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-680($fp)
-		lw	$t0	-680($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-684($fp)
-		lw	$t0	-676($fp)
-		lw	$t1	-684($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-688($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-692($fp)
-		lw	$t0	-688($fp)
-		lw	$t1	-692($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-696($fp)
-		lw	$t0	-672($fp)
-		lw	$t1	-696($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-700($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-704($fp)
-		lw	$t0	-704($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-708($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-712($fp)
-		lw	$t0	-708($fp)
-		lw	$t1	-712($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-716($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-720($fp)
-		lw	$t0	-720($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-724($fp)
-		lw	$t0	-716($fp)
-		lw	$t1	-724($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-728($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-732($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-736($fp)
-		lw	$t0	-736($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-740($fp)
-		lw	$t0	-732($fp)
-		lw	$t1	-740($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-744($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-748($fp)
-		lw	$t0	-744($fp)
-		lw	$t1	-748($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-752($fp)
-		lw	$t0	-728($fp)
-		lw	$t1	-752($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-756($fp)
-		lw	$t0	-700($fp)
-		lw	$t1	-756($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-760($fp)
-		lw	$t0	-644($fp)
-		lw	$t1	-760($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-764($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-768($fp)
-		lw	$t0	-768($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-772($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-776($fp)
-		lw	$t0	-772($fp)
-		lw	$t1	-776($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-780($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-784($fp)
-		lw	$t0	-784($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-788($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-792($fp)
-		lw	$t0	-788($fp)
-		lw	$t1	-792($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-796($fp)
-		lw	$t0	-780($fp)
-		lw	$t1	-796($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-800($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-804($fp)
-		lw	$t0	-804($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-808($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-812($fp)
-		lw	$t0	-808($fp)
-		lw	$t1	-812($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-816($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-820($fp)
-		lw	$t0	-820($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-824($fp)
-		lw	$t0	-816($fp)
-		lw	$t1	-824($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-828($fp)
-		lw	$t0	-800($fp)
-		lw	$t1	-828($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-832($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-836($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-840($fp)
-		lw	$t0	-840($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-844($fp)
-		lw	$t0	-836($fp)
-		lw	$t1	-844($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-848($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-852($fp)
-		lw	$t0	-848($fp)
-		lw	$t1	-852($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-856($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-860($fp)
-		lw	$t0	-860($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-864($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-868($fp)
-		lw	$t0	-864($fp)
-		lw	$t1	-868($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-872($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-876($fp)
-		lw	$t0	-876($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-880($fp)
-		lw	$t0	-872($fp)
-		lw	$t1	-880($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-884($fp)
-		lw	$t0	-856($fp)
-		lw	$t1	-884($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-888($fp)
-		lw	$t0	-832($fp)
-		lw	$t1	-888($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-892($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-896($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-900($fp)
-		lw	$t0	-900($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-904($fp)
-		lw	$t0	-896($fp)
-		lw	$t1	-904($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-908($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-912($fp)
-		lw	$t0	-908($fp)
-		lw	$t1	-912($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-916($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-920($fp)
-		lw	$t0	-920($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-924($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-928($fp)
-		lw	$t0	-924($fp)
-		lw	$t1	-928($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-932($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-936($fp)
-		lw	$t0	-936($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-940($fp)
-		lw	$t0	-932($fp)
-		lw	$t1	-940($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-944($fp)
-		lw	$t0	-916($fp)
-		lw	$t1	-944($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-948($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-952($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-956($fp)
-		lw	$t0	-956($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-960($fp)
-		lw	$t0	-952($fp)
-		lw	$t1	-960($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-964($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-968($fp)
-		lw	$t0	-964($fp)
-		lw	$t1	-968($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-972($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-976($fp)
-		lw	$t0	-976($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-980($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-984($fp)
-		lw	$t0	-980($fp)
-		lw	$t1	-984($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-988($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-992($fp)
-		lw	$t0	-992($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-996($fp)
-		lw	$t0	-988($fp)
-		lw	$t1	-996($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1000($fp)
-		lw	$t0	-972($fp)
-		lw	$t1	-1000($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1004($fp)
-		lw	$t0	-948($fp)
-		lw	$t1	-1004($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1008($fp)
-		lw	$t0	-892($fp)
-		lw	$t1	-1008($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1012($fp)
-		lw	$t0	-764($fp)
-		lw	$t1	-1012($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1016($fp)
-		lw	$t0	-520($fp)
-		lw	$t1	-1016($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1020($fp)
-		lw	$t0	-1020($fp)
+		li	$t2	1
+		li	$t3	29
+		sll	$t4	$t2	$t3
+		sw	$t4	-4($sp)
+		lw	$t2	C_0
+		lw	$t3	-4($sp)
+		bge	$t2	$t3	_L3
+		li	$t2	1
+		li	$t3	29
+		sll	$t4	$t2	$t3
+		sw	$t4	-8($sp)
+		neg	$t5	$t4
+		sw	$t5	-12($sp)
+		lw	$t2	C_0
+		lw	$t3	-12($sp)
+		ble	$t2	$t3	_L3
+		lw	$t2	C_0
+		lw	$t3	A_0
+		sub	$t4	$t2	$t3
+		sw	$t4	-16($sp)
+		lw	$t5	B_0
+		add	$t6	$t4	$t5
+		sw	$t6	-20($sp)
+		add	$t7	$t3	$t5
+		sw	$t7	-24($sp)
+		sub	$t8	$t6	$t7
+		sw	$t8	-28($sp)
+		sub	$t9	$t2	$t3
+		sw	$t9	-32($sp)
+		add	$a3	$t9	$t5
+		sw	$a3	-36($sp)
+		add	$s0	$t3	$t5
+		sw	$s0	-40($sp)
+		sub	$s1	$a3	$s0
+		sw	$s1	-44($sp)
+		add	$s2	$t8	$s1
+		sw	$s2	-48($sp)
+		sub	$s3	$t2	$t3
+		sw	$s3	-52($sp)
+		add	$s4	$s3	$t5
+		sw	$s4	-56($sp)
+		add	$s5	$t3	$t5
+		sw	$s5	-60($sp)
+		sub	$s6	$s4	$s5
+		sw	$s6	-64($sp)
+		sub	$s7	$t2	$t3
+		sw	$s7	-68($sp)
+		add	$fp	$s7	$t5
+		sw	$fp	-72($sp)
+		add	$a0	$s6	$fp
+		sw	$a0	-76($sp)
+		add	$a1	$s2	$a0
+		sw	$a1	-80($sp)
+		add	$a2	$t3	$t5
+		sw	$a2	-84($sp)
+		sub	$t0	$t2	$t3
+		sw	$t0	-88($sp)
+		add	$t1	$t0	$t5
+		sw	$t1	-92($sp)
+		add	$v0	$a2	$t1
+		sw	$v0	-96($sp)
+		add	$0	$t3	$t5
+		sw	$0	-100($sp)
+		sub	$t4	$v0	$0
+		sw	$t4	-104($sp)
+		sub	$t6	$t2	$t3
+		sw	$t6	-108($sp)
+		add	$t7	$t6	$t5
+		sw	$t7	-112($sp)
+		add	$t9	$t3	$t5
+		sw	$t9	-116($sp)
+		sub	$a3	$t7	$t9
+		sw	$a3	-120($sp)
+		sub	$s0	$t2	$t3
+		sw	$s0	-124($sp)
+		add	$t8	$s0	$t5
+		sw	$t8	-128($sp)
+		add	$s1	$a3	$t8
+		sw	$s1	-132($sp)
+		add	$s3	$t4	$s1
+		sw	$s3	-136($sp)
+		sub	$s4	$a1	$s3
+		sw	$s4	-140($sp)
+		add	$s5	$t3	$t5
+		sw	$s5	-144($sp)
+		sub	$s7	$t2	$t3
+		sw	$s7	-148($sp)
+		add	$s6	$s7	$t5
+		sw	$s6	-152($sp)
+		add	$fp	$s5	$s6
+		sw	$fp	-156($sp)
+		add	$s2	$t3	$t5
+		sw	$s2	-160($sp)
+		sub	$a0	$t2	$t3
+		sw	$a0	-164($sp)
+		add	$t0	$a0	$t5
+		sw	$t0	-168($sp)
+		add	$a2	$s2	$t0
+		sw	$a2	-172($sp)
+		sub	$t1	$fp	$a2
+		sw	$t1	-176($sp)
+		add	$v0	$t3	$t5
+		sw	$v0	-180($sp)
+		sub	$t6	$t2	$t3
+		sw	$t6	-184($sp)
+		add	$t7	$t6	$t5
+		sw	$t7	-188($sp)
+		add	$t9	$v0	$t7
+		sw	$t9	-192($sp)
+		add	$s0	$t3	$t5
+		sw	$s0	-196($sp)
+		sub	$a3	$t9	$s0
+		sw	$a3	-200($sp)
+		sub	$t8	$t1	$a3
+		sw	$t8	-204($sp)
+		sub	$t4	$t2	$t3
+		sw	$t4	-208($sp)
+		add	$s1	$t4	$t5
+		sw	$s1	-212($sp)
+		add	$a1	$t3	$t5
+		sw	$a1	-216($sp)
+		sub	$s3	$s1	$a1
+		sw	$s3	-220($sp)
+		sub	$s4	$t2	$t3
+		sw	$s4	-224($sp)
+		add	$s7	$s4	$t5
+		sw	$s7	-228($sp)
+		add	$s5	$s3	$s7
+		sw	$s5	-232($sp)
+		add	$s6	$t3	$t5
+		sw	$s6	-236($sp)
+		sub	$a0	$t2	$t3
+		sw	$a0	-240($sp)
+		add	$s2	$a0	$t5
+		sw	$s2	-244($sp)
+		add	$t0	$s6	$s2
+		sw	$t0	-248($sp)
+		add	$fp	$t3	$t5
+		sw	$fp	-252($sp)
+		sub	$a2	$t0	$fp
+		sw	$a2	-256($sp)
+		sub	$t6	$s5	$a2
+		sw	$t6	-260($sp)
+		add	$v0	$t8	$t6
+		sw	$v0	-264($sp)
+		lw	$t7	-140($sp)
+		sub	$t9	$t7	$v0
+		sw	$t9	-268($sp)
+		sub	$s0	$t2	$t3
+		sw	$s0	-272($sp)
+		add	$t1	$s0	$t5
+		sw	$t1	-276($sp)
+		add	$a3	$t3	$t5
+		sw	$a3	-280($sp)
+		sub	$t4	$t1	$a3
+		sw	$t4	-284($sp)
+		sub	$s1	$t2	$t3
+		sw	$s1	-288($sp)
+		add	$a1	$s1	$t5
+		sw	$a1	-292($sp)
+		add	$s4	$t3	$t5
+		sw	$s4	-296($sp)
+		sub	$s3	$a1	$s4
+		sw	$s3	-300($sp)
+		add	$s7	$t4	$s3
+		sw	$s7	-304($sp)
+		sub	$a0	$t2	$t3
+		sw	$a0	-308($sp)
+		add	$s6	$a0	$t5
+		sw	$s6	-312($sp)
+		add	$s2	$t3	$t5
+		sw	$s2	-316($sp)
+		sub	$t0	$s6	$s2
+		sw	$t0	-320($sp)
+		sub	$fp	$t2	$t3
+		sw	$fp	-324($sp)
+		add	$s5	$fp	$t5
+		sw	$s5	-328($sp)
+		add	$a2	$t0	$s5
+		sw	$a2	-332($sp)
+		add	$t8	$s7	$a2
+		sw	$t8	-336($sp)
+		add	$t6	$t3	$t5
+		sw	$t6	-340($sp)
+		sub	$t7	$t2	$t3
+		sw	$t7	-344($sp)
+		add	$v0	$t7	$t5
+		sw	$v0	-348($sp)
+		add	$t9	$t6	$v0
+		sw	$t9	-352($sp)
+		add	$s0	$t3	$t5
+		sw	$s0	-356($sp)
+		sub	$t1	$t9	$s0
+		sw	$t1	-360($sp)
+		sub	$a3	$t2	$t3
+		sw	$a3	-364($sp)
+		add	$s1	$a3	$t5
+		sw	$s1	-368($sp)
+		add	$a1	$t3	$t5
+		sw	$a1	-372($sp)
+		sub	$s4	$s1	$a1
+		sw	$s4	-376($sp)
+		sub	$t4	$t2	$t3
+		sw	$t4	-380($sp)
+		add	$s3	$t4	$t5
+		sw	$s3	-384($sp)
+		add	$a0	$s4	$s3
+		sw	$a0	-388($sp)
+		add	$s6	$t1	$a0
+		sw	$s6	-392($sp)
+		sub	$s2	$t8	$s6
+		sw	$s2	-396($sp)
+		add	$fp	$t3	$t5
+		sw	$fp	-400($sp)
+		sub	$t0	$t2	$t3
+		sw	$t0	-404($sp)
+		add	$s5	$t0	$t5
+		sw	$s5	-408($sp)
+		add	$s7	$fp	$s5
+		sw	$s7	-412($sp)
+		add	$a2	$t3	$t5
+		sw	$a2	-416($sp)
+		sub	$t7	$s7	$a2
+		sw	$t7	-420($sp)
+		sub	$t6	$t2	$t3
+		sw	$t6	-424($sp)
+		add	$v0	$t6	$t5
+		sw	$v0	-428($sp)
+		add	$t9	$t3	$t5
+		sw	$t9	-432($sp)
+		sub	$s0	$v0	$t9
+		sw	$s0	-436($sp)
+		sub	$a3	$t2	$t3
+		sw	$a3	-440($sp)
+		add	$s1	$a3	$t5
+		sw	$s1	-444($sp)
+		add	$a1	$s0	$s1
+		sw	$a1	-448($sp)
+		add	$t4	$t7	$a1
+		sw	$t4	-452($sp)
+		add	$s4	$t3	$t5
+		sw	$s4	-456($sp)
+		sub	$s3	$t2	$t3
+		sw	$s3	-460($sp)
+		add	$t1	$s3	$t5
+		sw	$t1	-464($sp)
+		add	$a0	$s4	$t1
+		sw	$a0	-468($sp)
+		add	$t8	$t3	$t5
+		sw	$t8	-472($sp)
+		sub	$s6	$a0	$t8
+		sw	$s6	-476($sp)
+		sub	$s2	$t2	$t3
+		sw	$s2	-480($sp)
+		add	$t0	$s2	$t5
+		sw	$t0	-484($sp)
+		add	$fp	$t3	$t5
+		sw	$fp	-488($sp)
+		sub	$s5	$t0	$fp
+		sw	$s5	-492($sp)
+		sub	$s7	$t2	$t3
+		sw	$s7	-496($sp)
+		add	$a2	$s7	$t5
+		sw	$a2	-500($sp)
+		add	$t6	$s5	$a2
+		sw	$t6	-504($sp)
+		add	$v0	$s6	$t6
+		sw	$v0	-508($sp)
+		sub	$t9	$t4	$v0
+		sw	$t9	-512($sp)
+		lw	$a3	-396($sp)
+		sub	$s0	$a3	$t9
+		sw	$s0	-516($sp)
+		lw	$s1	-268($sp)
+		add	$t7	$s1	$s0
+		sw	$t7	-520($sp)
+		add	$a1	$t3	$t5
+		sw	$a1	-524($sp)
+		sub	$s3	$t2	$t3
+		sw	$s3	-528($sp)
+		add	$s4	$s3	$t5
+		sw	$s4	-532($sp)
+		add	$t1	$a1	$s4
+		sw	$t1	-536($sp)
+		add	$a0	$t3	$t5
+		sw	$a0	-540($sp)
+		sub	$t8	$t2	$t3
+		sw	$t8	-544($sp)
+		add	$s2	$t8	$t5
+		sw	$s2	-548($sp)
+		add	$t0	$a0	$s2
+		sw	$t0	-552($sp)
+		sub	$fp	$t1	$t0
+		sw	$fp	-556($sp)
+		add	$s7	$t3	$t5
+		sw	$s7	-560($sp)
+		sub	$s5	$t2	$t3
+		sw	$s5	-564($sp)
+		add	$a2	$s5	$t5
+		sw	$a2	-568($sp)
+		add	$s6	$s7	$a2
+		sw	$s6	-572($sp)
+		add	$t6	$t3	$t5
+		sw	$t6	-576($sp)
+		sub	$t4	$s6	$t6
+		sw	$t4	-580($sp)
+		sub	$v0	$fp	$t4
+		sw	$v0	-584($sp)
+		sub	$a3	$t2	$t3
+		sw	$a3	-588($sp)
+		add	$t9	$a3	$t5
+		sw	$t9	-592($sp)
+		add	$s1	$t3	$t5
+		sw	$s1	-596($sp)
+		sub	$s0	$t9	$s1
+		sw	$s0	-600($sp)
+		sub	$t7	$t2	$t3
+		sw	$t7	-604($sp)
+		add	$s3	$t7	$t5
+		sw	$s3	-608($sp)
+		add	$a1	$s0	$s3
+		sw	$a1	-612($sp)
+		add	$s4	$t3	$t5
+		sw	$s4	-616($sp)
+		sub	$t8	$t2	$t3
+		sw	$t8	-620($sp)
+		add	$a0	$t8	$t5
+		sw	$a0	-624($sp)
+		add	$s2	$s4	$a0
+		sw	$s2	-628($sp)
+		add	$t1	$t3	$t5
+		sw	$t1	-632($sp)
+		sub	$t0	$s2	$t1
+		sw	$t0	-636($sp)
+		sub	$s5	$a1	$t0
+		sw	$s5	-640($sp)
+		add	$s7	$v0	$s5
+		sw	$s7	-644($sp)
+		sub	$a2	$t2	$t3
+		sw	$a2	-648($sp)
+		add	$s6	$a2	$t5
+		sw	$s6	-652($sp)
+		add	$t6	$t3	$t5
+		sw	$t6	-656($sp)
+		sub	$fp	$s6	$t6
+		sw	$fp	-660($sp)
+		sub	$t4	$t2	$t3
+		sw	$t4	-664($sp)
+		add	$a3	$t4	$t5
+		sw	$a3	-668($sp)
+		add	$t9	$fp	$a3
+		sw	$t9	-672($sp)
+		add	$s1	$t3	$t5
+		sw	$s1	-676($sp)
+		sub	$t7	$t2	$t3
+		sw	$t7	-680($sp)
+		add	$s0	$t7	$t5
+		sw	$s0	-684($sp)
+		add	$s3	$s1	$s0
+		sw	$s3	-688($sp)
+		add	$t8	$t3	$t5
+		sw	$t8	-692($sp)
+		sub	$s4	$s3	$t8
+		sw	$s4	-696($sp)
+		sub	$a0	$t9	$s4
+		sw	$a0	-700($sp)
+		sub	$s2	$t2	$t3
+		sw	$s2	-704($sp)
+		add	$t1	$s2	$t5
+		sw	$t1	-708($sp)
+		add	$a1	$t3	$t5
+		sw	$a1	-712($sp)
+		sub	$t0	$t1	$a1
+		sw	$t0	-716($sp)
+		sub	$v0	$t2	$t3
+		sw	$v0	-720($sp)
+		add	$s5	$v0	$t5
+		sw	$s5	-724($sp)
+		add	$s7	$t0	$s5
+		sw	$s7	-728($sp)
+		add	$a2	$t3	$t5
+		sw	$a2	-732($sp)
+		sub	$s6	$t2	$t3
+		sw	$s6	-736($sp)
+		add	$t6	$s6	$t5
+		sw	$t6	-740($sp)
+		add	$t4	$a2	$t6
+		sw	$t4	-744($sp)
+		add	$fp	$t3	$t5
+		sw	$fp	-748($sp)
+		sub	$a3	$t4	$fp
+		sw	$a3	-752($sp)
+		sub	$t7	$s7	$a3
+		sw	$t7	-756($sp)
+		add	$s1	$a0	$t7
+		sw	$s1	-760($sp)
+		lw	$s0	-644($sp)
+		add	$s3	$s0	$s1
+		sw	$s3	-764($sp)
+		sub	$t8	$t2	$t3
+		sw	$t8	-768($sp)
+		add	$t9	$t8	$t5
+		sw	$t9	-772($sp)
+		add	$s4	$t3	$t5
+		sw	$s4	-776($sp)
+		sub	$s2	$t9	$s4
+		sw	$s2	-780($sp)
+		sub	$t1	$t2	$t3
+		sw	$t1	-784($sp)
+		add	$a1	$t1	$t5
+		sw	$a1	-788($sp)
+		add	$v0	$t3	$t5
+		sw	$v0	-792($sp)
+		sub	$t0	$a1	$v0
+		sw	$t0	-796($sp)
+		add	$s5	$s2	$t0
+		sw	$s5	-800($sp)
+		sub	$s6	$t2	$t3
+		sw	$s6	-804($sp)
+		add	$a2	$s6	$t5
+		sw	$a2	-808($sp)
+		add	$t6	$t3	$t5
+		sw	$t6	-812($sp)
+		sub	$t4	$a2	$t6
+		sw	$t4	-816($sp)
+		sub	$fp	$t2	$t3
+		sw	$fp	-820($sp)
+		add	$s7	$fp	$t5
+		sw	$s7	-824($sp)
+		add	$a3	$t4	$s7
+		sw	$a3	-828($sp)
+		add	$a0	$s5	$a3
+		sw	$a0	-832($sp)
+		add	$t7	$t3	$t5
+		sw	$t7	-836($sp)
+		sub	$s0	$t2	$t3
+		sw	$s0	-840($sp)
+		add	$s1	$s0	$t5
+		sw	$s1	-844($sp)
+		add	$s3	$t7	$s1
+		sw	$s3	-848($sp)
+		add	$t8	$t3	$t5
+		sw	$t8	-852($sp)
+		sub	$t9	$s3	$t8
+		sw	$t9	-856($sp)
+		sub	$s4	$t2	$t3
+		sw	$s4	-860($sp)
+		add	$t1	$s4	$t5
+		sw	$t1	-864($sp)
+		add	$a1	$t3	$t5
+		sw	$a1	-868($sp)
+		sub	$v0	$t1	$a1
+		sw	$v0	-872($sp)
+		sub	$s2	$t2	$t3
+		sw	$s2	-876($sp)
+		add	$t0	$s2	$t5
+		sw	$t0	-880($sp)
+		add	$s6	$v0	$t0
+		sw	$s6	-884($sp)
+		add	$a2	$t9	$s6
+		sw	$a2	-888($sp)
+		sub	$t6	$a0	$a2
+		sw	$t6	-892($sp)
+		add	$fp	$t3	$t5
+		sw	$fp	-896($sp)
+		sub	$t4	$t2	$t3
+		sw	$t4	-900($sp)
+		add	$s7	$t4	$t5
+		sw	$s7	-904($sp)
+		add	$s5	$fp	$s7
+		sw	$s5	-908($sp)
+		add	$a3	$t3	$t5
+		sw	$a3	-912($sp)
+		sub	$s0	$s5	$a3
+		sw	$s0	-916($sp)
+		sub	$t7	$t2	$t3
+		sw	$t7	-920($sp)
+		add	$s1	$t7	$t5
+		sw	$s1	-924($sp)
+		add	$s3	$t3	$t5
+		sw	$s3	-928($sp)
+		sub	$t8	$s1	$s3
+		sw	$t8	-932($sp)
+		sub	$s4	$t2	$t3
+		sw	$s4	-936($sp)
+		add	$t1	$s4	$t5
+		sw	$t1	-940($sp)
+		add	$a1	$t8	$t1
+		sw	$a1	-944($sp)
+		add	$s2	$s0	$a1
+		sw	$s2	-948($sp)
+		add	$v0	$t3	$t5
+		sw	$v0	-952($sp)
+		sub	$t0	$t2	$t3
+		sw	$t0	-956($sp)
+		add	$t9	$t0	$t5
+		sw	$t9	-960($sp)
+		add	$s6	$v0	$t9
+		sw	$s6	-964($sp)
+		add	$a0	$t3	$t5
+		sw	$a0	-968($sp)
+		sub	$a2	$s6	$a0
+		sw	$a2	-972($sp)
+		sub	$t6	$t2	$t3
+		sw	$t6	-976($sp)
+		add	$t4	$t6	$t5
+		sw	$t4	-980($sp)
+		add	$fp	$t3	$t5
+		sw	$fp	-984($sp)
+		sub	$s7	$t4	$fp
+		sw	$s7	-988($sp)
+		sub	$s5	$t2	$t3
+		sw	$s5	-992($sp)
+		add	$a3	$s5	$t5
+		sw	$a3	-996($sp)
+		add	$t7	$s7	$a3
+		sw	$t7	-1000($sp)
+		add	$s1	$a2	$t7
+		sw	$s1	-1004($sp)
+		sub	$s3	$s2	$s1
+		sw	$s3	-1008($sp)
+		lw	$s4	-892($sp)
+		sub	$t8	$s4	$s3
+		sw	$t8	-1012($sp)
+		lw	$t1	-764($sp)
+		add	$s0	$t1	$t8
+		sw	$s0	-1016($sp)
+		lw	$a1	-520($sp)
+		sub	$t0	$a1	$s0
+		sw	$t0	-1020($sp)
 		sw	$t0	A_0
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1024($fp)
-		lw	$t0	-1024($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1028($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1032($fp)
-		lw	$t0	-1028($fp)
-		lw	$t1	-1032($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1036($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1040($fp)
-		lw	$t0	-1040($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1044($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1048($fp)
-		lw	$t0	-1044($fp)
-		lw	$t1	-1048($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1052($fp)
-		lw	$t0	-1036($fp)
-		lw	$t1	-1052($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1056($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1060($fp)
-		lw	$t0	-1060($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1064($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1068($fp)
-		lw	$t0	-1064($fp)
-		lw	$t1	-1068($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1072($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1076($fp)
-		lw	$t0	-1076($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1080($fp)
-		lw	$t0	-1072($fp)
-		lw	$t1	-1080($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1084($fp)
-		lw	$t0	-1056($fp)
-		lw	$t1	-1084($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1088($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1092($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1096($fp)
-		lw	$t0	-1096($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1100($fp)
-		lw	$t0	-1092($fp)
-		lw	$t1	-1100($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1104($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1108($fp)
-		lw	$t0	-1104($fp)
-		lw	$t1	-1108($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1112($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1116($fp)
-		lw	$t0	-1116($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1120($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1124($fp)
-		lw	$t0	-1120($fp)
-		lw	$t1	-1124($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1128($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1132($fp)
-		lw	$t0	-1132($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1136($fp)
-		lw	$t0	-1128($fp)
-		lw	$t1	-1136($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1140($fp)
-		lw	$t0	-1112($fp)
-		lw	$t1	-1140($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1144($fp)
-		lw	$t0	-1088($fp)
-		lw	$t1	-1144($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1148($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1152($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1156($fp)
-		lw	$t0	-1156($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1160($fp)
-		lw	$t0	-1152($fp)
-		lw	$t1	-1160($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1164($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1168($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1172($fp)
-		lw	$t0	-1172($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1176($fp)
-		lw	$t0	-1168($fp)
-		lw	$t1	-1176($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1180($fp)
-		lw	$t0	-1164($fp)
-		lw	$t1	-1180($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1184($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1188($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1192($fp)
-		lw	$t0	-1192($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1196($fp)
-		lw	$t0	-1188($fp)
-		lw	$t1	-1196($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1200($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1204($fp)
-		lw	$t0	-1200($fp)
-		lw	$t1	-1204($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1208($fp)
-		lw	$t0	-1184($fp)
-		lw	$t1	-1208($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1212($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1216($fp)
-		lw	$t0	-1216($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1220($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1224($fp)
-		lw	$t0	-1220($fp)
-		lw	$t1	-1224($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1228($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1232($fp)
-		lw	$t0	-1232($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1236($fp)
-		lw	$t0	-1228($fp)
-		lw	$t1	-1236($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1240($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1244($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1248($fp)
-		lw	$t0	-1248($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1252($fp)
-		lw	$t0	-1244($fp)
-		lw	$t1	-1252($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1256($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1260($fp)
-		lw	$t0	-1256($fp)
-		lw	$t1	-1260($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1264($fp)
-		lw	$t0	-1240($fp)
-		lw	$t1	-1264($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1268($fp)
-		lw	$t0	-1212($fp)
-		lw	$t1	-1268($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1272($fp)
-		lw	$t0	-1148($fp)
-		lw	$t1	-1272($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1276($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1280($fp)
-		lw	$t0	-1280($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1284($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1288($fp)
-		lw	$t0	-1284($fp)
-		lw	$t1	-1288($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1292($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1296($fp)
-		lw	$t0	-1296($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1300($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1304($fp)
-		lw	$t0	-1300($fp)
-		lw	$t1	-1304($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1308($fp)
-		lw	$t0	-1292($fp)
-		lw	$t1	-1308($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1312($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1316($fp)
-		lw	$t0	-1316($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1320($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1324($fp)
-		lw	$t0	-1320($fp)
-		lw	$t1	-1324($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1328($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1332($fp)
-		lw	$t0	-1332($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1336($fp)
-		lw	$t0	-1328($fp)
-		lw	$t1	-1336($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1340($fp)
-		lw	$t0	-1312($fp)
-		lw	$t1	-1340($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1344($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1348($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1352($fp)
-		lw	$t0	-1352($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1356($fp)
-		lw	$t0	-1348($fp)
-		lw	$t1	-1356($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1360($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1364($fp)
-		lw	$t0	-1360($fp)
-		lw	$t1	-1364($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1368($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1372($fp)
-		lw	$t0	-1372($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1376($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1380($fp)
-		lw	$t0	-1376($fp)
-		lw	$t1	-1380($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1384($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1388($fp)
-		lw	$t0	-1388($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1392($fp)
-		lw	$t0	-1384($fp)
-		lw	$t1	-1392($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1396($fp)
-		lw	$t0	-1368($fp)
-		lw	$t1	-1396($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1400($fp)
-		lw	$t0	-1344($fp)
-		lw	$t1	-1400($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1404($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1408($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1412($fp)
-		lw	$t0	-1412($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1416($fp)
-		lw	$t0	-1408($fp)
-		lw	$t1	-1416($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1420($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1424($fp)
-		lw	$t0	-1420($fp)
-		lw	$t1	-1424($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1428($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1432($fp)
-		lw	$t0	-1432($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1436($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1440($fp)
-		lw	$t0	-1436($fp)
-		lw	$t1	-1440($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1444($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1448($fp)
-		lw	$t0	-1448($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1452($fp)
-		lw	$t0	-1444($fp)
-		lw	$t1	-1452($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1456($fp)
-		lw	$t0	-1428($fp)
-		lw	$t1	-1456($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1460($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1464($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1468($fp)
-		lw	$t0	-1468($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1472($fp)
-		lw	$t0	-1464($fp)
-		lw	$t1	-1472($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1476($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1480($fp)
-		lw	$t0	-1476($fp)
-		lw	$t1	-1480($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1484($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1488($fp)
-		lw	$t0	-1488($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1492($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1496($fp)
-		lw	$t0	-1492($fp)
-		lw	$t1	-1496($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1500($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1504($fp)
-		lw	$t0	-1504($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1508($fp)
-		lw	$t0	-1500($fp)
-		lw	$t1	-1508($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1512($fp)
-		lw	$t0	-1484($fp)
-		lw	$t1	-1512($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1516($fp)
-		lw	$t0	-1460($fp)
-		lw	$t1	-1516($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1520($fp)
-		lw	$t0	-1404($fp)
-		lw	$t1	-1520($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1524($fp)
-		lw	$t0	-1276($fp)
-		lw	$t1	-1524($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1528($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1532($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1536($fp)
-		lw	$t0	-1536($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1540($fp)
-		lw	$t0	-1532($fp)
-		lw	$t1	-1540($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1544($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1548($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1552($fp)
-		lw	$t0	-1552($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1556($fp)
-		lw	$t0	-1548($fp)
-		lw	$t1	-1556($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1560($fp)
-		lw	$t0	-1544($fp)
-		lw	$t1	-1560($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1564($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1568($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1572($fp)
-		lw	$t0	-1572($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1576($fp)
-		lw	$t0	-1568($fp)
-		lw	$t1	-1576($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1580($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1584($fp)
-		lw	$t0	-1580($fp)
-		lw	$t1	-1584($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1588($fp)
-		lw	$t0	-1564($fp)
-		lw	$t1	-1588($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1592($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1596($fp)
-		lw	$t0	-1596($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1600($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1604($fp)
-		lw	$t0	-1600($fp)
-		lw	$t1	-1604($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1608($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1612($fp)
-		lw	$t0	-1612($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1616($fp)
-		lw	$t0	-1608($fp)
-		lw	$t1	-1616($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1620($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1624($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1628($fp)
-		lw	$t0	-1628($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1632($fp)
-		lw	$t0	-1624($fp)
-		lw	$t1	-1632($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1636($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1640($fp)
-		lw	$t0	-1636($fp)
-		lw	$t1	-1640($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1644($fp)
-		lw	$t0	-1620($fp)
-		lw	$t1	-1644($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1648($fp)
-		lw	$t0	-1592($fp)
-		lw	$t1	-1648($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1652($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1656($fp)
-		lw	$t0	-1656($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1660($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1664($fp)
-		lw	$t0	-1660($fp)
-		lw	$t1	-1664($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1668($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1672($fp)
-		lw	$t0	-1672($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1676($fp)
-		lw	$t0	-1668($fp)
-		lw	$t1	-1676($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1680($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1684($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1688($fp)
-		lw	$t0	-1688($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1692($fp)
-		lw	$t0	-1684($fp)
-		lw	$t1	-1692($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1696($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1700($fp)
-		lw	$t0	-1696($fp)
-		lw	$t1	-1700($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1704($fp)
-		lw	$t0	-1680($fp)
-		lw	$t1	-1704($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1708($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1712($fp)
-		lw	$t0	-1712($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1716($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1720($fp)
-		lw	$t0	-1716($fp)
-		lw	$t1	-1720($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1724($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1728($fp)
-		lw	$t0	-1728($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1732($fp)
-		lw	$t0	-1724($fp)
-		lw	$t1	-1732($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1736($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1740($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1744($fp)
-		lw	$t0	-1744($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1748($fp)
-		lw	$t0	-1740($fp)
-		lw	$t1	-1748($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1752($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1756($fp)
-		lw	$t0	-1752($fp)
-		lw	$t1	-1756($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1760($fp)
-		lw	$t0	-1736($fp)
-		lw	$t1	-1760($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1764($fp)
-		lw	$t0	-1708($fp)
-		lw	$t1	-1764($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1768($fp)
-		lw	$t0	-1652($fp)
-		lw	$t1	-1768($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1772($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1776($fp)
-		lw	$t0	-1776($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1780($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1784($fp)
-		lw	$t0	-1780($fp)
-		lw	$t1	-1784($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1788($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1792($fp)
-		lw	$t0	-1792($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1796($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1800($fp)
-		lw	$t0	-1796($fp)
-		lw	$t1	-1800($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1804($fp)
-		lw	$t0	-1788($fp)
-		lw	$t1	-1804($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1808($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1812($fp)
-		lw	$t0	-1812($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1816($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1820($fp)
-		lw	$t0	-1816($fp)
-		lw	$t1	-1820($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1824($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1828($fp)
-		lw	$t0	-1828($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1832($fp)
-		lw	$t0	-1824($fp)
-		lw	$t1	-1832($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1836($fp)
-		lw	$t0	-1808($fp)
-		lw	$t1	-1836($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1840($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1844($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1848($fp)
-		lw	$t0	-1848($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1852($fp)
-		lw	$t0	-1844($fp)
-		lw	$t1	-1852($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1856($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1860($fp)
-		lw	$t0	-1856($fp)
-		lw	$t1	-1860($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1864($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1868($fp)
-		lw	$t0	-1868($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1872($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1876($fp)
-		lw	$t0	-1872($fp)
-		lw	$t1	-1876($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1880($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1884($fp)
-		lw	$t0	-1884($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1888($fp)
-		lw	$t0	-1880($fp)
-		lw	$t1	-1888($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1892($fp)
-		lw	$t0	-1864($fp)
-		lw	$t1	-1892($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1896($fp)
-		lw	$t0	-1840($fp)
-		lw	$t1	-1896($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1900($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1904($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1908($fp)
-		lw	$t0	-1908($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1912($fp)
-		lw	$t0	-1904($fp)
-		lw	$t1	-1912($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1916($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1920($fp)
-		lw	$t0	-1916($fp)
-		lw	$t1	-1920($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1924($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1928($fp)
-		lw	$t0	-1928($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1932($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1936($fp)
-		lw	$t0	-1932($fp)
-		lw	$t1	-1936($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1940($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1944($fp)
-		lw	$t0	-1944($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1948($fp)
-		lw	$t0	-1940($fp)
-		lw	$t1	-1948($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1952($fp)
-		lw	$t0	-1924($fp)
-		lw	$t1	-1952($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1956($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1960($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1964($fp)
-		lw	$t0	-1964($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1968($fp)
-		lw	$t0	-1960($fp)
-		lw	$t1	-1968($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-1972($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1976($fp)
-		lw	$t0	-1972($fp)
-		lw	$t1	-1976($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1980($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-1984($fp)
-		lw	$t0	-1984($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1988($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-1992($fp)
-		lw	$t0	-1988($fp)
-		lw	$t1	-1992($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-1996($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2000($fp)
-		lw	$t0	-2000($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2004($fp)
-		lw	$t0	-1996($fp)
-		lw	$t1	-2004($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2008($fp)
-		lw	$t0	-1980($fp)
-		lw	$t1	-2008($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2012($fp)
-		lw	$t0	-1956($fp)
-		lw	$t1	-2012($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2016($fp)
-		lw	$t0	-1900($fp)
-		lw	$t1	-2016($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2020($fp)
-		lw	$t0	-1772($fp)
-		lw	$t1	-2020($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2024($fp)
-		lw	$t0	-1528($fp)
-		lw	$t1	-2024($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2028($fp)
-		lw	$t0	-2028($fp)
-		sw	$t0	B_0
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2032($fp)
-		lw	$t0	-2032($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2036($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2040($fp)
-		lw	$t0	-2036($fp)
-		lw	$t1	-2040($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2044($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2048($fp)
-		lw	$t0	-2048($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2052($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2056($fp)
-		lw	$t0	-2052($fp)
-		lw	$t1	-2056($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2060($fp)
-		lw	$t0	-2044($fp)
-		lw	$t1	-2060($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2064($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2068($fp)
-		lw	$t0	-2068($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2072($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2076($fp)
-		lw	$t0	-2072($fp)
-		lw	$t1	-2076($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2080($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2084($fp)
-		lw	$t0	-2084($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2088($fp)
-		lw	$t0	-2080($fp)
-		lw	$t1	-2088($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2092($fp)
-		lw	$t0	-2064($fp)
-		lw	$t1	-2092($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2096($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2100($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2104($fp)
-		lw	$t0	-2104($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2108($fp)
-		lw	$t0	-2100($fp)
-		lw	$t1	-2108($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2112($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2116($fp)
-		lw	$t0	-2112($fp)
-		lw	$t1	-2116($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2120($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2124($fp)
-		lw	$t0	-2124($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2128($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2132($fp)
-		lw	$t0	-2128($fp)
-		lw	$t1	-2132($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2136($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2140($fp)
-		lw	$t0	-2140($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2144($fp)
-		lw	$t0	-2136($fp)
-		lw	$t1	-2144($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2148($fp)
-		lw	$t0	-2120($fp)
-		lw	$t1	-2148($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2152($fp)
-		lw	$t0	-2096($fp)
-		lw	$t1	-2152($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2156($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2160($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2164($fp)
-		lw	$t0	-2164($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2168($fp)
-		lw	$t0	-2160($fp)
-		lw	$t1	-2168($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2172($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2176($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2180($fp)
-		lw	$t0	-2180($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2184($fp)
-		lw	$t0	-2176($fp)
-		lw	$t1	-2184($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2188($fp)
-		lw	$t0	-2172($fp)
-		lw	$t1	-2188($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2192($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2196($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2200($fp)
-		lw	$t0	-2200($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2204($fp)
-		lw	$t0	-2196($fp)
-		lw	$t1	-2204($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2208($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2212($fp)
-		lw	$t0	-2208($fp)
-		lw	$t1	-2212($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2216($fp)
-		lw	$t0	-2192($fp)
-		lw	$t1	-2216($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2220($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2224($fp)
-		lw	$t0	-2224($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2228($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2232($fp)
-		lw	$t0	-2228($fp)
-		lw	$t1	-2232($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2236($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2240($fp)
-		lw	$t0	-2240($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2244($fp)
-		lw	$t0	-2236($fp)
-		lw	$t1	-2244($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2248($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2252($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2256($fp)
-		lw	$t0	-2256($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2260($fp)
-		lw	$t0	-2252($fp)
-		lw	$t1	-2260($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2264($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2268($fp)
-		lw	$t0	-2264($fp)
-		lw	$t1	-2268($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2272($fp)
-		lw	$t0	-2248($fp)
-		lw	$t1	-2272($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2276($fp)
-		lw	$t0	-2220($fp)
-		lw	$t1	-2276($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2280($fp)
-		lw	$t0	-2156($fp)
-		lw	$t1	-2280($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2284($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2288($fp)
-		lw	$t0	-2288($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2292($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2296($fp)
-		lw	$t0	-2292($fp)
-		lw	$t1	-2296($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2300($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2304($fp)
-		lw	$t0	-2304($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2308($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2312($fp)
-		lw	$t0	-2308($fp)
-		lw	$t1	-2312($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2316($fp)
-		lw	$t0	-2300($fp)
-		lw	$t1	-2316($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2320($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2324($fp)
-		lw	$t0	-2324($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2328($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2332($fp)
-		lw	$t0	-2328($fp)
-		lw	$t1	-2332($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2336($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2340($fp)
-		lw	$t0	-2340($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2344($fp)
-		lw	$t0	-2336($fp)
-		lw	$t1	-2344($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2348($fp)
-		lw	$t0	-2320($fp)
-		lw	$t1	-2348($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2352($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2356($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2360($fp)
-		lw	$t0	-2360($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2364($fp)
-		lw	$t0	-2356($fp)
-		lw	$t1	-2364($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2368($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2372($fp)
-		lw	$t0	-2368($fp)
-		lw	$t1	-2372($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2376($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2380($fp)
-		lw	$t0	-2380($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2384($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2388($fp)
-		lw	$t0	-2384($fp)
-		lw	$t1	-2388($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2392($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2396($fp)
-		lw	$t0	-2396($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2400($fp)
-		lw	$t0	-2392($fp)
-		lw	$t1	-2400($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2404($fp)
-		lw	$t0	-2376($fp)
-		lw	$t1	-2404($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2408($fp)
-		lw	$t0	-2352($fp)
-		lw	$t1	-2408($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2412($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2416($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2420($fp)
-		lw	$t0	-2420($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2424($fp)
-		lw	$t0	-2416($fp)
-		lw	$t1	-2424($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2428($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2432($fp)
-		lw	$t0	-2428($fp)
-		lw	$t1	-2432($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2436($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2440($fp)
-		lw	$t0	-2440($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2444($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2448($fp)
-		lw	$t0	-2444($fp)
-		lw	$t1	-2448($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2452($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2456($fp)
-		lw	$t0	-2456($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2460($fp)
-		lw	$t0	-2452($fp)
-		lw	$t1	-2460($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2464($fp)
-		lw	$t0	-2436($fp)
-		lw	$t1	-2464($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2468($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2472($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2476($fp)
-		lw	$t0	-2476($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2480($fp)
-		lw	$t0	-2472($fp)
-		lw	$t1	-2480($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2484($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2488($fp)
-		lw	$t0	-2484($fp)
-		lw	$t1	-2488($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2492($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2496($fp)
-		lw	$t0	-2496($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2500($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2504($fp)
-		lw	$t0	-2500($fp)
-		lw	$t1	-2504($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2508($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2512($fp)
-		lw	$t0	-2512($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2516($fp)
-		lw	$t0	-2508($fp)
-		lw	$t1	-2516($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2520($fp)
-		lw	$t0	-2492($fp)
-		lw	$t1	-2520($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2524($fp)
-		lw	$t0	-2468($fp)
-		lw	$t1	-2524($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2528($fp)
-		lw	$t0	-2412($fp)
-		lw	$t1	-2528($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2532($fp)
-		lw	$t0	-2284($fp)
-		lw	$t1	-2532($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2536($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2540($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2544($fp)
-		lw	$t0	-2544($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2548($fp)
-		lw	$t0	-2540($fp)
-		lw	$t1	-2548($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2552($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2556($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2560($fp)
-		lw	$t0	-2560($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2564($fp)
-		lw	$t0	-2556($fp)
-		lw	$t1	-2564($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2568($fp)
-		lw	$t0	-2552($fp)
-		lw	$t1	-2568($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2572($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2576($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2580($fp)
-		lw	$t0	-2580($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2584($fp)
-		lw	$t0	-2576($fp)
-		lw	$t1	-2584($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2588($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2592($fp)
-		lw	$t0	-2588($fp)
-		lw	$t1	-2592($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2596($fp)
-		lw	$t0	-2572($fp)
-		lw	$t1	-2596($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2600($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2604($fp)
-		lw	$t0	-2604($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2608($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2612($fp)
-		lw	$t0	-2608($fp)
-		lw	$t1	-2612($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2616($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2620($fp)
-		lw	$t0	-2620($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2624($fp)
-		lw	$t0	-2616($fp)
-		lw	$t1	-2624($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2628($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2632($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2636($fp)
-		lw	$t0	-2636($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2640($fp)
-		lw	$t0	-2632($fp)
-		lw	$t1	-2640($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2644($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2648($fp)
-		lw	$t0	-2644($fp)
-		lw	$t1	-2648($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2652($fp)
-		lw	$t0	-2628($fp)
-		lw	$t1	-2652($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2656($fp)
-		lw	$t0	-2600($fp)
-		lw	$t1	-2656($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2660($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2664($fp)
-		lw	$t0	-2664($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2668($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2672($fp)
-		lw	$t0	-2668($fp)
-		lw	$t1	-2672($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2676($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2680($fp)
-		lw	$t0	-2680($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2684($fp)
-		lw	$t0	-2676($fp)
-		lw	$t1	-2684($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2688($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2692($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2696($fp)
-		lw	$t0	-2696($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2700($fp)
-		lw	$t0	-2692($fp)
-		lw	$t1	-2700($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2704($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2708($fp)
-		lw	$t0	-2704($fp)
-		lw	$t1	-2708($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2712($fp)
-		lw	$t0	-2688($fp)
-		lw	$t1	-2712($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2716($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2720($fp)
-		lw	$t0	-2720($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2724($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2728($fp)
-		lw	$t0	-2724($fp)
-		lw	$t1	-2728($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2732($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2736($fp)
-		lw	$t0	-2736($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2740($fp)
-		lw	$t0	-2732($fp)
-		lw	$t1	-2740($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2744($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2748($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2752($fp)
-		lw	$t0	-2752($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2756($fp)
-		lw	$t0	-2748($fp)
-		lw	$t1	-2756($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2760($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2764($fp)
-		lw	$t0	-2760($fp)
-		lw	$t1	-2764($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2768($fp)
-		lw	$t0	-2744($fp)
-		lw	$t1	-2768($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2772($fp)
-		lw	$t0	-2716($fp)
-		lw	$t1	-2772($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2776($fp)
-		lw	$t0	-2660($fp)
-		lw	$t1	-2776($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2780($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2784($fp)
-		lw	$t0	-2784($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2788($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2792($fp)
-		lw	$t0	-2788($fp)
-		lw	$t1	-2792($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2796($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2800($fp)
-		lw	$t0	-2800($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2804($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2808($fp)
-		lw	$t0	-2804($fp)
-		lw	$t1	-2808($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2812($fp)
-		lw	$t0	-2796($fp)
-		lw	$t1	-2812($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2816($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2820($fp)
-		lw	$t0	-2820($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2824($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2828($fp)
-		lw	$t0	-2824($fp)
-		lw	$t1	-2828($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2832($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2836($fp)
-		lw	$t0	-2836($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2840($fp)
-		lw	$t0	-2832($fp)
-		lw	$t1	-2840($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2844($fp)
-		lw	$t0	-2816($fp)
-		lw	$t1	-2844($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2848($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2852($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2856($fp)
-		lw	$t0	-2856($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2860($fp)
-		lw	$t0	-2852($fp)
-		lw	$t1	-2860($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2864($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2868($fp)
-		lw	$t0	-2864($fp)
-		lw	$t1	-2868($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2872($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2876($fp)
-		lw	$t0	-2876($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2880($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2884($fp)
-		lw	$t0	-2880($fp)
-		lw	$t1	-2884($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2888($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2892($fp)
-		lw	$t0	-2892($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2896($fp)
-		lw	$t0	-2888($fp)
-		lw	$t1	-2896($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2900($fp)
-		lw	$t0	-2872($fp)
-		lw	$t1	-2900($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2904($fp)
-		lw	$t0	-2848($fp)
-		lw	$t1	-2904($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2908($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2912($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2916($fp)
-		lw	$t0	-2916($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2920($fp)
-		lw	$t0	-2912($fp)
-		lw	$t1	-2920($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2924($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2928($fp)
-		lw	$t0	-2924($fp)
-		lw	$t1	-2928($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2932($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2936($fp)
-		lw	$t0	-2936($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2940($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2944($fp)
-		lw	$t0	-2940($fp)
-		lw	$t1	-2944($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2948($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2952($fp)
-		lw	$t0	-2952($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2956($fp)
-		lw	$t0	-2948($fp)
-		lw	$t1	-2956($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2960($fp)
-		lw	$t0	-2932($fp)
-		lw	$t1	-2960($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2964($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2968($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2972($fp)
-		lw	$t0	-2972($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2976($fp)
-		lw	$t0	-2968($fp)
-		lw	$t1	-2976($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-2980($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2984($fp)
-		lw	$t0	-2980($fp)
-		lw	$t1	-2984($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-2988($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-2992($fp)
-		lw	$t0	-2992($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-2996($fp)
-		lw	$t0	A_0
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-3000($fp)
-		lw	$t0	-2996($fp)
-		lw	$t1	-3000($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-3004($fp)
-		lw	$t0	C_0
-		lw	$t1	A_0
-		sub	$t2	$t0	$t1
-		sw	$t2	-3008($fp)
-		lw	$t0	-3008($fp)
-		lw	$t1	B_0
-		add	$t2	$t0	$t1
-		sw	$t2	-3012($fp)
-		lw	$t0	-3004($fp)
-		lw	$t1	-3012($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-3016($fp)
-		lw	$t0	-2988($fp)
-		lw	$t1	-3016($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-3020($fp)
-		lw	$t0	-2964($fp)
-		lw	$t1	-3020($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-3024($fp)
-		lw	$t0	-2908($fp)
-		lw	$t1	-3024($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-3028($fp)
-		lw	$t0	-2780($fp)
-		lw	$t1	-3028($fp)
-		add	$t2	$t0	$t1
-		sw	$t2	-3032($fp)
-		lw	$t0	-2536($fp)
-		lw	$t1	-3032($fp)
-		sub	$t2	$t0	$t1
-		sw	$t2	-3036($fp)
-		lw	$t0	-3036($fp)
-		sw	$t0	C_0
+		sub	$t3	$t2	$t0
+		sw	$t3	-1024($sp)
+		add	$v0	$t3	$t5
+		sw	$v0	-1028($sp)
+		add	$t9	$t0	$t5
+		sw	$t9	-1032($sp)
+		sub	$s6	$v0	$t9
+		sw	$s6	-1036($sp)
+		sub	$a0	$t2	$t0
+		sw	$a0	-1040($sp)
+		add	$t6	$a0	$t5
+		sw	$t6	-1044($sp)
+		add	$t4	$t0	$t5
+		sw	$t4	-1048($sp)
+		sub	$fp	$t6	$t4
+		sw	$fp	-1052($sp)
+		add	$s5	$s6	$fp
+		sw	$s5	-1056($sp)
+		sub	$s7	$t2	$t0
+		sw	$s7	-1060($sp)
+		add	$a3	$s7	$t5
+		sw	$a3	-1064($sp)
+		add	$a2	$t0	$t5
+		sw	$a2	-1068($sp)
+		sub	$t7	$a3	$a2
+		sw	$t7	-1072($sp)
+		sub	$s2	$t2	$t0
+		sw	$s2	-1076($sp)
+		add	$s1	$s2	$t5
+		sw	$s1	-1080($sp)
+		add	$s4	$t7	$s1
+		sw	$s4	-1084($sp)
+		add	$s3	$s5	$s4
+		sw	$s3	-1088($sp)
+		add	$t1	$t0	$t5
+		sw	$t1	-1092($sp)
+		sub	$t8	$t2	$t0
+		sw	$t8	-1096($sp)
+		add	$a1	$t8	$t5
+		sw	$a1	-1100($sp)
+		add	$s0	$t1	$a1
+		sw	$s0	-1104($sp)
+		add	$t3	$t0	$t5
+		sw	$t3	-1108($sp)
+		sub	$v0	$s0	$t3
+		sw	$v0	-1112($sp)
+		sub	$t9	$t2	$t0
+		sw	$t9	-1116($sp)
+		add	$a0	$t9	$t5
+		sw	$a0	-1120($sp)
+		add	$t6	$t0	$t5
+		sw	$t6	-1124($sp)
+		sub	$t4	$a0	$t6
+		sw	$t4	-1128($sp)
+		sub	$s6	$t2	$t0
+		sw	$s6	-1132($sp)
+		add	$fp	$s6	$t5
+		sw	$fp	-1136($sp)
+		add	$s7	$t4	$fp
+		sw	$s7	-1140($sp)
+		add	$a3	$v0	$s7
+		sw	$a3	-1144($sp)
+		sub	$a2	$s3	$a3
+		sw	$a2	-1148($sp)
+		add	$s2	$t0	$t5
+		sw	$s2	-1152($sp)
+		sub	$t7	$t2	$t0
+		sw	$t7	-1156($sp)
+		add	$s1	$t7	$t5
+		sw	$s1	-1160($sp)
+		add	$s5	$s2	$s1
+		sw	$s5	-1164($sp)
+		add	$s4	$t0	$t5
+		sw	$s4	-1168($sp)
+		sub	$t8	$t2	$t0
+		sw	$t8	-1172($sp)
+		add	$t1	$t8	$t5
+		sw	$t1	-1176($sp)
+		add	$a1	$s4	$t1
+		sw	$a1	-1180($sp)
+		sub	$s0	$s5	$a1
+		sw	$s0	-1184($sp)
+		add	$t3	$t0	$t5
+		sw	$t3	-1188($sp)
+		sub	$t9	$t2	$t0
+		sw	$t9	-1192($sp)
+		add	$a0	$t9	$t5
+		sw	$a0	-1196($sp)
+		add	$t6	$t3	$a0
+		sw	$t6	-1200($sp)
+		add	$s6	$t0	$t5
+		sw	$s6	-1204($sp)
+		sub	$t4	$t6	$s6
+		sw	$t4	-1208($sp)
+		sub	$fp	$s0	$t4
+		sw	$fp	-1212($sp)
+		sub	$v0	$t2	$t0
+		sw	$v0	-1216($sp)
+		add	$s7	$v0	$t5
+		sw	$s7	-1220($sp)
+		add	$s3	$t0	$t5
+		sw	$s3	-1224($sp)
+		sub	$a3	$s7	$s3
+		sw	$a3	-1228($sp)
+		sub	$a2	$t2	$t0
+		sw	$a2	-1232($sp)
+		add	$t7	$a2	$t5
+		sw	$t7	-1236($sp)
+		add	$s2	$a3	$t7
+		sw	$s2	-1240($sp)
+		add	$s1	$t0	$t5
+		sw	$s1	-1244($sp)
+		sub	$t8	$t2	$t0
+		sw	$t8	-1248($sp)
+		add	$s4	$t8	$t5
+		sw	$s4	-1252($sp)
+		add	$t1	$s1	$s4
+		sw	$t1	-1256($sp)
+		add	$s5	$t0	$t5
+		sw	$s5	-1260($sp)
+		sub	$a1	$t1	$s5
+		sw	$a1	-1264($sp)
+		sub	$t9	$s2	$a1
+		sw	$t9	-1268($sp)
+		add	$t3	$fp	$t9
+		sw	$t3	-1272($sp)
+		lw	$a0	-1148($sp)
+		sub	$t6	$a0	$t3
+		sw	$t6	-1276($sp)
+		sub	$s6	$t2	$t0
+		sw	$s6	-1280($sp)
+		add	$s0	$s6	$t5
+		sw	$s0	-1284($sp)
+		add	$t4	$t0	$t5
+		sw	$t4	-1288($sp)
+		sub	$v0	$s0	$t4
+		sw	$v0	-1292($sp)
+		sub	$s7	$t2	$t0
+		sw	$s7	-1296($sp)
+		add	$s3	$s7	$t5
+		sw	$s3	-1300($sp)
+		add	$a2	$t0	$t5
+		sw	$a2	-1304($sp)
+		sub	$a3	$s3	$a2
+		sw	$a3	-1308($sp)
+		add	$t7	$v0	$a3
+		sw	$t7	-1312($sp)
+		sub	$t8	$t2	$t0
+		sw	$t8	-1316($sp)
+		add	$s1	$t8	$t5
+		sw	$s1	-1320($sp)
+		add	$s4	$t0	$t5
+		sw	$s4	-1324($sp)
+		sub	$t1	$s1	$s4
+		sw	$t1	-1328($sp)
+		sub	$s5	$t2	$t0
+		sw	$s5	-1332($sp)
+		add	$s2	$s5	$t5
+		sw	$s2	-1336($sp)
+		add	$a1	$t1	$s2
+		sw	$a1	-1340($sp)
+		add	$fp	$t7	$a1
+		sw	$fp	-1344($sp)
+		add	$t9	$t0	$t5
+		sw	$t9	-1348($sp)
+		sub	$a0	$t2	$t0
+		sw	$a0	-1352($sp)
+		add	$t3	$a0	$t5
+		sw	$t3	-1356($sp)
+		add	$t6	$t9	$t3
+		sw	$t6	-1360($sp)
+		add	$s6	$t0	$t5
+		sw	$s6	-1364($sp)
+		sub	$s0	$t6	$s6
+		sw	$s0	-1368($sp)
+		sub	$t4	$t2	$t0
+		sw	$t4	-1372($sp)
+		add	$s7	$t4	$t5
+		sw	$s7	-1376($sp)
+		add	$s3	$t0	$t5
+		sw	$s3	-1380($sp)
+		sub	$a2	$s7	$s3
+		sw	$a2	-1384($sp)
+		sub	$v0	$t2	$t0
+		sw	$v0	-1388($sp)
+		add	$a3	$v0	$t5
+		sw	$a3	-1392($sp)
+		add	$t8	$a2	$a3
+		sw	$t8	-1396($sp)
+		add	$s1	$s0	$t8
+		sw	$s1	-1400($sp)
+		sub	$s4	$fp	$s1
+		sw	$s4	-1404($sp)
+		add	$s5	$t0	$t5
+		sw	$s5	-1408($sp)
+		sub	$t1	$t2	$t0
+		sw	$t1	-1412($sp)
+		add	$s2	$t1	$t5
+		sw	$s2	-1416($sp)
+		add	$t7	$s5	$s2
+		sw	$t7	-1420($sp)
+		add	$a1	$t0	$t5
+		sw	$a1	-1424($sp)
+		sub	$a0	$t7	$a1
+		sw	$a0	-1428($sp)
+		sub	$t9	$t2	$t0
+		sw	$t9	-1432($sp)
+		add	$t3	$t9	$t5
+		sw	$t3	-1436($sp)
+		add	$t6	$t0	$t5
+		sw	$t6	-1440($sp)
+		sub	$s6	$t3	$t6
+		sw	$s6	-1444($sp)
+		sub	$t4	$t2	$t0
+		sw	$t4	-1448($sp)
+		add	$s7	$t4	$t5
+		sw	$s7	-1452($sp)
+		add	$s3	$s6	$s7
+		sw	$s3	-1456($sp)
+		add	$v0	$a0	$s3
+		sw	$v0	-1460($sp)
+		add	$a2	$t0	$t5
+		sw	$a2	-1464($sp)
+		sub	$a3	$t2	$t0
+		sw	$a3	-1468($sp)
+		add	$s0	$a3	$t5
+		sw	$s0	-1472($sp)
+		add	$t8	$a2	$s0
+		sw	$t8	-1476($sp)
+		add	$fp	$t0	$t5
+		sw	$fp	-1480($sp)
+		sub	$s1	$t8	$fp
+		sw	$s1	-1484($sp)
+		sub	$s4	$t2	$t0
+		sw	$s4	-1488($sp)
+		add	$t1	$s4	$t5
+		sw	$t1	-1492($sp)
+		add	$s5	$t0	$t5
+		sw	$s5	-1496($sp)
+		sub	$s2	$t1	$s5
+		sw	$s2	-1500($sp)
+		sub	$t7	$t2	$t0
+		sw	$t7	-1504($sp)
+		add	$a1	$t7	$t5
+		sw	$a1	-1508($sp)
+		add	$t9	$s2	$a1
+		sw	$t9	-1512($sp)
+		add	$t3	$s1	$t9
+		sw	$t3	-1516($sp)
+		sub	$t6	$v0	$t3
+		sw	$t6	-1520($sp)
+		lw	$t4	-1404($sp)
+		sub	$s6	$t4	$t6
+		sw	$s6	-1524($sp)
+		lw	$s7	-1276($sp)
+		add	$a0	$s7	$s6
+		sw	$a0	-1528($sp)
+		add	$s3	$t0	$t5
+		sw	$s3	-1532($sp)
+		sub	$a3	$t2	$t0
+		sw	$a3	-1536($sp)
+		add	$a2	$a3	$t5
+		sw	$a2	-1540($sp)
+		add	$s0	$s3	$a2
+		sw	$s0	-1544($sp)
+		add	$t8	$t0	$t5
+		sw	$t8	-1548($sp)
+		sub	$fp	$t2	$t0
+		sw	$fp	-1552($sp)
+		add	$s4	$fp	$t5
+		sw	$s4	-1556($sp)
+		add	$t1	$t8	$s4
+		sw	$t1	-1560($sp)
+		sub	$s5	$s0	$t1
+		sw	$s5	-1564($sp)
+		add	$t7	$t0	$t5
+		sw	$t7	-1568($sp)
+		sub	$s2	$t2	$t0
+		sw	$s2	-1572($sp)
+		add	$a1	$s2	$t5
+		sw	$a1	-1576($sp)
+		add	$s1	$t7	$a1
+		sw	$s1	-1580($sp)
+		add	$t9	$t0	$t5
+		sw	$t9	-1584($sp)
+		sub	$v0	$s1	$t9
+		sw	$v0	-1588($sp)
+		sub	$t3	$s5	$v0
+		sw	$t3	-1592($sp)
+		sub	$t4	$t2	$t0
+		sw	$t4	-1596($sp)
+		add	$t6	$t4	$t5
+		sw	$t6	-1600($sp)
+		add	$s7	$t0	$t5
+		sw	$s7	-1604($sp)
+		sub	$s6	$t6	$s7
+		sw	$s6	-1608($sp)
+		sub	$a0	$t2	$t0
+		sw	$a0	-1612($sp)
+		add	$a3	$a0	$t5
+		sw	$a3	-1616($sp)
+		add	$s3	$s6	$a3
+		sw	$s3	-1620($sp)
+		add	$a2	$t0	$t5
+		sw	$a2	-1624($sp)
+		sub	$fp	$t2	$t0
+		sw	$fp	-1628($sp)
+		add	$t8	$fp	$t5
+		sw	$t8	-1632($sp)
+		add	$s4	$a2	$t8
+		sw	$s4	-1636($sp)
+		add	$s0	$t0	$t5
+		sw	$s0	-1640($sp)
+		sub	$t1	$s4	$s0
+		sw	$t1	-1644($sp)
+		sub	$s2	$s3	$t1
+		sw	$s2	-1648($sp)
+		add	$t7	$t3	$s2
+		sw	$t7	-1652($sp)
+		sub	$a1	$t2	$t0
+		sw	$a1	-1656($sp)
+		add	$s1	$a1	$t5
+		sw	$s1	-1660($sp)
+		add	$t9	$t0	$t5
+		sw	$t9	-1664($sp)
+		sub	$s5	$s1	$t9
+		sw	$s5	-1668($sp)
+		sub	$v0	$t2	$t0
+		sw	$v0	-1672($sp)
+		add	$t4	$v0	$t5
+		sw	$t4	-1676($sp)
+		add	$t6	$s5	$t4
+		sw	$t6	-1680($sp)
+		add	$s7	$t0	$t5
+		sw	$s7	-1684($sp)
+		sub	$a0	$t2	$t0
+		sw	$a0	-1688($sp)
+		add	$s6	$a0	$t5
+		sw	$s6	-1692($sp)
+		add	$a3	$s7	$s6
+		sw	$a3	-1696($sp)
+		add	$fp	$t0	$t5
+		sw	$fp	-1700($sp)
+		sub	$a2	$a3	$fp
+		sw	$a2	-1704($sp)
+		sub	$t8	$t6	$a2
+		sw	$t8	-1708($sp)
+		sub	$s4	$t2	$t0
+		sw	$s4	-1712($sp)
+		add	$s0	$s4	$t5
+		sw	$s0	-1716($sp)
+		add	$s3	$t0	$t5
+		sw	$s3	-1720($sp)
+		sub	$t1	$s0	$s3
+		sw	$t1	-1724($sp)
+		sub	$t3	$t2	$t0
+		sw	$t3	-1728($sp)
+		add	$s2	$t3	$t5
+		sw	$s2	-1732($sp)
+		add	$t7	$t1	$s2
+		sw	$t7	-1736($sp)
+		add	$a1	$t0	$t5
+		sw	$a1	-1740($sp)
+		sub	$s1	$t2	$t0
+		sw	$s1	-1744($sp)
+		add	$t9	$s1	$t5
+		sw	$t9	-1748($sp)
+		add	$v0	$a1	$t9
+		sw	$v0	-1752($sp)
+		add	$s5	$t0	$t5
+		sw	$s5	-1756($sp)
+		sub	$t4	$v0	$s5
+		sw	$t4	-1760($sp)
+		sub	$a0	$t7	$t4
+		sw	$a0	-1764($sp)
+		add	$s7	$t8	$a0
+		sw	$s7	-1768($sp)
+		lw	$s6	-1652($sp)
+		add	$a3	$s6	$s7
+		sw	$a3	-1772($sp)
+		sub	$fp	$t2	$t0
+		sw	$fp	-1776($sp)
+		add	$t6	$fp	$t5
+		sw	$t6	-1780($sp)
+		add	$a2	$t0	$t5
+		sw	$a2	-1784($sp)
+		sub	$s4	$t6	$a2
+		sw	$s4	-1788($sp)
+		sub	$s0	$t2	$t0
+		sw	$s0	-1792($sp)
+		add	$s3	$s0	$t5
+		sw	$s3	-1796($sp)
+		add	$t3	$t0	$t5
+		sw	$t3	-1800($sp)
+		sub	$t1	$s3	$t3
+		sw	$t1	-1804($sp)
+		add	$s2	$s4	$t1
+		sw	$s2	-1808($sp)
+		sub	$s1	$t2	$t0
+		sw	$s1	-1812($sp)
+		add	$a1	$s1	$t5
+		sw	$a1	-1816($sp)
+		add	$t9	$t0	$t5
+		sw	$t9	-1820($sp)
+		sub	$v0	$a1	$t9
+		sw	$v0	-1824($sp)
+		sub	$s5	$t2	$t0
+		sw	$s5	-1828($sp)
+		add	$t7	$s5	$t5
+		sw	$t7	-1832($sp)
+		add	$t4	$v0	$t7
+		sw	$t4	-1836($sp)
+		add	$t8	$s2	$t4
+		sw	$t8	-1840($sp)
+		add	$a0	$t0	$t5
+		sw	$a0	-1844($sp)
+		sub	$s6	$t2	$t0
+		sw	$s6	-1848($sp)
+		add	$s7	$s6	$t5
+		sw	$s7	-1852($sp)
+		add	$a3	$a0	$s7
+		sw	$a3	-1856($sp)
+		add	$fp	$t0	$t5
+		sw	$fp	-1860($sp)
+		sub	$t6	$a3	$fp
+		sw	$t6	-1864($sp)
+		sub	$a2	$t2	$t0
+		sw	$a2	-1868($sp)
+		add	$s0	$a2	$t5
+		sw	$s0	-1872($sp)
+		add	$s3	$t0	$t5
+		sw	$s3	-1876($sp)
+		sub	$t3	$s0	$s3
+		sw	$t3	-1880($sp)
+		sub	$s4	$t2	$t0
+		sw	$s4	-1884($sp)
+		add	$t1	$s4	$t5
+		sw	$t1	-1888($sp)
+		add	$s1	$t3	$t1
+		sw	$s1	-1892($sp)
+		add	$a1	$t6	$s1
+		sw	$a1	-1896($sp)
+		sub	$t9	$t8	$a1
+		sw	$t9	-1900($sp)
+		add	$s5	$t0	$t5
+		sw	$s5	-1904($sp)
+		sub	$v0	$t2	$t0
+		sw	$v0	-1908($sp)
+		add	$t7	$v0	$t5
+		sw	$t7	-1912($sp)
+		add	$s2	$s5	$t7
+		sw	$s2	-1916($sp)
+		add	$t4	$t0	$t5
+		sw	$t4	-1920($sp)
+		sub	$s6	$s2	$t4
+		sw	$s6	-1924($sp)
+		sub	$a0	$t2	$t0
+		sw	$a0	-1928($sp)
+		add	$s7	$a0	$t5
+		sw	$s7	-1932($sp)
+		add	$a3	$t0	$t5
+		sw	$a3	-1936($sp)
+		sub	$fp	$s7	$a3
+		sw	$fp	-1940($sp)
+		sub	$a2	$t2	$t0
+		sw	$a2	-1944($sp)
+		add	$s0	$a2	$t5
+		sw	$s0	-1948($sp)
+		add	$s3	$fp	$s0
+		sw	$s3	-1952($sp)
+		add	$s4	$s6	$s3
+		sw	$s4	-1956($sp)
+		add	$t3	$t0	$t5
+		sw	$t3	-1960($sp)
+		sub	$t1	$t2	$t0
+		sw	$t1	-1964($sp)
+		add	$t6	$t1	$t5
+		sw	$t6	-1968($sp)
+		add	$s1	$t3	$t6
+		sw	$s1	-1972($sp)
+		add	$t8	$t0	$t5
+		sw	$t8	-1976($sp)
+		sub	$a1	$s1	$t8
+		sw	$a1	-1980($sp)
+		sub	$t9	$t2	$t0
+		sw	$t9	-1984($sp)
+		add	$v0	$t9	$t5
+		sw	$v0	-1988($sp)
+		add	$s5	$t0	$t5
+		sw	$s5	-1992($sp)
+		sub	$t7	$v0	$s5
+		sw	$t7	-1996($sp)
+		sub	$s2	$t2	$t0
+		sw	$s2	-2000($sp)
+		add	$t4	$s2	$t5
+		sw	$t4	-2004($sp)
+		add	$a0	$t7	$t4
+		sw	$a0	-2008($sp)
+		add	$s7	$a1	$a0
+		sw	$s7	-2012($sp)
+		sub	$a3	$s4	$s7
+		sw	$a3	-2016($sp)
+		lw	$a2	-1900($sp)
+		sub	$fp	$a2	$a3
+		sw	$fp	-2020($sp)
+		lw	$s0	-1772($sp)
+		add	$s6	$s0	$fp
+		sw	$s6	-2024($sp)
+		lw	$s3	-1528($sp)
+		sub	$t1	$s3	$s6
+		sw	$t1	-2028($sp)
+		sw	$t1	B_0
+		sub	$t5	$t2	$t0
+		sw	$t5	-2032($sp)
+		add	$t3	$t5	$t1
+		sw	$t3	-2036($sp)
+		add	$t6	$t0	$t1
+		sw	$t6	-2040($sp)
+		sub	$s1	$t3	$t6
+		sw	$s1	-2044($sp)
+		sub	$t8	$t2	$t0
+		sw	$t8	-2048($sp)
+		add	$t9	$t8	$t1
+		sw	$t9	-2052($sp)
+		add	$v0	$t0	$t1
+		sw	$v0	-2056($sp)
+		sub	$s5	$t9	$v0
+		sw	$s5	-2060($sp)
+		add	$s2	$s1	$s5
+		sw	$s2	-2064($sp)
+		sub	$t7	$t2	$t0
+		sw	$t7	-2068($sp)
+		add	$t4	$t7	$t1
+		sw	$t4	-2072($sp)
+		add	$a1	$t0	$t1
+		sw	$a1	-2076($sp)
+		sub	$a0	$t4	$a1
+		sw	$a0	-2080($sp)
+		sub	$s4	$t2	$t0
+		sw	$s4	-2084($sp)
+		add	$s7	$s4	$t1
+		sw	$s7	-2088($sp)
+		add	$a2	$a0	$s7
+		sw	$a2	-2092($sp)
+		add	$a3	$s2	$a2
+		sw	$a3	-2096($sp)
+		add	$s0	$t0	$t1
+		sw	$s0	-2100($sp)
+		sub	$fp	$t2	$t0
+		sw	$fp	-2104($sp)
+		add	$s3	$fp	$t1
+		sw	$s3	-2108($sp)
+		add	$s6	$s0	$s3
+		sw	$s6	-2112($sp)
+		add	$t5	$t0	$t1
+		sw	$t5	-2116($sp)
+		sub	$t3	$s6	$t5
+		sw	$t3	-2120($sp)
+		sub	$t6	$t2	$t0
+		sw	$t6	-2124($sp)
+		add	$t8	$t6	$t1
+		sw	$t8	-2128($sp)
+		add	$t9	$t0	$t1
+		sw	$t9	-2132($sp)
+		sub	$v0	$t8	$t9
+		sw	$v0	-2136($sp)
+		sub	$s1	$t2	$t0
+		sw	$s1	-2140($sp)
+		add	$s5	$s1	$t1
+		sw	$s5	-2144($sp)
+		add	$t7	$v0	$s5
+		sw	$t7	-2148($sp)
+		add	$t4	$t3	$t7
+		sw	$t4	-2152($sp)
+		sub	$a1	$a3	$t4
+		sw	$a1	-2156($sp)
+		add	$s4	$t0	$t1
+		sw	$s4	-2160($sp)
+		sub	$a0	$t2	$t0
+		sw	$a0	-2164($sp)
+		add	$s7	$a0	$t1
+		sw	$s7	-2168($sp)
+		add	$s2	$s4	$s7
+		sw	$s2	-2172($sp)
+		add	$a2	$t0	$t1
+		sw	$a2	-2176($sp)
+		sub	$fp	$t2	$t0
+		sw	$fp	-2180($sp)
+		add	$s0	$fp	$t1
+		sw	$s0	-2184($sp)
+		add	$s3	$a2	$s0
+		sw	$s3	-2188($sp)
+		sub	$s6	$s2	$s3
+		sw	$s6	-2192($sp)
+		add	$t5	$t0	$t1
+		sw	$t5	-2196($sp)
+		sub	$t6	$t2	$t0
+		sw	$t6	-2200($sp)
+		add	$t8	$t6	$t1
+		sw	$t8	-2204($sp)
+		add	$t9	$t5	$t8
+		sw	$t9	-2208($sp)
+		add	$s1	$t0	$t1
+		sw	$s1	-2212($sp)
+		sub	$v0	$t9	$s1
+		sw	$v0	-2216($sp)
+		sub	$s5	$s6	$v0
+		sw	$s5	-2220($sp)
+		sub	$t3	$t2	$t0
+		sw	$t3	-2224($sp)
+		add	$t7	$t3	$t1
+		sw	$t7	-2228($sp)
+		add	$a3	$t0	$t1
+		sw	$a3	-2232($sp)
+		sub	$t4	$t7	$a3
+		sw	$t4	-2236($sp)
+		sub	$a1	$t2	$t0
+		sw	$a1	-2240($sp)
+		add	$a0	$a1	$t1
+		sw	$a0	-2244($sp)
+		add	$s4	$t4	$a0
+		sw	$s4	-2248($sp)
+		add	$s7	$t0	$t1
+		sw	$s7	-2252($sp)
+		sub	$fp	$t2	$t0
+		sw	$fp	-2256($sp)
+		add	$a2	$fp	$t1
+		sw	$a2	-2260($sp)
+		add	$s0	$s7	$a2
+		sw	$s0	-2264($sp)
+		add	$s2	$t0	$t1
+		sw	$s2	-2268($sp)
+		sub	$s3	$s0	$s2
+		sw	$s3	-2272($sp)
+		sub	$t6	$s4	$s3
+		sw	$t6	-2276($sp)
+		add	$t5	$s5	$t6
+		sw	$t5	-2280($sp)
+		lw	$t8	-2156($sp)
+		sub	$t9	$t8	$t5
+		sw	$t9	-2284($sp)
+		sub	$s1	$t2	$t0
+		sw	$s1	-2288($sp)
+		add	$s6	$s1	$t1
+		sw	$s6	-2292($sp)
+		add	$v0	$t0	$t1
+		sw	$v0	-2296($sp)
+		sub	$t3	$s6	$v0
+		sw	$t3	-2300($sp)
+		sub	$t7	$t2	$t0
+		sw	$t7	-2304($sp)
+		add	$a3	$t7	$t1
+		sw	$a3	-2308($sp)
+		add	$a1	$t0	$t1
+		sw	$a1	-2312($sp)
+		sub	$t4	$a3	$a1
+		sw	$t4	-2316($sp)
+		add	$a0	$t3	$t4
+		sw	$a0	-2320($sp)
+		sub	$fp	$t2	$t0
+		sw	$fp	-2324($sp)
+		add	$s7	$fp	$t1
+		sw	$s7	-2328($sp)
+		add	$a2	$t0	$t1
+		sw	$a2	-2332($sp)
+		sub	$s0	$s7	$a2
+		sw	$s0	-2336($sp)
+		sub	$s2	$t2	$t0
+		sw	$s2	-2340($sp)
+		add	$s4	$s2	$t1
+		sw	$s4	-2344($sp)
+		add	$s3	$s0	$s4
+		sw	$s3	-2348($sp)
+		add	$s5	$a0	$s3
+		sw	$s5	-2352($sp)
+		add	$t6	$t0	$t1
+		sw	$t6	-2356($sp)
+		sub	$t8	$t2	$t0
+		sw	$t8	-2360($sp)
+		add	$t5	$t8	$t1
+		sw	$t5	-2364($sp)
+		add	$t9	$t6	$t5
+		sw	$t9	-2368($sp)
+		add	$s1	$t0	$t1
+		sw	$s1	-2372($sp)
+		sub	$s6	$t9	$s1
+		sw	$s6	-2376($sp)
+		sub	$v0	$t2	$t0
+		sw	$v0	-2380($sp)
+		add	$t7	$v0	$t1
+		sw	$t7	-2384($sp)
+		add	$a3	$t0	$t1
+		sw	$a3	-2388($sp)
+		sub	$a1	$t7	$a3
+		sw	$a1	-2392($sp)
+		sub	$t3	$t2	$t0
+		sw	$t3	-2396($sp)
+		add	$t4	$t3	$t1
+		sw	$t4	-2400($sp)
+		add	$fp	$a1	$t4
+		sw	$fp	-2404($sp)
+		add	$s7	$s6	$fp
+		sw	$s7	-2408($sp)
+		sub	$a2	$s5	$s7
+		sw	$a2	-2412($sp)
+		add	$s2	$t0	$t1
+		sw	$s2	-2416($sp)
+		sub	$s0	$t2	$t0
+		sw	$s0	-2420($sp)
+		add	$s4	$s0	$t1
+		sw	$s4	-2424($sp)
+		add	$a0	$s2	$s4
+		sw	$a0	-2428($sp)
+		add	$s3	$t0	$t1
+		sw	$s3	-2432($sp)
+		sub	$t8	$a0	$s3
+		sw	$t8	-2436($sp)
+		sub	$t6	$t2	$t0
+		sw	$t6	-2440($sp)
+		add	$t5	$t6	$t1
+		sw	$t5	-2444($sp)
+		add	$t9	$t0	$t1
+		sw	$t9	-2448($sp)
+		sub	$s1	$t5	$t9
+		sw	$s1	-2452($sp)
+		sub	$v0	$t2	$t0
+		sw	$v0	-2456($sp)
+		add	$t7	$v0	$t1
+		sw	$t7	-2460($sp)
+		add	$a3	$s1	$t7
+		sw	$a3	-2464($sp)
+		add	$t3	$t8	$a3
+		sw	$t3	-2468($sp)
+		add	$a1	$t0	$t1
+		sw	$a1	-2472($sp)
+		sub	$t4	$t2	$t0
+		sw	$t4	-2476($sp)
+		add	$s6	$t4	$t1
+		sw	$s6	-2480($sp)
+		add	$fp	$a1	$s6
+		sw	$fp	-2484($sp)
+		add	$s5	$t0	$t1
+		sw	$s5	-2488($sp)
+		sub	$s7	$fp	$s5
+		sw	$s7	-2492($sp)
+		sub	$a2	$t2	$t0
+		sw	$a2	-2496($sp)
+		add	$s0	$a2	$t1
+		sw	$s0	-2500($sp)
+		add	$s2	$t0	$t1
+		sw	$s2	-2504($sp)
+		sub	$s4	$s0	$s2
+		sw	$s4	-2508($sp)
+		sub	$a0	$t2	$t0
+		sw	$a0	-2512($sp)
+		add	$s3	$a0	$t1
+		sw	$s3	-2516($sp)
+		add	$t6	$s4	$s3
+		sw	$t6	-2520($sp)
+		add	$t5	$s7	$t6
+		sw	$t5	-2524($sp)
+		sub	$t9	$t3	$t5
+		sw	$t9	-2528($sp)
+		lw	$v0	-2412($sp)
+		sub	$s1	$v0	$t9
+		sw	$s1	-2532($sp)
+		lw	$t7	-2284($sp)
+		add	$t8	$t7	$s1
+		sw	$t8	-2536($sp)
+		add	$a3	$t0	$t1
+		sw	$a3	-2540($sp)
+		sub	$t4	$t2	$t0
+		sw	$t4	-2544($sp)
+		add	$a1	$t4	$t1
+		sw	$a1	-2548($sp)
+		add	$s6	$a3	$a1
+		sw	$s6	-2552($sp)
+		add	$fp	$t0	$t1
+		sw	$fp	-2556($sp)
+		sub	$s5	$t2	$t0
+		sw	$s5	-2560($sp)
+		add	$a2	$s5	$t1
+		sw	$a2	-2564($sp)
+		add	$s0	$fp	$a2
+		sw	$s0	-2568($sp)
+		sub	$s2	$s6	$s0
+		sw	$s2	-2572($sp)
+		add	$a0	$t0	$t1
+		sw	$a0	-2576($sp)
+		sub	$s4	$t2	$t0
+		sw	$s4	-2580($sp)
+		add	$s3	$s4	$t1
+		sw	$s3	-2584($sp)
+		add	$s7	$a0	$s3
+		sw	$s7	-2588($sp)
+		add	$t6	$t0	$t1
+		sw	$t6	-2592($sp)
+		sub	$t3	$s7	$t6
+		sw	$t3	-2596($sp)
+		sub	$t5	$s2	$t3
+		sw	$t5	-2600($sp)
+		sub	$v0	$t2	$t0
+		sw	$v0	-2604($sp)
+		add	$t9	$v0	$t1
+		sw	$t9	-2608($sp)
+		add	$t7	$t0	$t1
+		sw	$t7	-2612($sp)
+		sub	$s1	$t9	$t7
+		sw	$s1	-2616($sp)
+		sub	$t8	$t2	$t0
+		sw	$t8	-2620($sp)
+		add	$t4	$t8	$t1
+		sw	$t4	-2624($sp)
+		add	$a3	$s1	$t4
+		sw	$a3	-2628($sp)
+		add	$a1	$t0	$t1
+		sw	$a1	-2632($sp)
+		sub	$s5	$t2	$t0
+		sw	$s5	-2636($sp)
+		add	$fp	$s5	$t1
+		sw	$fp	-2640($sp)
+		add	$a2	$a1	$fp
+		sw	$a2	-2644($sp)
+		add	$s6	$t0	$t1
+		sw	$s6	-2648($sp)
+		sub	$s0	$a2	$s6
+		sw	$s0	-2652($sp)
+		sub	$s4	$a3	$s0
+		sw	$s4	-2656($sp)
+		add	$a0	$t5	$s4
+		sw	$a0	-2660($sp)
+		sub	$s3	$t2	$t0
+		sw	$s3	-2664($sp)
+		add	$s7	$s3	$t1
+		sw	$s7	-2668($sp)
+		add	$t6	$t0	$t1
+		sw	$t6	-2672($sp)
+		sub	$s2	$s7	$t6
+		sw	$s2	-2676($sp)
+		sub	$t3	$t2	$t0
+		sw	$t3	-2680($sp)
+		add	$v0	$t3	$t1
+		sw	$v0	-2684($sp)
+		add	$t9	$s2	$v0
+		sw	$t9	-2688($sp)
+		add	$t7	$t0	$t1
+		sw	$t7	-2692($sp)
+		sub	$t8	$t2	$t0
+		sw	$t8	-2696($sp)
+		add	$s1	$t8	$t1
+		sw	$s1	-2700($sp)
+		add	$t4	$t7	$s1
+		sw	$t4	-2704($sp)
+		add	$s5	$t0	$t1
+		sw	$s5	-2708($sp)
+		sub	$a1	$t4	$s5
+		sw	$a1	-2712($sp)
+		sub	$fp	$t9	$a1
+		sw	$fp	-2716($sp)
+		sub	$a2	$t2	$t0
+		sw	$a2	-2720($sp)
+		add	$s6	$a2	$t1
+		sw	$s6	-2724($sp)
+		add	$a3	$t0	$t1
+		sw	$a3	-2728($sp)
+		sub	$s0	$s6	$a3
+		sw	$s0	-2732($sp)
+		sub	$t5	$t2	$t0
+		sw	$t5	-2736($sp)
+		add	$s4	$t5	$t1
+		sw	$s4	-2740($sp)
+		add	$a0	$s0	$s4
+		sw	$a0	-2744($sp)
+		add	$s3	$t0	$t1
+		sw	$s3	-2748($sp)
+		sub	$s7	$t2	$t0
+		sw	$s7	-2752($sp)
+		add	$t6	$s7	$t1
+		sw	$t6	-2756($sp)
+		add	$t3	$s3	$t6
+		sw	$t3	-2760($sp)
+		add	$s2	$t0	$t1
+		sw	$s2	-2764($sp)
+		sub	$v0	$t3	$s2
+		sw	$v0	-2768($sp)
+		sub	$t8	$a0	$v0
+		sw	$t8	-2772($sp)
+		add	$t7	$fp	$t8
+		sw	$t7	-2776($sp)
+		lw	$s1	-2660($sp)
+		add	$t4	$s1	$t7
+		sw	$t4	-2780($sp)
+		sub	$s5	$t2	$t0
+		sw	$s5	-2784($sp)
+		add	$t9	$s5	$t1
+		sw	$t9	-2788($sp)
+		add	$a1	$t0	$t1
+		sw	$a1	-2792($sp)
+		sub	$a2	$t9	$a1
+		sw	$a2	-2796($sp)
+		sub	$s6	$t2	$t0
+		sw	$s6	-2800($sp)
+		add	$a3	$s6	$t1
+		sw	$a3	-2804($sp)
+		add	$t5	$t0	$t1
+		sw	$t5	-2808($sp)
+		sub	$s0	$a3	$t5
+		sw	$s0	-2812($sp)
+		add	$s4	$a2	$s0
+		sw	$s4	-2816($sp)
+		sub	$s7	$t2	$t0
+		sw	$s7	-2820($sp)
+		add	$s3	$s7	$t1
+		sw	$s3	-2824($sp)
+		add	$t6	$t0	$t1
+		sw	$t6	-2828($sp)
+		sub	$t3	$s3	$t6
+		sw	$t3	-2832($sp)
+		sub	$s2	$t2	$t0
+		sw	$s2	-2836($sp)
+		add	$a0	$s2	$t1
+		sw	$a0	-2840($sp)
+		add	$v0	$t3	$a0
+		sw	$v0	-2844($sp)
+		add	$fp	$s4	$v0
+		sw	$fp	-2848($sp)
+		add	$t8	$t0	$t1
+		sw	$t8	-2852($sp)
+		sub	$s1	$t2	$t0
+		sw	$s1	-2856($sp)
+		add	$t7	$s1	$t1
+		sw	$t7	-2860($sp)
+		add	$t4	$t8	$t7
+		sw	$t4	-2864($sp)
+		add	$s5	$t0	$t1
+		sw	$s5	-2868($sp)
+		sub	$t9	$t4	$s5
+		sw	$t9	-2872($sp)
+		sub	$a1	$t2	$t0
+		sw	$a1	-2876($sp)
+		add	$s6	$a1	$t1
+		sw	$s6	-2880($sp)
+		add	$a3	$t0	$t1
+		sw	$a3	-2884($sp)
+		sub	$t5	$s6	$a3
+		sw	$t5	-2888($sp)
+		sub	$a2	$t2	$t0
+		sw	$a2	-2892($sp)
+		add	$s0	$a2	$t1
+		sw	$s0	-2896($sp)
+		add	$s7	$t5	$s0
+		sw	$s7	-2900($sp)
+		add	$s3	$t9	$s7
+		sw	$s3	-2904($sp)
+		sub	$t6	$fp	$s3
+		sw	$t6	-2908($sp)
+		add	$s2	$t0	$t1
+		sw	$s2	-2912($sp)
+		sub	$t3	$t2	$t0
+		sw	$t3	-2916($sp)
+		add	$a0	$t3	$t1
+		sw	$a0	-2920($sp)
+		add	$s4	$s2	$a0
+		sw	$s4	-2924($sp)
+		add	$v0	$t0	$t1
+		sw	$v0	-2928($sp)
+		sub	$s1	$s4	$v0
+		sw	$s1	-2932($sp)
+		sub	$t8	$t2	$t0
+		sw	$t8	-2936($sp)
+		add	$t7	$t8	$t1
+		sw	$t7	-2940($sp)
+		add	$t4	$t0	$t1
+		sw	$t4	-2944($sp)
+		sub	$s5	$t7	$t4
+		sw	$s5	-2948($sp)
+		sub	$a1	$t2	$t0
+		sw	$a1	-2952($sp)
+		add	$s6	$a1	$t1
+		sw	$s6	-2956($sp)
+		add	$a3	$s5	$s6
+		sw	$a3	-2960($sp)
+		add	$a2	$s1	$a3
+		sw	$a2	-2964($sp)
+		add	$t5	$t0	$t1
+		sw	$t5	-2968($sp)
+		sub	$s0	$t2	$t0
+		sw	$s0	-2972($sp)
+		add	$t9	$s0	$t1
+		sw	$t9	-2976($sp)
+		add	$s7	$t5	$t9
+		sw	$s7	-2980($sp)
+		add	$fp	$t0	$t1
+		sw	$fp	-2984($sp)
+		sub	$s3	$s7	$fp
+		sw	$s3	-2988($sp)
+		sub	$t6	$t2	$t0
+		sw	$t6	-2992($sp)
+		add	$t3	$t6	$t1
+		sw	$t3	-2996($sp)
+		add	$s2	$t0	$t1
+		sw	$s2	-3000($sp)
+		sub	$a0	$t3	$s2
+		sw	$a0	-3004($sp)
+		sub	$s4	$t2	$t0
+		sw	$s4	-3008($sp)
+		add	$v0	$s4	$t1
+		sw	$v0	-3012($sp)
+		add	$t8	$a0	$v0
+		sw	$t8	-3016($sp)
+		add	$t7	$s3	$t8
+		sw	$t7	-3020($sp)
+		sub	$t4	$a2	$t7
+		sw	$t4	-3024($sp)
+		lw	$a1	-2908($sp)
+		sub	$s5	$a1	$t4
+		sw	$s5	-3028($sp)
+		lw	$s6	-2780($sp)
+		add	$s1	$s6	$s5
+		sw	$s1	-3032($sp)
+		lw	$a3	-2536($sp)
+		sub	$s0	$a3	$s1
+		sw	$s0	-3036($sp)
+		sw	$s0	C_0
 		j	_L2
 _L3:
-		sw	$ra	-3040($fp)
-		la	$t0	_str0
-		sw	$t0	-3044($fp)
-		lw	$t0	A_0
-		sw	$t0	-3048($fp)
-		lw	$t0	B_0
-		sw	$t0	-3052($fp)
-		lw	$t0	C_0
-		sw	$t0	-3056($fp)
-		sub	$fp	3040
-		la	$t0	___printf
-		jal	$t0
-		add	$fp	3040
-		sw	$v0	-3060($fp)
-		lw	$ra	-3040($fp)
-		li	$t0	0
-		move	$v0	$t0
+		sw	$ra	-3040($sp)
+		la	$t2	_str0
+		sw	$t2	-3044($sp)
+		lw	$t3	A_0
+		sw	$t3	-3048($sp)
+		lw	$t4	B_0
+		sw	$t4	-3052($sp)
+		lw	$t5	C_0
+		sw	$t5	-3056($sp)
+		sub	$sp	3040
+		jal	___printf
+		add	$sp	3040
+		sw	$v0	-3060($sp)
+		lw	$ra	-3040($sp)
+		move	$v0	$0
 		jr	$ra
 		jr	$ra
 ___printf:
-        lw  $t0 -4($fp)
-        move    $t1 $fp
+        lw  $t0 -4($sp)
+        move    $t1 $sp
         sub $t1 4
 ___printf_loop:
         lb  $a0 0($t0)
@@ -3169,8 +1674,8 @@ ___getchar:
         syscall
         jr  $ra
 ___scanf:
-        lw  $t0 -4($fp)
-        move    $t1 $fp
+        lw  $t0 -4($sp)
+        move    $t1 $sp
         sub $t1 4
 ___scanf_loop:
         lb  $a0 0($t0)
@@ -3208,7 +1713,7 @@ ___scanf_char:
         sb  $v0 0($a0)
         j   ___scanf_loop 
 ___malloc:
-        lw  $a0 -4($fp)
+        lw  $a0 -4($sp)
         li  $v0 9
         syscall
         jr  $ra

@@ -3,7 +3,7 @@
  *
  * int getchar ( );
  * //成功读取则返回读到的字符，遭遇文件末尾时则返回EOF(-1) 
- * //键盘输入EOF可使用ctrl+z
+ * //修正：由于spim系统不支持返回EOF 特使用'\x01'(Ctrl+A)来判断文件结束 
  *
  * int printf ( const char * format, ... );
  * //除format中的字符依据本课程要求须实现：
@@ -24,10 +24,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-void getline(char *s) {
+void getline1(char *s) {
 	int tmp;
 	tmp = getchar();
-	while (tmp != -1 && tmp != '\n') {
+	while (tmp != 1 && tmp != '\n') {
 		*s = tmp;
 		++s;
 		tmp = getchar();
@@ -42,13 +42,13 @@ void getline(char *s) {
 int main() {
 	int tmp, line = 0;
 	char *buf;
-	while ((tmp = getchar()) != -1) {
+	while ((tmp = getchar()) != 1) {
 		buf = malloc(sizeof(char) * 505);
 		*buf = tmp;
 		if (tmp == '\n') {
 			*(buf + 1) = '\0';
 		} else {
-			getline(buf + 1);
+			getline1(buf + 1);
 		}
 		printf("%.3d : %s", ++line, buf);
 	}

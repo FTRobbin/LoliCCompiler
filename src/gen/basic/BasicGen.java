@@ -2,19 +2,17 @@ package gen.basic;
 
 import gen.ASMCode;
 import gen.CodeGen;
-import gen.SPIMCode;
 import mir.*;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by Robbin Ni on 2015/5/19.
  */
 public class BasicGen implements CodeGen {
 
-    public SPIMCode code;
+    public BasicSPIMCode code;
 
     void addSTL() {
         code.addText(   "___printf:\n" +
@@ -432,7 +430,7 @@ public class BasicGen implements CodeGen {
     @Override
     public ASMCode gen(Program prog) {
         strCnt = 0;
-        code = new SPIMCode();
+        code = new BasicSPIMCode();
         addGlobal(prog.list.get(0));
         for (ProgUnit unit : prog.list) {
             if (unit.label.name.equals("__global")) {

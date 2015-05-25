@@ -2,12 +2,10 @@ package analysis;
 
 import analysis.cfg.Block;
 import analysis.cfg.Graph;
+import analysis.cfg.Loop;
 import mir.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Robbin Ni on 2015/5/9.
@@ -180,5 +178,131 @@ public class ControlFlowGraph {
                 g.ver.get(idom[i]).addChild(g.ver.get(i));
             }
         }
+    }
+
+    public static void markNaturalLoops(Program prog) {
+        for (ProgUnit unit : prog.list) {
+            markNatrualLoops(unit.graph);
+        }
+    }
+
+    public static void markNatrualLoops(Graph g) {
+        int n = g.n;
+        int[] vis = new int[n];
+        for (int i = 0; i < n; ++i) {
+            vis[i] = 0;
+        }
+
+        LinkedList<Block> retu = new LinkedList<>(), retv = new LinkedList<>();
+
+        class anonymous {
+            int stamp = 0;
+
+            public boolean isDominator(Block u, Block v) {
+                while (u.idom.id != 0) {
+                    if (u == v) {
+                        return true;
+                    }
+                    u = u.idom;
+                }
+                return false;
+            }
+
+            public void findEdge (Block block){
+                int u = block.id;
+                vis[u] = stamp;
+                for (Block block1 : block.succ) {
+                    int v = block1.id;
+                    if (vis[v] == stamp) {
+                        if (isDominator(block, block1)) {
+                            retu.add(block);
+                            retv.add(block1);
+                        }
+                        continue;
+                    }
+                    findEdge(block1);
+                }
+            }
+
+            public void markLoop(Block block, Loop loop){
+                int u = block.id;
+                vis[u] = stamp;
+                loop.blocks.add(block);
+                for (Block block1 : block.prec) {
+                    int v = block1.id;
+                    if (vis[v] == stamp) {
+                        continue;
+                    }
+                    markLoop(block1, loop);
+                }
+            }
+        }
+
+        anonymous tmp = new anonymous();
+        tmp.stamp++;
+        tmp.findEdge(g.ver.get(0));
+
+        g.loops = new LinkedList<>();
+
+        for (int i = 0; i < retu.size(); ++i) {
+            tmp.stamp++;
+            vis[retv.get(i).id] = tmp.stamp;
+            Loop loop = new Loop();
+            loop.blocks.add(retv.get(i));
+            tmp.markLoop(retu.get(i), loop);
+            boolean isnew = true;
+            for (Loop loop1 : g.loops) {
+                if (loop1.equals(loop)) {
+                    isnew = false;
+                    break;
+                }
+            }
+            if (isnew) {
+                loop.id = g.loops.size();
+                g.loops.add(loop);
+            }
+        }
+
+        Collections.sort(g.loops);
+
+        for (Loop loop : g.loops) {
+            Loop mins = null;
+            for (Loop loop1 : g.loops) {
+                if (loop1.size() > loop.size() && loop1.contain(loop) && (mins == null || loop1.size() < mins.size())) {
+                    mins = loop1;
+                }
+            }
+            if (mins != null) {
+                mins.inner.add(loop);
+                loop.outer = mins;
+            } else {
+                loop.outer = null;
+            }
+        }
+
+        for (Loop loop : g.loops) {
+            Collections.sort(loop.blocks);
+            for (Block b : loop.blocks) {
+                if (b.loop == null || b.loop.size() > loop.size()) {
+                    b.loop = loop;
+                }
+            }
+        }
+
+        /*
+        for (Loop loop : g.loops) {
+            System.out.println("Loop #" + loop.id);
+            for (Loop loop1 : loop.inner) {
+                if (loop1.outer == loop) {
+                    System.out.println("Directly contains: #" + loop1.id);
+                }
+            }
+            for (Block b : loop.blocks) {
+                if (b.loop == loop) {
+                    System.out.println("Directly Contains block: #" + b.id);
+                }
+            }
+        }
+        */
     }
 }

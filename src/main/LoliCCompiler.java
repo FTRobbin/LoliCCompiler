@@ -5,6 +5,7 @@ import analysis.LivenessAnalysis;
 import analysis.StaticSingleAssignment;
 import ast.visitors.Visitor;
 import exception.*;
+import gen.advanced.AdvancedGen;
 import gen.basic.BasicGen;
 import gen.basic.RandomSpillGen;
 import irt.Prog;
@@ -46,6 +47,7 @@ public class LoliCCompiler {
     private JButton livenessButton;
     private JButton basicGenButton;
     private JButton randomSpillButton;
+    private JButton advancedGenButton;
     private JFrame frame;
 
     private static int cnt = 0;
@@ -309,11 +311,22 @@ public class LoliCCompiler {
                 textArea1.setText((new RandomSpillGen()).gen(IRroot).print());
             }
         });
+        advancedGenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mir.Program IRroot = getIR();
+                ControlFlowGraph.getCFG(IRroot);
+                ControlFlowGraph.calDominator(IRroot);
+                ControlFlowGraph.markNaturalLoops(IRroot);
+                LivenessAnalysis.cal(IRroot);
+                textArea1.setText((new AdvancedGen()).gen(IRroot).print());
+            }
+        });
     }
 
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("LoliCCompiler\u3000\uff5e\u7d05\u84ee\u6563\u83ef Ver\uff5e");
+        JFrame frame = new JFrame("LoliCCompiler\u3000\uff5e\u30af\u30ed\u30cd\u30b3 Ver\uff5e");
         frame.setContentPane(new LoliCCompiler().panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

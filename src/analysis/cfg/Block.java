@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Robbin Ni on 2015/5/9.
  */
-public class Block {
+public class Block implements Comparable<Block>{
 
     public int id;
     public List<MIRInst> insts;
@@ -26,6 +26,17 @@ public class Block {
 
     public void setNum(int id) {
         this.id = id;
+    }
+
+    @Override
+    public int compareTo(Block o) {
+        if (this.id < ((Block)o).id) {
+            return -1;
+        } else if (this.id == ((Block)o).id) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     public void addInst(MIRInst inst) {
@@ -88,4 +99,6 @@ public class Block {
         }
         return ret;
     }
+
+    public Loop loop = null;
 }

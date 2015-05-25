@@ -41,7 +41,11 @@ public class BinIntOp extends Op {
         Value src1 = gen.gen(cur, expr.exprs.get(0), list, mid);
         Value src2 = gen.gen(mid, expr.exprs.get(1), list, tcur);
         VarName dest = VarName.getTmp();
-        list.add((new AssignInst(this.op.IROp(), dest, src1, src2)).setLabel(tcur));
+        if (this.op.changeAble() && gen.hasMerit(src1) && !gen.hasMerit(src2)) {
+            list.add((new AssignInst(this.op.changedOp().IROp(), dest, src2, src1)).setLabel(tcur));
+        } else {
+            list.add((new AssignInst(this.op.IROp(), dest, src1, src2)).setLabel(tcur));
+        }
         return dest;
     }
 }
