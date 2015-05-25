@@ -32,10 +32,14 @@ public class UniIntOp extends Op {
     }
 
     @Override
-    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
+        if (ret == null) {
+            gen.gen(cur, expr.exprs.get(0), list, next, null);
+            return null;
+        }
         Label tcur = new Label(Label.DUMMY);
-        Value src1 = gen.gen(cur, expr.exprs.get(0), list, tcur);
-        VarName dest = VarName.getTmp();
+        Value src1 = gen.gen(cur, expr.exprs.get(0), list, tcur, VarName.getAbsTmp());
+        VarName dest = ret.isAbsTmp() ? VarName.getTmp() : ret;
         if (op.equals(UniIntFact.Ops.NOT)) {
             Label istr = new Label(Label.DUMMY);
             list.add((new IfInst(RelOp.beq, src1, new IntConst(0), istr)).setLabel(tcur));

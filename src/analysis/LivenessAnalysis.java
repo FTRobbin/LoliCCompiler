@@ -59,7 +59,9 @@ public class LivenessAnalysis {
             if (inst instanceof AssignInst) {
                 addDef(((AssignInst) inst).dest, b);
             } else if (inst instanceof CallInst)  {
-                addDef(((CallInst) inst).dest, b);
+                if (((CallInst)inst).dest != null) {
+                    addDef(((CallInst) inst).dest, b);
+                }
             } else if (inst instanceof MemInst) {
                 addDef(((MemInst) inst).var, b);
             } else if (inst instanceof RecvInst) {

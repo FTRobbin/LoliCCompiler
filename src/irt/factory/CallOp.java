@@ -41,14 +41,14 @@ public class CallOp extends Op {
     }
 
     @Override
-    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
         if (!(expr.retType instanceof RecordType)) {
             Label tcur = new Label(Label.DUMMY);
-            Value func = gen.gen(cur, expr.exprs.get(0), list, tcur);
+            Value func = gen.gen(cur, expr.exprs.get(0), list, tcur, VarName.getAbsTmp());
             LinkedList<Value> paras = new LinkedList<>();
             for (int i = 1; i < expr.exprs.size(); ++i) {
                 Label next1 = new Label(Label.DUMMY);
-                Value para = gen.gen(tcur, expr.exprs.get(i), list, next1);
+                Value para = gen.gen(tcur, expr.exprs.get(i), list, next1, VarName.getAbsTmp());
                 if (expr.exprs.get(i).retType instanceof RecordType) {
                     para = new DeRefVar(para, expr.exprs.get(i).retSize, IRTBuilder.getAlignSize(expr.exprs.get(i).retType), expr.exprs.get(i).retType instanceof ArrayType, expr.exprs.get(i).retType instanceof RecordType);
                 }
@@ -61,12 +61,17 @@ public class CallOp extends Op {
                 list.add((new ParaInst(val)).setLabel(tcur));
                 tcur = next1;
             }
-            VarName dest = VarName.getTmp();
-            list.add((new CallInst(dest, new IntConst(expr.exprs.size() - 1), func).setLabel(tcur)));
-            return dest;
+            if (ret == null) {
+                list.add((new CallInst(null, new IntConst(expr.exprs.size() - 1), func).setLabel(tcur)));
+                return null;
+            } else {
+                VarName dest = ret.isAbsTmp() ? VarName.getTmp() : ret;
+                list.add((new CallInst(dest, new IntConst(expr.exprs.size() - 1), func).setLabel(tcur)));
+                return dest;
+            }
         } else {
             Label tcur = new Label(Label.DUMMY);
-            Value func = gen.gen(cur, expr.exprs.get(0), list, tcur);
+            Value func = gen.gen(cur, expr.exprs.get(0), list, tcur, VarName.getAbsTmp());
             LinkedList<Value> paras = new LinkedList<>();
             for (int i = 0; i < expr.exprs.size(); ++i) {
                 Label next1 = new Label(Label.DUMMY);
@@ -82,7 +87,7 @@ public class CallOp extends Op {
                     //list.add((new ParaInst(para)).setLabel(next1));
                     paras.add(para);
                 } else {
-                    Value para = gen.gen(tcur, expr.exprs.get(i), list, next1);
+                    Value para = gen.gen(tcur, expr.exprs.get(i), list, next1, VarName.getAbsTmp());
                     if (expr.exprs.get(i).retType instanceof RecordType) {
                         para = new DeRefVar(para, expr.exprs.get(i).retSize, IRTBuilder.getAlignSize(expr.exprs.get(i).retType), expr.exprs.get(i).retType instanceof ArrayType, expr.exprs.get(i).retType instanceof RecordType);
                     }
@@ -96,9 +101,14 @@ public class CallOp extends Op {
                 list.add((new ParaInst(val)).setLabel(tcur));
                 tcur = next1;
             }
-            VarName dest = VarName.getTmp();
-            list.add((new CallInst(dest, new IntConst(expr.exprs.size()), func).setLabel(tcur)));
-            return dest;
+            if (ret == null) {
+                list.add((new CallInst(null, new IntConst(expr.exprs.size()), func).setLabel(tcur)));
+                return null;
+            } else {
+                VarName dest = ret.isAbsTmp() ? VarName.getTmp() : ret;
+                list.add((new CallInst(dest, new IntConst(expr.exprs.size()), func).setLabel(tcur)));
+                return dest;
+            }
         }
     }
 }

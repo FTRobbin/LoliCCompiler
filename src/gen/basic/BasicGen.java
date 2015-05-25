@@ -391,7 +391,9 @@ public class BasicGen implements CodeGen {
         }
         code.addText("\t\tadd\t$fp\t" + bak);
         releaseReg();
-        writeToMem(BasicReg.v0, inst.dest);
+        if (inst.dest != null) {
+            writeToMem(BasicReg.v0, inst.dest);
+        }
         releaseReg();
         code.addText("\t\tlw\t$ra\t" + -bak + "($fp)");
     }

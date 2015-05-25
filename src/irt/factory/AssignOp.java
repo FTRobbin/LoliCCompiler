@@ -34,11 +34,11 @@ public class AssignOp extends Op {
     }
 
     @Override
-    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
         Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
-        VarName dest = (VarName)gen.gen(cur, expr.exprs.get(0), list, mid);
-        Value src1 = gen.gen(mid, expr.exprs.get(1), list, tcur);
+        VarName dest = (VarName)gen.gen(cur, expr.exprs.get(0), list, mid, VarName.getAbsTmp());
         if (dest.isRet && dest.isStruct) {
+            Value src1 = gen.gen(mid, expr.exprs.get(1), list, tcur, VarName.getAbsTmp());
             VarName adrStr = gen.getEntry(Symbol.getnum("#ReturnStruct"));
             DeRefVar tmpStr = new DeRefVar(adrStr, dest.size, dest.align, dest.isArray, dest.isStruct);
             list.add((new AssignInst(ExprOp.asgr, tmpStr, src1)).setLabel(tcur));
@@ -46,11 +46,17 @@ public class AssignOp extends Op {
         } else {
             if (expr.retType instanceof RecordType) {
                 dest = new DeRefVar(dest, expr.retType.size, IRTBuilder.getAlignSize(expr.retType), expr.retType instanceof ArrayType, expr.retType instanceof RecordType);
+                Value src1 = gen.gen(mid, expr.exprs.get(1), list, tcur, VarName.getAbsTmp());
                 list.add((new AssignInst(ExprOp.asgr, dest, src1)).setLabel(tcur));
             } else {
-                list.add((new AssignInst(ExprOp.asg, dest, src1)).setLabel(tcur));
+                gen.gen(mid, expr.exprs.get(1), list, ret != null && !ret.isAbsTmp() ? tcur : next, dest);
             }
         }
-        return dest;
+        if (ret != null && !ret.isAbsTmp()) {
+            list.add(new AssignInst(ExprOp.asg, ret, dest).setLabel(tcur));
+            return ret;
+        } else {
+            return dest;
+        }
     }
 }

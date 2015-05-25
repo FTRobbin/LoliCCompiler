@@ -57,6 +57,15 @@ public class VarName extends Value {
         return new VarName(4, 4, false, false, false);
     }
 
+    public boolean isAbsTmp() {
+        return this.size == 0;
+    }
+
+    static public VarName getAbsTmp() {
+        --tmpCnt;
+        return new VarName(0, 0, false, false, false);
+    }
+
     static public VarName getStrTmp(int size, int align) {
         return new VarName(size, align, false, false, true);
     }

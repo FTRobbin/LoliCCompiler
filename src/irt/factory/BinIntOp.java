@@ -36,11 +36,17 @@ public class BinIntOp extends Op {
     }
 
     @Override
-    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
+        if (ret == null) {
+            Label mid = new Label(Label.DUMMY);
+            gen.gen(cur, expr.exprs.get(0), list, mid, null);
+            gen.gen(mid, expr.exprs.get(1), list, next, null);
+            return null;
+        }
         Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
-        Value src1 = gen.gen(cur, expr.exprs.get(0), list, mid);
-        Value src2 = gen.gen(mid, expr.exprs.get(1), list, tcur);
-        VarName dest = VarName.getTmp();
+        Value src1 = gen.gen(cur, expr.exprs.get(0), list, mid, VarName.getAbsTmp());
+        Value src2 = gen.gen(mid, expr.exprs.get(1), list, tcur, VarName.getAbsTmp());
+        VarName dest = ret.isAbsTmp() ? VarName.getTmp() : ret;
         if (this.op.changeAble() && gen.hasMerit(src1) && !gen.hasMerit(src2)) {
             list.add((new AssignInst(this.op.changedOp().IROp(), dest, src2, src1)).setLabel(tcur));
         } else {

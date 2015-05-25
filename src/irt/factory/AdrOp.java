@@ -23,10 +23,14 @@ public class AdrOp extends Op {
     }
 
     @Override
-    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName var) {
+        if (var == null) {
+            gen.gen(cur, expr.exprs.get(0), list, next, null);
+            return null;
+        }
         Label tcur = new Label(Label.DUMMY);
-        VarName src1 = (VarName)gen.gen(cur, expr.exprs.get(0), list, tcur);
-        VarName dest = VarName.getTmp();
+        VarName src1 = (VarName)gen.gen(cur, expr.exprs.get(0), list, tcur, VarName.getAbsTmp());
+        VarName dest = var.isAbsTmp() ? VarName.getTmp() : var;
         list.add((new AssignInst(ExprOp.adr, dest, src1)).setLabel(tcur));
         return dest;
     }

@@ -100,7 +100,9 @@ public class CodeSelect {
         if (inst instanceof AssignInst) {
             cur.remove(((AssignInst) inst).dest);
         } else if (inst instanceof CallInst)  {
-            cur.remove(((CallInst) inst).dest);
+            if (((CallInst) inst).dest != null) {
+                cur.remove(((CallInst) inst).dest);
+            }
         } else if (inst instanceof MemInst) {
             cur.remove(((MemInst) inst).var);
         } else if (inst instanceof RecvInst) {
@@ -548,18 +550,16 @@ public class CodeSelect {
             if (val instanceof VarName && ((VarName) val).isStruct) {
                 SPIMAddress src = getAddr((VarName)val),
                             dst = new SPIMAddress(SPIMImmediate.getImmi(paraAdr), SPIMRegID.$sp.getReg());
+                SPIMRegister reg = new SPIMInfRegister();
                 if (val.align == 1) {
-                    SPIMRegister reg = new SPIMInfRegister();
-                    if (inst.dest.align == 1) {
-                        for (int i = 0; i < inst.dest.size; ++i) {
-                            code.addText(new SPIMInst(SPIMOp.lb, reg, src.addImmi(i)));
-                            code.addText(new SPIMInst(SPIMOp.sb, reg, dst.addImmi(i)));
-                        }
-                    } else {
-                        for (int i = 0; i < inst.dest.size; i += 4) {
-                            code.addText(new SPIMInst(SPIMOp.lw, reg, src.addImmi(i)));
-                            code.addText(new SPIMInst(SPIMOp.sw, reg, dst.addImmi(i)));
-                        }
+                    for (int i = 0; i < val.size; ++i) {
+                        code.addText(new SPIMInst(SPIMOp.lb, reg, src.addImmi(i)));
+                        code.addText(new SPIMInst(SPIMOp.sb, reg, dst.addImmi(i)));
+                    }
+                } else {
+                    for (int i = 0; i < val.size; i += 4) {
+                        code.addText(new SPIMInst(SPIMOp.lw, reg, src.addImmi(i)));
+                        code.addText(new SPIMInst(SPIMOp.sw, reg, dst.addImmi(i)));
                     }
                 }
             } else {
@@ -640,7 +640,9 @@ public class CodeSelect {
                 if (inst.func.name.equals("___malloc")) {
                     loadArguSTL(1);
                 }
-                writeRegTo(inst.dest, SPIMRegID.$v0.getReg());
+                if (inst.dest != null) {
+                    writeRegTo(inst.dest, SPIMRegID.$v0.getReg());
+                }
             }
         } else {
             saveCall();
@@ -654,7 +656,9 @@ public class CodeSelect {
             code.addText(new SPIMInst(SPIMOp.add, SPIMRegID.$sp.getReg(), SPIMImmediate.getImmi(raAdr)));
             code.addText(new SPIMInst(SPIMOp.lw, SPIMRegID.$ra.getReg(), new SPIMAddress(SPIMImmediate.getImmi(-raAdr), SPIMRegID.$sp.getReg())));
             loadArgu();
-            writeRegTo(inst.dest, SPIMRegID.$v0.getReg());
+            if (inst.dest != null) {
+                writeRegTo(inst.dest, SPIMRegID.$v0.getReg());
+            }
         }
     }
 

@@ -34,14 +34,21 @@ public class VariOp extends Op{
     }
 
     @Override
-    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
         int id = (Integer)this.expr.consts.get(0);
         VarName var = gen.getEntry(id);
         if (gen.isNested(id)) {
             list.add((new TrampInst(var)).setLabel(cur));
-        } else {
+        } else if (ret == null || ret.isAbsTmp()) {
             list.add((new EmptyInst()).setLabel(cur));
         }
-        return var;
+        if (ret == null) {
+            return null;
+        } else if (ret.isAbsTmp()) {
+            return var;
+        } else {
+            list.add(new AssignInst(ExprOp.asg, ret, var).setLabel(cur));
+            return ret;
+        }
     }
 }

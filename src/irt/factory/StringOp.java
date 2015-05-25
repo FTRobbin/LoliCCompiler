@@ -34,10 +34,17 @@ public class StringOp extends Op{
     }
 
     @Override
-    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
-        if (!cur.isDummy()) {
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
+        if (!cur.isDummy() && (ret == null || ret.isAbsTmp())) {
             list.add((new EmptyInst()).setLabel(cur));
         }
-        return new StringConst((String) this.expr.consts.get(0));
+        if (ret == null) {
+            return null;
+        } else if (ret.isAbsTmp()) {
+            return new StringConst((String) this.expr.consts.get(0));
+        } else {
+            list.add(new AssignInst(ExprOp.asg, ret, new StringConst((String) this.expr.consts.get(0))).setLabel(cur));
+            return ret;
+        }
     }
 }

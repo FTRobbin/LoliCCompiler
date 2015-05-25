@@ -27,13 +27,18 @@ public class SubPtrIgnOp extends Op {
     }
 
     @Override
-    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
         Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
-        VarName src1 = (VarName)gen.gen(cur, expr.exprs.get(0), list, mid);
-        Value src2 = gen.gen(mid, expr.exprs.get(1), list, tcur);
+        VarName src1 = (VarName)gen.gen(cur, expr.exprs.get(0), list, mid, VarName.getAbsTmp());
+        Value src2 = gen.gen(mid, expr.exprs.get(1), list, tcur, VarName.getAbsTmp());
         VarName tmp = VarName.getTmp();
         list.add((new AssignInst(ExprOp.sub, tmp, src1, src2)).setLabel(tcur));
         list.add((new AssignInst(ExprOp.div, src1, tmp, new IntConst(size))).setLabel(tcur));
-        return src1;
+        if (ret != null && !ret.isAbsTmp()) {
+            list.add(new AssignInst(ExprOp.asg, ret, src1));
+            return ret;
+        } else {
+            return src1;
+        }
     }
 }

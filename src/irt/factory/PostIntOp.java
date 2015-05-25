@@ -29,12 +29,17 @@ public class PostIntOp extends Op {
     }
 
     @Override
-    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
         Label tcur = new Label(Label.DUMMY);
-        VarName src1 = (VarName)gen.gen(cur, expr.exprs.get(0), list, tcur);
-        VarName dest = VarName.getTmp();
-        list.add((new AssignInst(ExprOp.asg, dest, src1)).setLabel(tcur));
-        list.add(new AssignInst(delta < 0 ? ExprOp.sub : ExprOp.add, src1, src1, new IntConst(Math.abs(delta))));
-        return dest;
+        VarName src1 = (VarName)gen.gen(cur, expr.exprs.get(0), list, tcur, VarName.getAbsTmp());
+        if (ret == null) {
+            list.add(new AssignInst(delta < 0 ? ExprOp.sub : ExprOp.add, src1, src1, new IntConst(Math.abs(delta))).setLabel(tcur));
+            return null;
+        } else {
+            VarName dest = ret.isAbsTmp() ? VarName.getTmp() : ret;
+            list.add((new AssignInst(ExprOp.asg, dest, src1)).setLabel(tcur));
+            list.add(new AssignInst(delta < 0 ? ExprOp.sub : ExprOp.add, src1, src1, new IntConst(Math.abs(delta))));
+            return dest;
+        }
     }
 }

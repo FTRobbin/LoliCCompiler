@@ -249,18 +249,16 @@ public class MIRGen {
                 for (Pair pair : list1) {
                     Label ccur = new Label(Label.DUMMY),
                           cnxt = new Label(Label.DUMMY);
-                    Value tmp = gen(ccur, pair.expr, list, cnxt);
                     VarName tmp2 = VarName.getTmp();
                     list.add((new AssignInst(ExprOp.add, tmp2, var, new IntConst(pair.id))).setLabel(cnxt));
-                    list.add(new AssignInst(ExprOp.asg, new DeRefVar(tmp2, pair.expr.retSize, IRTBuilder.getAlignSize(pair.expr.retType), pair.expr.retType instanceof ArrayType, pair.expr.retType instanceof RecordType), tmp));
+                    Value tmp = gen(ccur, pair.expr, list, cnxt, new DeRefVar(tmp2, pair.expr.retSize, IRTBuilder.getAlignSize(pair.expr.retType), pair.expr.retType instanceof ArrayType, pair.expr.retType instanceof RecordType));
                 }
             } else {
                 if (list1.size() > 1 || list1.get(0).id != 0) {
                     throw new InternalError("Multi-initialize a non-array.\n");
                 }
                 Label nxt = new Label(Label.DUMMY);
-                Value tmp = gen(new Label(Label.DUMMY), list1.get(0).expr, list, nxt);
-                list.add((new AssignInst(ExprOp.asg, var, tmp)).setLabel(nxt));
+                Value tmp = gen(new Label(Label.DUMMY), list1.get(0).expr, list, nxt, var);
             }
         }
         return list;
@@ -288,7 +286,7 @@ public class MIRGen {
 
     public List<MIRInst> gen(Label cur, ExSt st, Label next) {
         List<MIRInst> list = new LinkedList<>();
-        gen(cur, st.expr, list, next);
+        gen(cur, st.expr, list, next, null);
         return list;
     }
 
@@ -338,14 +336,22 @@ public class MIRGen {
             Label trjp = new Label(Label.DUMMY), iftr = new Label(Label.FALL | Label.DUMMY), iffl = new Label(Label.DUMMY);
             list.addAll(genRel(cur, st.expr, iftr, iffl));
             list.addAll(genStat(iftr, st.tr, trjp));
+            boolean flag = false;
+            if (next.isFall()) {
+                flag = true;
+                next.st ^= Label.FALL;
+            }
             list.add((new GotoInst(next)).setLabel(trjp));
+            if (flag) {
+                next.st ^= Label.FALL;
+            }
             list.addAll(genStat(iffl, st.fl, next));
         }
         return list;
     }
 
-    public Value gen(Label cur, Expr expr, List<MIRInst> list, Label next) {
-        return expr.op.genIR(cur, list, next, this);
+    public Value gen(Label cur, Expr expr, List<MIRInst> list, Label next, VarName ret) {
+        return expr.op.genIR(cur, list, next, this, ret);
     }
 
     public List<MIRInst> genRel(Label cur, Expr expr, Label trLa, Label faLa) {
@@ -375,7 +381,6 @@ public class MIRGen {
                 fafa = faLa;
             }
             if (rev) {
-                op = op.changedOp();
                 switch (op.ordinal()) {
                     case 0 : {
                         //LESS
@@ -413,8 +418,8 @@ public class MIRGen {
                 }
             }
             Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
-            Value src1 = gen(cur, expr.exprs.get(0), list, mid);
-            Value src2 = gen(mid, expr.exprs.get(1), list, tcur);
+            Value src1 = gen(cur, expr.exprs.get(0), list, mid, VarName.getAbsTmp());
+            Value src2 = gen(mid, expr.exprs.get(1), list, tcur, VarName.getAbsTmp());
             if (op.changeAble() && hasMerit(src1) && !hasMerit(src2)) {
                 list.add((new IfInst((lastOpb.op = op.changedOp()).IRRelOp(), src2, src1, fatr)).setLabel(tcur));
             } else {
@@ -426,7 +431,7 @@ public class MIRGen {
         } else if (lastOp instanceof SPRelOp) {
             ((SPRelOp)expr.op).genIfIR(cur, list, trLa, faLa, this, rev);
         } else {
-            Value ret = gen(cur, expr, list, branch);
+            Value ret = gen(cur, expr, list, branch, VarName.getAbsTmp());
             if (trLa.isFall()) {
                 list.add((new IfInst(rev ? RelOp.bne : RelOp.beq, ret, new IntConst(0), faLa)).setLabel(branch));
             } else if (faLa.isFall()) {

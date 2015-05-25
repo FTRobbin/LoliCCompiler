@@ -54,23 +54,68 @@ public class SPRelOp extends Op {
     }
 
     @Override
-    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
+        if (ret == null) {
+            int tag = this.op; //OR = 1 AND = 0
+            Label br2 = new Label(Label.FALL | Label.DUMMY);
+            if (tag == 1) {
+                boolean flag = false;
+                if (next.isFall()) {
+                    flag = true;
+                    next.st ^= Label.FALL;
+                }
+                list.addAll(gen.genRel(cur, expr.exprs.get(0), next, br2));
+                if (flag) {
+                    next.st ^= Label.FALL;
+                }
+                gen.gen(br2, expr.exprs.get(1), list, next, null);
+            } else {
+                boolean flag = false;
+                if (next.isFall()) {
+                    flag = true;
+                    next.st ^= Label.FALL;
+                }
+                list.addAll(gen.genRel(cur, expr.exprs.get(0), br2, next));
+                if (flag) {
+                    next.st ^= Label.FALL;
+                }
+                gen.gen(br2, expr.exprs.get(1), list, next, null);
+            }
+            return null;
+        }
         int tag = this.op; //OR = 1 AND = 0
-        Label br1 = new Label(Label.DUMMY), br2 = new Label(Label.FALL | Label.DUMMY), istr = new Label(Label.DUMMY), isfl = new Label(Label.FALL | Label.DUMMY);
+        Label br2 = new Label(Label.FALL | Label.DUMMY), istr = new Label(Label.DUMMY), isfl = new Label(Label.FALL | Label.DUMMY);
         VarName dest = null;
         if (tag == 1) {
             list.addAll(gen.genRel(cur, expr.exprs.get(0), istr, br2));
             list.addAll(gen.genRel(br2, expr.exprs.get(1), istr, isfl));
-            dest = VarName.getTmp();
+            dest = ret.isAbsTmp() ? VarName.getTmp() : ret;
             list.add((new AssignInst(ExprOp.asg, dest, new IntConst(0))).setLabel(isfl));
+            boolean flag = false;
+            if (next.isFall()) {
+                flag = true;
+                next.st ^= Label.FALL;
+            }
             list.add((new GotoInst(next)));
+            if (flag) {
+                next.st ^= Label.FALL;
+            }
             list.add((new AssignInst(ExprOp.asg, dest, new IntConst(1))).setLabel(istr));
         } else {
             list.addAll(gen.genRel(cur, expr.exprs.get(0), br2, istr));
             list.addAll(gen.genRel(br2, expr.exprs.get(1), isfl, istr));
-            dest = VarName.getTmp();
+            dest = ret.isAbsTmp() ? VarName.getTmp() : ret;
             list.add((new AssignInst(ExprOp.asg, dest, new IntConst(1))).setLabel(isfl));
+            boolean flag = false;
+            if (next.isFall()) {
+                flag = true;
+                next.st ^= Label.FALL;
+            }
+            System.out.println("HIHI");
             list.add((new GotoInst(next)));
+            if (flag) {
+                next.st ^= Label.FALL;
+            }
             list.add((new AssignInst(ExprOp.asg, dest, new IntConst(0))).setLabel(istr));
         }
         return dest;

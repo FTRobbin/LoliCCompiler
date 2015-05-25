@@ -28,11 +28,11 @@ public class CastItoBOp extends Op{
     }
 
     @Override
-    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
-        Label tcur = new Label(Label.DUMMY);
-        Value src1 = gen.gen(cur, expr.exprs.get(0), list, tcur);
-        VarName dest = VarName.getTmp();
-        list.add((new AssignInst(ExprOp.asg, dest, src1)).setLabel(tcur));
-        return dest;
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
+        if (ret == null) {
+            return null;
+        }
+        gen.gen(cur, expr.exprs.get(0), list, next, ret);
+        return ret;
     }
 }

@@ -18,6 +18,10 @@ public class CallInst extends MIRInst {
     }
 
     public List<String> print() {
-        return super.print(dest.name + " = " + "call " + func.name + " " + num.name);
+        if (dest == null) {
+            return super.print("call " + func.name + " " + num.name);
+        } else {
+            return super.print(dest.name + " = " + "call " + func.name + " " + num.name);
+        }
     }
 }

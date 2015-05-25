@@ -14,5 +14,5 @@ public abstract class Op {
 
     public abstract int interpret(Interpreter v);
 
-    public abstract Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen);
+    public abstract Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret);
 }

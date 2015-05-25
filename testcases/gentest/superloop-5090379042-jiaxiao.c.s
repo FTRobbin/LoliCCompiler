@@ -15,248 +15,248 @@ _str0:		.asciiz	"%d\n"
 	.text
 	.globl main
 main:
-		li	$t0	6
-		sw	$t0	N_0
-		li	$t0	99
-		sw	$t0	h_0
-		li	$t0	100
-		sw	$t0	i_0
-		li	$t0	101
-		sw	$t0	j_0
-		li	$t0	102
-		sw	$t0	k_0
-		li	$t0	0
-		sw	$t0	total_0
+		li	$t2	6
+		sw	$t2	N_0
+		li	$t2	99
+		sw	$t2	h_0
+		li	$t2	100
+		sw	$t2	i_0
+		li	$t2	101
+		sw	$t2	j_0
+		li	$t2	102
+		sw	$t2	k_0
+		li	$t2	0
+		sw	$t2	total_0
 		move	$fp	$sp
 		j	__main
 __main:
-		li	$t0	1
-		sw	$t0	-4($fp)
+		li	$t2	1
+		sw	$t2	-4($fp)
 _L2:
-		lw	$t0	-4($fp)
-		lw	$t1	N_0
-		bgt	$t0	$t1	_L3
-		li	$t0	1
-		sw	$t0	-8($fp)
+		lw	$t2	-4($fp)
+		lw	$t3	N_0
+		bgt	$t2	$t3	_L3
+		li	$t2	1
+		sw	$t2	-8($fp)
 _L4:
-		lw	$t0	-8($fp)
-		lw	$t1	N_0
-		bgt	$t0	$t1	_L5
-		li	$t0	1
-		sw	$t0	-12($fp)
+		lw	$t2	-8($fp)
+		lw	$t3	N_0
+		bgt	$t2	$t3	_L5
+		li	$t2	1
+		sw	$t2	-12($fp)
 _L6:
-		lw	$t0	-12($fp)
-		lw	$t1	N_0
-		bgt	$t0	$t1	_L7
-		li	$t0	1
-		sw	$t0	-16($fp)
+		lw	$t2	-12($fp)
+		lw	$t3	N_0
+		bgt	$t2	$t3	_L7
+		li	$t2	1
+		sw	$t2	-16($fp)
 _L8:
-		lw	$t0	-16($fp)
-		lw	$t1	N_0
-		bgt	$t0	$t1	_L9
-		li	$t0	1
-		sw	$t0	-20($fp)
+		lw	$t2	-16($fp)
+		lw	$t3	N_0
+		bgt	$t2	$t3	_L9
+		li	$t2	1
+		sw	$t2	-20($fp)
 _L10:
-		lw	$t0	-20($fp)
-		lw	$t1	N_0
-		bgt	$t0	$t1	_L11
-		li	$t0	1
-		sw	$t0	-24($fp)
-_L12:
-		lw	$t0	-24($fp)
-		lw	$t1	N_0
-		bgt	$t0	$t1	_L13
-		lw	$t0	-4($fp)
-		lw	$t1	-8($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-4($fp)
-		lw	$t1	-12($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-4($fp)
-		lw	$t1	-16($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-4($fp)
-		lw	$t1	-20($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-4($fp)
-		lw	$t1	-24($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-4($fp)
-		lw	$t1	h_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-4($fp)
-		lw	$t1	i_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-4($fp)
-		lw	$t1	j_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-4($fp)
-		lw	$t1	k_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-8($fp)
-		lw	$t1	-12($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-8($fp)
-		lw	$t1	-16($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-8($fp)
-		lw	$t1	-20($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-8($fp)
-		lw	$t1	-24($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-8($fp)
-		lw	$t1	h_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-8($fp)
-		lw	$t1	i_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-8($fp)
-		lw	$t1	j_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-8($fp)
-		lw	$t1	k_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-12($fp)
-		lw	$t1	-16($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-12($fp)
-		lw	$t1	-20($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-12($fp)
-		lw	$t1	-24($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-12($fp)
-		lw	$t1	h_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-12($fp)
-		lw	$t1	i_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-12($fp)
-		lw	$t1	j_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-12($fp)
-		lw	$t1	k_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-16($fp)
-		lw	$t1	-20($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-16($fp)
-		lw	$t1	-24($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-16($fp)
-		lw	$t1	h_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-16($fp)
-		lw	$t1	i_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-16($fp)
-		lw	$t1	j_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-16($fp)
-		lw	$t1	k_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-20($fp)
-		lw	$t1	-24($fp)
-		beq	$t0	$t1	_L14
-		lw	$t0	-20($fp)
-		lw	$t1	h_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-20($fp)
-		lw	$t1	i_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-20($fp)
-		lw	$t1	j_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-20($fp)
-		lw	$t1	k_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-24($fp)
-		lw	$t1	h_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-24($fp)
-		lw	$t1	i_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-24($fp)
-		lw	$t1	j_0
-		beq	$t0	$t1	_L14
-		lw	$t0	-24($fp)
-		lw	$t1	k_0
-		beq	$t0	$t1	_L14
-		lw	$t0	i_0
-		lw	$t1	j_0
-		beq	$t0	$t1	_L14
-		lw	$t0	h_0
-		lw	$t1	k_0
-		beq	$t0	$t1	_L14
-		lw	$t0	total_0
-		sw	$t0	-28($fp)
-		lw	$t0	total_0
-		li	$t1	1
-		add	$t2	$t0	$t1
-		sw	$t2	total_0
-_L14:
-		lw	$t0	-24($fp)
-		sw	$t0	-32($fp)
-		lw	$t0	-24($fp)
-		li	$t1	1
-		add	$t2	$t0	$t1
+		lw	$t2	-20($fp)
+		lw	$t3	N_0
+		bgt	$t2	$t3	_L11
+		li	$t2	1
 		sw	$t2	-24($fp)
+_L12:
+		lw	$t2	-24($fp)
+		lw	$t3	N_0
+		bgt	$t2	$t3	_L13
+		lw	$t2	-4($fp)
+		lw	$t3	-8($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-4($fp)
+		lw	$t3	-12($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-4($fp)
+		lw	$t3	-16($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-4($fp)
+		lw	$t3	-20($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-4($fp)
+		lw	$t3	-24($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-4($fp)
+		lw	$t3	h_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-4($fp)
+		lw	$t3	i_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-4($fp)
+		lw	$t3	j_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-4($fp)
+		lw	$t3	k_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-8($fp)
+		lw	$t3	-12($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-8($fp)
+		lw	$t3	-16($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-8($fp)
+		lw	$t3	-20($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-8($fp)
+		lw	$t3	-24($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-8($fp)
+		lw	$t3	h_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-8($fp)
+		lw	$t3	i_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-8($fp)
+		lw	$t3	j_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-8($fp)
+		lw	$t3	k_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-12($fp)
+		lw	$t3	-16($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-12($fp)
+		lw	$t3	-20($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-12($fp)
+		lw	$t3	-24($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-12($fp)
+		lw	$t3	h_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-12($fp)
+		lw	$t3	i_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-12($fp)
+		lw	$t3	j_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-12($fp)
+		lw	$t3	k_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-16($fp)
+		lw	$t3	-20($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-16($fp)
+		lw	$t3	-24($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-16($fp)
+		lw	$t3	h_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-16($fp)
+		lw	$t3	i_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-16($fp)
+		lw	$t3	j_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-16($fp)
+		lw	$t3	k_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-20($fp)
+		lw	$t3	-24($fp)
+		bne	$t2	$t3	_L14
+		lw	$t2	-20($fp)
+		lw	$t3	h_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-20($fp)
+		lw	$t3	i_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-20($fp)
+		lw	$t3	j_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-20($fp)
+		lw	$t3	k_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-24($fp)
+		lw	$t3	h_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-24($fp)
+		lw	$t3	i_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-24($fp)
+		lw	$t3	j_0
+		bne	$t2	$t3	_L14
+		lw	$t2	-24($fp)
+		lw	$t3	k_0
+		bne	$t2	$t3	_L14
+		lw	$t2	i_0
+		lw	$t3	j_0
+		bne	$t2	$t3	_L14
+		lw	$t2	h_0
+		lw	$t3	k_0
+		bne	$t2	$t3	_L14
+		lw	$t2	total_0
+		sw	$t2	-28($fp)
+		lw	$t2	total_0
+		li	$t3	1
+		add	$t4	$t2	$t3
+		sw	$t4	total_0
+_L14:
+		lw	$t2	-24($fp)
+		sw	$t2	-32($fp)
+		lw	$t2	-24($fp)
+		li	$t3	1
+		add	$t4	$t2	$t3
+		sw	$t4	-24($fp)
 		j	_L12
 _L13:
-		lw	$t0	-20($fp)
-		sw	$t0	-36($fp)
-		lw	$t0	-20($fp)
-		li	$t1	1
-		add	$t2	$t0	$t1
-		sw	$t2	-20($fp)
+		lw	$t2	-20($fp)
+		sw	$t2	-36($fp)
+		lw	$t2	-20($fp)
+		li	$t3	1
+		add	$t4	$t2	$t3
+		sw	$t4	-20($fp)
 		j	_L10
 _L11:
-		lw	$t0	-16($fp)
-		sw	$t0	-40($fp)
-		lw	$t0	-16($fp)
-		li	$t1	1
-		add	$t2	$t0	$t1
-		sw	$t2	-16($fp)
+		lw	$t2	-16($fp)
+		sw	$t2	-40($fp)
+		lw	$t2	-16($fp)
+		li	$t3	1
+		add	$t4	$t2	$t3
+		sw	$t4	-16($fp)
 		j	_L8
 _L9:
-		lw	$t0	-12($fp)
-		sw	$t0	-44($fp)
-		lw	$t0	-12($fp)
-		li	$t1	1
-		add	$t2	$t0	$t1
-		sw	$t2	-12($fp)
+		lw	$t2	-12($fp)
+		sw	$t2	-44($fp)
+		lw	$t2	-12($fp)
+		li	$t3	1
+		add	$t4	$t2	$t3
+		sw	$t4	-12($fp)
 		j	_L6
 _L7:
-		lw	$t0	-8($fp)
-		sw	$t0	-48($fp)
-		lw	$t0	-8($fp)
-		li	$t1	1
-		add	$t2	$t0	$t1
-		sw	$t2	-8($fp)
+		lw	$t2	-8($fp)
+		sw	$t2	-48($fp)
+		lw	$t2	-8($fp)
+		li	$t3	1
+		add	$t4	$t2	$t3
+		sw	$t4	-8($fp)
 		j	_L4
 _L5:
-		lw	$t0	-4($fp)
-		sw	$t0	-52($fp)
-		lw	$t0	-4($fp)
-		li	$t1	1
-		add	$t2	$t0	$t1
-		sw	$t2	-4($fp)
+		lw	$t2	-4($fp)
+		sw	$t2	-52($fp)
+		lw	$t2	-4($fp)
+		li	$t3	1
+		add	$t4	$t2	$t3
+		sw	$t4	-4($fp)
 		j	_L2
 _L3:
 		sw	$ra	-56($fp)
-		la	$t0	_str0
-		sw	$t0	-60($fp)
-		lw	$t0	total_0
-		sw	$t0	-64($fp)
+		la	$t2	_str0
+		sw	$t2	-60($fp)
+		lw	$t2	total_0
+		sw	$t2	-64($fp)
 		sub	$fp	56
-		la	$t0	___printf
-		jal	$t0
+		jal	___printf
 		add	$fp	56
 		sw	$v0	-68($fp)
 		lw	$ra	-56($fp)
-		li	$t0	0
-		move	$v0	$t0
+		li	$t2	0
+		move	$v0	$t2
+		jr	$ra
 		jr	$ra
 		jr	$ra
 ___printf:

@@ -32,13 +32,19 @@ public class BinPtrrOp extends Op {
     }
 
     @Override
-    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen) {
+    public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
+        if (ret == null) {
+            Label mid = new Label(Label.DUMMY);
+            gen.gen(cur, expr.exprs.get(0), list, mid, null);
+            gen.gen(mid, expr.exprs.get(1), list, next, null);
+            return null;
+        }
         Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
-        Value src1 = gen.gen(cur, expr.exprs.get(0), list, mid);
-        Value src2 = gen.gen(mid, expr.exprs.get(1), list, tcur);
+        Value src1 = gen.gen(cur, expr.exprs.get(0), list, mid, VarName.getAbsTmp());
+        Value src2 = gen.gen(mid, expr.exprs.get(1), list, tcur, VarName.getAbsTmp());
         VarName tmp = VarName.getTmp();
         list.add((new AssignInst(ExprOp.mul, tmp, src1, new IntConst(((PointerType)(expr.exprs.get(1).retType)).baseType.size))).setLabel(tcur));
-        VarName dest = VarName.getTmp();
+        VarName dest = ret.isAbsTmp() ? VarName.getTmp() : ret;
         list.add(new AssignInst(this.op.IROp(), dest, tmp, src2));
         return dest;
     }
