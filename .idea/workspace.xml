@@ -10,9 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd301699-7dc0-43f0-8c70-45cea3c704d9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/CastItoBOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/CastItoBOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/gentest/num1-5110379024-wuhang.c.s" afterPath="$PROJECT_DIR$/testcases/gentest/num1-5110379024-wuhang.c.s" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/UniIncIntOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/UniIncIntOp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="loliccompiler.iws" />
@@ -35,16 +33,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BasicGen.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gen/basic/BasicGen.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="234" column="35" selection-start-line="234" selection-start-column="35" selection-end-line="234" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="VarName.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mir/VarName.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -68,16 +56,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SubPtrOp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irt/factory/SubPtrOp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CallOp.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/irt/factory/CallOp.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -88,11 +66,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CastItoBOp.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CastItoBOp.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/irt/factory/CastItoBOp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.77011496">
-              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UniIncFact.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irt/factory/UniIncFact.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UniIncIntOp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irt/factory/UniIncIntOp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="36" column="58" selection-start-line="36" selection-start-column="58" selection-end-line="36" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PostIntOp.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/irt/factory/PostIntOp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6059113">
+              <caret line="38" column="67" selection-start-line="38" selection-start-column="67" selection-end-line="38" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -123,16 +131,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="32" column="42" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ControlFlowGraph.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/analysis/ControlFlowGraph.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -198,11 +196,9 @@
         <option value="$PROJECT_DIR$/src/irt/factory/IntOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/PointOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/PostByteOp.java" />
-        <option value="$PROJECT_DIR$/src/irt/factory/PostIntOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/RecordOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/SubPtrIgnOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/UniIncByteOp.java" />
-        <option value="$PROJECT_DIR$/src/irt/factory/UniIncIntOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/UniIntOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/VariOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/RefOp.java" />
@@ -219,6 +215,8 @@
         <option value="$PROJECT_DIR$/src/irt/factory/CallOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/CastItoBOp.java" />
+        <option value="$PROJECT_DIR$/src/irt/factory/UniIncIntOp.java" />
+        <option value="$PROJECT_DIR$/src/irt/factory/PostIntOp.java" />
       </list>
     </option>
   </component>
@@ -295,6 +293,64 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="loliccompiler" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="loliccompiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="loliccompiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="loliccompiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="loliccompiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="loliccompiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="irt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="loliccompiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="loliccompiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="irt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="factory" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -586,12 +642,6 @@
       <option name="number" value="Default" />
       <updated>1428288077013</updated>
     </task>
-    <task id="LOCAL-00019" summary="The first version of GUI implemented.">
-      <created>1428851844681</created>
-      <option name="number" value="00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1428851844681</updated>
-    </task>
     <task id="LOCAL-00020" summary="typedef is now fully supported">
       <created>1429111872570</created>
       <option name="number" value="00020" />
@@ -880,7 +930,13 @@
       <option name="project" value="LOCAL" />
       <updated>1432564890160</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="IR small improvement. Bug fixes.">
+      <created>1432565457347</created>
+      <option name="number" value="00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1432565457347</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TodoView">
@@ -934,7 +990,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="INCLUDE_TEXT_INTO_SHELF" value="true" />
-    <MESSAGE value="A little more of Phase 2 is now completed." />
     <MESSAGE value="Minor fixes." />
     <MESSAGE value="Phase 2 : Now Passed some trivial tests." />
     <MESSAGE value="Major bug fix in the type system." />
@@ -959,7 +1014,8 @@
     <MESSAGE value="Trivial changes." />
     <MESSAGE value="Bug fixes." />
     <MESSAGE value="IR small improvement." />
-    <option name="LAST_COMMIT_MESSAGE" value="IR small improvement." />
+    <MESSAGE value="IR small improvement. Bug fixes." />
+    <option name="LAST_COMMIT_MESSAGE" value="IR small improvement. Bug fixes." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -995,13 +1051,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/analysis/trivial/GotoGoto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30560273">
-          <caret line="9" column="30" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gen/spim/SPIMLabel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20134228">
@@ -1214,14 +1263,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irt/factory/PostIntOp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="88" selection-start-line="31" selection-start-column="88" selection-end-line="31" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irt/factory/PointOp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1258,14 +1299,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irt/factory/UniIncIntOp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="88" selection-start-line="31" selection-start-column="88" selection-end-line="31" selection-end-column="88" />
           <folding />
         </state>
       </provider>
@@ -1403,8 +1436,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/irt/factory/CastItoBOp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77011496">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irt/factory/UniIncFact.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irt/factory/UniIncIntOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="58" selection-start-line="36" selection-start-column="58" selection-end-line="36" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irt/factory/PostIntOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6059113">
+          <caret line="38" column="67" selection-start-line="38" selection-start-column="67" selection-end-line="38" selection-end-column="67" />
           <folding />
         </state>
       </provider>
