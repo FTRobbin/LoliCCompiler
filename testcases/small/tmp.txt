@@ -1,0 +1,14 @@
+\\Program
+__global:
+begin
+return
+end
+__main:
+begin
+a_1 <- MEM[40]
+_t0 = 4 * 4
+_t1 = a_1 + _t0
+_t2 = 6 * 4
+_t3 = _t1 + _t2
+*_t3 = 1
+end
