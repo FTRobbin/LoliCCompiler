@@ -376,12 +376,47 @@ public class MIRGen {
             }
             if (rev) {
                 op = op.changedOp();
+                switch (op.ordinal()) {
+                    case 0 : {
+                        //LESS
+                        lastOpb.op = op = BinIntFact.Ops.GE_OP;
+                        break;
+                    }
+                    case 1 : {
+                        //GREATER
+                        lastOpb.op = op = BinIntFact.Ops.LE_OP;
+                        break;
+                    }
+                    case 2 : {
+                        //LE_OP
+                        lastOpb.op = op = BinIntFact.Ops.GREATER;
+                        break;
+                    }
+                    case 3 : {
+                        //GE_OP
+                        lastOpb.op = op = BinIntFact.Ops.LESS;
+                        break;
+                    }
+                    case 4 : {
+                        //EQ_OP
+                        lastOpb.op = op = BinIntFact.Ops.NE_OP;
+                        break;
+                    }
+                    case 5 : {
+                        //NE_OP
+                        lastOpb.op = op = BinIntFact.Ops.EQ_OP;
+                        break;
+                    }
+                    default: {
+                        throw new InternalError("Unknown relation op.\n");
+                    }
+                }
             }
             Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
             Value src1 = gen(cur, expr.exprs.get(0), list, mid);
             Value src2 = gen(mid, expr.exprs.get(1), list, tcur);
             if (op.changeAble() && hasMerit(src1) && !hasMerit(src2)) {
-                list.add((new IfInst(op.changedOp().IRRelOp(), src2, src1, fatr)).setLabel(tcur));
+                list.add((new IfInst((lastOpb.op = op.changedOp()).IRRelOp(), src2, src1, fatr)).setLabel(tcur));
             } else {
                 list.add((new IfInst(op.IRRelOp(), src1, src2, fatr)).setLabel(tcur));
             }
@@ -397,7 +432,7 @@ public class MIRGen {
             } else if (faLa.isFall()) {
                 list.add((new IfInst(rev ? RelOp.beq : RelOp.bne, ret, new IntConst(0), trLa)).setLabel(branch));
             } else {
-                list.add((new IfInst(rev ? RelOp.bne :RelOp.beq, ret, new IntConst(0), faLa)).setLabel(branch));
+                list.add((new IfInst(rev ? RelOp.bne : RelOp.beq, ret, new IntConst(0), faLa)).setLabel(branch));
                 list.add((new GotoInst(trLa)));
             }
         }
