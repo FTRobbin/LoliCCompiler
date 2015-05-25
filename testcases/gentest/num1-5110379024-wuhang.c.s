@@ -7,80 +7,55 @@ main:
 		move	$fp	$sp
 		j	__main
 __main:
-		li	$t0	51
-		sw	$t0	-4($fp)
-		li	$t0	17658
-		sw	$t0	-8($fp)
-		li	$t0	11
-		sw	$t0	-16($fp)
-		lw	$t0	-16($fp)
-		sw	$t0	-12($fp)
-		li	$t0	8
-		sw	$t0	-20($fp)
-		li	$t0	10
-		sw	$t0	-24($fp)
-		li	$t0	40
-		sw	$t0	-32($fp)
-		lw	$t0	-32($fp)
-		sb	$t0	-25($fp)
-		lb	$t0	-25($fp)
-		sw	$t0	-36($fp)
-		lw	$t0	-24($fp)
-		sw	$t0	-40($fp)
-		lw	$t0	-40($fp)
-		sw	$t0	-44($fp)
-		lw	$t0	-36($fp)
-		lw	$t1	-44($fp)
-		add	$t2	$t0	$t1
+		li	$t2	51
+		sw	$t2	-4($fp)
+		li	$t2	17658
+		sw	$t2	-8($fp)
+		li	$t2	11
+		sw	$t2	-12($fp)
+		li	$t2	8
+		sw	$t2	-16($fp)
+		li	$t2	10
+		sw	$t2	-20($fp)
+		li	$t2	40
+		sb	$t2	-21($fp)
+		lb	$t2	-21($fp)
+		lw	$t3	-20($fp)
+		add	$t4	$t2	$t3
+		sb	$t4	-21($fp)
+		sw	$ra	-28($fp)
+		la	$t2	_str0
+		sw	$t2	-32($fp)
+		lw	$t2	-4($fp)
+		sw	$t2	-36($fp)
+		lw	$t2	-8($fp)
+		sw	$t2	-40($fp)
+		lw	$t2	-12($fp)
+		sw	$t2	-44($fp)
+		lw	$t2	-16($fp)
 		sw	$t2	-48($fp)
-		lw	$t0	-48($fp)
-		sw	$t0	-52($fp)
-		lw	$t0	-52($fp)
-		sb	$t0	-25($fp)
-		sw	$ra	-56($fp)
-		la	$t0	_str0
-		sw	$t0	-60($fp)
-		lw	$t0	-4($fp)
-		sw	$t0	-64($fp)
-		lw	$t0	-8($fp)
-		sw	$t0	-68($fp)
-		lw	$t0	-12($fp)
-		sw	$t0	-72($fp)
-		lw	$t0	-20($fp)
-		sw	$t0	-76($fp)
-		sub	$fp	56
-		la	$t0	___printf
-		jal	$t0
-		add	$fp	56
-		sw	$v0	-80($fp)
-		lw	$ra	-56($fp)
-		lw	$t0	-4($fp)
-		sw	$t0	-84($fp)
-		lw	$t0	-84($fp)
-		sw	$t0	-88($fp)
-		lw	$t0	-20($fp)
-		sw	$t0	-92($fp)
-		lb	$t0	-25($fp)
-		sw	$t0	-96($fp)
-		sw	$ra	-100($fp)
-		la	$t0	_str1
-		sw	$t0	-104($fp)
-		lw	$t0	-88($fp)
-		sw	$t0	-108($fp)
-		lw	$t0	-92($fp)
-		sw	$t0	-112($fp)
-		li	$t0	4
-		sw	$t0	-116($fp)
-		lw	$t0	-96($fp)
-		sw	$t0	-120($fp)
-		sub	$fp	100
-		la	$t0	___printf
-		jal	$t0
-		add	$fp	100
-		sw	$v0	-124($fp)
-		lw	$ra	-100($fp)
-		li	$t0	0
-		move	$v0	$t0
+		sub	$fp	28
+		jal	___printf
+		add	$fp	28
+		lw	$ra	-28($fp)
+		sw	$ra	-52($fp)
+		la	$t2	_str1
+		sw	$t2	-56($fp)
+		lw	$t2	-4($fp)
+		sw	$t2	-60($fp)
+		lw	$t2	-16($fp)
+		sw	$t2	-64($fp)
+		li	$t2	4
+		sw	$t2	-68($fp)
+		lb	$t2	-21($fp)
+		sb	$t2	-69($fp)
+		sub	$fp	52
+		jal	___printf
+		add	$fp	52
+		lw	$ra	-52($fp)
+		li	$t2	0
+		move	$v0	$t2
+		jr	$ra
 		jr	$ra
 		jr	$ra
 ___printf:

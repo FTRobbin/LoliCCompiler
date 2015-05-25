@@ -12,10 +12,7 @@
     <list default="true" id="bd301699-7dc0-43f0-8c70-45cea3c704d9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/CastItoBOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/CastItoBOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/CastNoOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/CastNoOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/SPRelOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/SPRelOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mir/VarName.java" afterPath="$PROJECT_DIR$/src/mir/VarName.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/baojingcount.log" afterPath="$PROJECT_DIR$/testcases/baojingcount.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/gentest/num1-5110379024-wuhang.c.s" afterPath="$PROJECT_DIR$/testcases/gentest/num1-5110379024-wuhang.c.s" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="loliccompiler.iws" />
@@ -81,21 +78,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CallOp.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CallOp.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/irt/factory/CallOp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44170773">
-              <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="52" column="53" selection-start-line="52" selection-start-column="53" selection-end-line="52" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CastItoBOp.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CastItoBOp.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/irt/factory/CastItoBOp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.77011496">
+              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -115,7 +112,7 @@
         <entry file="file://$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -218,10 +215,10 @@
         <option value="$PROJECT_DIR$/src/gen/basic/BasicGen.java" />
         <option value="$PROJECT_DIR$/src/mir/VarName.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/SPRelOp.java" />
-        <option value="$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java" />
-        <option value="$PROJECT_DIR$/src/irt/factory/CastItoBOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/CastNoOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/CallOp.java" />
+        <option value="$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java" />
+        <option value="$PROJECT_DIR$/src/irt/factory/CastItoBOp.java" />
       </list>
     </option>
   </component>
@@ -589,12 +586,6 @@
       <option name="number" value="Default" />
       <updated>1428288077013</updated>
     </task>
-    <task id="LOCAL-00018" summary="The Pretty Printer implemented.">
-      <created>1428818636524</created>
-      <option name="number" value="00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1428818636524</updated>
-    </task>
     <task id="LOCAL-00019" summary="The first version of GUI implemented.">
       <created>1428851844681</created>
       <option name="number" value="00019" />
@@ -883,7 +874,13 @@
       <option name="project" value="LOCAL" />
       <updated>1432564257211</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="IR small improvement.">
+      <created>1432564890160</created>
+      <option name="number" value="00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1432564890160</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1380,22 +1377,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irt/factory/CastItoBOp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irt/factory/CastNoOp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1406,8 +1387,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/irt/factory/CallOp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44170773">
-          <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="53" selection-start-line="52" selection-start-column="53" selection-end-line="52" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irt/factory/CastItoBOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.77011496">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding />
         </state>
       </provider>
