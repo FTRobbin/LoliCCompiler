@@ -32,7 +32,7 @@
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\typchk.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\voidpnt2.c" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gen/basic/BasicGen.java" afterPath="$PROJECT_DIR$/src/gen/basic/BasicGen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" afterPath="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/baojingcount.log" afterPath="$PROJECT_DIR$/testcases/baojingcount.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse-5100309153-yanghuan.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse3-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse3-5100309153-yanghuan.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/hpplus-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/hpplus-5100309153-yanghuan.c" />
@@ -59,21 +59,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CodeSelect.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CodeSelect.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26272577">
-              <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="67" column="50" selection-start-line="67" selection-start-column="50" selection-end-line="67" selection-end-column="50" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BasicGen.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BasicGen.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gen/basic/BasicGen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="152" column="60" selection-start-line="152" selection-start-column="60" selection-end-line="152" selection-end-column="60" />
+            <state vertical-scroll-proportion="0.19704433">
+              <caret line="146" column="8" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -158,8 +158,8 @@
         <option value="$PROJECT_DIR$/src/irt/factory/CastItoBOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/UniIncIntOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/PostIntOp.java" />
-        <option value="$PROJECT_DIR$/src/gen/basic/BasicGen.java" />
         <option value="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
+        <option value="$PROJECT_DIR$/src/gen/basic/BasicGen.java" />
       </list>
     </option>
   </component>
@@ -235,6 +235,42 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="loliccompiler" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="loliccompiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="loliccompiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="loliccompiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="loliccompiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="loliccompiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -527,12 +563,6 @@
       <option name="number" value="Default" />
       <updated>1428288077013</updated>
     </task>
-    <task id="LOCAL-00022" summary="Resolved the reduplication of struct/union definition.">
-      <created>1429187569641</created>
-      <option name="number" value="00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1429187569641</updated>
-    </task>
     <task id="LOCAL-00023" summary="Pretty Printer is now prettier.">
       <created>1429193330995</created>
       <option name="number" value="00023" />
@@ -821,7 +851,13 @@
       <option name="project" value="LOCAL" />
       <updated>1432572221684</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="Global alignment bug fixes.">
+      <created>1432573054407</created>
+      <option name="number" value="00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1432573054407</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TodoView">
@@ -835,7 +871,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -848,7 +884,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30777538" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17447917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17447917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -875,7 +911,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="INCLUDE_TEXT_INTO_SHELF" value="true" />
-    <MESSAGE value="Phase 2 : Now Passed some trivial tests." />
     <MESSAGE value="Major bug fix in the type system." />
     <MESSAGE value="Most known bugs of Phase 2 are fixed.&#10;New feature : 增加了可以统计报警次数的报警按钮！" />
     <MESSAGE value="Passed some minor tests." />
@@ -900,7 +935,8 @@
     <MESSAGE value="IR small improvement." />
     <MESSAGE value="IR small improvement. Bug fixes." />
     <MESSAGE value="Initialization bug fixes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Initialization bug fixes." />
+    <MESSAGE value="Global alignment bug fixes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Global alignment bug fixes." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1295,18 +1331,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gen/basic/BasicGen.java">
+    <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="152" column="60" selection-start-line="152" selection-start-column="60" selection-end-line="152" selection-end-column="60" />
+          <caret line="67" column="50" selection-start-line="67" selection-start-column="50" selection-end-line="67" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
+    <entry file="file://$PROJECT_DIR$/src/gen/basic/BasicGen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26272577">
-          <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.19704433">
+          <caret line="146" column="8" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="8" />
           <folding />
         </state>
       </provider>

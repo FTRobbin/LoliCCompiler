@@ -144,9 +144,9 @@ public class BasicGen implements CodeGen {
         delta = new HashMap<>();
         curDelta = 0;
         code.addText("main:");
+        code.addText("\t\tmove\t$fp\t$sp");
         for (MIRInst inst : global.list) {
             if (inst instanceof ReturnInst) {
-                code.addText("\t\tmove\t$fp\t$sp");
                 code.addText("\t\tj\t__main");
             } else if (inst instanceof MemInst) {
                 MemInst mem = (MemInst)inst;
