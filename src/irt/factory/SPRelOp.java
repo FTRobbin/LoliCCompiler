@@ -111,7 +111,6 @@ public class SPRelOp extends Op {
                 flag = true;
                 next.st ^= Label.FALL;
             }
-            System.out.println("HIHI");
             list.add((new GotoInst(next)));
             if (flag) {
                 next.st ^= Label.FALL;

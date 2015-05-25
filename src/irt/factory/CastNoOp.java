@@ -28,7 +28,6 @@ public class CastNoOp extends Op{
         if (ret == null) {
             return null;
         }
-        gen.gen(cur, expr.exprs.get(0), list, next, ret);
-        return ret;
+        return gen.gen(cur, expr.exprs.get(0), list, next, ret);
     }
 }

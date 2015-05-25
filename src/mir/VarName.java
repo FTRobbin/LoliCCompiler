@@ -63,7 +63,9 @@ public class VarName extends Value {
 
     static public VarName getAbsTmp() {
         --tmpCnt;
-        return new VarName(0, 0, false, false, false);
+        VarName ret = new VarName(0, 0, false, false, false);
+        ret.name += "DJKHLASFDEHJKLFHASDKLFHKLASDHKLFHSDKLHL";
+        return ret;
     }
 
     static public VarName getStrTmp(int size, int align) {

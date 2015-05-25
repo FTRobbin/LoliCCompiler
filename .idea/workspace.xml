@@ -10,46 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd301699-7dc0-43f0-8c70-45cea3c704d9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/AdrOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/AdrOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/ArrayOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/ArrayOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/AssignOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/AssignOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gen/basic/BasicGen.java" afterPath="$PROJECT_DIR$/src/gen/basic/BasicGen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/BinIntIgnCOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/BinIntIgnCOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/BinIntIgnOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/BinIntIgnOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/BinIntOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/BinIntOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/BinPtrlIgnOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/BinPtrlIgnOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/BinPtrlOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/BinPtrlOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/BinPtrrIgnCOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/BinPtrrIgnCOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/BinPtrrIgnOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/BinPtrrIgnOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/BinPtrrOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/BinPtrrOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mir/CallInst.java" afterPath="$PROJECT_DIR$/src/mir/CallInst.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/CallOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/CallOp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/CastItoBOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/CastItoBOp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/CastNoOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/CastNoOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/CharOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/CharOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" afterPath="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/CommaOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/CommaOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/IntOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/IntOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/analysis/LivenessAnalysis.java" afterPath="$PROJECT_DIR$/src/analysis/LivenessAnalysis.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mir/MIRGen.java" afterPath="$PROJECT_DIR$/src/mir/MIRGen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/Op.java" afterPath="$PROJECT_DIR$/src/irt/factory/Op.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/PointOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/PointOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/PostByteOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/PostByteOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/PostIntOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/PostIntOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/RecordOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/RecordOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/RefOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/RefOp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/SPRelOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/SPRelOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/StringOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/StringOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/SubPtrIgnOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/SubPtrIgnOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/SubPtrOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/SubPtrOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/UniIncByteOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/UniIncByteOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/UniIncIntOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/UniIncIntOp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/UniIntOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/UniIntOp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mir/VarName.java" afterPath="$PROJECT_DIR$/src/mir/VarName.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/irt/factory/VariOp.java" afterPath="$PROJECT_DIR$/src/irt/factory/VariOp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/baojingcount.log" afterPath="$PROJECT_DIR$/testcases/baojingcount.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/gentest/superloop-5090379042-jiaxiao.c.s" afterPath="$PROJECT_DIR$/testcases/gentest/superloop-5090379042-jiaxiao.c.s" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="loliccompiler.iws" />
@@ -72,21 +38,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SPRelOp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irt/factory/SPRelOp.java">
+      <file leaf-file-name="BasicGen.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gen/basic/BasicGen.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="113" column="38" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
+              <caret line="234" column="35" selection-start-line="234" selection-start-column="35" selection-end-line="234" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AssignOp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/irt/factory/AssignOp.java">
+      <file leaf-file-name="VarName.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mir/VarName.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="71" selection-start-line="55" selection-start-column="71" selection-end-line="55" selection-end-column="71" />
+              <caret line="66" column="59" selection-start-line="66" selection-start-column="59" selection-end-line="66" selection-end-column="59" />
+              <folding>
+                <element signature="e#1608#1609#0" expanded="true" />
+                <element signature="e#1645#1646#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SPRelOp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irt/factory/SPRelOp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -102,21 +81,61 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ControlFlowGraph.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/analysis/ControlFlowGraph.java">
+      <file leaf-file-name="CallOp.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/irt/factory/CallOp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334">
-              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.44170773">
+              <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MIRGen.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mir/MIRGen.java">
+      <file leaf-file-name="CastItoBOp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irt/factory/CastItoBOp.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="341" column="31" selection-start-line="341" selection-start-column="31" selection-end-line="341" selection-end-column="31" />
+              <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CastNoOp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irt/factory/CastNoOp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CastBtoIOp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CharOp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/irt/factory/CharOp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="32" column="42" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ControlFlowGraph.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/analysis/ControlFlowGraph.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -163,7 +182,6 @@
         <option value="$PROJECT_DIR$/src/gen/advanced/AddressDescription.java" />
         <option value="$PROJECT_DIR$/src/gen/advanced/RegisterStatus.java" />
         <option value="$PROJECT_DIR$/src/main/Compiler.java" />
-        <option value="$PROJECT_DIR$/src/mir/VarName.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/Op.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/AdrOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/ArrayOp.java" />
@@ -176,14 +194,9 @@
         <option value="$PROJECT_DIR$/src/irt/factory/BinPtrrIgnOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/BinPtrrOp.java" />
         <option value="$PROJECT_DIR$/src/mir/CallInst.java" />
-        <option value="$PROJECT_DIR$/src/gen/basic/BasicGen.java" />
         <option value="$PROJECT_DIR$/src/analysis/LivenessAnalysis.java" />
         <option value="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
         <option value="$PROJECT_DIR$/src/analysis/StaticSingleAssignment.java" />
-        <option value="$PROJECT_DIR$/src/irt/factory/CallOp.java" />
-        <option value="$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java" />
-        <option value="$PROJECT_DIR$/src/irt/factory/CastItoBOp.java" />
-        <option value="$PROJECT_DIR$/src/irt/factory/CastNoOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/CharOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/IntOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/PointOp.java" />
@@ -199,10 +212,16 @@
         <option value="$PROJECT_DIR$/src/irt/factory/StringOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/CommaOp.java" />
         <option value="$PROJECT_DIR$/src/mir/MIRGen.java" />
-        <option value="$PROJECT_DIR$/src/irt/factory/SPRelOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/AssignOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/SubPtrOp.java" />
         <option value="$PROJECT_DIR$/src/analysis/ControlFlowGraph.java" />
+        <option value="$PROJECT_DIR$/src/gen/basic/BasicGen.java" />
+        <option value="$PROJECT_DIR$/src/mir/VarName.java" />
+        <option value="$PROJECT_DIR$/src/irt/factory/SPRelOp.java" />
+        <option value="$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java" />
+        <option value="$PROJECT_DIR$/src/irt/factory/CastItoBOp.java" />
+        <option value="$PROJECT_DIR$/src/irt/factory/CastNoOp.java" />
+        <option value="$PROJECT_DIR$/src/irt/factory/CallOp.java" />
       </list>
     </option>
   </component>
@@ -280,242 +299,6 @@
               <option name="myItemId" value="loliccompiler" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mir" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LoliCCompiler" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="irt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="factory" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="interpreter" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="analysis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="analysis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="trivial" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="analysis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cfg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -574,7 +357,7 @@
       <recent name="irt.operator" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Phase3Test">
+  <component name="RunManager" selected="Application.LoliCCompiler">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -805,12 +588,6 @@
       <created>1428288077013</created>
       <option name="number" value="Default" />
       <updated>1428288077013</updated>
-    </task>
-    <task id="LOCAL-00017" summary="The UglyPrinter (which could make a piece of refined code into a terrible mess) function implemented. Changes are made to the AST, the parser and the lexer.">
-      <created>1428764380655</created>
-      <option name="number" value="00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1428764380655</updated>
     </task>
     <task id="LOCAL-00018" summary="The Pretty Printer implemented.">
       <created>1428818636524</created>
@@ -1100,7 +877,13 @@
       <option name="project" value="LOCAL" />
       <updated>1432557222431</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="IR small improvement.">
+      <created>1432564257211</created>
+      <option name="number" value="00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1432564257211</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1154,7 +937,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="INCLUDE_TEXT_INTO_SHELF" value="true" />
-    <MESSAGE value="The robustness of Lexer, Parser and Pretty Printer is greatly Enhanced.&#10;Completed some portion of Phase 2 : Semantic Check." />
     <MESSAGE value="A little more of Phase 2 is now completed." />
     <MESSAGE value="Minor fixes." />
     <MESSAGE value="Phase 2 : Now Passed some trivial tests." />
@@ -1179,7 +961,8 @@
     <MESSAGE value="Small Change" />
     <MESSAGE value="Trivial changes." />
     <MESSAGE value="Bug fixes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes." />
+    <MESSAGE value="IR small improvement." />
+    <option name="LAST_COMMIT_MESSAGE" value="IR small improvement." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1306,21 +1089,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mir/VarName.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.76521736">
-          <caret line="59" column="10" selection-start-line="59" selection-start-column="10" selection-end-line="59" selection-end-column="10" />
-          <folding>
-            <element signature="e#1514#1515#0" expanded="true" />
-            <element signature="e#1575#1576#0" expanded="true" />
-            <element signature="e#1608#1609#0" expanded="true" />
-            <element signature="e#1645#1646#0" expanded="true" />
-            <element signature="e#1825#1826#0" expanded="true" />
-            <element signature="e#1892#1893#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irt/factory/Op.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4173913">
@@ -1393,19 +1161,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gen/basic/BasicGen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="395" column="8" selection-start-line="395" selection-start-column="8" selection-end-line="395" selection-end-column="8" />
-          <folding>
-            <element signature="e#8782#8783#0" expanded="false" />
-            <element signature="e#8809#8810#0" expanded="false" />
-            <element signature="e#8841#8842#0" expanded="false" />
-            <element signature="e#8892#8893#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/analysis/LivenessAnalysis.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1434,46 +1189,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30560273">
           <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irt/factory/CallOp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="75" selection-start-line="108" selection-start-column="75" selection-end-line="108" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irt/factory/CastItoBOp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irt/factory/CastNoOp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="88" selection-start-line="26" selection-start-column="88" selection-end-line="26" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irt/factory/CharOp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1606,14 +1321,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/irt/factory/SPRelOp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="113" column="38" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/irt/factory/AssignOp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1632,8 +1339,75 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/analysis/ControlFlowGraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
+        <state vertical-scroll-proportion="0.0">
           <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gen/basic/BasicGen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="234" column="35" selection-start-line="234" selection-start-column="35" selection-end-line="234" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irt/factory/CharOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="42" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mir/VarName.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="59" selection-start-line="66" selection-start-column="59" selection-end-line="66" selection-end-column="59" />
+          <folding>
+            <element signature="e#1608#1609#0" expanded="true" />
+            <element signature="e#1645#1646#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irt/factory/SPRelOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irt/factory/CastItoBOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irt/factory/CastNoOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/irt/factory/CallOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44170773">
+          <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
           <folding />
         </state>
       </provider>
