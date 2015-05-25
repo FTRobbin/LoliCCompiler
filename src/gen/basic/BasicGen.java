@@ -141,6 +141,8 @@ public class BasicGen implements CodeGen {
     }
 
     void addGlobal(ProgUnit global) {
+        delta = new HashMap<>();
+        curDelta = 0;
         code.addText("main:");
         for (MIRInst inst : global.list) {
             if (inst instanceof ReturnInst) {

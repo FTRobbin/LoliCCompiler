@@ -62,6 +62,7 @@ public class CodeSelect {
     HashMap<VarName, AddressDescription> vars;
 
     void addGlobal(ProgUnit global) {
+        curDelta = 0;
         for (MIRInst inst : global.list) {
             if (inst instanceof ReturnInst) {
                 code.addText(new SPIMInst(SPIMOp.j, new SPIMAddress(new SPIMLabel("__main"))));
@@ -367,8 +368,17 @@ public class CodeSelect {
             code.addText(new SPIMInst(SPIMOp.move, reg1, reg));
             RegisterStatus regSt = regs.get(reg);
             for (VarName var : regSt.vars) {
-                if (curlive.contains(var)) {
-                    regs.get(reg).addVar(var);
+                if (curlive.contains(var) || var.uid == 0) {
+                    vars.get(var).delReg(reg);
+                    regs.get(reg1).addVar(var);
+                    vars.get(var).addReg(reg1);
+                }
+            }
+            regs.get(reg).vars.clear();
+        } else {
+            RegisterStatus regSt = regs.get(reg);
+            for (VarName var : regSt.vars) {
+                if (curlive.contains(var) || var.uid == 0) {
                     if (!vars.get(var).inmem) {
                         code.addText(new SPIMInst(var.size == 4 ? SPIMOp.sw : SPIMOp.sb, reg, vars.get(var).mem));
                         vars.get(var).inmem = true;
@@ -377,18 +387,6 @@ public class CodeSelect {
                 }
             }
             regs.get(reg).vars.clear();
-        } else {
-            saveReg(reg);
-            /*
-            for (VarName var : regSt.vars) {
-                if (curlive.contains(var)) {
-                    if (!vars.get(var).inmem) {
-                        code.addText(new SPIMInst(var.size == 4 ? SPIMOp.sw : SPIMOp.sb, reg, vars.get(var).mem));
-                        vars.get(var).inmem = true;
-                    }
-                    vars.get(var).delReg(reg);
-                }
-            }
         }
         if (val instanceof IntConst) {
             code.addText(new SPIMInst(SPIMOp.li, reg, SPIMImmediate.getImmi(((IntConst) val).val)));
@@ -398,19 +396,27 @@ public class CodeSelect {
             code.addText(new SPIMInst(SPIMOp.la, reg, getStringConst(((StringConst) val).s)));
         } else if (val instanceof VarName && (((VarName) val).isStruct || ((VarName) val).isArray || ((VarName) val).isFunc)) {
             if (val instanceof DeRefVar) {
-                val = ((DeRefVar) val).val;
-                if (val instanceof VarName && (((VarName) val).isStruct || ((VarName) val).isArray || ((VarName) val).isFunc)) {
-                    code.addText(new SPIMInst(SPIMOp.la, reg, getAddr((VarName) val)));
+                Value val1 = ((DeRefVar) val).val;
+                if (val1 instanceof VarName && (((VarName) val1).isStruct || ((VarName) val1).isArray || ((VarName) val1).isFunc)) {
+                    code.addText(new SPIMInst(SPIMOp.la, reg, getAddr((VarName) val1)));
                 } else {
-                    writeToReg(reg, )
+                    VarName var2 = (VarName) val1;
+                    if (vars.containsKey(var2) && vars.get(var2).regs.size() > 0) {
+                        for (SPIMRegister reg1 : vars.get(var2).regs) {
+                            code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, new SPIMAddress(reg1)));
+                            break;
+                        }
+                    } else {
+
+                    }
                 }
             } else {
-                LinkedList<SPIMRegister> list = writeReadReg(inst.dest, inst.src1);
-                code.addText(new SPIMInst(SPIMOp.valueOf(inst.op.name()), list.get(0), list.get(1), getAddr((VarName) val)));
+                //LinkedList<SPIMRegister> list = writeReadReg(inst.dest, inst.src1);
+                //code.addText(new SPIMInst(SPIMOp.valueOf(inst.op.name()), list.get(0), list.get(1), getAddr((VarName) val)));
             }
         } else {
-            LinkedList<SPIMRegister> list = writeReadReg(inst.dest, inst.src1, inst.src2);
-            code.addText(new SPIMInst(SPIMOp.valueOf(inst.op.name()), list.get(0), list.get(1), list.get(2)));*/
+            //LinkedList<SPIMRegister> list = writeReadReg(inst.dest, inst.src1, inst.src2);
+            //code.addText(new SPIMInst(SPIMOp.valueOf(inst.op.name()), list.get(0), list.get(1), list.get(2)));
         }
     }
 
