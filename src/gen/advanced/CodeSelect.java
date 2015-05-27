@@ -229,7 +229,7 @@ public class CodeSelect {
                 }
                 removed.add(var);
                 if (!vars.get(var).inmem) {
-                    code.addText(new SPIMInst(var.size == 4 ? SPIMOp.sw : SPIMOp.sb, reg, vars.get(var).mem));
+                    code.addText(new SPIMInst(var.size == 4 ? SPIMOp.sw : SPIMOp.sb, reg, getAddr((VarName)var)));
                     vars.get(var).inmem = true;
                 }
                 vars.get(var).delReg(reg);
@@ -256,7 +256,7 @@ public class CodeSelect {
             if (envr.bond.containsKey(var) || curPara.containsKey(var) || !vars.containsKey(var) || vars.get(var).inmem) {
                 continue;
             }
-            code.addText(new SPIMInst(var.size == 4 ? SPIMOp.sw : SPIMOp.sb, vars.get(var).regs.iterator().next(), vars.get(var).mem));
+            code.addText(new SPIMInst(var.size == 4 ? SPIMOp.sw : SPIMOp.sb, vars.get(var).regs.iterator().next(), getAddr(var)));
             vars.get(var).inmem = true;
         }
     }
@@ -381,7 +381,7 @@ public class CodeSelect {
                     SPIMRegister reg1 = envr.bond.get(var);
                     code.addText(new SPIMInst(SPIMOp.move, reg1, reg));
                 } else {
-                    code.addText(new SPIMInst(var.size == 4 ? SPIMOp.sw : SPIMOp.sb, reg, vars.get(var).mem));
+                    code.addText(new SPIMInst(var.size == 4 ? SPIMOp.sw : SPIMOp.sb, reg, getAddr(var)));
                     vars.get(var).inmem = true;
                 }
             }
@@ -420,7 +420,7 @@ public class CodeSelect {
                             SPIMRegister reg1 = curPara.get(var);
                             code.addText(new SPIMInst(SPIMOp.move, reg1, reg));
                         } else {
-                            code.addText(new SPIMInst(var.size == 4 ? SPIMOp.sw : SPIMOp.sb, reg, vars.get(var).mem));
+                            code.addText(new SPIMInst(var.size == 4 ? SPIMOp.sw : SPIMOp.sb, reg, getAddr(var)));
                             vars.get(var).inmem = true;
                         }
                     }
@@ -477,12 +477,12 @@ public class CodeSelect {
             code.addText(new SPIMInst(SPIMOp.la, reg, getStringConst(((StringConst) val).s)));
         } else if (envr.bond.containsKey(val)) {
             reg = envr.bond.get(val);
-            code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, vars.get((VarName)val).mem));
+            code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, getAddr((VarName)val)));
             vars.get(val).addReg(reg);
             regs.get(reg).addVar((VarName)val);
         } else if (curPara.containsKey(val)) {
             reg = curPara.get(val);
-            code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, vars.get((VarName)val).mem));
+            code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, getAddr((VarName)val)));
             vars.get(val).addReg(reg);
             regs.get(reg).addVar((VarName)val);
         } else if (val instanceof VarName && (((VarName) val).isStruct || ((VarName) val).isArray || ((VarName) val).isFunc)) {
@@ -495,11 +495,18 @@ public class CodeSelect {
             vars.get(val).addReg(reg);
             regs.get(reg).addVar((VarName) val);
         } else {
-            reg = new SPIMInfRegister();
-            regs.put(reg, new RegisterStatus());
-            code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, vars.get(val).mem));
-            vars.get(val).addReg(reg);
-            regs.get(reg).addVar((VarName) val);
+            if (val instanceof DeRefVar) {
+                reg = new SPIMInfRegister();
+                regs.put(reg, new RegisterStatus());
+                code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, getAddr((VarName) val)));
+                code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, new SPIMAddress(reg)));
+            } else {
+                reg = new SPIMInfRegister();
+                regs.put(reg, new RegisterStatus());
+                code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, getAddr((VarName) val)));
+                vars.get(val).addReg(reg);
+                regs.get(reg).addVar((VarName) val);
+            }
         }
         return reg;
     }
@@ -545,7 +552,7 @@ public class CodeSelect {
                     vars.get(val1).addReg(reg);
                     regs.get(reg).addVar(val1);
                 } else {
-                    code.addText(new SPIMInst(val1.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, vars.get(val).mem));
+                    code.addText(new SPIMInst(val1.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, getAddr((VarName)val)));
                     if (!vars.containsKey(val1)) {
                         getAddr(val1);
                     }
@@ -553,7 +560,7 @@ public class CodeSelect {
                     regs.get(reg).addVar(val1);
                 }
             } else {
-                code.addText(new SPIMInst(SPIMOp.la, reg, vars.get(val).mem));
+                code.addText(new SPIMInst(SPIMOp.la, reg, getAddr((VarName)val)));
                 vars.get(val).addReg(reg);
                 regs.get(reg).addVar((VarName) val);
             }
@@ -574,7 +581,7 @@ public class CodeSelect {
                 vars.get(val1).addReg(reg);
                 regs.get(reg).addVar(val1);
             } else {
-                code.addText(new SPIMInst(val1.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, vars.get(val).mem));
+                code.addText(new SPIMInst(val1.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, getAddr((VarName)val)));
                 if (!vars.containsKey(val1)) {
                     getAddr(val1);
                 }
