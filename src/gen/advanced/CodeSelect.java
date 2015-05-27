@@ -390,7 +390,7 @@ public class CodeSelect {
         if (!vars.containsKey(var)) {
             if (var.uid == 0) {
                 vars.put(var, (new AddressDescription(globalVar.get(var))));
-                vars.get(var).inmem = true;
+                vars.get(var).inmem = envr.bond.containsKey(var);
             } else {
                 curDelta = alignTo(curDelta, var.align);
                 curDelta += var.size;
@@ -497,6 +497,7 @@ public class CodeSelect {
         clearReg(reg);
         vars.get(var).addReg(reg);
         regs.get(reg).addVar(var);
+        vars.get(var).inmem = false;
         return reg;
     }
 
@@ -564,6 +565,7 @@ public class CodeSelect {
         }
         regs.get(reg).addVar(var);
         vars.get(var).addReg(reg);
+        vars.get(var).inmem = false;
     }
 
     void writeToReg(SPIMRegister reg, Value val) {
@@ -723,6 +725,7 @@ public class CodeSelect {
         writeToReg(reg, val);
         regs.get(reg).addVar(var);
         vars.get(var).addReg(reg);
+        vars.get(var).inmem = false;
     }
 
     void genInst(MIRInst inst, HashSet<VarName> liveOut) {
@@ -736,7 +739,11 @@ public class CodeSelect {
         for (String s : list) {
             IR += s;
         }
+        System.out.println(("#" + IR));
         code.addText(new SPIMInst(getLabel("#" + IR)));
+        for (VarName var : curlive) {
+            System.out.println("now living : " + var.name);
+        }
         */
         if (inst instanceof AssignInst) {
             genInst((AssignInst)inst);
