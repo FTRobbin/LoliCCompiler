@@ -24,8 +24,14 @@ public class SPIMInfRegister extends SPIMRegister {
         //TODO:!!!!
         if (this.id < 8) {
             return "$t" + (this.id + 2);
-        } else {
+        } else if (this.id - 8 < 8) {
             return "$s" + (this.id - 8);
+        } else if (this.id == 16) {
+            return "$v1";
+        } else if (this.id == 17) {
+            return "$fp";
+        } else {
+            throw new InternalError("Not Enough registers.");
         }
     }
 }
