@@ -421,6 +421,15 @@ public class CodeSelect {
         }
     }
 
+    void clearReg(SPIMRegister reg) {
+        if (regs.containsKey(reg)) {
+            for (VarName var : regs.get(reg).vars) {
+                vars.get(var).delReg(reg);
+            }
+            regs.get(reg).vars.clear();
+        }
+    }
+
     void saveReg(SPIMRegister reg) {
         if (regs.containsKey(reg)) {
             int alias = 0;
@@ -485,9 +494,9 @@ public class CodeSelect {
             regs.get(reg1).delVar(var);
         }
         saveReg(reg);
-        vars.get(var).regs.clear();
-        vars.get(var).inmem = false;
-        vars.get(var).regs.add(reg);
+        clearReg(reg);
+        vars.get(var).addReg(reg);
+        regs.get(reg).addVar(var);
         return reg;
     }
 
@@ -566,6 +575,7 @@ public class CodeSelect {
         }
         //如果有大量重名 直接全存内存也不一定好
         saveReg(reg);
+        clearReg(reg);
         if (val instanceof IntConst) {
             code.addText(new SPIMInst(SPIMOp.li, reg, SPIMImmediate.getImmi(((IntConst) val).val)));
         } else if (val instanceof CharConst) {
@@ -889,6 +899,7 @@ public class CodeSelect {
     void saveRegs(HashSet<SPIMRegister> regs) {
         for (SPIMRegister reg : regs) {
             saveReg(reg);
+            clearReg(reg);
         }
     }
 
@@ -896,15 +907,10 @@ public class CodeSelect {
         if (inst.func.name.equals("___printf")) {
             if (((IntConst)inst.num).val == 1) {
                 SPIMRegister reg = SPIMRegID.$a0.getReg(), reg1 = SPIMRegID.$v0.getReg();
-                saveReg(SPIMRegID.$a0.getReg());
+                saveReg(reg);
                 writeToReg(reg, pStack.pop());
-                saveReg(SPIMRegID.$v0.getReg());
-                if (regs.containsKey(reg1)) {
-                    for (VarName var : regs.get(reg1).vars) {
-                        vars.get(var).delReg(reg1);
-                    }
-                    regs.get(reg1).vars.clear();
-                }
+                saveReg(reg1);
+                clearReg(reg1);
                 code.addText(new SPIMInst(SPIMOp.li, SPIMRegID.$v0.getReg(), SPIMImmediate.getImmi(4)));
                 code.addText(new SPIMInst(SPIMOp.syscall));
                 return;
@@ -916,12 +922,7 @@ public class CodeSelect {
                     saveReg(SPIMRegID.$a0.getReg());
                     writeToReg(reg, pStack.pop());
                     saveReg(SPIMRegID.$v0.getReg());
-                    if (regs.containsKey(reg1)) {
-                        for (VarName var : regs.get(reg1).vars) {
-                            vars.get(var).delReg(reg1);
-                        }
-                        regs.get(reg1).vars.clear();
-                    }
+                    clearReg(reg1);
                     code.addText(new SPIMInst(SPIMOp.li, SPIMRegID.$v0.getReg(), SPIMImmediate.getImmi(1)));
                     code.addText(new SPIMInst(SPIMOp.syscall));
                     if (s.equals("%d\n")) {
@@ -936,12 +937,7 @@ public class CodeSelect {
                     saveReg(SPIMRegID.$a0.getReg());
                     writeToReg(reg, pStack.pop());
                     saveReg(SPIMRegID.$v0.getReg());
-                    if (regs.containsKey(reg1)) {
-                        for (VarName var : regs.get(reg1).vars) {
-                            vars.get(var).delReg(reg1);
-                        }
-                        regs.get(reg1).vars.clear();
-                    }
+                    clearReg(reg1);
                     code.addText(new SPIMInst(SPIMOp.li, SPIMRegID.$v0.getReg(), SPIMImmediate.getImmi(4)));
                     code.addText(new SPIMInst(SPIMOp.syscall));
                     if (s.equals("%s\n")) {
@@ -977,12 +973,7 @@ public class CodeSelect {
             saveReg(SPIMRegID.$a0.getReg());
             writeToReg(reg, pStack.pop());
             saveReg(SPIMRegID.$v0.getReg());
-            if (regs.containsKey(reg1)) {
-                for (VarName var : regs.get(reg1).vars) {
-                    vars.get(var).delReg(reg1);
-                }
-                regs.get(reg1).vars.clear();
-            }
+            clearReg(reg1);
             code.addText(new SPIMInst(SPIMOp.li, SPIMRegID.$v0.getReg(), SPIMImmediate.getImmi(9)));
             code.addText(new SPIMInst(SPIMOp.syscall));
             if (inst.dest != null) {
