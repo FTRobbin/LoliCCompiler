@@ -31,6 +31,8 @@
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\toolong.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\typchk.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\voidpnt2.c" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" afterPath="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/baojingcount.log" afterPath="$PROJECT_DIR$/testcases/baojingcount.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse-5100309153-yanghuan.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse3-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse3-5100309153-yanghuan.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/hpplus-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/hpplus-5100309153-yanghuan.c" />
@@ -60,13 +62,26 @@
       <file leaf-file-name="CodeSelect.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.2521739">
-              <caret line="911" column="35" selection-start-line="911" selection-start-column="35" selection-end-line="911" selection-end-column="35" />
+            <state vertical-scroll-proportion="6.600985">
+              <caret line="983" column="43" selection-start-line="983" selection-start-column="43" selection-end-line="983" selection-end-column="43" />
               <folding>
-                <element signature="e#45142#45143#0" expanded="true" />
-                <element signature="e#45239#45240#0" expanded="true" />
-                <element signature="e#47381#47382#0" expanded="true" />
-                <element signature="e#47417#47418#0" expanded="true" />
+                <element signature="e#47631#47632#0" expanded="true" />
+                <element signature="e#47728#47729#0" expanded="true" />
+                <element signature="e#49870#49871#0" expanded="true" />
+                <element signature="e#49906#49907#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddressDescription.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gen/advanced/AddressDescription.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#606#607#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,7 +91,7 @@
         <entry file="file://$PROJECT_DIR$/src/gen/advanced/AdvancedGen.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -149,7 +164,6 @@
         <option value="$PROJECT_DIR$/src/gen/spim/SPIMImmediate.java" />
         <option value="$PROJECT_DIR$/src/gen/spim/SPIMAddress.java" />
         <option value="$PROJECT_DIR$/src/gen/spim/SPIMCode.java" />
-        <option value="$PROJECT_DIR$/src/gen/advanced/AddressDescription.java" />
         <option value="$PROJECT_DIR$/src/gen/advanced/AdvancedGen.java" />
         <option value="$PROJECT_DIR$/src/gen/advanced/GlobalAssign.java" />
         <option value="$PROJECT_DIR$/src/gen/advanced/SPIMInfRegister.java" />
@@ -162,6 +176,7 @@
         <option value="$PROJECT_DIR$/src/mir/MIRGen.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/CastBtoIOp.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/CastItoBOp.java" />
+        <option value="$PROJECT_DIR$/src/gen/advanced/AddressDescription.java" />
         <option value="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
       </list>
     </option>
@@ -748,18 +763,6 @@
       <option name="number" value="Default" />
       <updated>1428288077013</updated>
     </task>
-    <task id="LOCAL-00028" summary="Most known bugs of Phase 2 are fixed.&#10;New feature : 增加了可以统计报警次数的报警按钮！">
-      <created>1429665855480</created>
-      <option name="number" value="00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1429665855480</updated>
-    </task>
-    <task id="LOCAL-00029" summary="Passed some minor tests.">
-      <created>1429667381361</created>
-      <option name="number" value="00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1429667381361</updated>
-    </task>
     <task id="LOCAL-00030" summary="A huge update for the basic framework of Phase 2.">
       <created>1429965724247</created>
       <option name="number" value="00030" />
@@ -1042,7 +1045,19 @@
       <option name="project" value="LOCAL" />
       <updated>1432689773974</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="Code Select fixes.">
+      <created>1432705963099</created>
+      <option name="number" value="00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1432705963099</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Code Select fixes.">
+      <created>1432707157773</created>
+      <option name="number" value="00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1432707157773</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1060,16 +1075,16 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34449244" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34449244" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30777538" sideWeight="0.50416666" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30777538" sideWeight="0.49583334" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30777538" sideWeight="0.49583334" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17447917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17447917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1096,6 +1111,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="INCLUDE_TEXT_INTO_SHELF" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/testcases/compiler2015" />
+    </ignored-roots>
     <MESSAGE value="A huge update for the basic framework of Phase 2." />
     <MESSAGE value="The Interpreter passed all the tests of last year." />
     <MESSAGE value="Passed all the given testcases." />
@@ -1341,14 +1359,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_40/src.zip!/java/util/HashMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="1430" column="0" selection-start-line="1430" selection-start-column="0" selection-end-line="1430" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gen/spim/SPIMLabel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16420361">
@@ -1386,14 +1396,6 @@
             <element signature="e#919#920#0" expanded="true" />
             <element signature="e#1012#1013#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gen/advanced/AddressDescription.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42692938">
-          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1536,23 +1538,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_40/src.zip!/java/util/HashMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1430" column="0" selection-start-line="1430" selection-start-column="0" selection-end-line="1430" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gen/advanced/AddressDescription.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#606#607#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/gen/advanced/AdvancedGen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2521739">
-          <caret line="911" column="35" selection-start-line="911" selection-start-column="35" selection-end-line="911" selection-end-column="35" />
+        <state vertical-scroll-proportion="6.600985">
+          <caret line="983" column="43" selection-start-line="983" selection-start-column="43" selection-end-line="983" selection-end-column="43" />
           <folding>
-            <element signature="e#45142#45143#0" expanded="true" />
-            <element signature="e#45239#45240#0" expanded="true" />
-            <element signature="e#47381#47382#0" expanded="true" />
-            <element signature="e#47417#47418#0" expanded="true" />
+            <element signature="e#47631#47632#0" expanded="true" />
+            <element signature="e#47728#47729#0" expanded="true" />
+            <element signature="e#49870#49871#0" expanded="true" />
+            <element signature="e#49906#49907#0" expanded="true" />
           </folding>
         </state>
       </provider>
