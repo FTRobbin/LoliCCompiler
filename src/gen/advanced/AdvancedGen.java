@@ -129,8 +129,5 @@ public class AdvancedGen implements CodeGen {
         code = RegisterRenaming.gen(code, table);
         code = addSTL(code);
         return code;
-        /*
-        return null;
-        */
     }
 }

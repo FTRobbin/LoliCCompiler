@@ -402,11 +402,6 @@ public class CodeSelect {
         return vars.get(var).mem;
     }
 
-    SPIMAddress getInfAddr() {
-        curDelta = alignTo(curDelta, 4) + 4;
-        return new SPIMAddress(SPIMImmediate.getImmi(-curDelta), SPIMRegID.$sp.getReg());
-    }
-
     void saveRegMem(SPIMRegister reg) {
         if (!regs.containsKey(reg)) {
             return;
@@ -438,7 +433,6 @@ public class CodeSelect {
 
     void saveReg(SPIMRegister reg) {
         if (regs.containsKey(reg)) {
-            /*
             int alias = 0;
             for (VarName var : regs.get(reg).vars) {
                 if ((curlive.contains(var) || var.uid == 0) && vars.containsKey(var) && !vars.get(var).inmem && vars.get(var).regs.size() == 1) {
@@ -456,7 +450,7 @@ public class CodeSelect {
                         vars.get(var).addReg(reg1);
                     }
                 }
-            } else {*/
+            } else {
                 RegisterStatus regSt = regs.get(reg);
                 for (VarName var : regSt.vars) {
                     if ((curlive.contains(var) || var.uid == 0) && vars.containsKey(var) && !vars.get(var).inmem && vars.get(var).regs.size() == 1) {
@@ -476,7 +470,7 @@ public class CodeSelect {
                         }
                     }
                 }
-            //}
+            }
         }
     }
 
@@ -489,7 +483,7 @@ public class CodeSelect {
         } else if (var.isRet) {
             reg = SPIMRegID.$v0.getReg();
         } else {
-            reg = new SPIMInfRegister(getInfAddr());
+            reg = new SPIMInfRegister();
         }
         if (!regs.containsKey(reg)) {
             regs.put(reg, new RegisterStatus());
@@ -509,60 +503,6 @@ public class CodeSelect {
         return reg;
     }
 
-    SPIMRegister loadToRegT0(Value val) {
-        //In registers
-        if (vars.containsKey(val) && vars.get(val).regs.size() > 0) {
-            return vars.get(val).regs.iterator().next();
-        }
-        //Does not in registers;
-        SPIMRegister reg = null;
-        if (val instanceof IntConst) {
-            if (((IntConst) val).val == 0) {
-                return SPIMRegID.$0.getReg();
-            }
-            reg = SPIMRegID.$t0.getReg();
-            code.addText(new SPIMInst(SPIMOp.li, reg, SPIMImmediate.getImmi(((IntConst) val).val)));
-        } else if (val instanceof CharConst) {
-            reg = SPIMRegID.$t0.getReg();
-            code.addText(new SPIMInst(SPIMOp.li, reg, SPIMImmediate.getImmi(((CharConst) val).ch)));
-        } else if (val instanceof StringConst) {
-            reg = SPIMRegID.$t0.getReg();
-            code.addText(new SPIMInst(SPIMOp.la, reg, getStringConst(((StringConst) val).s)));
-        } else if (envr.bond.containsKey(val)) {
-            reg = envr.bond.get(val);
-            code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, getAddr((VarName)val)));
-            vars.get(val).addReg(reg);
-            regs.get(reg).addVar((VarName)val);
-        } else if (curPara.containsKey(val)) {
-            reg = curPara.get(val);
-            code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, getAddr((VarName)val)));
-            vars.get(val).addReg(reg);
-            regs.get(reg).addVar((VarName)val);
-        } else if (val instanceof VarName && (((VarName) val).isStruct || ((VarName) val).isArray || ((VarName) val).isFunc)) {
-            reg = SPIMRegID.$t0.getReg();
-            regs.put(reg, new RegisterStatus());
-            if (val instanceof DeRefVar) {
-                val = (((DeRefVar) val).val);
-            }
-            code.addText(new SPIMInst(SPIMOp.la, reg, getAddr((VarName)val)));
-            vars.get(val).addReg(reg);
-            regs.get(reg).addVar((VarName) val);
-        } else {
-            if (val instanceof DeRefVar) {
-                reg = SPIMRegID.$t0.getReg();
-                regs.put(reg, new RegisterStatus());
-                code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, new SPIMAddress(loadToRegT0(((DeRefVar) val).val))));
-            } else {
-                reg = SPIMRegID.$t0.getReg();
-                regs.put(reg, new RegisterStatus());
-                code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, getAddr((VarName) val)));
-                vars.get(val).addReg(reg);
-                regs.get(reg).addVar((VarName) val);
-            }
-        }
-        return reg;
-    }
-
     SPIMRegister loadToReg(Value val) {
         //In registers
         if (vars.containsKey(val) && vars.get(val).regs.size() > 0) {
@@ -574,13 +514,13 @@ public class CodeSelect {
             if (((IntConst) val).val == 0) {
                 return SPIMRegID.$0.getReg();
             }
-            reg = new SPIMInfRegister(getInfAddr());
+            reg = new SPIMInfRegister();
             code.addText(new SPIMInst(SPIMOp.li, reg, SPIMImmediate.getImmi(((IntConst) val).val)));
         } else if (val instanceof CharConst) {
-            reg = new SPIMInfRegister(getInfAddr());
+            reg = new SPIMInfRegister();
             code.addText(new SPIMInst(SPIMOp.li, reg, SPIMImmediate.getImmi(((CharConst) val).ch)));
         } else if (val instanceof StringConst) {
-            reg = new SPIMInfRegister(getInfAddr());
+            reg = new SPIMInfRegister();
             code.addText(new SPIMInst(SPIMOp.la, reg, getStringConst(((StringConst) val).s)));
         } else if (envr.bond.containsKey(val)) {
             reg = envr.bond.get(val);
@@ -593,7 +533,7 @@ public class CodeSelect {
             vars.get(val).addReg(reg);
             regs.get(reg).addVar((VarName)val);
         } else if (val instanceof VarName && (((VarName) val).isStruct || ((VarName) val).isArray || ((VarName) val).isFunc)) {
-            reg = new SPIMInfRegister(getInfAddr());
+            reg = new SPIMInfRegister();
             regs.put(reg, new RegisterStatus());
             if (val instanceof DeRefVar) {
                 val = (((DeRefVar) val).val);
@@ -603,11 +543,11 @@ public class CodeSelect {
             regs.get(reg).addVar((VarName) val);
         } else {
             if (val instanceof DeRefVar) {
-                reg = new SPIMInfRegister(getInfAddr());
+                reg = new SPIMInfRegister();
                 regs.put(reg, new RegisterStatus());
                 code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, getAddr((VarName) val)));
             } else {
-                reg = new SPIMInfRegister(getInfAddr());
+                reg = new SPIMInfRegister();
                 regs.put(reg, new RegisterStatus());
                 code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, getAddr((VarName) val)));
                 vars.get(val).addReg(reg);
@@ -730,7 +670,7 @@ public class CodeSelect {
             if (var.isRet) {
                 reg = SPIMRegID.$v0.getReg();
             } else {
-                reg = new SPIMInfRegister(getInfAddr());
+                reg = new SPIMInfRegister();
             }
         }
         if (!regs.containsKey(reg)) {
@@ -780,7 +720,7 @@ public class CodeSelect {
             } else if (curPara.containsKey(var)) {
                 reg = curPara.get(var);
             } else {
-                reg = new SPIMInfRegister(getInfAddr());
+                reg = new SPIMInfRegister();
             }
         }
         if (!regs.containsKey(reg)) {
@@ -839,7 +779,7 @@ public class CodeSelect {
             //TODO eliminate struct move?
             SPIMAddress src = getAddr((VarName)inst.src1),
                         dst = getAddr(inst.dest);
-            SPIMRegister reg = new SPIMInfRegister(getInfAddr());
+            SPIMRegister reg = new SPIMInfRegister();
             if (inst.dest.align == 1) {
                 for (int i = 0; i < inst.dest.size; ++i) {
                     code.addText(new SPIMInst(SPIMOp.lb, reg, src.addImmi(i)));
@@ -860,7 +800,7 @@ public class CodeSelect {
                     if (inst.src1 instanceof DeRefVar) {
                         code.addText(new SPIMInst(inst.dest.size == 4 ? SPIMOp.sw : SPIMOp.sb, loadToReg(((DeRefVar) inst.src1).val), adr));
                     } else if (inst.src1 instanceof VarName) {
-                        SPIMInfRegister reg = new SPIMInfRegister(getInfAddr());
+                        SPIMInfRegister reg = new SPIMInfRegister();
                         code.addText(new SPIMInst(SPIMOp.la, reg, getAddr((VarName)inst.src1)));
                         code.addText(new SPIMInst(inst.dest.size == 4 ? SPIMOp.sw : SPIMOp.sb, reg, adr));
                     }
@@ -869,7 +809,7 @@ public class CodeSelect {
                     if (cnt == 1) {
                         LinkedList<SPIMRegister> list = new LinkedList<>();
                         list.push(loadToReg(inst.src1));
-                        list.push(new SPIMInfRegister(getInfAddr()));
+                        list.push(new SPIMInfRegister());
                         code.addText(new SPIMInst(SPIMOp.valueOf(inst.op.name()), list.get(0), list.get(1)));
                         code.addText(new SPIMInst(inst.dest.size == 4 ? SPIMOp.sw : SPIMOp.sb, list.get(0), adr));
                     } else if (cnt == 2) {
@@ -877,19 +817,19 @@ public class CodeSelect {
                         if (val instanceof IntConst) {
                             LinkedList<SPIMRegister> list = new LinkedList<>();
                             list.push(loadToReg(inst.src1));
-                            list.push(new SPIMInfRegister(getInfAddr()));
+                            list.push(new SPIMInfRegister());
                             code.addText(new SPIMInst(SPIMOp.valueOf(inst.op.name()), list.get(0), list.get(1), SPIMImmediate.getImmi(((IntConst) val).val)));
                             code.addText(new SPIMInst(inst.dest.size == 4 ? SPIMOp.sw : SPIMOp.sb, list.get(0), adr));
                         } else if (val instanceof CharConst) {
                             LinkedList<SPIMRegister> list = new LinkedList<>();
                             list.push(loadToReg(inst.src1));
-                            list.push(new SPIMInfRegister(getInfAddr()));
+                            list.push(new SPIMInfRegister());
                             code.addText(new SPIMInst(SPIMOp.valueOf(inst.op.name()), list.get(0), list.get(1), SPIMImmediate.getImmi(((CharConst) val).ch)));
                             code.addText(new SPIMInst(inst.dest.size == 4 ? SPIMOp.sw : SPIMOp.sb, list.get(0), adr));
                         } else if (val instanceof StringConst) {
                             LinkedList<SPIMRegister> list = new LinkedList<>();
                             list.push(loadToReg(inst.src1));
-                            list.push(new SPIMInfRegister(getInfAddr()));
+                            list.push(new SPIMInfRegister());
                             code.addText(new SPIMInst(SPIMOp.valueOf(inst.op.name()), list.get(0), list.get(1), getStringConst(((StringConst) val).s)));
                             code.addText(new SPIMInst(inst.dest.size == 4 ? SPIMOp.sw : SPIMOp.sb, list.get(0), adr));
                         } else if (val instanceof VarName && (((VarName) val).isStruct || ((VarName) val).isArray || ((VarName) val).isFunc)) {
@@ -898,14 +838,14 @@ public class CodeSelect {
                             }
                             LinkedList<SPIMRegister> list = new LinkedList<>();
                             list.push(loadToReg(inst.src1));
-                            list.push(new SPIMInfRegister(getInfAddr()));
+                            list.push(new SPIMInfRegister());
                             code.addText(new SPIMInst(SPIMOp.valueOf(inst.op.name()), list.get(0), list.get(1), getAddr((VarName) val)));
                             code.addText(new SPIMInst(inst.dest.size == 4 ? SPIMOp.sw : SPIMOp.sb, list.get(0), adr));
                         } else {
                             LinkedList<SPIMRegister> list = new LinkedList<>();
                             list.push(loadToReg(inst.src2));
                             list.push(loadToReg(inst.src1));
-                            list.push(new SPIMInfRegister(getInfAddr()));
+                            list.push(new SPIMInfRegister());
                             code.addText(new SPIMInst(SPIMOp.valueOf(inst.op.name()), list.get(0), list.get(1), list.get(2)));
                             code.addText(new SPIMInst(inst.dest.size == 4 ? SPIMOp.sw : SPIMOp.sb, list.get(0), adr));
                         }
@@ -1062,7 +1002,7 @@ public class CodeSelect {
             if (val instanceof VarName && ((VarName) val).isStruct) {
                 SPIMAddress src = getAddr((VarName)val),
                             dst = new SPIMAddress(SPIMImmediate.getImmi(-paraAdr), SPIMRegID.$sp.getReg());
-                SPIMRegister reg = SPIMRegID.$t0.getReg();
+                SPIMRegister reg = new SPIMInfRegister();
                 if (val.align == 1) {
                     for (int i = 0; i < val.size; ++i) {
                         code.addText(new SPIMInst(SPIMOp.lb, reg, src.addImmi(i)));
@@ -1098,7 +1038,7 @@ public class CodeSelect {
                     saveRegMem(reg);
                     writeToReg(reg, val);
                 } else {
-                    SPIMRegister reg = loadToRegT0(val);
+                    SPIMRegister reg = loadToReg(val);
                     code.addText(new SPIMInst(val.size == 4 ? SPIMOp.sw : SPIMOp.sb, reg, new SPIMAddress(SPIMImmediate.getImmi(-paraAdr), SPIMRegID.$sp.getReg())));
                 }
             }
@@ -1137,7 +1077,7 @@ public class CodeSelect {
             if (inst.func instanceof VarName && !(inst.func instanceof DeRefVar)) {
                 code.addText(new SPIMInst(SPIMOp.jal, new SPIMAddress(getLabel(inst.func.name))));
             } else {
-                code.addText(new SPIMInst(SPIMOp.jal, loadToRegT0(inst.func)));
+                code.addText(new SPIMInst(SPIMOp.jal, loadToReg(inst.func)));
             }
             code.addText(new SPIMInst(SPIMOp.add, SPIMRegID.$sp.getReg(),  SPIMRegID.$sp.getReg(), SPIMImmediate.getImmi(raAdr)));
             if (inst.dest != null) {
@@ -1188,9 +1128,6 @@ public class CodeSelect {
             SPIMRegister reg = envr.bond.get(inst.var);
             if (!regs.containsKey(reg)) {
                 regs.put(reg, new RegisterStatus());
-            }
-            if (reg instanceof SPIMInfRegister && ((SPIMInfRegister) reg).addr == null) {
-                ((SPIMInfRegister) reg).addr = vars.get(inst.var).mem;
             }
         }
     }

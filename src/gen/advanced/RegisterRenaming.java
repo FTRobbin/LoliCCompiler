@@ -43,6 +43,9 @@ public class RegisterRenaming {
             if (table.containsKey(reg)) {
                 return table.get(reg);
             } else {
+                if (reg.addr == null) {
+                    reg.addr = new SPIMAddress(SPIMImmediate.getImmi(-32768 - reg.id * 100), SPIMRegID.$sp.getReg());
+                }
                 writeAddr = reg.addr;
                 return reg1;
             }
