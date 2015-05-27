@@ -324,6 +324,7 @@ public class CodeSelect {
         if (var instanceof DeRefVar) {
             var = (VarName)((DeRefVar) var).val;
         }
+        cur.add(var);
     }
 
     void addUse(MIRInst inst, HashSet<VarName> cur) {
@@ -392,6 +393,10 @@ public class CodeSelect {
         }
         RegisterStatus regSt = regs.get(reg);
         for (VarName var : regSt.vars) {
+            System.out.println(var.name);
+            if (!curlive.contains(var)) {
+                System.out.println("HAHAHA");
+            }
             if ((curlive.contains(var) || var.uid == 0) && vars.containsKey(var) && !vars.get(var).inmem && vars.get(var).regs.size() == 1) {
                 if (envr.bond.containsKey(var) && var.uid == 0) {
                     SPIMRegister reg1 = envr.bond.get(var);
@@ -455,6 +460,8 @@ public class CodeSelect {
             reg = envr.bond.get(var);
         } else if (curPara.containsKey(var)) {
             reg = curPara.get(var);
+        } else if (var.isRet) {
+            reg = SPIMRegID.$v0.getReg();
         } else {
             reg = new SPIMInfRegister();
         }
@@ -1075,8 +1082,8 @@ public class CodeSelect {
         curDelta = alignTo(curDelta, inst.var.align) + inst.var.size;
         curDelta += inst.var.size;
         vars.put(inst.var, new AddressDescription(new SPIMAddress(SPIMImmediate.getImmi(-curDelta), SPIMRegID.$sp.getReg())));
-        vars.get(inst.var).inmem = true;
         if (inst.var.isPara != -1 && !inst.var.isStruct) {
+            vars.get(inst.var).inmem = false;
             SPIMPhysicalRegister reg = null;
             switch(inst.var.isPara) {
                 case 0 : {
