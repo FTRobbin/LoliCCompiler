@@ -493,6 +493,7 @@ public class CodeSelect {
         for (SPIMRegister reg1 : vars.get(var).regs) {
             regs.get(reg1).delVar(var);
         }
+        vars.get(var).regs.clear();
         saveReg(reg);
         clearReg(reg);
         vars.get(var).addReg(reg);
@@ -564,7 +565,7 @@ public class CodeSelect {
             getAddr(var);
         }
         for (SPIMRegister reg1 : vars.get(var).regs) {
-            regs.get(reg).delVar(var);
+            regs.get(reg1).delVar(var);
         }
         vars.get(var).regs.clear();
         regs.get(reg).addVar(var);
@@ -1139,7 +1140,6 @@ public class CodeSelect {
 
     void genInst(RecvInst inst) {
         curDelta = alignTo(curDelta, inst.var.align) + inst.var.size;
-        curDelta += inst.var.size;
         vars.put(inst.var, new AddressDescription(new SPIMAddress(SPIMImmediate.getImmi(-curDelta), SPIMRegID.$sp.getReg())));
         if (inst.var.isPara != -1 && !inst.var.isStruct) {
             vars.get(inst.var).inmem = false;
