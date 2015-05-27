@@ -30,7 +30,7 @@ public class BinIntFact extends OpFactory {
             }
 
             public boolean changeAble() {return true;}
-            public Ops changedOp() {return GE_OP;}
+            public Ops changedOp() {return GREATER;}
         },
 
         GREATER {
@@ -46,7 +46,7 @@ public class BinIntFact extends OpFactory {
             }
 
             public boolean changeAble() {return true;}
-            public Ops changedOp() {return LE_OP;}
+            public Ops changedOp() {return LESS;}
         },
 
 
@@ -62,7 +62,7 @@ public class BinIntFact extends OpFactory {
                 return a <= b ? 1 : 0;
             }
             public boolean changeAble() {return true;}
-            public Ops changedOp() {return GREATER;}
+            public Ops changedOp() {return GE_OP;}
         },
 
         GE_OP {
@@ -77,7 +77,7 @@ public class BinIntFact extends OpFactory {
                 return a >= b ? 1 : 0;
             }
             public boolean changeAble() {return true;}
-            public Ops changedOp() {return LESS;}
+            public Ops changedOp() {return LE_OP;}
         },
 
         EQ_OP {
