@@ -24,12 +24,13 @@ public class SPIMControlFlow {
     }
 
     public static void markLeader(SPIMCode code) {
-        boolean lastJump = true;
+        boolean lastJump = true, lastLabel = false;
         for (SPIMInst inst : code.text) {
-            if (inst.label != null || lastJump) {
+            if ((inst.label != null && !lastLabel) || lastJump) {
                 inst.isLeader = true;
             }
             lastJump = isJump(inst);
+            lastLabel = inst.label != null;
         }
     }
 
@@ -47,7 +48,7 @@ public class SPIMControlFlow {
                     for (Block b : g.blocks) {
                         if (b.insts.size() > 0) {
                             SPIMInst last = b.insts.get(b.size() - 1);
-                            if (last.op.equals(SPIMOp.jr) && last.val0.equals(SPIMRegID.$ra)) {
+                            if (last.label == null && last.op.equals(SPIMOp.jr) && last.val0.equals(SPIMRegID.$ra)) {
                                 b.addEdge(exit);
                             }
                         }

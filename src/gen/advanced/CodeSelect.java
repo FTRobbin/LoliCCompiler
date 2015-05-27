@@ -545,7 +545,6 @@ public class CodeSelect {
                 reg = new SPIMInfRegister();
                 regs.put(reg, new RegisterStatus());
                 code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, getAddr((VarName) val)));
-                code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, new SPIMAddress(reg)));
             } else {
                 reg = new SPIMInfRegister();
                 regs.put(reg, new RegisterStatus());
@@ -642,7 +641,6 @@ public class CodeSelect {
                 if (val instanceof DeRefVar) {
                     regs.put(reg, new RegisterStatus());
                     code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, getAddr((VarName) val)));
-                    code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, new SPIMAddress(reg)));
                 } else {
                     regs.put(reg, new RegisterStatus());
                     code.addText(new SPIMInst(val.size == 4 ? SPIMOp.lw : SPIMOp.lb, reg, getAddr((VarName) val)));

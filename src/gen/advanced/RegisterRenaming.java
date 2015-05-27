@@ -1,8 +1,6 @@
 package gen.advanced;
 
-import gen.spim.SPIMCode;
-import gen.spim.SPIMInst;
-import gen.spim.SPIMPhysicalRegister;
+import gen.spim.*;
 
 import java.util.HashMap;
 
@@ -11,16 +9,28 @@ import java.util.HashMap;
  */
 public class RegisterRenaming {
 
+    public static SPIMValue replace(SPIMValue val, HashMap<SPIMInfRegister, SPIMPhysicalRegister> table) {
+        if (val instanceof SPIMInfRegister) {
+            return table.get(val);
+        }
+        if (val instanceof SPIMAddress && ((SPIMAddress) val).regi != null) {
+            if (((SPIMAddress) val).regi instanceof SPIMInfRegister) {
+                ((SPIMAddress) val).regi = table.get((((SPIMAddress) val).regi));
+            }
+        }
+        return val;
+    }
+
     public static SPIMCode gen(SPIMCode code, HashMap<SPIMInfRegister, SPIMPhysicalRegister> table) {
         for (SPIMInst inst : code.text) {
-            if (inst.val0 != null && inst.val0 instanceof SPIMInfRegister) {
-                inst.val0 = table.get((SPIMInfRegister)inst.val0);
+            if (inst.val0 != null) {
+                inst.val0 = replace(inst.val0, table);
             }
-            if (inst.val1 != null && inst.val1 instanceof SPIMInfRegister) {
-                inst.val1 = table.get((SPIMInfRegister)inst.val1);
+            if (inst.val1 != null) {
+                inst.val1 = replace(inst.val1, table);
             }
-            if (inst.val2 != null && inst.val2 instanceof SPIMInfRegister) {
-                inst.val2 = table.get((SPIMInfRegister)inst.val2);
+            if (inst.val2 != null) {
+                inst.val2 = replace(inst.val2, table);
             }
         }
         return code;

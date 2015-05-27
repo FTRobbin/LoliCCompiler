@@ -21,11 +21,16 @@ public class SPIMLiveness {
     }
 
     public static void addUse(SPIMValue val, Block b) {
+        SPIMInfRegister reg = null;
         if (val instanceof SPIMInfRegister) {
-            SPIMInfRegister reg = (SPIMInfRegister)val;
-            if (!b.def.contains(reg) && !b.use.contains(reg)) {
-                b.use.add(reg);
+            reg = (SPIMInfRegister) val;
+        } else if (val instanceof SPIMAddress && ((SPIMAddress) val).regi != null) {
+            if (((SPIMAddress) val).regi instanceof SPIMInfRegister) {
+                reg = (SPIMInfRegister) (((SPIMAddress) val).regi);
             }
+        }
+        if (reg != null && !b.def.contains(reg) && !b.use.contains(reg)) {
+            b.use.add(reg);
         }
     }
 

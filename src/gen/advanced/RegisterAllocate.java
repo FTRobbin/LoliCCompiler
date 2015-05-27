@@ -39,8 +39,16 @@ public class RegisterAllocate {
     }
 
     public void create(SPIMValue val) {
+        SPIMInfRegister reg = null;
         if (val instanceof SPIMInfRegister) {
-            SPIMInfRegister reg = (SPIMInfRegister)val;
+            reg = (SPIMInfRegister)val;
+        }
+        if (val instanceof SPIMAddress && ((SPIMAddress) val).regi != null) {
+            if (((SPIMAddress) val).regi instanceof SPIMInfRegister) {
+                reg = (SPIMInfRegister)(((SPIMAddress) val).regi);
+            }
+        }
+        if (reg != null) {
             if (!cur.contains(reg)) {
                 for (SPIMInfRegister reg1 : cur) {
                     addRegEdge(reg, reg1);
