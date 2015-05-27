@@ -1,6 +1,7 @@
 package main;
 
 import analysis.ControlFlowGraph;
+import analysis.LivenessAnalysis;
 import analysis.trivial.GotoGoto;
 import ast.nodes.Program;
 import gen.ASMCode;
@@ -35,6 +36,9 @@ public class Compiler {
             mir.Program IRroot = gen.gen(IRTroot);
             IRroot = GotoGoto.GotoGotoOpti(IRroot);
             ControlFlowGraph.getCFG(IRroot);
+            ControlFlowGraph.calDominator(IRroot);
+            ControlFlowGraph.markNaturalLoops(IRroot);
+            LivenessAnalysis.cal(IRroot);
             CodeGen cgen = new AdvancedGen();
             ASMCode code = cgen.gen(IRroot);
             System.out.println(code.print());
