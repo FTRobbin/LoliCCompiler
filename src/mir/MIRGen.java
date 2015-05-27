@@ -251,14 +251,14 @@ public class MIRGen {
                           cnxt = new Label(Label.DUMMY);
                     VarName tmp2 = VarName.getTmp();
                     list.add((new AssignInst(ExprOp.add, tmp2, var, new IntConst(pair.id))).setLabel(cnxt));
-                    Value tmp = gen(ccur, pair.expr, list, cnxt, new DeRefVar(tmp2, pair.expr.retSize, IRTBuilder.getAlignSize(pair.expr.retType), pair.expr.retType instanceof ArrayType, pair.expr.retType instanceof RecordType));
+                    gen(ccur, pair.expr, list, cnxt, new DeRefVar(tmp2, pair.expr.retSize, IRTBuilder.getAlignSize(pair.expr.retType), pair.expr.retType instanceof ArrayType, pair.expr.retType instanceof RecordType));
                 }
             } else {
                 if (list1.size() > 1 || list1.get(0).id != 0) {
                     throw new InternalError("Multi-initialize a non-array.\n");
                 }
                 Label nxt = new Label(Label.DUMMY);
-                Value tmp = gen(new Label(Label.DUMMY), list1.get(0).expr, list, nxt, var);
+                gen(new Label(Label.DUMMY), list1.get(0).expr, list, nxt, var);
             }
         }
         return list;

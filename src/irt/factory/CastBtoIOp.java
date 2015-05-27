@@ -1,9 +1,12 @@
 package irt.factory;
 
+import ast.nodes.expression.*;
+import ast.nodes.expression.CharConst;
 import ast.nodes.type.Type;
 import interpreter.Interpreter;
 import irt.Expr;
 import mir.*;
+import mir.IntConst;
 
 import java.util.List;
 
@@ -31,6 +34,16 @@ public class CastBtoIOp extends Op{
     public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
         if (ret == null) {
             return null;
+        }
+        if (expr.exprs.get(0).op instanceof CharOp) {
+            if (ret.isAbsTmp()) {
+                if (!cur.isDummy()) {
+                    list.add((new EmptyInst()).setLabel(cur));
+                }
+                return new IntConst((int)((Character)expr.exprs.get(0).consts.get(0)).charValue());
+            } else {
+                return gen.gen(cur, expr.exprs.get(0), list, next, ret);
+            }
         }
         VarName dest = ret.isAbsTmp() ? VarName.getTmp() : ret;
         return gen.gen(cur, expr.exprs.get(0), list, next, dest);

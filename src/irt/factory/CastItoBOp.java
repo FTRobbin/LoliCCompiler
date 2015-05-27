@@ -32,6 +32,16 @@ public class CastItoBOp extends Op{
         if (ret == null) {
             return null;
         }
+        if (expr.exprs.get(0).op instanceof IntOp) {
+            if (ret.isAbsTmp()) {
+                if (!cur.isDummy()) {
+                    list.add((new EmptyInst()).setLabel(cur));
+                }
+                return new CharConst((char)(((Integer)expr.exprs.get(0).consts.get(0)).intValue()));
+            } else {
+                return gen.gen(cur, expr.exprs.get(0), list, next, ret);
+            }
+        }
         VarName dest = ret.isAbsTmp() ? VarName.getTmp() : ret;
         return gen.gen(cur, expr.exprs.get(0), list, next, dest);
     }

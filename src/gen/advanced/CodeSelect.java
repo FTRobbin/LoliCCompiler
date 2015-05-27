@@ -232,7 +232,7 @@ public class CodeSelect {
                     continue;
                 }
                 removed.add(var);
-                if (!vars.get(var).inmem) {
+                if (curlive.contains(var) && !vars.get(var).inmem) {
                     code.addText(new SPIMInst(var.size == 4 ? SPIMOp.sw : SPIMOp.sb, reg, getAddr((VarName)var)));
                     vars.get(var).inmem = true;
                 }
@@ -299,9 +299,17 @@ public class CodeSelect {
 
     void cutDef(MIRInst inst, HashSet<VarName> cur) {
         if (inst instanceof AssignInst) {
+            VarName var = ((AssignInst) inst).dest;
+            if (var instanceof DeRefVar) {
+                addUseVar((VarName)((DeRefVar) var).val, cur);
+            }
             cur.remove(((AssignInst) inst).dest);
         } else if (inst instanceof CallInst)  {
             if (((CallInst) inst).dest != null) {
+                VarName var = ((CallInst) inst).dest;
+                if (var instanceof DeRefVar) {
+                    addUseVar((VarName)((DeRefVar) var).val, cur);
+                }
                 cur.remove(((CallInst) inst).dest);
             }
         } else if (inst instanceof MemInst) {
@@ -313,7 +321,9 @@ public class CodeSelect {
 
     void addUseVar(VarName var, HashSet<VarName> cur) {
         //TODO : TYPE HAZARD!!!
-        cur.add(var);
+        if (var instanceof DeRefVar) {
+            var = (VarName)((DeRefVar) var).val;
+        }
     }
 
     void addUse(MIRInst inst, HashSet<VarName> cur) {
@@ -367,7 +377,7 @@ public class CodeSelect {
                 vars.put(var, (new AddressDescription(globalVar.get(var))));
                 vars.get(var).inmem = true;
             } else {
-                curDelta = alignTo(curDelta, var.align) + curDelta;
+                curDelta = alignTo(curDelta, var.align);
                 curDelta += var.size;
                 vars.put(var, (new AddressDescription(new SPIMAddress(SPIMImmediate.getImmi(-curDelta), SPIMRegID.$sp.getReg()))));
                 vars.get(var).inmem = true;
@@ -585,6 +595,9 @@ public class CodeSelect {
                 for (SPIMRegister reg1 : vars.get(val1).regs) {
                     regs.get(reg1).addVar(val1);
                     for (VarName var : regs.get(reg1).vars) {
+                        if (var.equals(val1) || reg.equals(reg1)) {
+                            continue;
+                        }
                         regs.get(reg).addVar(var);
                         vars.get(var).addReg(reg);
                     }
@@ -690,12 +703,14 @@ public class CodeSelect {
         if (inst.label != null) {
             code.addText(new SPIMInst(getLabel(inst.label.name)));
         }
+        /*
         List<String> list = inst.print();
         String IR = "";
         for (String s : list) {
             IR += s;
         }
         code.addText(new SPIMInst(getLabel("#" + IR)));
+        */
         if (inst instanceof AssignInst) {
             genInst((AssignInst)inst);
         } else if (inst instanceof CallInst) {
@@ -861,6 +876,48 @@ public class CodeSelect {
     }
 
     void genInst(CallInst inst) {
+        if (inst.func.name.equals("___printf")) {
+            if (((IntConst)inst.num).val == 1) {
+                SPIMRegister reg = SPIMRegID.$a0.getReg();
+                saveReg(SPIMRegID.$a0.getReg());
+                saveReg(SPIMRegID.$v0.getReg());
+                writeToReg(reg, pStack.pop());
+                code.addText(new SPIMInst(SPIMOp.li, SPIMRegID.$v0.getReg(), SPIMImmediate.getImmi(4)));
+                code.addText(new SPIMInst(SPIMOp.syscall));
+                return;
+            } else if (pStack.getFirst() instanceof StringConst) {
+                String s = ((StringConst)pStack.getFirst()).s;
+                if (s.equals("%d") || s.equals("%d\n")) {
+                    pStack.pop();
+                    SPIMRegister reg = SPIMRegID.$a0.getReg();
+                    saveReg(SPIMRegID.$a0.getReg());
+                    saveReg(SPIMRegID.$v0.getReg());
+                    writeToReg(reg, pStack.pop());
+                    code.addText(new SPIMInst(SPIMOp.li, SPIMRegID.$v0.getReg(), SPIMImmediate.getImmi(1)));
+                    code.addText(new SPIMInst(SPIMOp.syscall));
+                    if (s.equals("%d\n")) {
+                        code.addText(new SPIMInst(SPIMOp.li, SPIMRegID.$a0.getReg(), SPIMImmediate.getImmi('\n')));
+                        code.addText(new SPIMInst(SPIMOp.li, SPIMRegID.$v0.getReg(), SPIMImmediate.getImmi(12)));
+                        code.addText(new SPIMInst(SPIMOp.syscall));
+                    }
+                    return;
+                } else if (s.equals("%s") || s.equals("%s\n")) {
+                    pStack.pop();
+                    SPIMRegister reg = SPIMRegID.$a0.getReg();
+                    saveReg(SPIMRegID.$a0.getReg());
+                    saveReg(SPIMRegID.$v0.getReg());
+                    writeToReg(reg, pStack.pop());
+                    code.addText(new SPIMInst(SPIMOp.li, SPIMRegID.$v0.getReg(), SPIMImmediate.getImmi(4)));
+                    code.addText(new SPIMInst(SPIMOp.syscall));
+                    if (s.equals("%s\n")) {
+                        code.addText(new SPIMInst(SPIMOp.li, SPIMRegID.$a0.getReg(), SPIMImmediate.getImmi('\n')));
+                        code.addText(new SPIMInst(SPIMOp.li, SPIMRegID.$v0.getReg(), SPIMImmediate.getImmi(12)));
+                        code.addText(new SPIMInst(SPIMOp.syscall));
+                    }
+                    return;
+                }
+            }
+        }
         int raAdr = alignTo(curDelta, 4);
         int paraAdr = raAdr + 4, paraCnt = 0;
         for (Value val : pStack) {
@@ -1002,6 +1059,12 @@ public class CodeSelect {
         curDelta = alignTo(curDelta, inst.var.align) + inst.var.size;
         vars.put(inst.var, new AddressDescription(new SPIMAddress(SPIMImmediate.getImmi(-curDelta), SPIMRegID.$sp.getReg())));
         vars.get(inst.var).inmem = true;
+        if (envr.bond.containsKey(inst.var)) {
+            SPIMRegister reg = envr.bond.get(inst.var);
+            if (!regs.containsKey(reg)) {
+                regs.put(reg, new RegisterStatus());
+            }
+        }
     }
 
     void genInst(ParaInst inst) {
@@ -1041,6 +1104,12 @@ public class CodeSelect {
             vars.get(inst.var).addReg(reg);
         } else {
             vars.get(inst.var).inmem = true;
+            if (envr.bond.containsKey(inst.var)) {
+                SPIMRegister reg = envr.bond.get(inst.var);
+                if (!regs.containsKey(reg)) {
+                    regs.put(reg, new RegisterStatus());
+                }
+            }
         }
     }
 

@@ -12,6 +12,9 @@ import java.util.HashSet;
 public class LivenessAnalysis {
 
     public static void addUse(VarName var, Block b) {
+        if (var instanceof DeRefVar) {
+            var = (VarName)(((DeRefVar) var).val);
+        }
         if (b.def.contains(var) || b.use.contains(var)) {
             return;
         }
@@ -19,6 +22,9 @@ public class LivenessAnalysis {
     }
 
     public static void addDef(VarName var, Block b) {
+        if (var instanceof DeRefVar) {
+            addUse((VarName)((DeRefVar) var).val, b);
+        }
         if (b.def.contains(var)) {
             return;
         }

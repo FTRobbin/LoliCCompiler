@@ -5,6 +5,7 @@ package gen.spim;
  */
 public enum SPIMOp {
     add(3, 1),
+    and(3, 1),
     div(3, 1),
     mul(3, 1),
     neg(2, 1),

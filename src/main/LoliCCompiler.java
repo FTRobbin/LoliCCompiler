@@ -326,7 +326,7 @@ public class LoliCCompiler {
 
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("LoliCCompiler\u3000\uff5e\u30af\u30ed\u30cd\u30b3 Ver\uff5e");
+        JFrame frame = new JFrame("LoliCCompiler\u3000\uff5e\u6838\u878d\u548c\u7089 Ver\uff5e");
         frame.setContentPane(new LoliCCompiler().panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
