@@ -23,6 +23,11 @@ public class SPIMControlFlow {
                         inst.op.equals(SPIMOp.j));
     }
 
+    public static boolean isAbsJump(SPIMInst inst) {
+        return inst.op != null &&
+                (inst.op.equals(SPIMOp.jr) ||
+                        inst.op.equals(SPIMOp.j));
+    }
     public static void markLeader(SPIMCode code) {
         boolean lastJump = true, lastLabel = false;
         for (SPIMInst inst : code.text) {
@@ -63,7 +68,7 @@ public class SPIMControlFlow {
             if (inst.isLeader) {
                 Block old = cur;
                 cur = new Block();
-                if (old.equals(entry) || !isJump(old.insts.get(old.insts.size() - 1))) {
+                if (old.equals(entry) || !isAbsJump(old.insts.get(old.insts.size() - 1))) {
                     old.addEdge(cur);
                 }
                 g.addBlock(cur);

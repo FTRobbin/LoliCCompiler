@@ -315,14 +315,15 @@ public class CodeSelect {
         if (inst instanceof AssignInst) {
             VarName var = ((AssignInst) inst).dest;
             if (var instanceof DeRefVar) {
-                addUseVar((VarName)((DeRefVar) var).val, cur);
+                addUseVar((VarName)(((DeRefVar) var).val), cur);
             }
             cur.remove(((AssignInst) inst).dest);
         } else if (inst instanceof CallInst)  {
             if (((CallInst) inst).dest != null) {
                 VarName var = ((CallInst) inst).dest;
                 if (var instanceof DeRefVar) {
-                    addUseVar((VarName)((DeRefVar) var).val, cur);
+                    addUseVar((VarName) (((DeRefVar) var).val), cur);
+                    addUseVar((VarName) (((DeRefVar) var).val), liveList.peek());
                 }
                 cur.remove(((CallInst) inst).dest);
             }
@@ -743,11 +744,10 @@ public class CodeSelect {
             IR += s;
         }
         System.out.println(("#" + IR));
-        code.addText(new SPIMInst(getLabel("#" + IR)));
+        //code.addText(new SPIMInst(getLabel("#" + IR)));
         for (VarName var : curlive) {
             System.out.println("now living : " + var.name);
-        }
-        */
+        }*/
         if (inst instanceof AssignInst) {
             genInst((AssignInst)inst);
         } else if (inst instanceof CallInst) {
