@@ -77,13 +77,13 @@ public class RegisterAllocate {
 
     public void addUse(SPIMInst inst) {
         if (inst.label == null) {
-            if (inst.op.def > 0) {
+            if (inst.op.use > 0) {
                 create(inst.val0);
             }
-            if (inst.op.def > 1) {
+            if (inst.op.use > 1) {
                 create(inst.val1);
             }
-            if (inst.op.def > 2) {
+            if (inst.op.use > 2) {
                 create(inst.val2);
             }
         }
