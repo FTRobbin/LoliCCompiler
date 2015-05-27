@@ -390,7 +390,7 @@ public class CodeSelect {
         if (!vars.containsKey(var)) {
             if (var.uid == 0) {
                 vars.put(var, (new AddressDescription(globalVar.get(var))));
-                vars.get(var).inmem = envr.bond.containsKey(var);
+                vars.get(var).inmem = !envr.bond.containsKey(var);
             } else {
                 curDelta = alignTo(curDelta, var.align);
                 curDelta += var.size;
@@ -563,6 +563,10 @@ public class CodeSelect {
         if (!vars.containsKey(var)) {
             getAddr(var);
         }
+        for (SPIMRegister reg1 : vars.get(var).regs) {
+            regs.get(reg).delVar(var);
+        }
+        vars.get(var).regs.clear();
         regs.get(reg).addVar(var);
         vars.get(var).addReg(reg);
         vars.get(var).inmem = false;

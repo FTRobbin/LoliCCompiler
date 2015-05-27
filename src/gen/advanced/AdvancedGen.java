@@ -68,7 +68,7 @@ public class AdvancedGen implements CodeGen {
             code.addText(new SPIMInst(SPIMOp.sub, SPIMRegID.$a2.getReg(), SPIMRegID.$a2.getReg(), SPIMImmediate.getImmi('1')));
             code.addText(new SPIMInst(SPIMOp.add, SPIMRegID.$t0.getReg(), SPIMRegID.$t0.getReg(), SPIMImmediate.getImmi(2)));
             code.addText(new SPIMInst(SPIMOp.sub, SPIMRegID.$t1.getReg(), SPIMRegID.$t1.getReg(), SPIMImmediate.getImmi(4)));
-            code.addText(new SPIMInst(SPIMOp.lw, SPIMRegID.$a1.getReg(), new SPIMAddress(SPIMRegID.$t0.getReg())));
+            code.addText(new SPIMInst(SPIMOp.lw, SPIMRegID.$a1.getReg(), new SPIMAddress(SPIMRegID.$t1.getReg())));
             code.addText(new SPIMInst(SPIMOp.blt, SPIMRegID.$a1.getReg(), SPIMImmediate.getImmi(10), new SPIMAddress(___printf_width_go)));
             code.addText(new SPIMInst(SPIMOp.sub, SPIMRegID.$a2.getReg(), SPIMRegID.$a2.getReg(), SPIMImmediate.getImmi(1)));
             code.addText(new SPIMInst(SPIMOp.blt, SPIMRegID.$a1.getReg(), SPIMImmediate.getImmi(100), new SPIMAddress(___printf_width_go)));
