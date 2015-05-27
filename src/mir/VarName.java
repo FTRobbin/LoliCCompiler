@@ -40,6 +40,7 @@ public class VarName extends Value {
     private VarName(int size, int align, boolean isFunc, boolean isArray, boolean isStruct) {
         this.isTemp = true;
         this.name = "_t" + (tmpCnt++);
+        this.uid = -1;
         this.size = size;
         this.align = align;
         this.isFunc = isFunc;
@@ -64,7 +65,6 @@ public class VarName extends Value {
     static public VarName getAbsTmp() {
         --tmpCnt;
         VarName ret = new VarName(0, 0, false, false, false);
-        ret.name += "DJKHLASFDEHJKLFHASDKLFHKLASDHKLFHSDKLHL";
         return ret;
     }
 

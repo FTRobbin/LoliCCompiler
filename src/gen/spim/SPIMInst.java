@@ -45,6 +45,7 @@ public class SPIMInst {
 
     public String print() {
         if (label != null) {
+            //System.out.println(label.label);
             return label.label + ":";
         } else {
             return "\t\t" + op.print(this);

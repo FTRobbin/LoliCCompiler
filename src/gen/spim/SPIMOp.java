@@ -48,6 +48,19 @@ public enum SPIMOp {
     }
 
     public String print(SPIMInst inst) {
+        /*
+        if (this.name() != null) {
+            System.out.println(this.name());
+        }
+        if (inst.val0 != null) {
+            System.out.println(inst.val0.print());
+        }
+        if (inst.val1 != null) {
+            System.out.println(inst.val1.print());
+        }
+        if (inst.val2 != null) {
+            System.out.println(inst.val2.print());
+        }*/
         if (use == 0) {
             return this.name();
         } else if (use == 1) {
