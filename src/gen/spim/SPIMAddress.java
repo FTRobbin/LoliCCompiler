@@ -23,7 +23,7 @@ public class SPIMAddress extends SPIMValue {
 
         mi {
             public String print(SPIMAddress addr) {
-                return "" + addr.immi;
+                return "" + addr.immi.print();
             }
 
             public SPIMAddress addImmi(SPIMAddress cur, int delta) {
@@ -33,7 +33,7 @@ public class SPIMAddress extends SPIMValue {
 
         mir {
             public String print(SPIMAddress addr) {
-                return "" + addr.immi + "(" + addr.regi.print() + ")";
+                return "" + addr.immi.print() + "(" + addr.regi.print() + ")";
             }
 
             public SPIMAddress addImmi(SPIMAddress cur, int delta) {

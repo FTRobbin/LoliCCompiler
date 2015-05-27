@@ -24,14 +24,8 @@ public class GlobalAssign {
     }
 
     public void add(VarName var, Integer inc) {
-        if (var.isTemp || var instanceof DeRefVar || var.isArray || var.isStruct || var.isPara != -1) {
+        if (var.isTemp || var instanceof DeRefVar || var.isArray || var.isStruct || var.isFunc || var.isPara != -1) {
             return;
-        }
-        if (var.isFunc) {
-            inc /= 2;
-            if (inc == 0) {
-                return;
-            }
         }
         if (!counter.containsKey(var)) {
             counter.put(var, 0);

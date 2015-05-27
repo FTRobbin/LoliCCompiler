@@ -15,8 +15,17 @@ public class SPIMInfRegister extends SPIMRegister {
         this.id = cnt++;
     }
 
+    static public void reset() {
+        cnt = 0;
+    }
+
     @Override
     public String print() {
-        return "$I" + this.id;
+        //TODO:!!!!
+        if (this.id < 8) {
+            return "$t" + (this.id + 2);
+        } else {
+            return "$s" + (this.id - 8);
+        }
     }
 }

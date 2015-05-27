@@ -13,14 +13,8 @@ public class AddressDescription {
     public boolean inmem;
     public HashSet<SPIMRegister> regs;
 
-    public AddressDescription() {
-        mem = null;
-        inmem = false;
-        regs = new HashSet<>();
-    }
-
     public AddressDescription(SPIMAddress mem) {
-        mem = mem;
+        this.mem = mem;
         inmem = false;
         regs = new HashSet<>();
     }

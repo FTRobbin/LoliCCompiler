@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class SPIMImmediate extends SPIMValue {
     public Integer val;
 
-    static HashMap<Integer, SPIMImmediate> dict;
+    static HashMap<Integer, SPIMImmediate> dict = new HashMap<>();
 
     SPIMImmediate(int val) {
         this.val = val;
@@ -22,6 +22,7 @@ public class SPIMImmediate extends SPIMValue {
         return dict.get(val);
     }
 
+    @Override
     public String print() {
         return "" + val;
     }

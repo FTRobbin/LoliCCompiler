@@ -35,20 +35,23 @@ public class SPIMCode extends ASMCode {
         }
         ret += ".text\n";
         for (SPIMInst inst : text) {
-            ret += inst.print();
+            ret += inst.print() + "\n";
         }
         return ret;
     }
 
     public SPIMLabel getLabel(String name) {
         for (SPIMInst inst : text) {
-            if (inst.op.use >= 1 && inst.val0 instanceof SPIMAddress && ((SPIMAddress) inst.val0).label.label.equals(name)) {
+            if (inst.label != null) {
+                continue;
+            }
+            if (inst.op.use >= 1 && inst.val0 instanceof SPIMAddress && ((SPIMAddress) inst.val0).label != null && ((SPIMAddress) inst.val0).label.label.equals(name)) {
                 return ((SPIMAddress) inst.val0).label;
             }
-            if (inst.op.use >= 2 && inst.val1 instanceof SPIMAddress && ((SPIMAddress) inst.val1).label.label.equals(name)) {
+            if (inst.op.use >= 2 && inst.val1 instanceof SPIMAddress && ((SPIMAddress) inst.val1).label != null && ((SPIMAddress) inst.val1).label.label.equals(name)) {
                 return ((SPIMAddress) inst.val1).label;
             }
-            if (inst.op.use >= 3 && inst.val2 instanceof SPIMAddress && ((SPIMAddress) inst.val2).label.label.equals(name)) {
+            if (inst.op.use >= 3 && inst.val2 instanceof SPIMAddress && ((SPIMAddress) inst.val2).label != null && ((SPIMAddress) inst.val2).label.label.equals(name)) {
                 return ((SPIMAddress) inst.val2).label;
             }
         }

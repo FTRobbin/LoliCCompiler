@@ -25,12 +25,12 @@ public class AdvancedGen implements CodeGen {
                     ___printf_width_int = new SPIMLabel("___printf_width_int");
             code.addText(new SPIMInst(___printf));
             code.addText(new SPIMInst(SPIMOp.move, SPIMRegID.$t1.getReg(), SPIMRegID.$sp.getReg()));
-            code.addText(new SPIMInst(SPIMOp.sub, SPIMRegID.$t1.getReg(), SPIMRegID.$t1.getReg(), new SPIMAddress(SPIMImmediate.getImmi(4))));
+            code.addText(new SPIMInst(SPIMOp.sub, SPIMRegID.$t1.getReg(), SPIMRegID.$t1.getReg(), new SPIMAddress(SPIMImmediate.getImmi(8))));
             code.addText(new SPIMInst(SPIMOp.lw, SPIMRegID.$t0.getReg(), new SPIMAddress(SPIMRegID.$t1.getReg())));
             code.addText(new SPIMInst(___printf_loop));
             code.addText(new SPIMInst(SPIMOp.lb, SPIMRegID.$a0.getReg(), new SPIMAddress(SPIMRegID.$t0.getReg())));
             code.addText(new SPIMInst(SPIMOp.beq, SPIMRegID.$a0.getReg(), SPIMRegID.$0.getReg(), new SPIMAddress(___printf_end)));
-            code.addText(new SPIMInst(SPIMOp.add, SPIMRegID.$a0.getReg(), SPIMRegID.$a0.getReg(), SPIMImmediate.getImmi(1)));
+            code.addText(new SPIMInst(SPIMOp.add, SPIMRegID.$t0.getReg(), SPIMRegID.$t0.getReg(), SPIMImmediate.getImmi(1)));
             code.addText(new SPIMInst(SPIMOp.beq, SPIMRegID.$a0.getReg(), SPIMImmediate.getImmi('%'), new SPIMAddress(___printf_fmt)));
             code.addText(new SPIMInst(SPIMOp.li, SPIMRegID.$v0.getReg(), SPIMImmediate.getImmi(11)));
             code.addText(new SPIMInst(SPIMOp.syscall));
@@ -120,13 +120,14 @@ public class AdvancedGen implements CodeGen {
 
     @Override
     public ASMCode gen(Program prog) {
+        SPIMInfRegister.reset();
         AdvEnvr envr = (new GlobalAssign()).assign(prog);
         SPIMCode code = (new CodeSelect()).gen(prog, envr);
+        code = addSTL(code);
         return code;
         /*
         return null;
         code = (new RegisterAllocate()).gen(code);
-        code = addSTL(code);
         */
     }
 }

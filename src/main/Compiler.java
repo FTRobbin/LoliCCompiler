@@ -5,6 +5,7 @@ import analysis.trivial.GotoGoto;
 import ast.nodes.Program;
 import gen.ASMCode;
 import gen.CodeGen;
+import gen.advanced.AdvancedGen;
 import gen.basic.BasicGen;
 import gen.basic.RandomSpillGen;
 import irt.Prog;
@@ -34,7 +35,7 @@ public class Compiler {
             mir.Program IRroot = gen.gen(IRTroot);
             IRroot = GotoGoto.GotoGotoOpti(IRroot);
             ControlFlowGraph.getCFG(IRroot);
-            CodeGen cgen = new BasicGen();
+            CodeGen cgen = new AdvancedGen();
             ASMCode code = cgen.gen(IRroot);
             System.out.println(code.print());
         } catch (Throwable t) {
