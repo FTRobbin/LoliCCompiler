@@ -30,13 +30,13 @@ public class CommaOp extends Op {
     public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
         if (ret == null) {
             Label mid = new Label(Label.DUMMY);
-            gen.gen(cur, expr.exprs.get(0), list, mid, null);
             gen.gen(mid, expr.exprs.get(1), list, next, null);
+            gen.gen(cur, expr.exprs.get(0), list, mid, null);
             return null;
         }
         Label mid = new Label(Label.DUMMY);
-        Value src1 = gen.gen(cur, expr.exprs.get(0), list, mid, null);
         Value src2 = gen.gen(mid, expr.exprs.get(1), list, next, ret.isAbsTmp() ? VarName.getAbsTmp() : ret);
+        Value src1 = gen.gen(cur, expr.exprs.get(0), list, mid, null);
         return src2;
     }
 }

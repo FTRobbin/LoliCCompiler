@@ -1,5 +1,6 @@
 package gen.advanced;
 
+import gen.spim.SPIMAddress;
 import gen.spim.SPIMRegister;
 
 /**
@@ -11,7 +12,10 @@ public class SPIMInfRegister extends SPIMRegister {
 
     public int id;
 
-    public SPIMInfRegister() {
+    public SPIMAddress addr;
+
+    public SPIMInfRegister(SPIMAddress addr) {
+        this.addr = addr;
         this.id = cnt++;
     }
 
