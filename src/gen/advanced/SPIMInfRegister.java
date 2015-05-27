@@ -21,6 +21,8 @@ public class SPIMInfRegister extends SPIMRegister {
 
     @Override
     public String print() {
+        return "$I" + (this.id);
+        /*
         //TODO:!!!!
         if (this.id < 8) {
             return "$t" + (this.id + 2);
@@ -32,6 +34,6 @@ public class SPIMInfRegister extends SPIMRegister {
             return "$fp";
         } else {
             throw new InternalError("Not Enough registers.");
-        }
+        }*/
     }
 }

@@ -41,7 +41,7 @@ public enum SPIMOp {
     sw(2, 0),
     syscall(0, 0);
 
-    int use, def;
+    public int use, def;
 
     SPIMOp(int use, int def) {
         this.use = use;

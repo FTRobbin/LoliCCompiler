@@ -50,7 +50,7 @@ public class CodeSelect {
             }
         }
         trans += "\"";
-        SPIMLabel label = new SPIMLabel("_str" + (strCnt++));
+        SPIMLabel label = getLabel("_str" + (strCnt++));
         code.addData(label.label + ":\t\t.asciiz\t" + trans);
         strs.put(Symbol.getnum(s), new SPIMAddress(label));
         return strs.get(Symbol.getnum(s));
@@ -120,21 +120,21 @@ public class CodeSelect {
 
     void addGlobal(ProgUnit global) {
         globalVar = new HashMap<>();
-        code.addText(new SPIMInst(new SPIMLabel("main")));
+        code.addText(new SPIMInst(getLabel("main")));
         curDelta = 0;
         curPara = new HashMap<>();
         curlive = new HashSet<VarName>();
         for (MIRInst inst : global.list) {
             if (inst instanceof ReturnInst) {
                 saveGlobalUnbonded();
-                code.addText(new SPIMInst(SPIMOp.j, new SPIMAddress(new SPIMLabel("__main"))));
+                code.addText(new SPIMInst(SPIMOp.j, new SPIMAddress(getLabel("__main"))));
             } else if (inst instanceof MemInst) {
                 MemInst mem = (MemInst)inst;
                 code.addData("\t\t.align\t" + mem.var.align);
                 code.addData("\t\t.extern\t" + mem.var.name + "\t" + mem.size);
                 code.addData(mem.var.name + ":\t\t" + ".space" + "\t" + mem.size);
-                globalVar.put(mem.var, (new SPIMAddress(new SPIMLabel(mem.var.name))));
-                vars.put(mem.var, (new AddressDescription(new SPIMAddress(new SPIMLabel(mem.var.name)))));
+                globalVar.put(mem.var, (new SPIMAddress(getLabel(mem.var.name))));
+                vars.put(mem.var, (new AddressDescription(new SPIMAddress(getLabel(mem.var.name)))));
                 vars.get(mem.var).inmem = true;
                 setGlobalBond(mem.var);
             } else {

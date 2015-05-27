@@ -51,4 +51,6 @@ public class SPIMInst {
             return "\t\t" + op.print(this);
         }
     }
+
+    public boolean isLeader = false;
 }

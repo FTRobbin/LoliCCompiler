@@ -1,5 +1,6 @@
 package gen.advanced;
 
+import gen.spim.SPIMRegister;
 import mir.VarName;
 
 import java.util.HashMap;
@@ -9,7 +10,9 @@ import java.util.HashMap;
  */
 public class AdvEnvr {
 
-    public HashMap<VarName, SPIMInfRegister> bond;
+    public int cnt = 0;
+
+    public HashMap<VarName, SPIMRegister> bond;
 
     public AdvEnvr() {
         bond = new HashMap<>();

@@ -3,6 +3,7 @@ package gen.advanced;
 import analysis.cfg.Block;
 import analysis.cfg.Graph;
 import analysis.cfg.Loop;
+import gen.spim.SPIMPhysicalRegister;
 import mir.DeRefVar;
 import mir.ProgUnit;
 import mir.Program;
@@ -108,7 +109,11 @@ public class GlobalAssign {
         for (VarName var : vars) {
             //System.out.println(var.name + " : " + counter.get(var));
             if (counter.get(var) >= 10) {
-                ret.bond.put(var, new SPIMInfRegister());
+                if (var.uid == 0 && ret.cnt < 8) {
+                    ret.bond.put(var, SPIMPhysicalRegister.getGlobal(ret.cnt++));
+                } else {
+                    ret.bond.put(var, new SPIMInfRegister());
+                }
             }
         }
         return ret;

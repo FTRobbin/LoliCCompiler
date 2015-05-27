@@ -5,6 +5,8 @@ import gen.CodeGen;
 import gen.spim.*;
 import mir.Program;
 
+import java.util.HashMap;
+
 /**
  * Created by Robbin Ni on 2015/5/23.
  */
@@ -123,11 +125,12 @@ public class AdvancedGen implements CodeGen {
         SPIMInfRegister.reset();
         AdvEnvr envr = (new GlobalAssign()).assign(prog);
         SPIMCode code = (new CodeSelect()).gen(prog, envr);
+        HashMap<SPIMInfRegister, SPIMPhysicalRegister> table = (new RegisterAllocate()).gen(code, envr);
+        code = RegisterRenaming.gen(code, table);
         code = addSTL(code);
         return code;
         /*
         return null;
-        code = (new RegisterAllocate()).gen(code);
         */
     }
 }
