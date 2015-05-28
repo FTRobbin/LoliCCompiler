@@ -8,11 +8,19 @@ public enum ExprOp {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " + " + inst.src2.name;
         }
+        @Override
+        public boolean changeable() {
+            return true;
+        }
     },
 
     and (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " & " + inst.src2.name;
+        }
+        @Override
+        public boolean changeable() {
+            return true;
         }
     },
 
@@ -25,6 +33,10 @@ public enum ExprOp {
     mul (2) {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " * " + inst.src2.name;
+        }
+        @Override
+        public boolean changeable() {
+            return true;
         }
 
     },
@@ -55,6 +67,10 @@ public enum ExprOp {
             return inst.dest.name + " = " + inst.src1.name + " | " + inst.src2.name;
         }
 
+        @Override
+        public boolean changeable() {
+            return true;
+        }
     },
 
     rem (2) {
@@ -90,6 +106,10 @@ public enum ExprOp {
             return inst.dest.name + " = " + inst.src1.name + " ^ " + inst.src2.name;
         }
 
+        @Override
+        public boolean changeable() {
+            return true;
+        }
     },
 
 
@@ -98,6 +118,10 @@ public enum ExprOp {
             return inst.dest.name + " = " + inst.src1.name + " == " + inst.src2.name;
         }
 
+        @Override
+        public boolean changeable() {
+            return true;
+        }
     },
 
     sge (2) {
@@ -131,6 +155,10 @@ public enum ExprOp {
         public String print(AssignInst inst) {
             return inst.dest.name + " = " + inst.src1.name + " != " + inst.src2.name;
         }
+        @Override
+        public boolean changeable() {
+            return true;
+        }
     },
 
     asg (1) {
@@ -157,4 +185,7 @@ public enum ExprOp {
         this.cnt = cnt;
     }
     public abstract String print(AssignInst inst);
+    public boolean changeable() {
+        return false;
+    }
 }

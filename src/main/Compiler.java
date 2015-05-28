@@ -1,5 +1,6 @@
 package main;
 
+import analysis.CommonSubexpression;
 import analysis.ControlFlowGraph;
 import analysis.LivenessAnalysis;
 import analysis.trivial.GotoGoto;
@@ -35,6 +36,12 @@ public class Compiler {
             MIRGen gen = new MIRGen();
             mir.Program IRroot = gen.gen(IRTroot);
             IRroot = GotoGoto.GotoGotoOpti(IRroot);
+            ControlFlowGraph.getCFG(IRroot);
+            ControlFlowGraph.calDominator(IRroot);
+            LivenessAnalysis.cal(IRroot);
+            CommonSubexpression CSE = new CommonSubexpression();
+            CSE.calCommonSubexpression(IRroot);
+            IRroot = CSE.replaceCommonSubexpression(IRroot);
             ControlFlowGraph.getCFG(IRroot);
             ControlFlowGraph.calDominator(IRroot);
             ControlFlowGraph.markNaturalLoops(IRroot);

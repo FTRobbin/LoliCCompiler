@@ -1,5 +1,6 @@
 package main;
 
+import analysis.CommonSubexpression;
 import analysis.ControlFlowGraph;
 import analysis.LivenessAnalysis;
 import analysis.StaticSingleAssignment;
@@ -48,6 +49,7 @@ public class LoliCCompiler {
     private JButton basicGenButton;
     private JButton randomSpillButton;
     private JButton advancedGenButton;
+    private JButton subexpressionButton;
     private JFrame frame;
 
     private static int cnt = 0;
@@ -294,6 +296,24 @@ public class LoliCCompiler {
                 ControlFlowGraph.calDominator(IRroot);
                 LivenessAnalysis.cal(IRroot);
                 textArea1.setText(LivenessAnalysis.printLive(IRroot));
+            }
+        });
+        subexpressionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mir.Program IRroot = getIR();
+                ControlFlowGraph.getCFG(IRroot);
+                ControlFlowGraph.calDominator(IRroot);
+                LivenessAnalysis.cal(IRroot);
+                CommonSubexpression CSE = new CommonSubexpression();
+                CSE.calCommonSubexpression(IRroot);
+                //textArea1.setText(CSE.printCommonSubexpression(IRroot));
+                IRroot = CSE.replaceCommonSubexpression(IRroot);
+                java.util.List<String> IR = IRroot.print();
+                textArea1.setText("");
+                for (String s : IR) {
+                    textArea1.append(s + "\n");
+                }
             }
         });
         basicGenButton.addActionListener(new ActionListener() {

@@ -39,4 +39,6 @@ public abstract class MIRInst {
 
     public boolean isLeader = false;
     public Block block;
+
+    public MIRInst insertedNext;
 }

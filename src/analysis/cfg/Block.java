@@ -1,5 +1,7 @@
 package analysis.cfg;
 
+import analysis.Subexpression;
+import mir.AssignInst;
 import mir.MIRInst;
 import mir.PhiInst;
 import mir.VarName;
@@ -101,4 +103,7 @@ public class Block implements Comparable<Block>{
     }
 
     public Loop loop = null;
+
+    public HashSet<Subexpression> genSub, inSub, outSub;
+    public HashMap<Subexpression, AssignInst> whereSub;
 }

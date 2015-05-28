@@ -1,5 +1,6 @@
 package analysis.cfg;
 
+import analysis.Subexpression;
 import mir.VarName;
 
 import java.util.ArrayList;
@@ -45,4 +46,6 @@ public class Graph {
     }
 
     public List<Loop> loops;
+
+    public HashSet<Subexpression> allExp;
 }
