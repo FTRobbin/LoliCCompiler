@@ -306,6 +306,7 @@ public class CodeSelect {
                 } else {
                     genInst(inst, calls);
                     if (inst instanceof CallInst) {
+                        liveList.pop();
                         calls = null;
                     }
                 }
