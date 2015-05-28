@@ -48,9 +48,14 @@ public class ArrayOp extends Op {
         }
         Label mid = new Label(Label.DUMMY), tcur = new Label(Label.DUMMY);
         Value src1 = gen.gen(cur, expr.exprs.get(0), list, mid, VarName.getAbsTmp());
-        Value src2 = gen.gen(mid, expr.exprs.get(1), list, tcur, VarName.getAbsTmp());
-        VarName tmp = VarName.getTmp();
-        list.add(new AssignInst(ExprOp.mul, tmp, src2, new IntConst(this.expr.retType.size)).setLabel(tcur));
+        Value tmp = VarName.getTmp();
+        if (expr.exprs.get(1).isConst) {
+            int result = (Integer)expr.exprs.get(1).value * this.expr.retType.size;
+            tmp = new IntConst(result);
+        } else {
+            Value src2 = gen.gen(mid, expr.exprs.get(1), list, tcur, VarName.getAbsTmp());
+            list.add(new AssignInst(ExprOp.mul, (VarName)tmp, src2, new IntConst(this.expr.retType.size)).setLabel(tcur));
+        }
         if (ret.isAbsTmp()) {
             VarName dest = VarName.getTmp();
             list.add(new AssignInst(ExprOp.add, dest, src1, tmp));

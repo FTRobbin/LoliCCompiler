@@ -37,6 +37,20 @@ public class BinIntOp extends Op {
 
     @Override
     public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
+        if (expr.isConst) {
+            if (ret == null) {
+                return null;
+            }
+            if (ret.isAbsTmp()) {
+                if (!cur.isDummy() && (ret == null || ret.isAbsTmp())) {
+                    list.add((new EmptyInst()).setLabel(cur));
+                }
+                return new IntConst((Integer)expr.value);
+            } else {
+                list.add((new AssignInst(ExprOp.asg, ret, new IntConst((Integer) expr.value))).setLabel(cur));
+                return ret;
+            }
+        }
         if (ret == null) {
             Label mid = new Label(Label.DUMMY);
             gen.gen(cur, expr.exprs.get(0), list, mid, null);
