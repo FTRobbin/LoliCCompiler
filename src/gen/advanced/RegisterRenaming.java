@@ -45,7 +45,7 @@ public class RegisterRenaming {
             } else {
                 if (reg.addr == null) {
                     throw new InternalError("HAHAHA");
-                    reg.addr = new SPIMAddress(SPIMImmediate.getImmi(-32768 - reg.id * 100), SPIMRegID.$sp.getReg());
+                    //reg.addr = new SPIMAddress(SPIMImmediate.getImmi(-32768 - reg.id * 100), SPIMRegID.$sp.getReg());
                 }
                 writeAddr = reg.addr;
                 return reg1;
