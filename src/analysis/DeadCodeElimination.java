@@ -86,6 +86,7 @@ public class DeadCodeElimination {
                 addUse(b.insts.get(i), cur);
                 for (int j = 1; j <= num; ++j) {
                     addUse(b.insts.get(i - j), cur);
+                    addUse(b.insts.get(i - j), liveList.peek());
                 }
                 i -= num;
             } else {
