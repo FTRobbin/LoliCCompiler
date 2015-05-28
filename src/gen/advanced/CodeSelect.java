@@ -436,13 +436,13 @@ public class CodeSelect {
         return new SPIMAddress(SPIMImmediate.getImmi(-curDelta), SPIMRegID.$sp.getReg());
     }
 
-    void saveRegMem(SPIMRegister reg) {
+    void saveRegMem(SPIMRegister reg, int paraCnt) {
         if (!regs.containsKey(reg)) {
             return;
         }
         RegisterStatus regSt = regs.get(reg);
         for (VarName var : regSt.vars) {
-            if ((curlive.contains(var) || var.uid == 0 || pStack.contains(var)) && vars.containsKey(var) && !vars.get(var).inmem && vars.get(var).regs.size() == 1) {
+            if ((curlive.contains(var) || var.uid == 0 || pStack.indexOf(var) > paraCnt) && vars.containsKey(var) && !vars.get(var).inmem && vars.get(var).regs.size() == 1) {
                 if (envr.bond.containsKey(var) && var.uid == 0) {
                     SPIMRegister reg1 = envr.bond.get(var);
                     code.addText(new SPIMInst(SPIMOp.move, reg1, reg));
@@ -1179,7 +1179,7 @@ public class CodeSelect {
                             break;
                         }
                     }
-                    saveRegMem(reg);
+                    saveRegMem(reg, paraCnt);
                     writeToReg(reg, val);
                 } else {
                     SPIMRegister reg = inst.func.name.equals("___printf") ? loadToRegT0(val) : loadToRegNonArgu(val);
