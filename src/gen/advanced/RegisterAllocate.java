@@ -140,7 +140,7 @@ public class RegisterAllocate {
                 }
             }
             if (!table.containsKey(cur)) {
-                //throw new InternalError("Error in graph painting!\n");
+                throw new InternalError("Error in graph painting!\n");
             }
         }
     }
