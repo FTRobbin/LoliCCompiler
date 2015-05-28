@@ -14,9 +14,9 @@ public class SPIMInfRegister extends SPIMRegister {
 
     public SPIMAddress addr;
 
-    public SPIMInfRegister() {
+    public SPIMInfRegister(SPIMAddress addr) {
+        this.addr = addr;
         this.id = cnt++;
-        this.addr = null;
     }
 
     static public void reset() {

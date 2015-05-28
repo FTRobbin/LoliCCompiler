@@ -112,7 +112,7 @@ public class GlobalAssign {
                 if (var.uid == 0 && ret.cnt < 8) {
                     ret.bond.put(var, SPIMPhysicalRegister.getGlobal(ret.cnt++));
                 } else {
-                    ret.bond.put(var, new SPIMInfRegister());
+                    ret.bond.put(var, new SPIMInfRegister(null));
                 }
             }
         }
