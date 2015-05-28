@@ -1,9 +1,6 @@
 package main;
 
-import analysis.CommonSubexpression;
-import analysis.ControlFlowGraph;
-import analysis.LivenessAnalysis;
-import analysis.StaticSingleAssignment;
+import analysis.*;
 import ast.visitors.Visitor;
 import exception.*;
 import gen.advanced.AdvancedGen;
@@ -50,6 +47,7 @@ public class LoliCCompiler {
     private JButton randomSpillButton;
     private JButton advancedGenButton;
     private JButton subexpressionButton;
+    private JButton deadeliminateButton;
     private JFrame frame;
 
     private static int cnt = 0;
@@ -352,6 +350,22 @@ public class LoliCCompiler {
                 ControlFlowGraph.markNaturalLoops(IRroot);
                 LivenessAnalysis.cal(IRroot);
                 textArea1.setText((new AdvancedGen()).gen(IRroot).print());
+            }
+        });
+        deadeliminateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mir.Program IRroot = getIR();
+                ControlFlowGraph.getCFG(IRroot);
+                ControlFlowGraph.calDominator(IRroot);
+                LivenessAnalysis.cal(IRroot);
+                DeadCodeElimination DCE = new DeadCodeElimination();
+                IRroot = DCE.DeadCodeElimination(IRroot);
+                java.util.List<String> IR = IRroot.print();
+                textArea1.setText("");
+                for (String s : IR) {
+                    textArea1.append(s + "\n");
+                }
             }
         });
     }

@@ -296,6 +296,17 @@
           <text value="Subexpression"/>
         </properties>
       </component>
+      <component id="9eb62" class="javax.swing.JButton" binding="deadeliminateButton">
+        <constraints>
+          <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="80" height="36"/>
+          </grid>
+        </constraints>
+        <properties>
+          <enabled value="true"/>
+          <text value="DeadElimination"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
