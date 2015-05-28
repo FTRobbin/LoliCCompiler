@@ -297,8 +297,6 @@ public class CodeSelect {
                 if (inst instanceof ParaInst) {
                     if (calls == null) {
                         calls = liveList.pop();
-                    } else {
-                        liveList.pop();
                     }
                 }
                 if (calls == null) {
@@ -306,7 +304,6 @@ public class CodeSelect {
                 } else {
                     genInst(inst, calls);
                     if (inst instanceof CallInst) {
-                        liveList.pop();
                         calls = null;
                     }
                 }
@@ -393,8 +390,19 @@ public class CodeSelect {
         for (int i = b.insts.size() - 1; i >= 0; --i) {
             liveList.push(cur);
             cur = (HashSet<VarName>)(cur.clone());
-            cutDef(b.insts.get(i), cur);
-            addUse(b.insts.get(i), cur);
+            if (b.insts.get(i) instanceof CallInst) {
+                CallInst call = (CallInst)(b.insts.get(i));
+                int num = ((IntConst)call.num).val;
+                cutDef(b.insts.get(i), cur);
+                addUse(b.insts.get(i), cur);
+                for (int j = 1; j <= num; ++j) {
+                    addUse(b.insts.get(i - j), cur);
+                }
+                i -= num;
+            } else {
+                cutDef(b.insts.get(i), cur);
+                addUse(b.insts.get(i), cur);
+            }
         }
     }
 

@@ -10,7 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd301699-7dc0-43f0-8c70-45cea3c704d9" name="Default" comment="Address bug fixed.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/analysis/DeadCodeElimination.java" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\CompileError-new\defcomment.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\CompileError-new\funcini.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\CompileError-new\funcstruct.c" afterPath="" />
@@ -32,8 +31,8 @@
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\toolong.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\typchk.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\voidpnt2.c" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Compiler.java" afterPath="$PROJECT_DIR$/src/main/Compiler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/LoliCCompiler.form" afterPath="$PROJECT_DIR$/src/main/LoliCCompiler.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" afterPath="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/analysis/DeadCodeElimination.java" afterPath="$PROJECT_DIR$/src/analysis/DeadCodeElimination.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/LoliCCompiler.java" afterPath="$PROJECT_DIR$/src/main/LoliCCompiler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/baojingcount.log" afterPath="$PROJECT_DIR$/testcases/baojingcount.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse-5100309153-yanghuan.c" />
@@ -78,7 +77,7 @@
         <entry file="file://$PROJECT_DIR$/src/analysis/DeadCodeElimination.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="114" column="19" selection-start-line="114" selection-start-column="19" selection-end-line="114" selection-end-column="19" />
+              <caret line="131" column="42" selection-start-line="131" selection-start-column="42" selection-end-line="131" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -120,7 +119,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/LoliCCompiler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="363" column="58" selection-start-line="363" selection-start-column="58" selection-end-line="363" selection-end-column="58" />
+              <caret line="262" column="37" selection-start-line="262" selection-start-column="37" selection-end-line="262" selection-end-column="37" />
               <folding>
                 <element signature="e#2138#2139#0" expanded="true" />
                 <element signature="e#2208#2209#0" expanded="true" />
@@ -140,27 +139,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CodeSelect.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CodeSelect.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="289" column="0" selection-start-line="289" selection-start-column="0" selection-end-line="289" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.52545154">
+              <caret line="289" column="41" selection-start-line="289" selection-start-column="41" selection-end-line="289" selection-end-column="41" />
               <folding>
-                <element signature="e#54363#54364#0" expanded="true" />
-                <element signature="e#54460#54461#0" expanded="true" />
-                <element signature="e#56777#56778#0" expanded="true" />
-                <element signature="e#56813#56814#0" expanded="true" />
+                <element signature="e#54699#54700#0" expanded="true" />
+                <element signature="e#54796#54797#0" expanded="true" />
+                <element signature="e#57113#57114#0" expanded="true" />
+                <element signature="e#57149#57150#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Compiler.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/Compiler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6715928">
-              <caret line="52" column="12" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="12" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -250,12 +239,12 @@
         <option value="$PROJECT_DIR$/src/analysis/Subexpression.java" />
         <option value="$PROJECT_DIR$/src/mir/MIRInst.java" />
         <option value="$PROJECT_DIR$/src/analysis/cfg/Block.java" />
-        <option value="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
         <option value="$PROJECT_DIR$/src/analysis/CommonSubexpression.java" />
         <option value="$PROJECT_DIR$/src/main/LoliCCompiler.form" />
+        <option value="$PROJECT_DIR$/src/main/Compiler.java" />
         <option value="$PROJECT_DIR$/src/main/LoliCCompiler.java" />
         <option value="$PROJECT_DIR$/src/analysis/DeadCodeElimination.java" />
-        <option value="$PROJECT_DIR$/src/main/Compiler.java" />
+        <option value="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
       </list>
     </option>
   </component>
@@ -882,12 +871,6 @@
       <option name="number" value="Default" />
       <updated>1428288077013</updated>
     </task>
-    <task id="LOCAL-00060" summary="The crazyness and madness random-spill register allocator!">
-      <created>1432306495694</created>
-      <option name="number" value="00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1432306495694</updated>
-    </task>
     <task id="LOCAL-00061" summary="The crazyness and madness random-spill register allocator!">
       <created>1432306655471</created>
       <option name="number" value="00061" />
@@ -1176,7 +1159,13 @@
       <option name="project" value="LOCAL" />
       <updated>1432821291999</updated>
     </task>
-    <option name="localTasksCounter" value="109" />
+    <task id="LOCAL-00109" summary="Deadcode elimination.">
+      <created>1432823484035</created>
+      <option name="number" value="00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1432823484035</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1233,7 +1222,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/testcases/compiler2015" />
     </ignored-roots>
-    <MESSAGE value="IR small improvement." />
     <MESSAGE value="IR small improvement. Bug fixes." />
     <MESSAGE value="Initialization bug fixes." />
     <MESSAGE value="Global alignment bug fixes." />
@@ -1258,7 +1246,8 @@
     <MESSAGE value="Test spill existence." />
     <MESSAGE value="CSE the first trial." />
     <MESSAGE value="CSE : Second trial." />
-    <option name="LAST_COMMIT_MESSAGE" value="CSE : Second trial." />
+    <MESSAGE value="Deadcode elimination." />
+    <option name="LAST_COMMIT_MESSAGE" value="Deadcode elimination." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1667,14 +1656,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mir/Program.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/analysis/cfg/Block.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1691,31 +1672,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
+    <entry file="file://$PROJECT_DIR$/src/mir/MIRInst.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="289" column="0" selection-start-line="289" selection-start-column="0" selection-end-line="289" selection-end-column="0" />
-          <folding>
-            <element signature="e#54363#54364#0" expanded="true" />
-            <element signature="e#54460#54461#0" expanded="true" />
-            <element signature="e#56777#56778#0" expanded="true" />
-            <element signature="e#56813#56814#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/LoliCCompiler.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/analysis/DeadCodeElimination.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="114" column="19" selection-start-line="114" selection-start-column="19" selection-end-line="114" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1729,18 +1690,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mir/MIRInst.java">
+    <entry file="file://$PROJECT_DIR$/src/main/Compiler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.6239737">
+          <caret line="46" column="11" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mir/Program.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/LoliCCompiler.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/LoliCCompiler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="363" column="58" selection-start-line="363" selection-start-column="58" selection-end-line="363" selection-end-column="58" />
+          <caret line="262" column="37" selection-start-line="262" selection-start-column="37" selection-end-line="262" selection-end-column="37" />
           <folding>
             <element signature="e#2138#2139#0" expanded="true" />
             <element signature="e#2208#2209#0" expanded="true" />
@@ -1752,11 +1726,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Compiler.java">
+    <entry file="file://$PROJECT_DIR$/src/analysis/DeadCodeElimination.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6715928">
-          <caret line="52" column="12" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="12" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="131" column="42" selection-start-line="131" selection-start-column="42" selection-end-line="131" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.52545154">
+          <caret line="289" column="41" selection-start-line="289" selection-start-column="41" selection-end-line="289" selection-end-column="41" />
+          <folding>
+            <element signature="e#54699#54700#0" expanded="true" />
+            <element signature="e#54796#54797#0" expanded="true" />
+            <element signature="e#57113#57114#0" expanded="true" />
+            <element signature="e#57149#57150#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -260,6 +260,19 @@ public class LoliCCompiler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mir.Program IRroot = getIR();
+                for (int i = 0; i < 10; ++i) {
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    LivenessAnalysis.cal(IRroot);
+                    CommonSubexpression CSE = new CommonSubexpression();
+                    CSE.calCommonSubexpression(IRroot);
+                    IRroot = CSE.replaceCommonSubexpression(IRroot);
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    LivenessAnalysis.cal(IRroot);
+                    DeadCodeElimination DCE = new DeadCodeElimination();
+                    IRroot = DCE.DeadCodeElimination(IRroot);
+                }
                 java.util.List<String> IR = IRroot.print();
                 textArea1.setText("");
                 for (String s : IR) {
@@ -339,12 +352,20 @@ public class LoliCCompiler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mir.Program IRroot = getIR();
-                ControlFlowGraph.getCFG(IRroot);
-                ControlFlowGraph.calDominator(IRroot);
-                LivenessAnalysis.cal(IRroot);
-                CommonSubexpression CSE = new CommonSubexpression();
-                CSE.calCommonSubexpression(IRroot);
-                IRroot = CSE.replaceCommonSubexpression(IRroot);
+                for (int i = 0; i < 10; ++i) {
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    LivenessAnalysis.cal(IRroot);
+                    CommonSubexpression CSE = new CommonSubexpression();
+                    CSE.calCommonSubexpression(IRroot);
+                    IRroot = CSE.replaceCommonSubexpression(IRroot);
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    LivenessAnalysis.cal(IRroot);
+                    DeadCodeElimination DCE = new DeadCodeElimination();
+                    IRroot = DCE.DeadCodeElimination(IRroot);
+                }
+
                 ControlFlowGraph.getCFG(IRroot);
                 ControlFlowGraph.calDominator(IRroot);
                 ControlFlowGraph.markNaturalLoops(IRroot);

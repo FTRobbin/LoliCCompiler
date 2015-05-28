@@ -79,8 +79,19 @@ public class DeadCodeElimination {
         for (int i = b.insts.size() - 1; i >= 0; --i) {
             liveList.push(cur);
             cur = (HashSet<VarName>)(cur.clone());
-            cutDef(b.insts.get(i), cur);
-            addUse(b.insts.get(i), cur);
+            if (b.insts.get(i) instanceof CallInst) {
+                CallInst call = (CallInst)(b.insts.get(i));
+                int num = ((IntConst)call.num).val;
+                cutDef(b.insts.get(i), cur);
+                addUse(b.insts.get(i), cur);
+                for (int j = 1; j <= num; ++j) {
+                    addUse(b.insts.get(i - j), cur);
+                }
+                i -= num;
+            } else {
+                cutDef(b.insts.get(i), cur);
+                addUse(b.insts.get(i), cur);
+            }
         }
     }
 
@@ -95,22 +106,16 @@ public class DeadCodeElimination {
     public MIRInst eliminate(MIRInst inst, HashSet<VarName> cur) {
         if (inst instanceof AssignInst) {
             VarName var = ((AssignInst) inst).dest;
-            if (!(var instanceof DeRefVar) && !cur.contains(var)) {
+            if (!(var instanceof DeRefVar) && !(cur.contains(var) || var.isRet || var.uid == 0)) {
                 return emptyReplace(inst);
             }
         } else if (inst instanceof CallInst)  {
             if (((CallInst) inst).dest != null) {
                 VarName var = ((CallInst) inst).dest;
-                if (!(var instanceof DeRefVar) && !cur.contains(var)) {
+                if (!(var instanceof DeRefVar) && !(cur.contains(var) || var.isRet || var.uid == 0)) {
                     ((CallInst) inst).dest = null;
                 }
             }
-        } else if (inst instanceof MemInst) {
-            if (!cur.contains(((MemInst) inst).var)) {
-                return emptyReplace(inst);
-            }
-        } else if (inst instanceof RecvInst) {
-            cur.remove(((RecvInst) inst).var);
         }
         return inst;
     }
@@ -125,8 +130,6 @@ public class DeadCodeElimination {
                 if (inst instanceof ParaInst) {
                     if (calls == null) {
                         calls = liveList.pop();
-                    } else {
-                        liveList.pop();
                     }
                 }
                 if (calls == null) {
@@ -134,7 +137,6 @@ public class DeadCodeElimination {
                 } else {
                     unit1.addInst(eliminate(inst, calls));
                     if (inst instanceof CallInst) {
-                        liveList.pop();
                         calls = null;
                     }
                 }
