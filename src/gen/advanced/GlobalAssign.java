@@ -116,7 +116,7 @@ public class GlobalAssign {
         AdvEnvr ret = new AdvEnvr();
         Set<VarName> vars = counter.keySet();
         for (VarName var : vars) {
-            System.out.println(var.name + " : " + counter.get(var));
+            //System.out.println(var.name + " : " + counter.get(var));
             if (counter.get(var) >= 6) {
                 if (var.uid == 0 && ret.cnt < 8) {
                     ret.bond.put(var, SPIMPhysicalRegister.getGlobal(ret.cnt++));
