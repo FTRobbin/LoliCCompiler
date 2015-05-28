@@ -36,16 +36,19 @@ public class Compiler {
             MIRGen gen = new MIRGen();
             mir.Program IRroot = gen.gen(IRTroot);
             IRroot = GotoGoto.GotoGotoOpti(IRroot);
+
             ControlFlowGraph.getCFG(IRroot);
             ControlFlowGraph.calDominator(IRroot);
             LivenessAnalysis.cal(IRroot);
             CommonSubexpression CSE = new CommonSubexpression();
             CSE.calCommonSubexpression(IRroot);
             IRroot = CSE.replaceCommonSubexpression(IRroot);
+
             ControlFlowGraph.getCFG(IRroot);
             ControlFlowGraph.calDominator(IRroot);
             ControlFlowGraph.markNaturalLoops(IRroot);
             LivenessAnalysis.cal(IRroot);
+
             CodeGen cgen = new AdvancedGen();
             ASMCode code = cgen.gen(IRroot);
             System.out.println(code.print());

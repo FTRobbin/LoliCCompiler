@@ -309,6 +309,12 @@ public class LoliCCompiler {
                 CSE.calCommonSubexpression(IRroot);
                 //textArea1.setText(CSE.printCommonSubexpression(IRroot));
                 IRroot = CSE.replaceCommonSubexpression(IRroot);
+                /*
+                ControlFlowGraph.getCFG(IRroot);
+                ControlFlowGraph.calDominator(IRroot);
+                LivenessAnalysis.cal(IRroot);
+                textArea1.setText(LivenessAnalysis.printLive(IRroot));
+                */
                 java.util.List<String> IR = IRroot.print();
                 textArea1.setText("");
                 for (String s : IR) {
@@ -335,6 +341,12 @@ public class LoliCCompiler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mir.Program IRroot = getIR();
+                ControlFlowGraph.getCFG(IRroot);
+                ControlFlowGraph.calDominator(IRroot);
+                LivenessAnalysis.cal(IRroot);
+                CommonSubexpression CSE = new CommonSubexpression();
+                CSE.calCommonSubexpression(IRroot);
+                IRroot = CSE.replaceCommonSubexpression(IRroot);
                 ControlFlowGraph.getCFG(IRroot);
                 ControlFlowGraph.calDominator(IRroot);
                 ControlFlowGraph.markNaturalLoops(IRroot);

@@ -185,6 +185,9 @@ public class CommonSubexpression {
             AssignInst inserted = new AssignInst(exp.op, tmp, exp.val1, exp.val2);
             inst.insertedNext = inserted;
             inserted.label = inst.label;
+            if (inst.label != null) {
+                inst.label.inst = inserted;
+            }
             inst.insertedNext.insertedNext = new AssignInst(ExprOp.asg, inst.dest, tmp);
         }
     }
@@ -236,6 +239,9 @@ public class CommonSubexpression {
                         }
                         inst.insertedNext = new AssignInst(ExprOp.asg, ((AssignInst)inst).dest, tmp);
                         inst.insertedNext.label = inst.label;
+                        if (inst.label != null) {
+                            inst.label.inst = inst.insertedNext;
+                        }
                     } else {
                         avli.add(exp);
                         inBlock.put(exp, (AssignInst)inst);
