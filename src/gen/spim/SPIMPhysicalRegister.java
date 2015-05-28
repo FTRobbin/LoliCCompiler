@@ -37,4 +37,14 @@ public class SPIMPhysicalRegister extends SPIMRegister {
             default : throw new InternalError("Global assignment spilled");
         }
     }
+
+    public static SPIMPhysicalRegister getTemp(int num) {
+        switch(num) {
+            case 0 : return SPIMRegID.$t0.getReg();
+            case 1 : return SPIMRegID.$t1.getReg();
+            case 2 : return SPIMRegID.$k0.getReg();
+            case 3 : return SPIMRegID.$k1.getReg();
+            default : throw new InternalError("Temp assignment failed");
+        }
+    }
 }
