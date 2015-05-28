@@ -251,14 +251,26 @@ public class MIRGen {
                           cnxt = new Label(Label.DUMMY);
                     VarName tmp2 = VarName.getTmp();
                     list.add((new AssignInst(ExprOp.add, tmp2, var, new IntConst(pair.id))).setLabel(cnxt));
-                    gen(ccur, pair.expr, list, cnxt, new DeRefVar(tmp2, pair.expr.retSize, IRTBuilder.getAlignSize(pair.expr.retType), pair.expr.retType instanceof ArrayType, pair.expr.retType instanceof RecordType));
+                    VarName var1 = new DeRefVar(tmp2, pair.expr.retSize, IRTBuilder.getAlignSize(pair.expr.retType), pair.expr.retType instanceof ArrayType, pair.expr.retType instanceof RecordType);
+                    if (var.isStruct) {
+                        Label nnxt = new Label(Label.DUMMY);
+                        Value val = gen(new Label(Label.DUMMY), list1.get(0).expr, list, nnxt, VarName.getAbsTmp());
+                        list.add((new AssignInst(ExprOp.asgr, var1, val)).setLabel(nnxt));
+                    } else {
+                        gen(ccur, pair.expr, list, cnxt, var1);
+                    }
                 }
             } else {
                 if (list1.size() > 1 || list1.get(0).id != 0) {
                     throw new InternalError("Multi-initialize a non-array.\n");
                 }
                 Label nxt = new Label(Label.DUMMY);
-                gen(new Label(Label.DUMMY), list1.get(0).expr, list, nxt, var);
+                if (var.isStruct) {
+                    Value val = gen(new Label(Label.DUMMY), list1.get(0).expr, list, nxt, VarName.getAbsTmp());
+                    list.add(new AssignInst(ExprOp.asgr, var, val));
+                } else {
+                    gen(new Label(Label.DUMMY), list1.get(0).expr, list, nxt, var);
+                }
             }
         }
         return list;
