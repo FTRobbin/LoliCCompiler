@@ -32,6 +32,9 @@ public class RegisterAllocate {
         if (val instanceof SPIMInfRegister) {
             SPIMInfRegister reg = (SPIMInfRegister)val;
             cur.remove(reg);
+            for (SPIMInfRegister reg1 : cur) {
+                addRegEdge(reg, reg1);
+            }
             if (!edges.containsKey(reg)) {
                 edges.put(reg, new HashSet<>());
             }

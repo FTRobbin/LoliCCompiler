@@ -31,7 +31,6 @@
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\toolong.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\typchk.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\voidpnt2.c" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" afterPath="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gen/advanced/RegisterAllocate.java" afterPath="$PROJECT_DIR$/src/gen/advanced/RegisterAllocate.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/baojingcount.log" afterPath="$PROJECT_DIR$/testcases/baojingcount.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse-5100309153-yanghuan.c" />
@@ -64,12 +63,12 @@
         <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="1110" column="18" selection-start-line="1110" selection-start-column="18" selection-end-line="1110" selection-end-column="18" />
+              <caret line="905" column="14" selection-start-line="905" selection-start-column="14" selection-end-line="905" selection-end-column="14" />
               <folding>
-                <element signature="e#54323#54324#0" expanded="true" />
-                <element signature="e#54420#54421#0" expanded="true" />
-                <element signature="e#56737#56738#0" expanded="true" />
-                <element signature="e#56773#56774#0" expanded="true" />
+                <element signature="e#54363#54364#0" expanded="true" />
+                <element signature="e#54460#54461#0" expanded="true" />
+                <element signature="e#56777#56778#0" expanded="true" />
+                <element signature="e#56813#56814#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -100,11 +99,21 @@
       <file leaf-file-name="RegisterAllocate.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gen/advanced/RegisterAllocate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24466339">
-              <caret line="143" column="0" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
+            <state vertical-scroll-proportion="-3.3497536">
+              <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SPIMLiveness.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gen/spim/SPIMLiveness.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="60" column="12" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -113,7 +122,7 @@
         <entry file="file://$PROJECT_DIR$/src/gen/advanced/GlobalAssign.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="102" column="40" selection-start-line="102" selection-start-column="40" selection-end-line="102" selection-end-column="40" />
+              <caret line="96" column="16" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -123,7 +132,7 @@
         <entry file="file://$PROJECT_DIR$/src/gen/spim/SPIMOp.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+              <caret line="61" column="31" selection-start-line="61" selection-start-column="31" selection-end-line="61" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -199,7 +208,6 @@
         <option value="$PROJECT_DIR$/src/gen/spim/spimcfg/Graph.java" />
         <option value="$PROJECT_DIR$/src/gen/spim/SPIMCode.java" />
         <option value="$PROJECT_DIR$/src/gen/spim/SPIMOp.java" />
-        <option value="$PROJECT_DIR$/src/gen/spim/SPIMLiveness.java" />
         <option value="$PROJECT_DIR$/src/gen/spim/SPIMControlFlow.java" />
         <option value="$PROJECT_DIR$/src/mir/MIRGen.java" />
         <option value="$PROJECT_DIR$/src/irt/factory/BinIntFact.java" />
@@ -209,6 +217,7 @@
         <option value="$PROJECT_DIR$/src/gen/advanced/GlobalAssign.java" />
         <option value="$PROJECT_DIR$/src/gen/advanced/RegisterRenaming.java" />
         <option value="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
+        <option value="$PROJECT_DIR$/src/gen/spim/SPIMLiveness.java" />
         <option value="$PROJECT_DIR$/src/gen/advanced/RegisterAllocate.java" />
       </list>
     </option>
@@ -814,18 +823,6 @@
       <option name="number" value="Default" />
       <updated>1428288077013</updated>
     </task>
-    <task id="LOCAL-00051" summary="Renamed some classes. Fixed many bugs.">
-      <created>1431962538385</created>
-      <option name="number" value="00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1431962538385</updated>
-    </task>
-    <task id="LOCAL-00052" summary="Commited for correctness test.">
-      <created>1432270643958</created>
-      <option name="number" value="00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1432270643959</updated>
-    </task>
     <task id="LOCAL-00053" summary="Commited for correctness test.">
       <created>1432270802050</created>
       <option name="number" value="00053" />
@@ -1108,7 +1105,19 @@
       <option name="project" value="LOCAL" />
       <updated>1432785815733</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="Size bug fixed. SPIMLiveness bug fixed.">
+      <created>1432791171958</created>
+      <option name="number" value="00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1432791171959</updated>
+    </task>
+    <task id="LOCAL-00101" summary="Call liveness bug fixed.">
+      <created>1432791562852</created>
+      <option name="number" value="00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1432791562852</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1165,8 +1174,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/testcases/compiler2015" />
     </ignored-roots>
-    <MESSAGE value="Renamed some classes. Fixed many bugs." />
-    <MESSAGE value="Commited for correctness test." />
     <MESSAGE value="A trivial optimization added. Test the test script." />
     <MESSAGE value="Another trivial optimization added." />
     <MESSAGE value="The crazyness and madness random-spill register allocator!" />
@@ -1190,7 +1197,9 @@
     <MESSAGE value="Address bug fixed." />
     <MESSAGE value="Printf spill bug fix." />
     <MESSAGE value="Struct bug fixed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Struct bug fixed." />
+    <MESSAGE value="Size bug fixed. SPIMLiveness bug fixed." />
+    <MESSAGE value="Call liveness bug fixed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Call liveness bug fixed." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1523,16 +1532,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gen/spim/SPIMLiveness.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gen/spim/SPIMCode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1602,24 +1601,21 @@
     <entry file="file://$PROJECT_DIR$/src/gen/spim/SPIMOp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <caret line="61" column="31" selection-start-line="61" selection-start-column="31" selection-end-line="61" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gen/spim/SPIMControlFlow.java">
+    <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gen/advanced/GlobalAssign.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="102" column="40" selection-start-line="102" selection-start-column="40" selection-end-line="102" selection-end-column="40" />
-          <folding />
+          <caret line="905" column="14" selection-start-line="905" selection-start-column="14" selection-end-line="905" selection-end-column="14" />
+          <folding>
+            <element signature="e#54363#54364#0" expanded="true" />
+            <element signature="e#54460#54461#0" expanded="true" />
+            <element signature="e#56777#56778#0" expanded="true" />
+            <element signature="e#56813#56814#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1633,23 +1629,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
+    <entry file="file://$PROJECT_DIR$/src/gen/spim/SPIMControlFlow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="1110" column="18" selection-start-line="1110" selection-start-column="18" selection-end-line="1110" selection-end-column="18" />
-          <folding>
-            <element signature="e#54323#54324#0" expanded="true" />
-            <element signature="e#54420#54421#0" expanded="true" />
-            <element signature="e#56737#56738#0" expanded="true" />
-            <element signature="e#56773#56774#0" expanded="true" />
-          </folding>
+          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gen/spim/SPIMLiveness.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="60" column="12" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gen/advanced/GlobalAssign.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="96" column="16" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gen/advanced/RegisterAllocate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24466339">
-          <caret line="143" column="0" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
+        <state vertical-scroll-proportion="-3.3497536">
+          <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
