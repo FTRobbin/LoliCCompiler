@@ -25,7 +25,7 @@ public class GlobalAssign {
     }
 
     public void add(VarName var, Integer inc) {
-        if (var.isTemp || var instanceof DeRefVar || var.isArray || var.isStruct || var.isFunc || var.isPara != -1) {
+        if (var instanceof DeRefVar || var.isArray || var.isStruct || var.isFunc || var.isPara != -1) {
             return;
         }
         if (!counter.containsKey(var)) {
@@ -108,7 +108,7 @@ public class GlobalAssign {
         Set<VarName> vars = counter.keySet();
         for (VarName var : vars) {
             //System.out.println(var.name + " : " + counter.get(var));
-            if (counter.get(var) >= 10) {
+            if (counter.get(var) >= 6) {
                 if (var.uid == 0 && ret.cnt < 8) {
                     ret.bond.put(var, SPIMPhysicalRegister.getGlobal(ret.cnt++));
                 } else {

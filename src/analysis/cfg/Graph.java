@@ -48,4 +48,6 @@ public class Graph {
     public List<Loop> loops;
 
     public HashSet<Subexpression> allExp;
+
+    public HashSet<VarName> allVar;
 }
