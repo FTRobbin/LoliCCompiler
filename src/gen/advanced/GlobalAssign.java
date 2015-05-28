@@ -4,10 +4,7 @@ import analysis.cfg.Block;
 import analysis.cfg.Graph;
 import analysis.cfg.Loop;
 import gen.spim.SPIMPhysicalRegister;
-import mir.DeRefVar;
-import mir.ProgUnit;
-import mir.Program;
-import mir.VarName;
+import mir.*;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -100,14 +97,26 @@ public class GlobalAssign {
         }
     }
 
+    public void removePtrs(ProgUnit unit) {
+        for (MIRInst inst : unit.list) {
+            if (inst instanceof AssignInst) {
+                if (((AssignInst) inst).op.equals(ExprOp.adr)) {
+                    VarName var = (VarName)(((AssignInst) inst).src1);
+                    counter.remove(var);
+                }
+            }
+        }
+    }
+
     public AdvEnvr assign(Program prog) {
         for (ProgUnit unit : prog.list) {
             countGraph(unit.graph);
+            removePtrs(unit);
         }
         AdvEnvr ret = new AdvEnvr();
         Set<VarName> vars = counter.keySet();
         for (VarName var : vars) {
-            //System.out.println(var.name + " : " + counter.get(var));
+            System.out.println(var.name + " : " + counter.get(var));
             if (counter.get(var) >= 6) {
                 if (var.uid == 0 && ret.cnt < 8) {
                     ret.bond.put(var, SPIMPhysicalRegister.getGlobal(ret.cnt++));
