@@ -442,7 +442,7 @@ public class CodeSelect {
         }
         RegisterStatus regSt = regs.get(reg);
         for (VarName var : regSt.vars) {
-            if ((curlive.contains(var) || var.uid == 0) && vars.containsKey(var) && !vars.get(var).inmem && vars.get(var).regs.size() == 1) {
+            if ((curlive.contains(var) || var.uid == 0 || pStack.contains(var)) && vars.containsKey(var) && !vars.get(var).inmem && vars.get(var).regs.size() == 1) {
                 if (envr.bond.containsKey(var) && var.uid == 0) {
                     SPIMRegister reg1 = envr.bond.get(var);
                     code.addText(new SPIMInst(SPIMOp.move, reg1, reg));
