@@ -1098,12 +1098,6 @@ public class CodeSelect {
                     SPIMRegister reg = inst.func.name.equals("___printf") ? loadToReg(val) : loadToRegNonArgu(val);
                     code.addText(new SPIMInst(val.size == 4 ? SPIMOp.sw : SPIMOp.sb, reg, new SPIMAddress(SPIMImmediate.getImmi(-paraAdr), SPIMRegID.$sp.getReg())));
                     //TODO: ATTENTION memory! problem happens when printf and used later
-                    if (val instanceof VarName && vars.containsKey(val)) {
-                        vars.get(val).delReg(reg);
-                    }
-                    if (regs.containsKey(reg)) {
-                        regs.get(reg).delVar((VarName) val);
-                    }
                 }
             }
             ++paraCnt;
