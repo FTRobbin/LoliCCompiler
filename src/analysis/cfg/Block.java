@@ -1,5 +1,6 @@
 package analysis.cfg;
 
+import analysis.AssignCopyPair;
 import analysis.Subexpression;
 import mir.AssignInst;
 import mir.MIRInst;
@@ -107,5 +108,5 @@ public class Block implements Comparable<Block>{
     public HashSet<Subexpression> genSub, inSub, outSub;
     public HashMap<Subexpression, AssignInst> whereSub;
 
-    public HashMap<VarName, HashSet<VarName>> genCopy, inCopy, outCopy;
+    public HashSet<AssignCopyPair> genCopy, inCopy, outCopy;
 }

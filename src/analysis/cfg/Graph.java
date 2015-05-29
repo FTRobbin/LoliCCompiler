@@ -1,5 +1,6 @@
 package analysis.cfg;
 
+import analysis.AssignCopyPair;
 import analysis.Subexpression;
 import mir.VarName;
 
@@ -49,5 +50,5 @@ public class Graph {
 
     public HashSet<Subexpression> allExp;
 
-    public HashSet<VarName> allVar;
+    public HashSet<AssignCopyPair> allACP;
 }

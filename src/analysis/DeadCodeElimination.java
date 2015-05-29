@@ -109,6 +109,9 @@ public class DeadCodeElimination {
             if (!(var instanceof DeRefVar) && !(cur.contains(var) || var.isRet || var.uid == 0)) {
                 return emptyReplace(inst);
             }
+            if (((AssignInst) inst).op.equals(ExprOp.asg) && ((AssignInst) inst).dest.equals(((AssignInst) inst).src1)) {
+                return emptyReplace(inst);
+            }
         } else if (inst instanceof CallInst)  {
             if (((CallInst) inst).dest != null) {
                 VarName var = ((CallInst) inst).dest;

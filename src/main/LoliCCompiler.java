@@ -260,13 +260,18 @@ public class LoliCCompiler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mir.Program IRroot = getIR();
-                for (int i = 0; i < 10; ++i) {
+                for (int i = 0; i < 20; ++i) {
                     ControlFlowGraph.getCFG(IRroot);
                     ControlFlowGraph.calDominator(IRroot);
                     LivenessAnalysis.cal(IRroot);
                     CommonSubexpression CSE = new CommonSubexpression();
                     CSE.calCommonSubexpression(IRroot);
                     IRroot = CSE.replaceCommonSubexpression(IRroot);
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    LivenessAnalysis.cal(IRroot);
+                    CopyPropagation CP = new CopyPropagation();
+                    IRroot = CP.CopyPropagation(IRroot);
                     ControlFlowGraph.getCFG(IRroot);
                     ControlFlowGraph.calDominator(IRroot);
                     LivenessAnalysis.cal(IRroot);

@@ -1,9 +1,6 @@
 package main;
 
-import analysis.CommonSubexpression;
-import analysis.ControlFlowGraph;
-import analysis.DeadCodeElimination;
-import analysis.LivenessAnalysis;
+import analysis.*;
 import analysis.trivial.GotoGoto;
 import ast.nodes.Program;
 import gen.ASMCode;
@@ -38,13 +35,18 @@ public class Compiler {
             mir.Program IRroot = gen.gen(IRTroot);
             IRroot = GotoGoto.GotoGotoOpti(IRroot);
 
-            for (int i = 0; i < 10; ++i) {
+            for (int i = 0; i < 20; ++i) {
                 ControlFlowGraph.getCFG(IRroot);
                 ControlFlowGraph.calDominator(IRroot);
                 LivenessAnalysis.cal(IRroot);
                 CommonSubexpression CSE = new CommonSubexpression();
                 CSE.calCommonSubexpression(IRroot);
                 IRroot = CSE.replaceCommonSubexpression(IRroot);
+                ControlFlowGraph.getCFG(IRroot);
+                ControlFlowGraph.calDominator(IRroot);
+                LivenessAnalysis.cal(IRroot);
+                CopyPropagation CP = new CopyPropagation();
+                IRroot = CP.CopyPropagation(IRroot);
                 ControlFlowGraph.getCFG(IRroot);
                 ControlFlowGraph.calDominator(IRroot);
                 LivenessAnalysis.cal(IRroot);
