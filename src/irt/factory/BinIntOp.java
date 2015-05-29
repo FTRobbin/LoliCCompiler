@@ -51,6 +51,38 @@ public class BinIntOp extends Op {
                 return ret;
             }
         }
+        if (this.op.equals(BinIntFact.Ops.ADD)) {
+            if (expr.exprs.get(0).isConst && (Integer)expr.exprs.get(0).value == 0) {
+                if (ret == null) {
+                    gen.gen(cur, expr.exprs.get(1), list, next, null);
+                    return null;
+                }
+                return gen.gen(cur, expr.exprs.get(1), list, next, ret);
+            }
+            if (expr.exprs.get(1).isConst && (Integer)expr.exprs.get(1).value == 0) {
+                if (ret == null) {
+                    gen.gen(cur, expr.exprs.get(0), list, next, null);
+                    return null;
+                }
+                return gen.gen(cur, expr.exprs.get(0), list, next, ret);
+            }
+        }
+        if (this.op.equals(BinIntFact.Ops.MUL)) {
+            if (expr.exprs.get(0).isConst && (Integer)expr.exprs.get(0).value == 1) {
+                if (ret == null) {
+                    gen.gen(cur, expr.exprs.get(1), list, next, null);
+                    return null;
+                }
+                return gen.gen(cur, expr.exprs.get(1), list, next, ret);
+            }
+            if (expr.exprs.get(1).isConst && (Integer)expr.exprs.get(1).value == 1) {
+                if (ret == null) {
+                    gen.gen(cur, expr.exprs.get(0), list, next, null);
+                    return null;
+                }
+                return gen.gen(cur, expr.exprs.get(0), list, next, ret);
+            }
+        }
         if (ret == null) {
             Label mid = new Label(Label.DUMMY);
             gen.gen(cur, expr.exprs.get(0), list, mid, null);
