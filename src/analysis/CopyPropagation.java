@@ -26,6 +26,9 @@ public class CopyPropagation {
     void defCut(MIRInst inst, HashSet<AssignCopyPair> acps) {
         if (inst instanceof AssignInst) {
             defCut(((AssignInst) inst).dest, acps);
+            if (((AssignInst) inst).op.equals(ExprOp.adr)) {
+                defCut((VarName)(((AssignInst) inst).src1), acps);
+            }
         } else if (inst instanceof CallInst)  {
             if (((CallInst)inst).dest != null) {
                 defCut(((CallInst) inst).dest, acps);

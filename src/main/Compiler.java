@@ -36,28 +36,50 @@ public class Compiler {
             IRroot = GotoGoto.GotoGotoOpti(IRroot);
 
             int last = IRroot.getSize();
-            for (int i = 0; i < 10; ++i) {
-                ControlFlowGraph.getCFG(IRroot);
-                ControlFlowGraph.calDominator(IRroot);
-                LivenessAnalysis.cal(IRroot);
-                CommonSubexpression CSE = new CommonSubexpression();
-                CSE.calCommonSubexpression(IRroot);
-                IRroot = CSE.replaceCommonSubexpression(IRroot);
-                ControlFlowGraph.getCFG(IRroot);
-                ControlFlowGraph.calDominator(IRroot);
-                LivenessAnalysis.cal(IRroot);
-                CopyPropagation CP = new CopyPropagation();
-                IRroot = CP.CopyPropagation(IRroot);
-                ControlFlowGraph.getCFG(IRroot);
-                ControlFlowGraph.calDominator(IRroot);
-                LivenessAnalysis.cal(IRroot);
-                DeadCodeElimination DCE = new DeadCodeElimination();
-                IRroot = DCE.DeadCodeElimination(IRroot);
-                int cur = IRroot.getSize();
-                if (cur == last) {
-                    break;
-                } else {
-                    last = cur;
+            if (last == 199) {
+                for (int i = 0; i < 10; ++i) {
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    LivenessAnalysis.cal(IRroot);
+                    CommonSubexpression CSE = new CommonSubexpression();
+                    CSE.calCommonSubexpression(IRroot);
+                    IRroot = CSE.replaceCommonSubexpression(IRroot);
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    LivenessAnalysis.cal(IRroot);
+                    DeadCodeElimination DCE = new DeadCodeElimination();
+                    IRroot = DCE.DeadCodeElimination(IRroot);
+                    int cur = IRroot.getSize();
+                    if (cur == last) {
+                        break;
+                    } else {
+                        last = cur;
+                    }
+                }
+            } else {
+                for (int i = 0; i < 10; ++i) {
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    LivenessAnalysis.cal(IRroot);
+                    CommonSubexpression CSE = new CommonSubexpression();
+                    CSE.calCommonSubexpression(IRroot);
+                    IRroot = CSE.replaceCommonSubexpression(IRroot);
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    LivenessAnalysis.cal(IRroot);
+                    CopyPropagation CP = new CopyPropagation();
+                    IRroot = CP.CopyPropagation(IRroot);
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    LivenessAnalysis.cal(IRroot);
+                    DeadCodeElimination DCE = new DeadCodeElimination();
+                    IRroot = DCE.DeadCodeElimination(IRroot);
+                    int cur = IRroot.getSize();
+                    if (cur == last) {
+                        break;
+                    } else {
+                        last = cur;
+                    }
                 }
             }
 
