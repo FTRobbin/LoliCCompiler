@@ -23,15 +23,27 @@ public class CopyPropagation {
         }
     }
 
+    void defCutAllGlobal(HashSet<AssignCopyPair> acps) {
+        LinkedList<AssignCopyPair> remove = new LinkedList<>();
+        for (AssignCopyPair acp : acps) {
+            if (acp.u.uid == 0 || acp.v.uid == 0) {
+                remove.add(acp);
+            }
+        }
+        for (AssignCopyPair acp: remove) {
+            acps.remove(acp);
+        }
+    }
+
     void defCut(MIRInst inst, HashSet<AssignCopyPair> acps) {
         if (inst instanceof AssignInst) {
             defCut(((AssignInst) inst).dest, acps);
-            if (((AssignInst) inst).op.equals(ExprOp.adr)) {
-                defCut((VarName)(((AssignInst) inst).src1), acps);
-            }
         } else if (inst instanceof CallInst)  {
             if (((CallInst)inst).dest != null) {
                 defCut(((CallInst) inst).dest, acps);
+            }
+            if (!(((CallInst) inst).func instanceof VarName && ((VarName) ((CallInst) inst).func).isSTL)) {
+                defCutAllGlobal(acps);
             }
         } else if (inst instanceof MemInst) {
             defCut(((MemInst) inst).var, acps);
