@@ -36,7 +36,7 @@ public class Compiler {
             IRroot = GotoGoto.GotoGotoOpti(IRroot);
 
             int last = IRroot.getSize();
-            for (int i = 0; i < 15; ++i) {
+            for (int i = 0; i < 10; ++i) {
                 ControlFlowGraph.getCFG(IRroot);
                 ControlFlowGraph.calDominator(IRroot);
                 LivenessAnalysis.cal(IRroot);

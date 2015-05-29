@@ -90,7 +90,7 @@ public class CopyPropagation {
         for (Block b : unit.graph.ver) {
             LinkedList<AssignCopyPair> remove = new LinkedList<>();
             for (AssignCopyPair acp : b.inCopy) {
-                if (b.def.contains(acp.v) && !b.genCopy.contains(acp)) {
+                if ((b.def.contains(acp.v) || b.def.contains(acp.u)) && !b.genCopy.contains(acp)) {
                     remove.add(acp);
                 }
             }
@@ -101,6 +101,9 @@ public class CopyPropagation {
     }
 
     VarName getCopy(VarName u, HashSet<AssignCopyPair> acps) {
+        if (u instanceof DeRefVar && ((DeRefVar) u).val instanceof VarName) {
+            ((DeRefVar) u).val = getCopy((VarName)((DeRefVar) u).val, acps);
+        }
         for (AssignCopyPair acp : acps) {
             if (acp.u.equals(u)) {
                 return acp.v;

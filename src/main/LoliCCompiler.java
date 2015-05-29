@@ -48,6 +48,7 @@ public class LoliCCompiler {
     private JButton advancedGenButton;
     private JButton subexpressionButton;
     private JButton deadeliminateButton;
+    private JButton optimizedIRButton;
     private JFrame frame;
 
     private static int cnt = 0;
@@ -260,31 +261,6 @@ public class LoliCCompiler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mir.Program IRroot = getIR();
-                int last = IRroot.getSize();
-                for (int i = 0; i < 15; ++i) {
-                    ControlFlowGraph.getCFG(IRroot);
-                    ControlFlowGraph.calDominator(IRroot);
-                    LivenessAnalysis.cal(IRroot);
-                    CommonSubexpression CSE = new CommonSubexpression();
-                    CSE.calCommonSubexpression(IRroot);
-                    IRroot = CSE.replaceCommonSubexpression(IRroot);
-                    ControlFlowGraph.getCFG(IRroot);
-                    ControlFlowGraph.calDominator(IRroot);
-                    LivenessAnalysis.cal(IRroot);
-                    CopyPropagation CP = new CopyPropagation();
-                    IRroot = CP.CopyPropagation(IRroot);
-                    ControlFlowGraph.getCFG(IRroot);
-                    ControlFlowGraph.calDominator(IRroot);
-                    LivenessAnalysis.cal(IRroot);
-                    DeadCodeElimination DCE = new DeadCodeElimination();
-                    IRroot = DCE.DeadCodeElimination(IRroot);
-                    int cur = IRroot.getSize();
-                    if (cur == last) {
-                        break;
-                    } else {
-                        last = cur;
-                    }
-                }
                 java.util.List<String> IR = IRroot.print();
                 textArea1.setText("");
                 for (String s : IR) {
@@ -365,7 +341,7 @@ public class LoliCCompiler {
             public void actionPerformed(ActionEvent e) {
                 mir.Program IRroot = getIR();
                 int last = IRroot.getSize();
-                for (int i = 0; i < 15; ++i) {
+                for (int i = 0; i < 10; ++i) {
                     ControlFlowGraph.getCFG(IRroot);
                     ControlFlowGraph.calDominator(IRroot);
                     LivenessAnalysis.cal(IRroot);
@@ -406,6 +382,42 @@ public class LoliCCompiler {
                 LivenessAnalysis.cal(IRroot);
                 DeadCodeElimination DCE = new DeadCodeElimination();
                 IRroot = DCE.DeadCodeElimination(IRroot);
+                java.util.List<String> IR = IRroot.print();
+                textArea1.setText("");
+                for (String s : IR) {
+                    textArea1.append(s + "\n");
+                }
+            }
+        });
+        optimizedIRButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mir.Program IRroot = getIR();
+                int last = IRroot.getSize();
+                for (int i = 0; i < 10; ++i) {
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    LivenessAnalysis.cal(IRroot);
+                    CommonSubexpression CSE = new CommonSubexpression();
+                    CSE.calCommonSubexpression(IRroot);
+                    IRroot = CSE.replaceCommonSubexpression(IRroot);
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    LivenessAnalysis.cal(IRroot);
+                    CopyPropagation CP = new CopyPropagation();
+                    IRroot = CP.CopyPropagation(IRroot);
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    LivenessAnalysis.cal(IRroot);
+                    DeadCodeElimination DCE = new DeadCodeElimination();
+                    IRroot = DCE.DeadCodeElimination(IRroot);
+                    int cur = IRroot.getSize();
+                    if (cur == last) {
+                        break;
+                    } else {
+                        last = cur;
+                    }
+                }
                 java.util.List<String> IR = IRroot.print();
                 textArea1.setText("");
                 for (String s : IR) {
