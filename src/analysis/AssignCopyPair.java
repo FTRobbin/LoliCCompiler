@@ -16,6 +16,10 @@ public class AssignCopyPair {
 
     static HashMap<Integer, AssignCopyPair> dict = new HashMap<>();
 
+    public static void reset() {
+        dict = new HashMap<>();
+    }
+
     AssignCopyPair(VarName u, VarName v, int id) {
         this.u = u;
         this.v = v;

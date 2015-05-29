@@ -39,6 +39,7 @@ public class CopyPropagation {
     void calBlock(Block b) {
         b.genCopy = new HashSet<>();
         for (MIRInst inst : b.insts) {
+            replaceCopy(inst, b.genCopy);
             defCut(inst, b.genCopy);
             if (inst instanceof AssignInst && ((AssignInst) inst).op.equals(ExprOp.asg)) {
                 AssignInst assi = (AssignInst)inst;
@@ -156,6 +157,7 @@ public class CopyPropagation {
     }
 
     public Program CopyPropagation(Program prog) {
+        AssignCopyPair.reset();
         for (ProgUnit unit : prog.list) {
             calCopy(unit);
         }
