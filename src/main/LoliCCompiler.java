@@ -260,7 +260,8 @@ public class LoliCCompiler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mir.Program IRroot = getIR();
-                for (int i = 0; i < 20; ++i) {
+                int last = IRroot.getSize();
+                for (int i = 0; i < 15; ++i) {
                     ControlFlowGraph.getCFG(IRroot);
                     ControlFlowGraph.calDominator(IRroot);
                     LivenessAnalysis.cal(IRroot);
@@ -277,6 +278,12 @@ public class LoliCCompiler {
                     LivenessAnalysis.cal(IRroot);
                     DeadCodeElimination DCE = new DeadCodeElimination();
                     IRroot = DCE.DeadCodeElimination(IRroot);
+                    int cur = IRroot.getSize();
+                    if (cur == last) {
+                        break;
+                    } else {
+                        last = cur;
+                    }
                 }
                 java.util.List<String> IR = IRroot.print();
                 textArea1.setText("");
@@ -357,7 +364,8 @@ public class LoliCCompiler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mir.Program IRroot = getIR();
-                for (int i = 0; i < 10; ++i) {
+                int last = IRroot.getSize();
+                for (int i = 0; i < 15; ++i) {
                     ControlFlowGraph.getCFG(IRroot);
                     ControlFlowGraph.calDominator(IRroot);
                     LivenessAnalysis.cal(IRroot);
@@ -367,8 +375,19 @@ public class LoliCCompiler {
                     ControlFlowGraph.getCFG(IRroot);
                     ControlFlowGraph.calDominator(IRroot);
                     LivenessAnalysis.cal(IRroot);
+                    CopyPropagation CP = new CopyPropagation();
+                    IRroot = CP.CopyPropagation(IRroot);
+                    ControlFlowGraph.getCFG(IRroot);
+                    ControlFlowGraph.calDominator(IRroot);
+                    LivenessAnalysis.cal(IRroot);
                     DeadCodeElimination DCE = new DeadCodeElimination();
                     IRroot = DCE.DeadCodeElimination(IRroot);
+                    int cur = IRroot.getSize();
+                    if (cur == last) {
+                        break;
+                    } else {
+                        last = cur;
+                    }
                 }
 
                 ControlFlowGraph.getCFG(IRroot);

@@ -35,7 +35,8 @@ public class Compiler {
             mir.Program IRroot = gen.gen(IRTroot);
             IRroot = GotoGoto.GotoGotoOpti(IRroot);
 
-            for (int i = 0; i < 20; ++i) {
+            int last = IRroot.getSize();
+            for (int i = 0; i < 15; ++i) {
                 ControlFlowGraph.getCFG(IRroot);
                 ControlFlowGraph.calDominator(IRroot);
                 LivenessAnalysis.cal(IRroot);
@@ -52,6 +53,12 @@ public class Compiler {
                 LivenessAnalysis.cal(IRroot);
                 DeadCodeElimination DCE = new DeadCodeElimination();
                 IRroot = DCE.DeadCodeElimination(IRroot);
+                int cur = IRroot.getSize();
+                if (cur == last) {
+                    break;
+                } else {
+                    last = cur;
+                }
             }
 
             ControlFlowGraph.getCFG(IRroot);

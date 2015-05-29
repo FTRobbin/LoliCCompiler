@@ -43,7 +43,7 @@ public class CopyPropagation {
             defCut(inst, b.genCopy);
             if (inst instanceof AssignInst && ((AssignInst) inst).op.equals(ExprOp.asg)) {
                 AssignInst assi = (AssignInst)inst;
-                if (assi.src1 instanceof VarName && !(assi.src1 instanceof DeRefVar) && !(assi.dest instanceof DeRefVar)) {
+                if (assi.src1 instanceof VarName && !(assi.src1 instanceof DeRefVar) && !(assi.dest instanceof DeRefVar) && ((AssignInst) inst).dest.size == ((AssignInst) inst).src1.size) {
                     b.genCopy.add(AssignCopyPair.getACP(assi.dest, (VarName)assi.src1));
                 }
             }
@@ -147,7 +147,7 @@ public class CopyPropagation {
                 defCut(inst, acp);
                 if (inst instanceof AssignInst && ((AssignInst) inst).op.equals(ExprOp.asg)) {
                     AssignInst assi = (AssignInst)inst;
-                    if (assi.src1 instanceof VarName && !(assi.src1 instanceof DeRefVar) && !(assi.dest instanceof DeRefVar)) {
+                    if (assi.src1 instanceof VarName && !(assi.src1 instanceof DeRefVar) && !(assi.dest instanceof DeRefVar) && ((AssignInst) inst).dest.size == ((AssignInst) inst).src1.size) {
                         acp.add(AssignCopyPair.getACP(assi.dest, (VarName) assi.src1));
                     }
                 }

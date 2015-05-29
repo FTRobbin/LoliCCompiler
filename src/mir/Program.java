@@ -18,6 +18,13 @@ public class Program {
         list.add(unit);
     }
 
+    public int getSize() {
+        int ret = 0;
+        for (ProgUnit unit : list) {
+            ret += unit.list.size();
+        }
+        return ret;
+    }
     public List<String> print() {
         LinkedList<String> ret = new LinkedList<>();
         ret.add("\\\\Program");

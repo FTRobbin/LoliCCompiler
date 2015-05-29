@@ -109,7 +109,7 @@ public class DeadCodeElimination {
             if (!(var instanceof DeRefVar) && !(cur.contains(var) || var.isRet || var.uid == 0)) {
                 return emptyReplace(inst);
             }
-            if (((AssignInst) inst).op.equals(ExprOp.asg) && ((AssignInst) inst).dest.equals(((AssignInst) inst).src1)) {
+            if (((AssignInst) inst).op.equals(ExprOp.asg) && ((AssignInst) inst).dest.equals(((AssignInst) inst).src1) && ((AssignInst) inst).dest.size == ((AssignInst) inst).src1.size) {
                 return emptyReplace(inst);
             }
         } else if (inst instanceof CallInst)  {
