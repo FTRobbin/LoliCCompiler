@@ -1246,9 +1246,13 @@ public class CodeSelect {
             }
         } else {
             synchronGlobalBonds();
-            code.addText(new SPIMInst(SPIMOp.sub, SPIMRegID.$sp.getReg(),  SPIMRegID.$sp.getReg(), SPIMImmediate.getImmi(raAdr)));
             if (inst.func instanceof VarName && !(inst.func instanceof DeRefVar)) {
                 saveCall(getLabel(inst.func.name));
+            } else {
+                saveCall(null);
+            }
+            code.addText(new SPIMInst(SPIMOp.sub, SPIMRegID.$sp.getReg(),  SPIMRegID.$sp.getReg(), SPIMImmediate.getImmi(raAdr)));
+            if (inst.func instanceof VarName && !(inst.func instanceof DeRefVar)) {
                 code.addText(new SPIMInst(SPIMOp.jal, new SPIMAddress(getLabel(inst.func.name))));
             } else {
                 saveCall(null);
