@@ -31,8 +31,8 @@
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\toolong.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\typchk.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\voidpnt2.c" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" afterPath="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/baojingcount.log" afterPath="$PROJECT_DIR$/testcases/baojingcount.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.properties" afterPath="$PROJECT_DIR$/build.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse-5100309153-yanghuan.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse3-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse3-5100309153-yanghuan.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/hpplus-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/hpplus-5100309153-yanghuan.c" />
@@ -109,17 +109,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CodeSelect.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CodeSelect.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8169935">
-              <caret line="276" column="28" selection-start-line="276" selection-start-column="28" selection-end-line="276" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="272" column="59" selection-start-line="272" selection-start-column="59" selection-end-line="272" selection-end-column="59" />
               <folding>
                 <element signature="e#56944#56945#0" expanded="true" />
                 <element signature="e#57041#57042#0" expanded="true" />
                 <element signature="e#59358#59359#0" expanded="true" />
                 <element signature="e#59394#59395#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.properties" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="35" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -199,12 +209,12 @@
         <option value="$PROJECT_DIR$/src/gen/spim/SPIMCode.java" />
         <option value="$PROJECT_DIR$/src/gen/spim/SPIMInst.java" />
         <option value="$PROJECT_DIR$/src/gen/advanced/RegisterAllocate.java" />
-        <option value="$PROJECT_DIR$/build.properties" />
         <option value="$PROJECT_DIR$/src/gen/spim/SPIMControlFlow.java" />
         <option value="$PROJECT_DIR$/src/analysis/cfg/Graph.java" />
         <option value="$PROJECT_DIR$/src/gen/spim/spimcfg/Graph.java" />
         <option value="$PROJECT_DIR$/src/gen/spim/SPIMLiveness.java" />
         <option value="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
+        <option value="$PROJECT_DIR$/build.properties" />
       </list>
     </option>
   </component>
@@ -831,12 +841,6 @@
       <option name="number" value="Default" />
       <updated>1428288077013</updated>
     </task>
-    <task id="LOCAL-00084" summary="Code Select fixes.">
-      <created>1432717752037</created>
-      <option name="number" value="00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1432717752037</updated>
-    </task>
     <task id="LOCAL-00085" summary="Naive graph paint. No spill.">
       <created>1432745110914</created>
       <option name="number" value="00085" />
@@ -1125,7 +1129,13 @@
       <option name="project" value="LOCAL" />
       <updated>1433050969894</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="Alias bug fixes.">
+      <created>1433051442255</created>
+      <option name="number" value="00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1433051442255</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1182,7 +1192,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/testcases/compiler2015" />
     </ignored-roots>
-    <MESSAGE value="Liveness bug fixed." />
     <MESSAGE value="Justice!" />
     <MESSAGE value="Better spill algorithm." />
     <MESSAGE value="Address bug fixed." />
@@ -1207,7 +1216,8 @@
     <MESSAGE value="Register allocation improvement?" />
     <MESSAGE value="build fix." />
     <MESSAGE value="Register Allocation improvement." />
-    <option name="LAST_COMMIT_MESSAGE" value="Register Allocation improvement." />
+    <MESSAGE value="Alias bug fixes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Alias bug fixes." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1554,14 +1564,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="35" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1648,14 +1650,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8169935">
-          <caret line="276" column="28" selection-start-line="276" selection-start-column="28" selection-end-line="276" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="272" column="59" selection-start-line="272" selection-start-column="59" selection-end-line="272" selection-end-column="59" />
           <folding>
             <element signature="e#56944#56945#0" expanded="true" />
             <element signature="e#57041#57042#0" expanded="true" />
             <element signature="e#59358#59359#0" expanded="true" />
             <element signature="e#59394#59395#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="35" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
