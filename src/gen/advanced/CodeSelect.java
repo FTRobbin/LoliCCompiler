@@ -166,12 +166,14 @@ public class CodeSelect {
     }
 
     SPIMLabel mySelf = null;
+    HashSet<VarName> isDangerous = null;
 
     void addFunc(ProgUnit func) {
         curDelta = 4;
         pStack = new LinkedList<>();
         curPara = new HashMap<>();
         mySelf = getLabel(func.label.name);
+        isDangerous = new HashSet<>();
         code.addText(new SPIMInst(mySelf));
         hasCall = false;
         for (MIRInst inst : func.list) {
@@ -268,11 +270,14 @@ public class CodeSelect {
                             vars.get(var).delReg(reg);
                         } else {
                             //TODO
-                            /*
-                            if (!vars.get(var).inmem) {
+                            if (isDangerous.contains(var) && !vars.get(var).inmem) {
                                 code.addText(new SPIMInst(var.size == 1 ? SPIMOp.sb : SPIMOp.sw, reg, getAddr((VarName) var)));
                                 vars.get(var).inmem = true;
-                            }*/
+                            }
+                            if (isDangerous.contains(var)) {
+                                removed.add(var);
+                                vars.get(var).delReg(reg);
+                            }
                         }
                     }
                 }
@@ -957,6 +962,7 @@ public class CodeSelect {
                     if (inst.src1 instanceof DeRefVar) {
                         code.addText(new SPIMInst(inst.dest.size == 1 ? SPIMOp.sb : SPIMOp.sw, loadToReg(((DeRefVar) inst.src1).val), adr));
                     } else if (inst.src1 instanceof VarName) {
+                        isDangerous.add((VarName)inst.src1);
                         SPIMInfRegister reg = new SPIMInfRegister(getInfAddr());
                         code.addText(new SPIMInst(SPIMOp.la, reg, getAddr((VarName)inst.src1)));
                         code.addText(new SPIMInst(inst.dest.size == 1 ? SPIMOp.sb : SPIMOp.sw, reg, adr));
@@ -1019,6 +1025,7 @@ public class CodeSelect {
                     if (inst.src1 instanceof DeRefVar) {
                         writeValTo(inst.dest, ((DeRefVar) inst.src1).val);
                     } else if (inst.src1 instanceof VarName) {
+                        isDangerous.add((VarName)inst.src1);
                         writeAddrTo(inst.dest, getAddr((VarName) inst.src1));
                         if (vars.containsKey(inst.src1) && !vars.get((VarName)inst.src1).inmem) {
                             code.addText(new SPIMInst(inst.dest.size == 1 ? SPIMOp.sb : SPIMOp.sw, loadToReg(inst.src1), getAddr((VarName)inst.src1)));
