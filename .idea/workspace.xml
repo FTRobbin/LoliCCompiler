@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd301699-7dc0-43f0-8c70-45cea3c704d9" name="Default" comment="CopyPropagation bug fixed.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/report_5122409037.pdf" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\CompileError-new\defcomment.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\CompileError-new\funcini.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\CompileError-new\funcstruct.c" afterPath="" />
@@ -31,8 +32,7 @@
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\toolong.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\typchk.c" afterPath="" />
       <change type="DELETED" beforePath="D:\4415 编译原理 MS109\loliccompiler\testcases\compiler2015\Phase2\Passed-new\voidpnt2.c" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/baojingcount.log" afterPath="$PROJECT_DIR$/testcases/baojingcount.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.properties" afterPath="$PROJECT_DIR$/build.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/small/hello.c" afterPath="$PROJECT_DIR$/testcases/small/hello.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse-5100309153-yanghuan.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse3-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/horse3-5100309153-yanghuan.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/hpplus-5100309153-yanghuan.c" afterPath="$PROJECT_DIR$/testcases/compiler2015/Phase2/Passed/hpplus-5100309153-yanghuan.c" />
@@ -58,83 +58,7 @@
     <favorites_list name="loliccompiler" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="RegisterAllocate.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gen/advanced/RegisterAllocate.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="101" column="16" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GlobalAssign.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gen/advanced/GlobalAssign.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="119" column="39" selection-start-line="119" selection-start-column="39" selection-end-line="119" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SPIMControlFlow.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gen/spim/SPIMControlFlow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="67" column="35" selection-start-line="67" selection-start-column="35" selection-end-line="67" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SPIMLiveness.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gen/spim/SPIMLiveness.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="112" column="27" selection-start-line="112" selection-start-column="27" selection-end-line="112" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Graph.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/analysis/cfg/Graph.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CodeSelect.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="272" column="59" selection-start-line="272" selection-start-column="59" selection-end-line="272" selection-end-column="59" />
-              <folding>
-                <element signature="e#56944#56945#0" expanded="true" />
-                <element signature="e#57041#57042#0" expanded="true" />
-                <element signature="e#59358#59359#0" expanded="true" />
-                <element signature="e#59394#59395#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.properties" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/build.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="35" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -205,7 +129,6 @@
         <option value="$PROJECT_DIR$/src/mir/MIRGen.java" />
         <option value="$PROJECT_DIR$/src/gen/basic/TrampolineGen.java" />
         <option value="$PROJECT_DIR$/src/main/LoliCCompiler.form" />
-        <option value="$PROJECT_DIR$/src/main/LoliCCompiler.java" />
         <option value="$PROJECT_DIR$/src/gen/spim/SPIMCode.java" />
         <option value="$PROJECT_DIR$/src/gen/spim/SPIMInst.java" />
         <option value="$PROJECT_DIR$/src/gen/advanced/RegisterAllocate.java" />
@@ -215,6 +138,7 @@
         <option value="$PROJECT_DIR$/src/gen/spim/SPIMLiveness.java" />
         <option value="$PROJECT_DIR$/src/gen/advanced/CodeSelect.java" />
         <option value="$PROJECT_DIR$/build.properties" />
+        <option value="$PROJECT_DIR$/src/main/LoliCCompiler.java" />
       </list>
     </option>
   </component>
@@ -229,10 +153,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-9" />
+    <option name="x" value="-1929" />
     <option name="y" value="-9" />
     <option name="width" value="1938" />
-    <option name="height" value="1050" />
+    <option name="height" value="1098" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -280,10 +204,6 @@
               <option name="myItemId" value="loliccompiler" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -292,20 +212,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testcases" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -337,7 +243,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="mir" />
+              <option name="myItemId" value="semantic" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -355,7 +261,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
+              <option name="myItemId" value="parser" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -391,7 +297,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="gen" />
+              <option name="myItemId" value="interpreter" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -409,143 +315,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="gen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spim" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spimcfg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="basic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="advanced" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="analysis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="analysis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="trivial" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="loliccompiler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="analysis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cfg" />
+              <option name="myItemId" value="exception" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -561,7 +331,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="settings.editor.splitter.proportion" value="0.25797373" />
     <property name="FullScreen" value="false" />
     <property name="recentsLimit" value="5" />
@@ -840,18 +610,6 @@
       <created>1428288077013</created>
       <option name="number" value="Default" />
       <updated>1428288077013</updated>
-    </task>
-    <task id="LOCAL-00085" summary="Naive graph paint. No spill.">
-      <created>1432745110914</created>
-      <option name="number" value="00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1432745110916</updated>
-    </task>
-    <task id="LOCAL-00086" summary="Address bug fixed.">
-      <created>1432748385992</created>
-      <option name="number" value="00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1432748385992</updated>
     </task>
     <task id="LOCAL-00087" summary="Address bug fixed.">
       <created>1432750906020</created>
@@ -1135,7 +893,19 @@
       <option name="project" value="LOCAL" />
       <updated>1433051442255</updated>
     </task>
-    <option name="localTasksCounter" value="134" />
+    <task id="LOCAL-00134" summary="For final test.">
+      <created>1433051851333</created>
+      <option name="number" value="00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1433051851333</updated>
+    </task>
+    <task id="LOCAL-00135" summary="Version name bug fixed.">
+      <created>1433067933996</created>
+      <option name="number" value="00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1433067933996</updated>
+    </task>
+    <option name="localTasksCounter" value="136" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1148,7 +918,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
+    <frame x="-1929" y="-9" width="1938" height="1098" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1159,7 +929,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30453563" sideWeight="0.49166667" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2895277" sideWeight="0.49166667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17447917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1192,8 +962,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/testcases/compiler2015" />
     </ignored-roots>
-    <MESSAGE value="Justice!" />
-    <MESSAGE value="Better spill algorithm." />
     <MESSAGE value="Address bug fixed." />
     <MESSAGE value="Test spill existence." />
     <MESSAGE value="CSE the first trial." />
@@ -1217,7 +985,9 @@
     <MESSAGE value="build fix." />
     <MESSAGE value="Register Allocation improvement." />
     <MESSAGE value="Alias bug fixes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Alias bug fixes." />
+    <MESSAGE value="For final test." />
+    <MESSAGE value="Version name bug fixed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Version name bug fixed." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1253,48 +1023,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/gen/spim/SPIMRegID.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47454843">
-          <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/irt/factory/CommaOp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gen/advanced/AdvancedGen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="126" column="7" selection-start-line="126" selection-start-column="7" selection-end-line="126" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gen/spim/SPIMPhysicalRegister.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="65" selection-start-line="46" selection-start-column="65" selection-end-line="46" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mir/ExprOp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.5796387">
-          <caret line="190" column="0" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/analysis/Subexpression.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/mir/MIRInst.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1485,7 +1213,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="259" column="8" selection-start-line="259" selection-start-column="8" selection-end-line="259" selection-end-column="8" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1503,10 +1231,10 @@
         <state vertical-scroll-proportion="0.4248366">
           <caret line="430" column="33" selection-start-line="430" selection-start-column="33" selection-end-line="430" selection-end-column="33" />
           <folding>
-            <element signature="e#17772#17773#0" expanded="true" />
-            <element signature="e#17809#17810#0" expanded="true" />
-            <element signature="e#17995#17996#0" expanded="true" />
-            <element signature="e#18038#18039#0" expanded="true" />
+            <element signature="e#17772#17773#0" expanded="false" />
+            <element signature="e#17809#17810#0" expanded="false" />
+            <element signature="e#17995#17996#0" expanded="false" />
+            <element signature="e#18038#18039#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1514,14 +1242,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/LoliCCompiler.form">
       <provider selected="true" editor-type-id="ui-designer">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/LoliCCompiler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="413" column="67" selection-start-line="413" selection-start-column="67" selection-end-line="413" selection-end-column="67" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gen/advanced/RegisterRenaming.java">
@@ -1625,9 +1345,38 @@
         <state vertical-scroll-proportion="0.8366013">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#499#500#0" expanded="true" />
-            <element signature="e#532#533#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#499#500#0" expanded="false" />
+            <element signature="e#532#533#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gen/advanced/RegisterAllocate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="101" column="16" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="38" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="281" column="21" selection-start-line="281" selection-start-column="21" selection-end-line="281" selection-end-column="21" />
+          <folding>
+            <element signature="e#56944#56945#0" expanded="false" />
+            <element signature="e#57041#57042#0" expanded="false" />
+            <element signature="e#59358#59359#0" expanded="false" />
+            <element signature="e#59394#59395#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1640,31 +1389,145 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gen/advanced/RegisterAllocate.java">
+    <entry file="file://$PROJECT_DIR$/src/lexer/loliccompiler.flex">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="101" column="16" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gen/advanced/CodeSelect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="272" column="59" selection-start-line="272" selection-start-column="59" selection-end-line="272" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.92727274">
+          <caret line="140" column="44" selection-start-line="140" selection-start-column="44" selection-end-line="140" selection-end-column="44" />
           <folding>
-            <element signature="e#56944#56945#0" expanded="true" />
-            <element signature="e#57041#57042#0" expanded="true" />
-            <element signature="e#59358#59359#0" expanded="true" />
-            <element signature="e#59394#59395#0" expanded="true" />
+            <marker date="1430292126050" expanded="false" signature="-1:-1" placeholder="/.../" />
+            <marker date="1430292126050" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1430292126050" expanded="false" signature="-1:-1" placeholder=" { " />
+            <marker date="1430292126050" expanded="false" signature="-1:-1" placeholder=" }" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1430292126050" expanded="true" signature="-1:-1" placeholder="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/Phase4Test.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="35" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/LoliCCompiler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="424" column="84" selection-start-line="424" selection-start-column="84" selection-end-line="424" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/exception/CompileError.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/semantic/IRTBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="10.031818">
+          <caret line="542" column="29" selection-start-line="542" selection-start-column="29" selection-end-line="542" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parser/loliccompiler.cup">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.4">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/interpreter/Interpreter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.74545455">
+          <caret line="361" column="30" selection-start-line="361" selection-start-column="12" selection-end-line="361" selection-end-column="31" />
           <folding />
         </state>
       </provider>
