@@ -65,6 +65,7 @@ public class SPIMControlFlow {
                 g.addBlock(entry);
                 cur = entry;
                 code.graphs.add(g);
+                g.name = inst.label;
                 code.funcs.put(inst.label, g);
             }
             if (inst.isLeader) {

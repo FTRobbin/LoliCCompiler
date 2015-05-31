@@ -171,7 +171,7 @@ public class CodeSelect {
         curDelta = 4;
         pStack = new LinkedList<>();
         curPara = new HashMap<>();
-        SPIMLabel mySelf = getLabel(func.label.name);
+        mySelf = getLabel(func.label.name);
         code.addText(new SPIMInst(mySelf));
         hasCall = false;
         for (MIRInst inst : func.list) {

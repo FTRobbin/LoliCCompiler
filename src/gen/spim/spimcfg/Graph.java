@@ -1,6 +1,7 @@
 package gen.spim.spimcfg;
 
 import gen.advanced.SPIMInfRegister;
+import gen.spim.SPIMLabel;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -25,4 +26,6 @@ public class Graph {
     public void addBlock(Block block) {
         blocks.add(block);
     }
+
+    public SPIMLabel name;
 }

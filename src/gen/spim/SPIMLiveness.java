@@ -94,11 +94,13 @@ public class SPIMLiveness {
         }
     }
 
+    static SPIMLabel mySelf;
+
     public static void calcalls(HashSet<Graph> calls, Block b, SPIMCode code) {
         for (SPIMInst inst : b.insts) {
             if (inst.label == null && inst.op.equals(SPIMOp.jal)) {
                 SPIMAddress adr = (SPIMAddress)inst.val0;
-                if (adr.label.label.equals("___printf")) {
+                if (adr.label.label.equals("___printf") || adr.label.equals(mySelf)) {
                     continue;
                 }
                 calls.add(code.funcs.get(adr.label));
@@ -108,6 +110,7 @@ public class SPIMLiveness {
 
     public static void LivenessAnalysis(SPIMCode code) {
         for (Graph g : code.graphs) {
+            mySelf = g.name;
             for (Block b : g.blocks) {
                 calUsage(b);
                 g.used.addAll(b.use);

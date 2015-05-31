@@ -2,6 +2,7 @@ package analysis.cfg;
 
 import analysis.AssignCopyPair;
 import analysis.Subexpression;
+import gen.spim.SPIMLabel;
 import mir.VarName;
 
 import java.util.ArrayList;
