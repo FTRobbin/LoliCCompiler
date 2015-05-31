@@ -7,14 +7,15 @@ import java.util.List;
  */
 public class TrampInst extends MIRInst {
 
-    public VarName func;
+    public VarName func, tramped;
 
-    public TrampInst(VarName func) {
+    public TrampInst(VarName tramped, VarName func) {
+        this.tramped = tramped;
         this.func = func;
     }
 
     @Override
     public List<String> print() {
-        return super.print("tramp " + func.name);
+        return super.print(tramped.name + " = trampoline " + func.name);
     }
 }

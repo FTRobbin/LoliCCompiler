@@ -15,4 +15,10 @@ public class SSAVarName extends VarName {
         this.id = id;
         this.name = var.name + "_" + id;
     }
+
+    public VarName getOriCopy() {
+        VarName ret = new VarName(ori.uid, this.name, ori.size, ori.align);
+        ret.name = this.name;
+        return ret;
+    }
 }

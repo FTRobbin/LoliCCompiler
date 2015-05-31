@@ -176,9 +176,6 @@ public class MIRGen {
 
     public ProgUnit gen(Func func) {
         ProgUnit ret = new ProgUnit(new Label("__" + Symbol.getstr(func.id) + (curScope() > 0 ? "_" + curScope() : "") ));
-        if (curScope() > 0) {
-            funcs.peek().put(func.id, new VarName(curScope(), "__" + Symbol.getstr(func.id), 4, 4));
-        }
         addLabelEntry(func.id, ret.label);
         addScope();
         VarName retVar = new VarName(curScope(), "_Return", func.retSize, func.retAlign);
@@ -287,7 +284,12 @@ public class MIRGen {
                 if (!ccur.isDummy()) {
                     list.add((new EmptyInst()).setLabel(ccur));
                 }
-                root.addUnit(gen((Func)node));
+                Func func = (Func)node;
+                VarName real =  new VarName(curScope(), "__" + Symbol.getstr(func.id), 4, 4);
+                VarName tramped = new VarName(curScope(), "__tramped_" + Symbol.getstr(func.id), 4, 4);
+                list.add(new TrampInst(tramped, real));
+                funcs.peek().put(func.id, tramped);
+                root.addUnit(gen(func));
             } else {
                 ++cnt;
                 list.addAll(genStat(ccur, node, cnxt));

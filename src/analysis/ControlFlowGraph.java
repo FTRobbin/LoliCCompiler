@@ -60,6 +60,45 @@ public class ControlFlowGraph {
         }
     }
 
+    public static void edgeSplitForm(ProgUnit unit) {
+        LinkedList<Block> us = new LinkedList<>(), vs = new LinkedList<>();
+        for (Block b : unit.graph.ver) {
+            if (b.succ.size() > 1) {
+                for (Block b1 : b.succ) {
+                    if (b1.prec.size() > 1) {
+                        us.add(b);
+                        vs.add(b1);
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < us.size(); ++i) {
+            Block u = us.get(i), v = vs.get(i);
+            if (v.insts.size() == 0) {
+                //exit no phi function will get here
+                continue;
+            }
+            Label vlabel = v.insts.get(0).label, zlabel = new Label();
+            IfInst inst = (IfInst)u.insts.get(u.insts.size() - 1);
+            Block z = new Block();
+            GotoInst ginst = (GotoInst)((new GotoInst(vlabel)).setLabel(zlabel));
+            z.addInst(ginst);
+            unit.addInst(ginst);
+            unit.graph.addBlock(z);
+            inst.target = zlabel;
+            u.succ.remove(v);
+            v.prec.remove(u);
+            u.addEdge(z);
+            z.addEdge(v);
+        }
+    }
+
+    public static void turnToEdgeSplit(Program prog) {
+        for (ProgUnit unit : prog.list) {
+            edgeSplitForm(unit);
+        }
+    }
+
     public static void calDominator(Program prog) {
         for (ProgUnit unit : prog.list) {
             calDominator(unit.graph);

@@ -6,6 +6,7 @@ import exception.*;
 import gen.advanced.AdvancedGen;
 import gen.basic.BasicGen;
 import gen.basic.RandomSpillGen;
+import gen.basic.TrampolineGen;
 import irt.Prog;
 import mir.MIRGen;
 import parser.Parser;
@@ -49,6 +50,9 @@ public class LoliCCompiler {
     private JButton subexpressionButton;
     private JButton deadeliminateButton;
     private JButton optimizedIRButton;
+    private JButton edgeSplitButton;
+    private JButton SSAedIRButton;
+    private JButton trampolineGenButton;
     private JFrame frame;
 
     private static int cnt = 0;
@@ -174,12 +178,14 @@ public class LoliCCompiler {
                 visit(new ast.visitors.PrintAST());
             }
         });
+        /*
         uglyPrinterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 visit(new ast.visitors.UglyPrinter());
             }
         });
+        */
         prettyPrinterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -246,6 +252,7 @@ public class LoliCCompiler {
                 InterpreterWin.run(textField1);
             }
         });
+        /*
         oldBuggyCheckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -256,7 +263,7 @@ public class LoliCCompiler {
                     showError(ce);
                 }
             }
-        });
+        });*/
         IRButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -282,6 +289,7 @@ public class LoliCCompiler {
             public void actionPerformed(ActionEvent e) {
                 mir.Program IRroot = getIR();
                 ControlFlowGraph.getCFG(IRroot);
+                ControlFlowGraph.turnToEdgeSplit(IRroot);
                 ControlFlowGraph.calDominator(IRroot);
                 StaticSingleAssignment.turntoSSA(IRroot);
                 textArea1.setText(IRroot.printSSA());
@@ -297,43 +305,11 @@ public class LoliCCompiler {
                 textArea1.setText(LivenessAnalysis.printLive(IRroot));
             }
         });
-        subexpressionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mir.Program IRroot = getIR();
-                ControlFlowGraph.getCFG(IRroot);
-                ControlFlowGraph.calDominator(IRroot);
-                LivenessAnalysis.cal(IRroot);
-                CommonSubexpression CSE = new CommonSubexpression();
-                CSE.calCommonSubexpression(IRroot);
-                //textArea1.setText(CSE.printCommonSubexpression(IRroot));
-                IRroot = CSE.replaceCommonSubexpression(IRroot);
-                /*
-                ControlFlowGraph.getCFG(IRroot);
-                ControlFlowGraph.calDominator(IRroot);
-                LivenessAnalysis.cal(IRroot);
-                textArea1.setText(LivenessAnalysis.printLive(IRroot));
-                */
-                java.util.List<String> IR = IRroot.print();
-                textArea1.setText("");
-                for (String s : IR) {
-                    textArea1.append(s + "\n");
-                }
-            }
-        });
         basicGenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mir.Program IRroot = getIR();
                 textArea1.setText((new BasicGen()).gen(IRroot).print());
-            }
-        });
-        randomSpillButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mir.Program IRroot = getIR();
-                ControlFlowGraph.getCFG(IRroot);
-                textArea1.setText((new RandomSpillGen()).gen(IRroot).print());
             }
         });
         advancedGenButton.addActionListener(new ActionListener() {
@@ -373,22 +349,6 @@ public class LoliCCompiler {
                 textArea1.setText((new AdvancedGen()).gen(IRroot).print());
             }
         });
-        deadeliminateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mir.Program IRroot = getIR();
-                ControlFlowGraph.getCFG(IRroot);
-                ControlFlowGraph.calDominator(IRroot);
-                LivenessAnalysis.cal(IRroot);
-                DeadCodeElimination DCE = new DeadCodeElimination();
-                IRroot = DCE.DeadCodeElimination(IRroot);
-                java.util.List<String> IR = IRroot.print();
-                textArea1.setText("");
-                for (String s : IR) {
-                    textArea1.append(s + "\n");
-                }
-            }
-        });
         optimizedIRButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -423,6 +383,39 @@ public class LoliCCompiler {
                 for (String s : IR) {
                     textArea1.append(s + "\n");
                 }
+            }
+        });
+        edgeSplitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mir.Program IRroot = getIR();
+                ControlFlowGraph.getCFG(IRroot);
+                ControlFlowGraph.turnToEdgeSplit(IRroot);
+                ControlFlowGraph.calDominator(IRroot);
+                textArea1.setText(IRroot.printCFG());
+            }
+        });
+        SSAedIRButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mir.Program IRroot = getIR();
+                ControlFlowGraph.getCFG(IRroot);
+                ControlFlowGraph.turnToEdgeSplit(IRroot);
+                ControlFlowGraph.calDominator(IRroot);
+                StaticSingleAssignment.turntoSSA(IRroot);
+                StaticSingleAssignment.eliminateSSA(IRroot);
+                java.util.List<String> IR = IRroot.print();
+                textArea1.setText("");
+                for (String s : IR) {
+                    textArea1.append(s + "\n");
+                }
+            }
+        });
+        trampolineGenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mir.Program IRroot = getIR();
+                textArea1.setText((new TrampolineGen()).gen(IRroot).print());
             }
         });
     }

@@ -198,7 +198,7 @@ public class StaticSingleAssignment {
                 for (Block v : u.succ) {
                     Set<VarName> set1 = v.phiHeader.keySet();
                     for (VarName var : set1) {
-                        v.phiHeader.get(var).addVar(getSSA(var));
+                        v.phiHeader.get(var).addVar(getSSA(var), u);
                     }
                 }
                 for (Block c : u.children) {
@@ -219,8 +219,69 @@ public class StaticSingleAssignment {
         tmp.dfs(g.ver.get(0));
     }
 
+    static HashMap<SSAVarName, VarName> table;
+
+    static Value killSSA(Value val) {
+        if (val instanceof SSAVarName) {
+            if (!table.containsKey(val)) {
+                table.put((SSAVarName) val, ((SSAVarName)val).getOriCopy());
+            }
+            return table.get(val);
+        } else if (val instanceof DeRefVar) {
+            ((DeRefVar) val).val = killSSA(((DeRefVar) val).val);
+        }
+        return val;
+    }
+
     public static Program eliminateSSA(Program prog) {
-        //TODO
+        for (ProgUnit unit : prog.list) {
+            for (Block b : unit.graph.ver) {
+                for (VarName var : b.phiHeader.keySet()) {
+                    PhiInst inst = b.phiHeader.get(var);
+                    for (VarName var1 : inst.set.keySet()) {
+                        Block b1 = inst.set.get(var1);
+                        AssignInst inst1 = new AssignInst(ExprOp.asg, inst.dest, var1);
+                        MIRInst inst2 = b1.insts.get(b1.insts.size() - 1);
+                        if (inst2 instanceof BranchInst) {
+                            if (inst2.label != null) {
+                                inst1.setLabel(inst2.label);
+                                inst1.label.inst = inst;
+                                inst2.label = null;
+                            }
+                            b1.insts.add(b1.insts.size() - 1, inst1);
+                            unit.list.add(unit.list.indexOf(inst2), inst1);
+                        } else {
+                            b1.insts.add(inst1);
+                            unit.list.add(unit.list.indexOf(inst2) + 1, inst1);
+                        }
+                    }
+                }
+            }
+        }
+        table = new HashMap<>();
+        for (ProgUnit unit : prog.list) {
+            for (MIRInst inst : unit.list) {
+                if (inst instanceof AssignInst) {
+                    ((AssignInst) inst).dest = (VarName)killSSA(((AssignInst)inst).dest);
+                    ((AssignInst) inst).src1 = killSSA(((AssignInst)inst).src1);
+                    ((AssignInst) inst).src2 = killSSA(((AssignInst)inst).src2);
+                } else if (inst instanceof CallInst)  {
+                    ((CallInst) inst).dest = (VarName)killSSA(((CallInst)inst).dest);
+                    ((CallInst) inst).func = killSSA(((CallInst)inst).func);
+                } else if (inst instanceof MemInst) {
+                    ((MemInst) inst).var = (VarName)killSSA(((MemInst)inst).var);
+                } else if (inst instanceof RecvInst) {
+                    ((RecvInst) inst).var = (VarName)killSSA(((RecvInst)inst).var);
+                } else if (inst instanceof IfInst) {
+                    IfInst ifin = (IfInst)inst;
+                    ifin.src1 = killSSA(ifin.src1);
+                    ifin.src2 = killSSA(ifin.src2);
+                } else if (inst instanceof ParaInst) {
+                    ParaInst para = (ParaInst)inst;
+                    para.val = killSSA(para.val);
+                }
+            }
+        }
         return prog;
     }
 }

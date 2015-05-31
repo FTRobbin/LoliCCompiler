@@ -1,5 +1,8 @@
 package mir;
 
+import analysis.cfg.Block;
+
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -9,22 +12,22 @@ import java.util.List;
 public class PhiInst extends MIRInst {
 
     public VarName dest;
-    public HashSet<VarName> set;
+    public HashMap<VarName, Block> set;
 
     public PhiInst(VarName dest) {
         this.dest = dest;
-        set = new HashSet<>();
+        set = new HashMap<>();
     }
 
-    public void addVar(VarName var) {
-        set.add(var);
+    public void addVar(VarName var, Block b) {
+        set.put(var, b);
     }
 
     @Override
     public List<String> print() {
         String s = dest.name + " = phi(";
         int cnt = 0;
-        for (VarName var : set) {
+        for (VarName var : set.keySet()) {
             if (cnt != 0) {
                 s += ", ";
             }

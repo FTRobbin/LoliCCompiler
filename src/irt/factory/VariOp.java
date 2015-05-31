@@ -37,9 +37,7 @@ public class VariOp extends Op{
     public Value genIR(Label cur, List<MIRInst> list, Label next, MIRGen gen, VarName ret) {
         int id = (Integer)this.expr.consts.get(0);
         VarName var = gen.getEntry(id);
-        if (gen.isNested(id)) {
-            list.add((new TrampInst(var)).setLabel(cur));
-        } else if (ret == null || ret.isAbsTmp()) {
+        if (ret == null || ret.isAbsTmp()) {
             list.add((new EmptyInst()).setLabel(cur));
         }
         if (ret == null) {
