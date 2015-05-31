@@ -3,6 +3,7 @@ package gen.spim;
 import gen.ASMCode;
 import gen.spim.spimcfg.Graph;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -60,4 +61,5 @@ public class SPIMCode extends ASMCode {
     }
 
     public LinkedList<Graph> graphs;
+    public HashMap<SPIMLabel, Graph> funcs;
 }

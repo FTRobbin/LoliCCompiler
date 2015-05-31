@@ -92,9 +92,23 @@ public class RegisterAllocate {
         }
     }
 
-    public void addEdge(Block b) {
+    public void addEdge(Block b, SPIMCode code) {
         cur = (HashSet<SPIMInfRegister>)b.liveOut.clone();
         for (int i = b.size() - 1; i >= 0; --i) {
+            SPIMInst inst = b.insts.get(i);
+            if (inst.label == null && inst.op.equals(SPIMOp.jal)) {
+                if (((SPIMAddress)inst.val0).label.label.equals("___printf")) {
+                    continue;
+                }
+                HashSet<SPIMInfRegister> target = code.funcs.get(((SPIMAddress)inst.val0).label).used;
+                for (SPIMInfRegister reg : cur) {
+                    for (SPIMInfRegister reg1 : target) {
+                        if (!reg.equals(reg1)) {
+                            addRegEdge(reg, reg1);
+                        }
+                    }
+                }
+            }
             cutDef(b.insts.get(i));
             addUse(b.insts.get(i));
         }
@@ -153,7 +167,7 @@ public class RegisterAllocate {
         //System.out.println(SPIMLiveness.print(code));
         for (Graph g : code.graphs) {
             for (Block b : g.blocks) {
-                addEdge(b);
+                addEdge(b, code);
             }
         }
         table = new HashMap<>();

@@ -3,6 +3,7 @@ package gen.spim;
 import gen.spim.spimcfg.Block;
 import gen.spim.spimcfg.Graph;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -64,6 +65,7 @@ public class SPIMControlFlow {
                 g.addBlock(entry);
                 cur = entry;
                 code.graphs.add(g);
+                code.funcs.put(inst.label, g);
             }
             if (inst.isLeader) {
                 Block old = cur;
@@ -107,6 +109,7 @@ public class SPIMControlFlow {
     }
 
     public static void ControlFlowGraph(SPIMCode code) {
+        code.funcs = new HashMap<>();
         markLeader(code);
         cutFuncBlocks(code);
         addEdges(code);

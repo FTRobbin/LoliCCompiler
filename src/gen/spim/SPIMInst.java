@@ -1,5 +1,7 @@
 package gen.spim;
 
+import gen.advanced.SPIMInfRegister;
+
 /**
  * Created by Robbin Ni on 2015/5/23.
  */

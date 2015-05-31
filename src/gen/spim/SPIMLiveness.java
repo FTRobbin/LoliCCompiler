@@ -94,12 +94,51 @@ public class SPIMLiveness {
         }
     }
 
+    public static void calcalls(HashSet<Graph> calls, Block b, SPIMCode code) {
+        for (SPIMInst inst : b.insts) {
+            if (inst.label == null && inst.op.equals(SPIMOp.jal)) {
+                SPIMAddress adr = (SPIMAddress)inst.val0;
+                if (adr.label.label.equals("___printf")) {
+                    continue;
+                }
+                calls.add(code.funcs.get(adr.label));
+            }
+        }
+    }
+
     public static void LivenessAnalysis(SPIMCode code) {
         for (Graph g : code.graphs) {
             for (Block b : g.blocks) {
                 calUsage(b);
+                g.used.addAll(b.use);
+                g.used.addAll(b.def);
+                calcalls(g.calls, b, code);
             }
             calLive(g);
+        }
+
+        HashSet<Graph> visited = new HashSet<>();
+        class anonymous {
+            public void dfs(Graph g) {
+                if (visited.contains(g)) {
+                    return;
+                }
+                visited.add(g);
+                for (Graph g1 : g.calls) {
+                    dfs(g1);
+                }
+            }
+
+        }
+        anonymous tmp = new anonymous();
+        for (Graph g : code.graphs) {
+            visited.clear();
+            tmp.dfs(g);
+            for (Graph g1 : visited) {
+                if (!g.equals(g1)) {
+                    g.used.addAll(g1.used);
+                }
+            }
         }
     }
 
